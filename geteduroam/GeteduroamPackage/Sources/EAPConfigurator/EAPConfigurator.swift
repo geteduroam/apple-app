@@ -11,7 +11,7 @@ public class EAPConfigurator {
     
     /// Configure the network for an Identity Provider
     /// - Parameter identityProvider: The Identity Provider
-    public func configure(identityProvider: EAPIdentityProvider) async throws {
+    public func configure(identityProvider: EAPIdentityProvider, credentials: Credentials? = nil) async throws {
         // At this point, we're not certain this configuration can work,
         // but we can't do this any step later, because createNetworkConfigurations will import things to the keychain.
         // TODO: only remove keychain items that match these networks
@@ -24,7 +24,7 @@ public class EAPConfigurator {
         let domain = identityProvider.id
         removeNetwork(ssids: ssids, domains: [domain])
         
-        let configurations = try createNetworkConfigurations(identityProvider: identityProvider)
+        let configurations = try createNetworkConfigurations(identityProvider: identityProvider, credentials: credentials)
         
         guard let last = configurations.last else {
             throw EAPConfiguratorError.noConfigurations
@@ -35,7 +35,7 @@ public class EAPConfigurator {
     /// Create network configuration object
     /// - Parameter identityProvider: The Identity Provider
     /// - Returns: Network configurations to apply
-    private func createNetworkConfigurations(identityProvider: EAPIdentityProvider) throws -> [NEHotspotConfiguration] {
+    private func createNetworkConfigurations(identityProvider: EAPIdentityProvider, credentials: Credentials?) throws -> [NEHotspotConfiguration] {
         let oids = identityProvider
             .credentialApplicability
             .IEEE80211
@@ -55,7 +55,7 @@ public class EAPConfigurator {
             throw EAPConfiguratorError.noOIDOrSSID
         }
         
-        let eapSettings = try buildSettings(identityProvider: identityProvider)
+        let eapSettings = try buildSettings(identityProvider: identityProvider, credentials: credentials)
         
         var configurations: [NEHotspotConfiguration] = []
         
@@ -83,12 +83,12 @@ public class EAPConfigurator {
     ///  Create a Hotspot EAP settings object
     /// - Parameter identityProvider: The Identity Provider
     /// - Returns: Hotspot EAP settings object
-    func buildSettings(identityProvider: EAPIdentityProvider) throws -> NEHotspotEAPSettings {
+    private func buildSettings(identityProvider: EAPIdentityProvider, credentials: Credentials?) throws -> NEHotspotEAPSettings {
         let settings = try identityProvider
             .authenticationMethods
             .methods
             .compactMap { authenticationMethod -> NEHotspotEAPSettings? in
-                let eapSettings = try buildSettings(identityProvider: identityProvider, authenticationMethod: authenticationMethod)
+                let eapSettings = try buildSettings(identityProvider: identityProvider, authenticationMethod: authenticationMethod, credentials: credentials)
                 
                 let trustedServerNames = authenticationMethod.serverSideCredential?.serverIDs
                 if let eapSettings, let trustedServerNames, !trustedServerNames.isEmpty {
@@ -157,7 +157,7 @@ public class EAPConfigurator {
     ///   - identityProvider: The Identity Provider
     ///   - authenticationMethod: The authentication method
     /// - Returns: Hotspot EAP settings object
-    private func buildSettings(identityProvider: EAPIdentityProvider, authenticationMethod: AuthenticationMethod) throws -> NEHotspotEAPSettings? {
+    private func buildSettings(identityProvider: EAPIdentityProvider, authenticationMethod: AuthenticationMethod, credentials: Credentials?) throws -> NEHotspotEAPSettings? {
         guard let outerEapType = Self.getOuterEapType(outerEapType: authenticationMethod.EAPMethod.type) else {
             return nil
         }
@@ -179,12 +179,41 @@ public class EAPConfigurator {
             )
             
         case .EAPTTLS, .EAPFAST, .EAPPEAP:
-            guard let clientSideCredential = authenticationMethod.clientSideCredential,
-                  let username = clientSideCredential.userName,
-                  let password = clientSideCredential.password
-            else {
+            guard let clientSideCredential = authenticationMethod.clientSideCredential else {
                 return nil
             }
+            let username: String
+            let password: String
+            
+            if let clientSideUsername = clientSideCredential.userName,
+               let clientSidePassword = clientSideCredential.password,
+               clientSideUsername.isEmpty == false,
+               clientSidePassword.isEmpty == false {
+                username = clientSideUsername
+                password = clientSidePassword
+            } else if let credentials,
+                      credentials.username.isEmpty == false,
+                      credentials.password.isEmpty == false  {
+                username = credentials.username
+                if let requiredSuffix = clientSideCredential.innerIdentitySuffix {
+                    if let hint = clientSideCredential.innerIdentityHint, hint == true {
+                        guard username.hasSuffix("@\(requiredSuffix)") else {
+                            throw EAPConfiguratorError.invalidUsername(suffix: requiredSuffix)
+                        }
+                    } else {
+                        guard username.hasSuffix("@\(requiredSuffix)") || username.hasSuffix(".\(requiredSuffix)") else {
+                            throw EAPConfiguratorError.invalidUsername(suffix: requiredSuffix)
+                        }
+                        guard username.contains("@") else {
+                            throw EAPConfiguratorError.invalidUsername(suffix: requiredSuffix)
+                        }
+                    }
+                }
+                password = credentials.password
+            } else {
+                throw EAPConfiguratorError.missingCredentials(clientSideCredential)
+            }
+
             let outerEapTypes = identityProvider
                 .authenticationMethods
                 .methods
@@ -192,7 +221,7 @@ public class EAPConfigurator {
                     Self.getOuterEapType(outerEapType: $0.EAPMethod.type)
                 }
             let outerIdentity = clientSideCredential.outerIdentity
-            let innerAuthType =  Self.getInnerAuthMethod(innerAuthMethod: 0)
+            let innerAuthType = Self.getInnerAuthMethod(innerAuthMethod: 0)
             return try buildSettingsWithUsernamePassword(
                 outerEapTypes: outerEapTypes,
                 outerIdentity: outerIdentity,

@@ -11,7 +11,12 @@ public struct MainView: View {
     
     public let store: StoreOf<Main>
     
-    @FocusState var searchFieldIsFocused: Bool
+    private enum Field: Int, Hashable {
+        case search
+    }
+    
+    @FocusState private var focusedField: Field?
+
     @EnvironmentObject var theme: Theme
     
     public var body: some View {
@@ -25,8 +30,9 @@ public struct MainView: View {
                                 NSLocalizedString("Search for your institution", bundle: .module, comment: ""),
                                 text: viewStore.binding(get: \.searchQuery, send: Main.Action.searchQueryChanged))
                             .font(theme.searchFont)
-                            .focused($searchFieldIsFocused)
+                            .focused($focusedField, equals: .search)
                             .textInputAutocapitalization(.never)
+                            .disableAutocorrection(true)
                             
                             Button {
                                 viewStore.send(.searchQueryChanged(""))
@@ -34,7 +40,7 @@ public struct MainView: View {
                                 Image(systemName: "xmark.circle.fill")
                             }
                             .buttonStyle(.plain)
-                            .opacity(searchFieldIsFocused && viewStore.searchQuery.isEmpty == false ? 1 : 0)
+                            .opacity(focusedField == .search && viewStore.searchQuery.isEmpty == false ? 1 : 0)
                             .accessibility(label: Text("Clear", bundle: .module))
                         }
                         Rectangle()
