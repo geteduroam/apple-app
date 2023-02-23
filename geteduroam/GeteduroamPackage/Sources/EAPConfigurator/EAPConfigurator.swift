@@ -194,8 +194,14 @@ public class EAPConfigurator {
             } else if let credentials,
                       credentials.username.isEmpty == false,
                       credentials.password.isEmpty == false  {
-                username = credentials.username
                 if let requiredSuffix = clientSideCredential.innerIdentitySuffix {
+                    // Add required suffix to username if user didn't specify host
+                    if credentials.username.contains("@") {
+                        username = credentials.username
+                    } else {
+                        username = credentials.username + "@" + requiredSuffix
+                    }
+                    
                     if let hint = clientSideCredential.innerIdentityHint, hint == true {
                         guard username.hasSuffix("@\(requiredSuffix)") else {
                             throw EAPConfiguratorError.invalidUsername(suffix: requiredSuffix)
@@ -208,6 +214,8 @@ public class EAPConfigurator {
                             throw EAPConfiguratorError.invalidUsername(suffix: requiredSuffix)
                         }
                     }
+                } else {
+                    username = credentials.username
                 }
                 password = credentials.password
             } else {
