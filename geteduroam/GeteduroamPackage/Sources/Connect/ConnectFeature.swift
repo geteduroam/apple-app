@@ -93,10 +93,11 @@ public struct Connect: Reducer {
         }
         
         var loadingState: LoadingState
-        @PresentationState var alert: AlertState<Action.Alert>?
+
+        @PresentationState public var destination: Destination.State?
     }
     
-    public enum Action: Equatable {
+    public indirect enum Action: Equatable {
         public static func == (lhs: Connect.Action, rhs: Connect.Action) -> Bool {
             switch (lhs, rhs) {
             case (.onAppear, .onAppear):
@@ -114,10 +115,9 @@ public struct Connect: Reducer {
             }
         }
         
-        case alert(PresentationAction<Alert>)
         case connect
         case connectResponse(TaskResult<ProviderInfo?>)
-        case delegate(Delegate)
+        case destination(PresentationAction<Destination.Action>)
         case dismissPromptForCredentials
         case dismissTapped
         case onAppear
@@ -127,9 +127,34 @@ public struct Connect: Reducer {
         case updateUsername(String)
         
         public enum Alert: Equatable { }
+    }
+    
+    public struct Destination: Reducer {
+        public enum State: Equatable {
+//            case credentialsPrompt(Connect.State)
+            case alert(AlertState<Action>)
+        }
         
-        public enum Delegate: Equatable {
-            case dismiss
+        public enum Action: Equatable {
+//            case credentialsPrompt(Connect.Action)
+            case alert(AlertState<Action>)
+            
+            public enum TermsAlert: Equatable {
+                case agreeButtonTapped
+                case disagreeButtonTapped
+                case readTermsButtonTapped
+            }
+        }
+        
+        public var body: some Reducer<State, Action> {
+            EmptyReducer()
+//            Scope(state: /State.credentialsPrompt, action: /Action.credentialsPrompt) {
+//                Connect()
+//            }
+            // TODO: Do we need this?
+            //        Scope(state: /State.alert, action: /Action.alert) {
+            //          GameCore()
+            //        }
         }
     }
     
@@ -142,6 +167,8 @@ public struct Connect: Reducer {
         case eapConfigurationFailed(EAPConfiguratorError, ProviderInfo?)
         case unknownError(Error, ProviderInfo?)
     }
+    
+    @Dependency(\.dismiss) var dismiss
     
     public var body: some Reducer<State, Action> {
         Reduce { state, action in
@@ -157,15 +184,13 @@ public struct Connect: Reducer {
                     await Action.connectResponse(TaskResult<ProviderInfo?> { try await connect(profile: profile, authClient: authClient, credentials: credentials) })
                 }
                 
-            case .alert(.dismiss):
-                state.alert = nil
-                return .none
-                
-            case .delegate:
+            case .destination:
                 return .none
                 
             case .dismissTapped:
-                return .send(.delegate(.dismiss))
+                return .run { _ in
+                    await dismiss()
+                }
                 
             case let .select(profileId):
                 state.selectedProfileId = profileId
@@ -202,12 +227,33 @@ public struct Connect: Reducer {
                 if nserror.domain == OIDGeneralErrorDomain && nserror.code == -3 {
                     return .none
                 }
-                // TODO
-//                state.alert = AlertState(
-//                    title: .init(NSLocalizedString("Failed to connect", bundle: .module, comment: "Failed to connect")),
-//                    message: .init((error as NSError).localizedDescription),
-//                    dismissButton: .default(.init(NSLocalizedString("OK", bundle: .module, comment: "")), action: .send(.dismissErrorTapped))
-//                )
+                let alert = AlertState<Destination.Action>(
+                    title: {
+                        TextState("Failed to connect", bundle: .module)
+                    }, actions: {
+                    }, message: {
+                        TextState((error as NSError).localizedDescription)
+                    })
+                state.destination = .alert(alert)
+                
+                // Check terms of use
+                let tosAlert = AlertState<Destination.Action.TermsAlert>(
+                    title: {
+                        TextState("Terms of Use", bundle: .module)
+                    }, actions: {
+                        ButtonState(action: .send(.agreeButtonTapped)) {
+                            TextState("Agree")
+                        }
+                        ButtonState(action: .send(.readTermsButtonTapped)) {
+                            TextState("Read Terms of Use")
+                        }
+                        ButtonState(role: .cancel, action: .send(.disagreeButtonTapped)) {
+                            TextState("Disagree")
+                        }
+                    }, message: {
+                        TextState("You must agree to the terms of use before you can use this network.")
+                    })
+                
                 return .none
                 
             case .startAgainTapped:
@@ -236,7 +282,9 @@ public struct Connect: Reducer {
                 
             }
         }
-        .ifLet(\.$alert, action: /Action.alert)
+        .ifLet(\.$destination, action: /Action.destination) {
+          Destination()
+        }
     }
     
     var decoder: XMLDecoder = {

@@ -16,11 +16,12 @@ public struct Main: Reducer {
     }
     
     public struct State: Equatable {
-        public init(searchQuery: String = "", institutions: IdentifiedArrayOf<Institution> = .init(uniqueElements: []), loadingState: LoadingState = .initial) {
+        public init(searchQuery: String = "", institutions: IdentifiedArrayOf<Institution> = .init(uniqueElements: []), loadingState: LoadingState = .initial, destination: Destination.State? = nil) {
             self.searchQuery = searchQuery
             self.institutions = institutions
             self.loadingState = loadingState
             self.searchResults = .init(uniqueElements: [])
+            self.destination = destination
         }
         
         public enum LoadingState: Equatable {
@@ -36,13 +37,11 @@ public struct Main: Reducer {
         var searchQuery: String
         var searchResults: IdentifiedArrayOf<Institution>
         
-        @PresentationState var connect: Connect.State?
-        @PresentationState var alert: AlertState<Action.Alert>?
+        @PresentationState public var destination: Destination.State?
     }
     
     public enum Action: Equatable {
-        case alert(PresentationAction<Alert>)
-        case connect(PresentationAction<Connect.Action>)
+        case destination(PresentationAction<Destination.Action>)
         case discoveryResponse(TaskResult<InstitutionsResponse>)
         case onAppear
         case searchQueryChangeDebounced
@@ -53,6 +52,26 @@ public struct Main: Reducer {
         
         public enum Alert: Equatable {
             case okButtonTapped
+        }
+    }
+    
+    public struct Destination: Reducer {
+        public enum State: Equatable {
+            case connect(Connect.State)
+            case alert(AlertState<AlertAction>)
+        }
+        
+        public enum Action: Equatable {
+            case connect(Connect.Action)
+            case alert(AlertAction)
+        }
+        public enum AlertAction {
+            case okButtonTapped
+        }
+        public var body: some Reducer<State, Action>{
+            Scope(state: /State.connect, action: /Action.connect) {
+                Connect()
+            }
         }
     }
     
@@ -94,7 +113,7 @@ public struct Main: Reducer {
                 
             case let .discoveryResponse(.failure(error)):
                 state.loadingState = .failure
-                state.alert = AlertState(title: {
+                let alert = AlertState<Destination.AlertAction>(title: {
                     TextState(NSLocalizedString("Failed to load institutions", bundle: .module, comment: ""))
                 }, actions: {
                     ButtonState(role: .cancel, action: .send(.okButtonTapped)) {
@@ -103,6 +122,7 @@ public struct Main: Reducer {
                 }, message: {
                     TextState((error as NSError).localizedDescription)
                 })
+                state.destination = .alert(alert)
                 return .none
                 
             case let .searchQueryChanged(query):
@@ -137,27 +157,15 @@ public struct Main: Reducer {
                 return .none
                 
             case let .select(institution):
-                state.connect = .init(institution: institution)
+                state.destination = .connect(.init(institution: institution))
                 return .none
                 
-            case .connect(.presented(.delegate(.dismiss))):
-                state.connect = nil
-                return .none
-                
-            case .connect:
-                return .none
-                
-            case .alert(.presented(.okButtonTapped)), .alert(.dismiss):
-                state.alert = nil
-                return .none
-                
-            case .alert:
+            case .destination:
                 return .none
             }
         }
-        .ifLet(\.$connect, action: /Action.connect) {
-            Connect(authClient: authClient)
+        .ifLet(\.$destination, action: /Action.destination) {
+          Destination()
         }
-        .ifLet(\.$alert, action: /Action.alert)
     }
 }

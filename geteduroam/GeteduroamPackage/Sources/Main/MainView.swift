@@ -145,10 +145,18 @@ public struct MainView: View {
                 // TODO: To focus or not to focus? searchFieldIsFocused = true
                 viewStore.send(.onAppear)
             }
-            .sheet(store: store.scope(state: \.$connect, action: Main.Action.connect)) {
+            .sheet(
+                store: store.scope(state: \.$destination, action: Main.Action.destination),
+                state: /Main.Destination.State.connect,
+                action: Main.Destination.Action.connect
+            ) {
                 ConnectView(store: $0)
             }
-            .alert(store: store.scope(state: \.$alert, action: Main.Action.alert))
+            .alert(
+                store: store.scope(state: \.$destination, action: Main.Action.destination),
+                state: /Main.Destination.State.alert,
+                action: Main.Destination.Action.alert
+            )
         }
     }
 }

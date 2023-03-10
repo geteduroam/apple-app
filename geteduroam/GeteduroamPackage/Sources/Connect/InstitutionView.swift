@@ -11,7 +11,6 @@ public struct ConnectView: View {
     let store: StoreOf<Connect>
     
     @EnvironmentObject var theme: Theme
-//    @State var agreed = true
     
     // TODO: Define ViewState
     
@@ -106,42 +105,30 @@ public struct ConnectView: View {
                 .edgesIgnoringSafeArea(.all)
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-            .alert(store: store.scope(state: \.$alert, action: Connect.Action.alert))
-//            .alert("Terms of Use", isPresented: $agreed, actions: {
-//                Button("Agree", action: {
-////                    viewStore.send(.connect)
+//            .alert(store: store.scope(state: \.$alert, action: Connect.Action.alert))
+            
+//            .alert("Login Required",
+//                   isPresented: viewStore.binding(
+//                    get: \.promptForCredentials,
+//                    send: Connect.Action.dismissPromptForCredentials),
+//                   actions: {
+//                TextField("Username", text: viewStore.binding(
+//                    get: \.username,
+//                    send: Connect.Action.updateUsername))
+//                .textContentType(.username)
+//                SecureField("Password", text: viewStore.binding(
+//                    get: \.password,
+//                    send: Connect.Action.updatePassword))
+//                .textContentType(.password)
+//                Button("Log In", action: {
+//                    viewStore.send(.connect)
 //                })
-//                Button("Read Terms of Use", action: {
-////                    viewStore.send(.connect)
-//                })
-//                Button("Disagree", role: .cancel, action: {
-////                    viewStore.send(.dismissPromptForCredentials)
+//                Button("Cancel", role: .cancel, action: {
+//                    viewStore.send(.dismissPromptForCredentials)
 //                })
 //            }, message: {
-//                Text("You must agree to the terms of use before you can use this network.")
+//                Text("Please enter your username and password.")
 //            })
-            .alert("Login Required",
-                   isPresented: viewStore.binding(
-                    get: \.promptForCredentials,
-                    send: Connect.Action.dismissPromptForCredentials),
-                   actions: {
-                TextField("Username", text: viewStore.binding(
-                    get: \.username,
-                    send: Connect.Action.updateUsername))
-                .textContentType(.username)
-                SecureField("Password", text: viewStore.binding(
-                    get: \.password,
-                    send: Connect.Action.updatePassword))
-                .textContentType(.password)
-                Button("Log In", action: {
-                    viewStore.send(.connect)
-                })
-                Button("Cancel", role: .cancel, action: {
-                    viewStore.send(.dismissPromptForCredentials)
-                })
-            }, message: {
-                Text("Please enter your username and password.")
-            })
         }
     }
 }
