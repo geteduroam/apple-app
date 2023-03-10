@@ -19,8 +19,22 @@ public struct MainView: View {
 
     @EnvironmentObject var theme: Theme
     
+    struct ViewState: Equatable {
+        let loadingState: Main.State.LoadingState
+        let isSearching: Bool
+        let searchQuery: String
+        let searchResults: IdentifiedArrayOf<Institution>
+    }
+    
     public var body: some View {
-        WithViewStore(store) { viewStore in
+        WithViewStore(store, observe: {
+            ViewState(
+                loadingState: $0.loadingState,
+                isSearching: $0.isSearching,
+                searchQuery: $0.searchQuery,
+                searchResults: $0.searchResults
+            )
+        }) { viewStore in
             VStack(alignment: .leading, spacing: 0) {
                 if viewStore.loadingState == .success {
                     VStack(spacing: 8) {
@@ -131,15 +145,10 @@ public struct MainView: View {
                 // TODO: To focus or not to focus? searchFieldIsFocused = true
                 viewStore.send(.onAppear)
             }
-            .sheet(isPresented: viewStore.binding(get: \.isSheetVisible, send: Main.Action.dismissSheet)) {
-                IfLetStore(store.scope(state: \.selectedInstitutionState, action: Main.Action.institution)) { store in
-                    ConnectView(store: store)
-                }
+            .sheet(store: store.scope(state: \.$connect, action: Main.Action.connect)) {
+                ConnectView(store: $0)
             }
-            .alert(
-                self.store.scope(state: \.alert),
-                dismiss: .dismissErrorTapped
-            )
+            .alert(store: store.scope(state: \.$alert, action: Main.Action.alert))
         }
     }
 }

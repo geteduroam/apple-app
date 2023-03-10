@@ -11,9 +11,12 @@ public struct ConnectView: View {
     let store: StoreOf<Connect>
     
     @EnvironmentObject var theme: Theme
+//    @State var agreed = true
+    
+    // TODO: Define ViewState
     
     public var body: some View {
-        WithViewStore(store) { viewStore in
+        WithViewStore(store, observe: { $0 }) { viewStore in
             VStack(alignment: .leading) {
                 HStack(alignment: .firstTextBaseline) {
                     VStack(alignment: .leading) {
@@ -52,6 +55,11 @@ public struct ConnectView: View {
                     }
                     .listStyle(.plain)
                     .disabled(viewStore.canSelectProfile == false)
+                }
+                
+                if let providerInfo = viewStore.providerInfo {
+                    HelpdeskView(providerInfo: providerInfo)
+                        .padding(20)
                 }
                 
                 HStack {
@@ -98,10 +106,20 @@ public struct ConnectView: View {
                 .edgesIgnoringSafeArea(.all)
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-            .alert(
-                self.store.scope(state: \.alert),
-                dismiss: .dismissErrorTapped
-            )
+            .alert(store: store.scope(state: \.$alert, action: Connect.Action.alert))
+//            .alert("Terms of Use", isPresented: $agreed, actions: {
+//                Button("Agree", action: {
+////                    viewStore.send(.connect)
+//                })
+//                Button("Read Terms of Use", action: {
+////                    viewStore.send(.connect)
+//                })
+//                Button("Disagree", role: .cancel, action: {
+////                    viewStore.send(.dismissPromptForCredentials)
+//                })
+//            }, message: {
+//                Text("You must agree to the terms of use before you can use this network.")
+//            })
             .alert("Login Required",
                    isPresented: viewStore.binding(
                     get: \.promptForCredentials,
@@ -157,5 +175,6 @@ struct ConnectView_Previews: PreviewProvider {
                     ],
                     geo: [.init(lat: 0, lon: 0)])),
             reducer: Connect()))
+        .environmentObject(Theme.demo)
     }
 }

@@ -1,5 +1,7 @@
-import Models
+import Dependencies
 import Foundation
+import Models
+import OSLog
 
 public struct CacheClient {
     public var cacheInstitutions: (InstitutionsResponse) -> Void
@@ -13,8 +15,6 @@ public struct CacheClient {
         return cacheURL
     }
 }
-
-import Dependencies
 
 extension DependencyValues {
     public var cacheClient: CacheClient {
@@ -42,37 +42,35 @@ extension DependencyValues.CacheClientKey: DependencyKey {
     public static var liveValue = CacheClient.live
 }
 
+extension Logger {
+  static var cache = Logger(subsystem: Bundle.main.bundleIdentifier ?? "CacheClient", category: "cache")
+}
+
 extension CacheClient {
     static var live: Self = .init(
         cacheInstitutions: { institutions in
             guard let data = try? JSONEncoder().encode(institutions), let cacheURL = try? Self.cacheURLForInstitutions() else {
+                Logger.cache.error("Failed to cache institutions")
                 return
             }
             try? data.write(to: cacheURL)
-            #if DEBUG
-            print("Cached to \(cacheURL)")
-            #endif
+            Logger.cache.info("Cached institutions to \(cacheURL)")
         },
         restoreInstitutions: {
             do {
                 let cacheURL = try Self.cacheURLForInstitutions()
                 let data = try Data(contentsOf: cacheURL)
                 let institutions = try JSONDecoder().decode(InstitutionsResponse.self, from: data)
-                #if DEBUG
-                print("Restored from \(cacheURL)")
-                #endif
+                Logger.cache.info("Restored institutions from \(cacheURL)")
                 return institutions
             } catch {
-                #if DEBUG
-                print("No cache found, using bundled cache")
-                #endif
+                Logger.cache.warning("No institutions cache found, using bundled cache")
                 guard let cacheURL = Bundle.main.url(forResource: "institutions", withExtension: "json") else {
+                    Logger.cache.error("Failed to restore institutions from bundled cache")
                     throw CacheClientError.noCacheInBundle
                 }
                 let data = try Data(contentsOf: cacheURL)
-                #if DEBUG
-                print("Restored from \(cacheURL)")
-                #endif
+                Logger.cache.info("Restored institutions from \(cacheURL)")
                 let institutions = try JSONDecoder().decode(InstitutionsResponse.self, from: data)
                 return institutions
             }

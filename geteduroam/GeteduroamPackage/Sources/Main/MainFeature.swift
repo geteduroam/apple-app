@@ -6,7 +6,7 @@ import DiscoveryClient
 import Foundation
 import Models
 
-public struct Main: ReducerProtocol {
+public struct Main: Reducer {
     public let authClient: AuthClient
     @Dependency(\.cacheClient) var cacheClient
     @Dependency(\.discoveryClient) var discoveryClient
@@ -23,18 +23,6 @@ public struct Main: ReducerProtocol {
             self.searchResults = .init(uniqueElements: [])
         }
         
-        var searchQuery: String
-        var isSearching: Bool = false
-        var institutions: IdentifiedArrayOf<Institution>
-        
-        var selectedInstitutionState: Connect.State?
-        
-        var searchResults: IdentifiedArrayOf<Institution>
-
-        var isSheetVisible: Bool {
-            selectedInstitutionState != nil
-        }
-        
         public enum LoadingState: Equatable {
             case initial
             case isLoading
@@ -43,20 +31,29 @@ public struct Main: ReducerProtocol {
         }
         
         var loadingState: LoadingState
-        var alert: AlertState<Action>?
+        var institutions: IdentifiedArrayOf<Institution>
+        var isSearching: Bool = false
+        var searchQuery: String
+        var searchResults: IdentifiedArrayOf<Institution>
+        
+        @PresentationState var connect: Connect.State?
+        @PresentationState var alert: AlertState<Action.Alert>?
     }
     
     public enum Action: Equatable {
+        case alert(PresentationAction<Alert>)
+        case connect(PresentationAction<Connect.Action>)
         case discoveryResponse(TaskResult<InstitutionsResponse>)
         case onAppear
-        case searchQueryChanged(String)
         case searchQueryChangeDebounced
+        case searchQueryChanged(String)
         case searchResponse(TaskResult<IdentifiedArrayOf<Institution>>)
         case select(Institution)
-        case institution(Connect.Action)
-        case dismissSheet
         case tryAgainTapped
-        case dismissErrorTapped
+        
+        public enum Alert: Equatable {
+            case okButtonTapped
+        }
     }
     
     private enum SearchID {}
@@ -72,7 +69,7 @@ public struct Main: ReducerProtocol {
             .sorted(by: { $0.name < $1.name }))
     }
 
-    public var body: some ReducerProtocol<State, Action> {
+    public var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
             case .onAppear, .tryAgainTapped:
@@ -97,11 +94,15 @@ public struct Main: ReducerProtocol {
                 
             case let .discoveryResponse(.failure(error)):
                 state.loadingState = .failure
-                state.alert = AlertState(
-                    title: .init(NSLocalizedString("Failed to load institutions", bundle: .module, comment: "")),
-                    message: .init((error as NSError).localizedDescription),
-                    dismissButton: .default(.init(NSLocalizedString("OK", bundle: .module, comment: "OK")), action: .send(.dismissErrorTapped))
-                )
+                state.alert = AlertState(title: {
+                    TextState(NSLocalizedString("Failed to load institutions", bundle: .module, comment: ""))
+                }, actions: {
+                    ButtonState(role: .cancel, action: .send(.okButtonTapped)) {
+                        TextState(NSLocalizedString("OK", bundle: .module, comment: ""))
+                    }
+                }, message: {
+                    TextState((error as NSError).localizedDescription)
+                })
                 return .none
                 
             case let .searchQueryChanged(query):
@@ -136,23 +137,27 @@ public struct Main: ReducerProtocol {
                 return .none
                 
             case let .select(institution):
-                state.selectedInstitutionState = .init(institution: institution)
+                state.connect = .init(institution: institution)
                 return .none
                 
-            case .institution(.dismissTapped), .institution(.startAgainTapped), .dismissSheet:
-                state.selectedInstitutionState = nil
+            case .connect(.presented(.delegate(.dismiss))):
+                state.connect = nil
                 return .none
                 
-            case .institution:
+            case .connect:
                 return .none
                 
-            case .dismissErrorTapped:
+            case .alert(.presented(.okButtonTapped)), .alert(.dismiss):
                 state.alert = nil
+                return .none
+                
+            case .alert:
                 return .none
             }
         }
-        .ifLet(\.selectedInstitutionState, action: /Action.institution) {
+        .ifLet(\.$connect, action: /Action.connect) {
             Connect(authClient: authClient)
         }
+        .ifLet(\.$alert, action: /Action.alert)
     }
 }

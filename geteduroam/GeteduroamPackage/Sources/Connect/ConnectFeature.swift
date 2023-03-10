@@ -7,7 +7,7 @@ import Models
 import SwiftUI
 import XMLCoder
 
-public struct Connect: ReducerProtocol {
+public struct Connect: Reducer {
     public let authClient: AuthClient
     
     public init(authClient: AuthClient = FailingAuthClient()) {
@@ -23,6 +23,8 @@ public struct Connect: ReducerProtocol {
         
         public let institution: Institution
         public var selectedProfileId: Profile.ID?
+        
+        public var providerInfo: ProviderInfo?
         public var credentials: Credentials?
         public var promptForCredentials: Bool = false
         
@@ -91,7 +93,7 @@ public struct Connect: ReducerProtocol {
         }
         
         var loadingState: LoadingState
-        var alert: AlertState<Action>?
+        @PresentationState var alert: AlertState<Action.Alert>?
     }
     
     public enum Action: Equatable {
@@ -112,17 +114,23 @@ public struct Connect: ReducerProtocol {
             }
         }
         
-        case onAppear
-        case dismissTapped
-        case select(Profile.ID)
+        case alert(PresentationAction<Alert>)
         case connect
-        case connectResponse(TaskResult<Void>)
-        case dismissErrorTapped
-        case startAgainTapped
-        
-        case updateUsername(String)
-        case updatePassword(String)
+        case connectResponse(TaskResult<ProviderInfo?>)
+        case delegate(Delegate)
         case dismissPromptForCredentials
+        case dismissTapped
+        case onAppear
+        case select(Profile.ID)
+        case startAgainTapped
+        case updatePassword(String)
+        case updateUsername(String)
+        
+        public enum Alert: Equatable { }
+        
+        public enum Delegate: Equatable {
+            case dismiss
+        }
     }
     
     public enum InstitutionSetupError: Error {
@@ -130,95 +138,105 @@ public struct Connect: ReducerProtocol {
         case missingAuthorizationEndpoint
         case missingTokenEndpoint
         case accessPointConfigurationFailed
-        case noValidProviderFound
+        case noValidProviderFound(ProviderInfo?)
+        case eapConfigurationFailed(EAPConfiguratorError, ProviderInfo?)
+        case unknownError(Error, ProviderInfo?)
     }
     
-    public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
-        switch action {
-        case .onAppear:
-            guard let profile = state.selectedProfile, state.institution.hasSingleProfile else {
+    public var body: some Reducer<State, Action> {
+        Reduce { state, action in
+            switch action {
+            case .onAppear:
+                guard let profile = state.selectedProfile, state.institution.hasSingleProfile else {
+                    return .none
+                }
+                // Auto connect if there is only a single profile
+                state.loadingState = .isLoading
+                let credentials = state.credentials
+                return .task {
+                    await Action.connectResponse(TaskResult<ProviderInfo?> { try await connect(profile: profile, authClient: authClient, credentials: credentials) })
+                }
+                
+            case .alert(.dismiss):
+                state.alert = nil
                 return .none
-            }
-            // Auto connect if there is only a single profile
-            state.loadingState = .isLoading
-            let credentials = state.credentials
-            return .task {
-                await Action.connectResponse(TaskResult<Void> { try await connect(profile: profile, authClient: authClient, credentials: credentials) })
-            }
-            
-        case .dismissTapped:
-            return .none
-            
-        case let .select(profileId):
-            state.selectedProfileId = profileId
-            return .none
-            
-        case .connect:
-            guard let profile = state.selectedProfile else {
+                
+            case .delegate:
                 return .none
-            }
-            state.loadingState = .isLoading
-            let credentials = state.credentials
-            state.credentials = nil
-            state.promptForCredentials = false
-            return .task {
-                await Action.connectResponse(TaskResult<Void> { try await connect(profile: profile, authClient: authClient, credentials: credentials) })
-            }
-            
-        case .connectResponse(.success):
-            state.loadingState = .success
-            return .none
-            
-        case .connectResponse(.failure(EAPConfiguratorError.missingCredentials)):
-            print("prompt")
-            state.promptForCredentials = true
-            return .none
-            
-        case let .connectResponse(.failure(error)):
-            state.loadingState = .failure
-            
-            let nserror = error as NSError
-            // Telling the user they cancelled isn't helping
-            if nserror.domain == OIDGeneralErrorDomain && nserror.code == -3 {
+                
+            case .dismissTapped:
+                return .send(.delegate(.dismiss))
+                
+            case let .select(profileId):
+                state.selectedProfileId = profileId
                 return .none
+                
+            case .connect:
+                guard let profile = state.selectedProfile else {
+                    return .none
+                }
+                state.loadingState = .isLoading
+                let credentials = state.credentials
+                state.credentials = nil
+                state.promptForCredentials = false
+                return .task {
+                    await Action.connectResponse(TaskResult<ProviderInfo?> { try await connect(profile: profile, authClient: authClient, credentials: credentials) })
+                }
+                
+            case let .connectResponse(.success(providerInfo)):
+                state.loadingState = .success
+                state.providerInfo = providerInfo
+                return .none
+                
+            case .connectResponse(.failure(EAPConfiguratorError.missingCredentials)):
+                state.promptForCredentials = true
+                return .none
+                
+            case let .connectResponse(.failure(error)):
+                // TODO: Read providerinfo if error has it so we can populate helpdesk
+                
+                state.loadingState = .failure
+                
+                let nserror = error as NSError
+                // Telling the user they cancelled isn't helping
+                if nserror.domain == OIDGeneralErrorDomain && nserror.code == -3 {
+                    return .none
+                }
+                // TODO
+//                state.alert = AlertState(
+//                    title: .init(NSLocalizedString("Failed to connect", bundle: .module, comment: "Failed to connect")),
+//                    message: .init((error as NSError).localizedDescription),
+//                    dismissButton: .default(.init(NSLocalizedString("OK", bundle: .module, comment: "")), action: .send(.dismissErrorTapped))
+//                )
+                return .none
+                
+            case .startAgainTapped:
+                return .none
+                
+            case let .updateUsername(username):
+                if let _ = state.credentials {
+                    state.credentials?.username = username
+                } else {
+                    state.credentials = Credentials(username: username)
+                }
+                return .none
+                
+            case let .updatePassword(password):
+                if let _ = state.credentials {
+                    state.credentials?.password = password
+                } else {
+                    state.credentials = Credentials(password: password)
+                }
+                return .none
+                
+            case .dismissPromptForCredentials:
+                state.promptForCredentials = false
+                state.credentials = nil
+                return .none
+                
             }
-            
-            state.alert = AlertState(
-                title: .init(NSLocalizedString("Failed to connect", bundle: .module, comment: "Failed to connect")),
-                message: .init((error as NSError).localizedDescription),
-                dismissButton: .default(.init(NSLocalizedString("OK", bundle: .module, comment: "")), action: .send(.dismissErrorTapped))
-            )
-            return .none
-            
-        case .dismissErrorTapped:
-            state.alert = nil
-            return .none
-            
-        case .startAgainTapped:
-            return .none
-            
-        case let .updateUsername(username):
-            if let _ = state.credentials {
-                state.credentials?.username = username
-            } else {
-                state.credentials = Credentials(username: username)
-            }
-            return .none
-            
-        case let .updatePassword(password):
-            if let _ = state.credentials {
-                state.credentials?.password = password
-            } else {
-                state.credentials = Credentials(password: password)
-            }
-            return .none
-            
-        case .dismissPromptForCredentials:
-            state.promptForCredentials = false
-            state.credentials = nil
-            return .none
-
         }
+        .ifLet(\.$alert, action: /Action.alert)
     }
     
     var decoder: XMLDecoder = {
@@ -230,7 +248,7 @@ public struct Connect: ReducerProtocol {
     
     @Dependency(\.date) var date
     
-    func connect(profile: Profile, authClient: AuthClient, credentials: Credentials?) async throws {
+    func connect(profile: Profile, authClient: AuthClient, credentials: Credentials?) async throws -> ProviderInfo? {
         let accessToken: String?
         if profile.oauth ?? false {
             guard let authorizationEndpoint = profile.authorization_endpoint else {
@@ -273,19 +291,23 @@ public struct Connect: ReducerProtocol {
             .first(where: { ($0.validUntil?.timeIntervalSince(date()) ?? 0) >= 0 })
         
         guard let firstValidProvider else {
-            throw InstitutionSetupError.noValidProviderFound
+            throw InstitutionSetupError.noValidProviderFound(providerList.providers.first?.providerInfo)
         }
         
         do {
             try await EAPConfigurator().configure(identityProvider: firstValidProvider, credentials: credentials)
+        } catch let error as EAPConfiguratorError {
+            throw InstitutionSetupError.eapConfigurationFailed(error, firstValidProvider.providerInfo)
         } catch {
-            throw error
+            throw InstitutionSetupError.unknownError(error, firstValidProvider.providerInfo)
         }
         
         let info = SSID.fetchNetworkInfo()
         
         print("Info: \(String(describing: info))")
         // TODO: Check if connection works?
+        
+        return firstValidProvider.providerInfo
     }
     
 }

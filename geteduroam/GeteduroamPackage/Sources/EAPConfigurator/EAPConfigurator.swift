@@ -3,6 +3,11 @@ import Foundation
 import Models
 import NetworkExtension
 import SystemConfiguration.CaptiveNetwork
+import OSLog
+
+extension Logger {
+  static var eap = Logger(subsystem: Bundle.main.bundleIdentifier ?? "EAPConfigurator", category: "eap")
+}
 
 public class EAPConfigurator {
     public init() { }
@@ -51,7 +56,7 @@ public class EAPConfigurator {
             }
         
         guard !oids.isEmpty || !ssids.isEmpty else {
-            NSLog("☠️ createNetworkConfigurations: No OID or SSID in configuration")
+            Logger.eap.error("createNetworkConfigurations: No OID or SSID in configuration")
             throw EAPConfiguratorError.noOIDOrSSID
         }
         
@@ -112,7 +117,7 @@ public class EAPConfigurator {
                             // The bug was fixed in iOS 15.2, business as usual:
                             caImportStatus = eapSettings.setTrustedServerCertificates(importCACertificates(certificateStrings: caCertificates))
                         } else {
-                            NSLog("😡 createNetworkConfigurations: iOS 15.0 and 15.1 do not accept setTrustedServerCertificates - continuing")
+                            Logger.eap.info("createNetworkConfigurations: iOS 15.0 and 15.1 do not accept setTrustedServerCertificates - continuing")
                             
                             // On iOS 15.0 and 15.1 we pretend everything went fine while in reality we don't even attempt; it would have crashed later on
                             caImportStatus = true
@@ -124,7 +129,7 @@ public class EAPConfigurator {
                     }
                     guard caImportStatus else {
                         // This code used to throw at this point, but now we choose to continue instead to see if another method works.
-                        // NSLog("☠️ createNetworkConfigurations: setTrustedServerCertificates: returned false")
+                        Logger.eap.warning("createNetworkConfigurations: setTrustedServerCertificates: returned false")
                         // throw EAPConfiguratorError.failedToSetTrustedServerCertificates
                         return nil
                     }
@@ -132,7 +137,7 @@ public class EAPConfigurator {
                 
                 guard let trustedServerNames, let caCertificates, !trustedServerNames.isEmpty || !caCertificates.isEmpty else {
                     // This code used to throw at this point, but now we choose to continue instead to see if another method works.
-                    // NSLog("😱 createNetworkConfigurations: No server names and no custom CAs set; there is no way to verify this network")
+                    Logger.eap.warning("createNetworkConfigurations: No server names and no custom CAs set; there is no way to verify this network")
                     // throw EAPConfiguratorError.unableToVerifyNetwork
                     return nil
                 }
@@ -260,7 +265,7 @@ public class EAPConfigurator {
         let identity = try addClientCertificate(certificate: pkcs12, passphrase: passphrase)
         
         guard eapSettings.setIdentity(identity) else {
-            NSLog("☠️ configureAP: buildSettingsWithClientCertificate: cannot set identity")
+            Logger.eap.error("configureAP: buildSettingsWithClientCertificate: cannot set identity")
             throw EAPConfiguratorError.cannotSetIdentity
         }
         
@@ -285,7 +290,7 @@ public class EAPConfigurator {
         let eapSettings = NEHotspotEAPSettings()
         
         guard username != "" && password != "" else{
-            NSLog("☠️ buildSettingsWithUsernamePassword: empty user/pass")
+            Logger.eap.error("buildSettingsWithUsernamePassword: empty user/pass")
             throw EAPConfiguratorError.emptyUsernameOrPassword
         }
         
@@ -294,7 +299,7 @@ public class EAPConfigurator {
         eapSettings.ttlsInnerAuthenticationType = innerAuthType ?? NEHotspotEAPSettings.TTLSInnerAuthenticationType.eapttlsInnerAuthenticationMSCHAPv2
         eapSettings.username = username
         eapSettings.password = password
-        //NSLog("🦊 buildSettingsWithUsernamePassword: eapSettings.ttlsInnerAuthenticationType = " + String(eapSettings.ttlsInnerAuthenticationType.rawValue))
+        Logger.eap.info("buildSettingsWithUsernamePassword: eapSettings.ttlsInnerAuthenticationType = \(eapSettings.ttlsInnerAuthenticationType.rawValue)")
         
         if let outerIdentity {
             eapSettings.outerIdentity = outerIdentity
@@ -333,21 +338,20 @@ public class EAPConfigurator {
     func importCACertificates(certificateStrings: [String]) -> [SecCertificate] {
         // supporting multiple CAs
         var certificates = [SecCertificate]()
-        //NSLog("🦊 configureAP: Start handling caCertificateStrings")
+        Logger.eap.info("Start handling CA certificate strings")
         for caCertificateString in certificateStrings {
-            //NSLog("🦊 configureAP: caCertificateString " + caCertificateString)
+            Logger.eap.info("Handling CA certificate string: \(caCertificateString)")
             guard let certificate: SecCertificate = try? addCertificate(certificate: caCertificateString) else {
-                NSLog("☠️ importCACertificates: CA certificate not added")
+                Logger.eap.error("CA certificate not added")
                 continue
             }
-            
             certificates.append(certificate)
         }
         
         if certificates.isEmpty {
-            NSLog("☠️ importCACertificates: No certificates added")
+            Logger.eap.warning("No certificates imported")
         } else {
-            //NSLog("🦊 configureAP: All caCertificateStrings handled")
+            Logger.eap.info("All certificates imported")
         }
         
         return certificates
@@ -361,18 +365,18 @@ public class EAPConfigurator {
      */
     func addCertificate(certificate: String) throws -> SecCertificate {
         guard let data = Data(base64Encoded: certificate) else {
-            NSLog("☠️ Unable to base64 decode certificate data")
+            Logger.eap.error("Unable to base64 decode certificate data")
             throw EAPConfiguratorError.failedToBase64DecodeCertificate
         }
         guard let certificateRef = SecCertificateCreateWithData(kCFAllocatorDefault, data as CFData) else {
-            NSLog("☠️ addCertificate: SecCertificateCreateWithData: false")
+            Logger.eap.error("addCertificate: SecCertificateCreateWithData: false")
             throw EAPConfiguratorError.failedToCreateCertificateFromData
         }
         
         var commonNameRef: CFString?
         var status: OSStatus = SecCertificateCopyCommonName(certificateRef, &commonNameRef)
         guard status == errSecSuccess else {
-            NSLog("☠️ addCertificate: unable to get common name")
+            Logger.eap.error("addCertificate: unable to get common name")
             throw EAPConfiguratorError.failedToCopyCommonName
         }
         let commonName: String = commonNameRef! as String
@@ -394,7 +398,7 @@ public class EAPConfigurator {
         }
         
         guard status == errSecSuccess || status == errSecDuplicateItem else {
-            NSLog("☠️ addCertificate: SecItemAdd " + String(status))
+            Logger.eap.error("addCertificate: SecItemAdd \(String(status), privacy: .public)")
             throw EAPConfiguratorError.failedSecItemAdd(status)
         }
         
@@ -413,7 +417,7 @@ public class EAPConfigurator {
         ]
         status = SecItemCopyMatching(getquery as CFDictionary, &item)
         guard status == errSecSuccess && item != nil else {
-            NSLog("☠️ addCertificate: item is nil after insert and retrieve")
+            Logger.eap.error("addCertificate: item is nil after insert and retrieve")
             throw EAPConfiguratorError.failedSecItemCopyMatching(status)
         }
         
@@ -436,15 +440,15 @@ public class EAPConfigurator {
         let certificateData = Data(base64Encoded: certificate)!
         let statusImport = SecPKCS12Import(certificateData as CFData, options as CFDictionary, &rawItems)
         guard statusImport == errSecSuccess else {
-            NSLog("☠️ addClientCertificate: SecPKCS12Import: " + String(statusImport))
-            throw EAPConfiguratorError.failedSecPKCS12Import(String(statusImport))
+            Logger.eap.error("addClientCertificate: SecPKCS12Import: \(String(statusImport), privacy: .public)")
+            throw EAPConfiguratorError.failedSecPKCS12Import(statusImport)
         }
         let items = rawItems! as NSArray
         let item: Dictionary<String,Any> = items.firstObject as! Dictionary<String, Any>
         let identity: SecIdentity = item[kSecImportItemIdentity as String] as! SecIdentity
         let chain = item[kSecImportItemCertChain as String] as! [SecCertificate]
         if items.count > 1 {
-            NSLog("😱 addClientCertificate: SecPKCS12Import: more than one result - using only first one")
+            Logger.eap.warning("addClientCertificate: SecPKCS12Import: more than one result - using only first one")
         }
         
         // Import the identity to the keychain
@@ -460,7 +464,7 @@ public class EAPConfigurator {
         guard status == errSecSuccess else {
             // -34018 = errSecMissingEntitlement
             // -26276 = errSecInternal
-            NSLog("☠️ addClientCertificate: SecItemAdd: %d", status)
+            Logger.eap.error("addClientCertificate: SecItemAdd: \(String(status), privacy: .public)")
             throw EAPConfiguratorError.failedSecItemAdd(status)
         }
         
@@ -471,7 +475,7 @@ public class EAPConfigurator {
             var commonNameRef: CFString?
             var status: OSStatus = SecCertificateCopyCommonName(certificateRef, &commonNameRef)
             guard status == errSecSuccess else {
-                NSLog("☠️ addClientCertificate: unable to get common name")
+                Logger.eap.error("addClientCertificate: unable to get common name")
                 continue
             }
             let commonName: String = commonNameRef! as String
@@ -488,7 +492,7 @@ public class EAPConfigurator {
             status = SecItemAdd(addquery as CFDictionary, nil)
             
             guard status == errSecSuccess || status == errSecDuplicateItem else {
-                NSLog("☠️ addClientCertificate: SecItemAdd: %s: %d", commonName, status)
+                Logger.eap.error("addClientCertificate: SecItemAdd: \(commonName, privacy: .public) \(String(status), privacy: .public)")
                 throw EAPConfiguratorError.failedSecItemAdd(status, commonName: commonName)
             }
         }
@@ -505,7 +509,7 @@ public class EAPConfigurator {
         var ref: CFTypeRef?
         status = SecItemCopyMatching(getquery as CFDictionary, &ref)
         guard status == errSecSuccess else {
-            NSLog("☠️ addClientCertificate: SecItemCopyMatching: retrieving identity returned %d", status)
+            Logger.eap.error("addClientCertificate: SecItemCopyMatching: \(String(status), privacy: .public)")
             throw EAPConfiguratorError.failedSecItemCopyMatching(status)
         }
         newIdentity = ref! as! SecIdentity
