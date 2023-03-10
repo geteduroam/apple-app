@@ -21,3 +21,16 @@ public class Theme: ObservableObject {
         self.connectedFont = connectedFont
     }
 }
+
+extension Theme {
+    public static var demo = Theme(
+        searchFont: .custom("OpenSans-Regular", size: 20, relativeTo: .body),
+        errorFont: .custom("OpenSans-Regular", size: 16, relativeTo: .body),
+        institutionNameFont: .custom("OpenSans-Bold", size: 16, relativeTo: .body),
+        institutionCountryFont: .custom("OpenSans-Regular", size: 11, relativeTo: .footnote),
+        profilesHeaderFont: .custom("OpenSans-SemiBold", size: 12, relativeTo: .body),
+        profileNameFont: .custom("OpenSans-Regular", size: 16, relativeTo: .body),
+        connectButtonFont: .custom("OpenSans-Bold", size: 20, relativeTo: .body),
+        connectedFont: .custom("OpenSans-Bold", size: 14, relativeTo: .body))
+    
+}

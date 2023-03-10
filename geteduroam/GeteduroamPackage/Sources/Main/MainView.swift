@@ -19,8 +19,22 @@ public struct MainView: View {
 
     @EnvironmentObject var theme: Theme
     
+    struct ViewState: Equatable {
+        let loadingState: Main.State.LoadingState
+        let isSearching: Bool
+        let searchQuery: String
+        let searchResults: IdentifiedArrayOf<Institution>
+    }
+    
     public var body: some View {
-        WithViewStore(store) { viewStore in
+        WithViewStore(store, observe: {
+            ViewState(
+                loadingState: $0.loadingState,
+                isSearching: $0.isSearching,
+                searchQuery: $0.searchQuery,
+                searchResults: $0.searchResults
+            )
+        }) { viewStore in
             VStack(alignment: .leading, spacing: 0) {
                 if viewStore.loadingState == .success {
                     VStack(spacing: 8) {
@@ -97,28 +111,7 @@ public struct MainView: View {
             .backport
             .readableContentWidthPadding()
             .background {
-                ZStack {
-                    Color("Background")
-                    
-                    VStack(alignment: .trailing) {
-                        Spacer()
-                        Image("Eduroam")
-                            .resizable()
-                            .frame(width: 160, height: 74)
-                            .padding(.bottom, 80)
-                        
-                    }
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .trailing)
-                    VStack(spacing: 0) {
-                        Image("Heart")
-                            .resizable()
-                            .frame(width: 200, height: 200)
-                            .accessibility(hidden: true)
-                        Spacer()
-                            .frame(width: 200, height: 200)
-                    }
-                }
-                .edgesIgnoringSafeArea(.all)
+                BackgroundView(showLogo: true)
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             .task(id: viewStore.searchQuery) {
@@ -131,14 +124,17 @@ public struct MainView: View {
                 // TODO: To focus or not to focus? searchFieldIsFocused = true
                 viewStore.send(.onAppear)
             }
-            .sheet(isPresented: viewStore.binding(get: \.isSheetVisible, send: Main.Action.dismissSheet)) {
-                IfLetStore(store.scope(state: \.selectedInstitutionState, action: Main.Action.institution)) { store in
-                    ConnectView(store: store)
-                }
+            .sheet(
+                store: store.scope(state: \.$destination, action: Main.Action.destination),
+                state: /Main.Destination.State.connect,
+                action: Main.Destination.Action.connect
+            ) {
+                ConnectView(store: $0)
             }
             .alert(
-                self.store.scope(state: \.alert),
-                dismiss: .dismissErrorTapped
+                store: store.scope(state: \.$destination, action: Main.Action.destination),
+                state: /Main.Destination.State.alert,
+                action: Main.Destination.Action.alert
             )
         }
     }
