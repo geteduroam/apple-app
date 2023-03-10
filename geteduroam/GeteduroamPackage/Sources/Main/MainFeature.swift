@@ -49,10 +49,6 @@ public struct Main: Reducer {
         case searchResponse(TaskResult<IdentifiedArrayOf<Institution>>)
         case select(Institution)
         case tryAgainTapped
-        
-        public enum Alert: Equatable {
-            case okButtonTapped
-        }
     }
     
     public struct Destination: Reducer {
@@ -65,9 +61,11 @@ public struct Main: Reducer {
             case connect(Connect.Action)
             case alert(AlertAction)
         }
+        
         public enum AlertAction {
             case okButtonTapped
         }
+        
         public var body: some Reducer<State, Action>{
             Scope(state: /State.connect, action: /Action.connect) {
                 Connect()

@@ -15,16 +15,18 @@ public struct Connect: Reducer {
     }
     
     public struct State: Equatable {
-        public init(institution: Institution, loadingState: LoadingState = .initial, credentials: Credentials? = nil) {
+        public init(institution: Institution, loadingState: LoadingState = .initial, credentials: Credentials? = nil, destination: Destination.State? = nil) {
             self.institution = institution
             self.loadingState = loadingState
             self.credentials = credentials
+            self.destination = destination
         }
         
         public let institution: Institution
         public var selectedProfileId: Profile.ID?
         
         public var providerInfo: ProviderInfo?
+        public var agreedToTerms: Bool = false
         public var credentials: Credentials?
         public var promptForCredentials: Bool = false
         
@@ -120,6 +122,7 @@ public struct Connect: Reducer {
         case destination(PresentationAction<Destination.Action>)
         case dismissPromptForCredentials
         case dismissTapped
+        case logInButtonTapped
         case onAppear
         case select(Profile.ID)
         case startAgainTapped
@@ -131,57 +134,114 @@ public struct Connect: Reducer {
     
     public struct Destination: Reducer {
         public enum State: Equatable {
-//            case credentialsPrompt(Connect.State)
-            case alert(AlertState<Action>)
+            case alert(AlertState<AlertAction>)
+            case termsAlert(AlertState<TermsAlertAction>)
         }
         
         public enum Action: Equatable {
-//            case credentialsPrompt(Connect.Action)
-            case alert(AlertState<Action>)
-            
-            public enum TermsAlert: Equatable {
-                case agreeButtonTapped
-                case disagreeButtonTapped
-                case readTermsButtonTapped
-            }
+            case alert(AlertAction)
+            case termsAlert(TermsAlertAction)
+        }
+        
+        public enum AlertAction: Equatable { }
+        
+        public enum TermsAlertAction: Equatable {
+            case agreeButtonTapped
+            case disagreeButtonTapped
+            case readTermsButtonTapped
         }
         
         public var body: some Reducer<State, Action> {
             EmptyReducer()
-//            Scope(state: /State.credentialsPrompt, action: /Action.credentialsPrompt) {
-//                Connect()
-//            }
-            // TODO: Do we need this?
-            //        Scope(state: /State.alert, action: /Action.alert) {
-            //          GameCore()
-            //        }
         }
     }
     
     public enum InstitutionSetupError: Error {
-        case noProfile
         case missingAuthorizationEndpoint
         case missingTokenEndpoint
-        case accessPointConfigurationFailed
+        case missingTermsAcceptance(ProviderInfo?)
         case noValidProviderFound(ProviderInfo?)
         case eapConfigurationFailed(EAPConfiguratorError, ProviderInfo?)
         case unknownError(Error, ProviderInfo?)
+        
+        var providerInfo: ProviderInfo? {
+            switch self {
+            case .missingAuthorizationEndpoint, .missingTokenEndpoint:
+                return nil
+            case let .missingTermsAcceptance(info), let .noValidProviderFound(info), let .eapConfigurationFailed(_, info), let .unknownError(_, info):
+                return info
+            }
+        }
     }
     
     @Dependency(\.dismiss) var dismiss
+    @Dependency(\.openURL) var openURL
+    
+    private func connect(state: inout State) -> Effect<Connect.Action> {
+        guard let profile = state.selectedProfile else {
+            return .none
+        }
+        
+        guard state.agreedToTerms || state.providerInfo?.localizedTermsOfUseURL == nil else {
+            let termsAlert = AlertState<Destination.TermsAlertAction>(
+                title: {
+                    TextState("Terms of Use", bundle: .module)
+                }, actions: {
+                    ButtonState(action: .send(.readTermsButtonTapped)) {
+                        TextState("Read Terms of Use")
+                    }
+                    ButtonState(action: .send(.agreeButtonTapped)) {
+                        TextState("Agree")
+                    }
+                    ButtonState(role: .cancel, action: .send(.disagreeButtonTapped)) {
+                        TextState("Disagree")
+                    }
+                }, message: {
+                    TextState("You must agree to the terms of use before you can use this network.")
+                })
+            state.destination = .termsAlert(termsAlert)
+            return .none
+        }
+        
+        state.loadingState = .isLoading
+        let credentials = state.credentials
+        state.credentials = nil
+        state.promptForCredentials = false
+        let agreedToTerms = state.agreedToTerms
+        return .task {
+            await Action.connectResponse(TaskResult<ProviderInfo?> { try await connect(profile: profile, authClient: authClient, credentials: credentials, agreedToTerms: agreedToTerms) })
+        }
+    }
     
     public var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
             case .onAppear:
-                guard let profile = state.selectedProfile, state.institution.hasSingleProfile else {
+                guard let _ = state.selectedProfile, state.institution.hasSingleProfile else {
                     return .none
                 }
                 // Auto connect if there is only a single profile
-                state.loadingState = .isLoading
-                let credentials = state.credentials
-                return .task {
-                    await Action.connectResponse(TaskResult<ProviderInfo?> { try await connect(profile: profile, authClient: authClient, credentials: credentials) })
+                return connect(state: &state)
+                
+            case let .destination(.presented(.termsAlert(action))):
+                switch action {
+                case .agreeButtonTapped:
+                    state.agreedToTerms = true
+                    return connect(state: &state)
+                    
+                case .disagreeButtonTapped:
+                    state.loadingState = .initial
+                    state.agreedToTerms = false
+                    return .none
+                    
+                case .readTermsButtonTapped:
+                    state.loadingState = .initial
+                    return .run { [localizedTermsOfUseURL = state.providerInfo?.localizedTermsOfUseURL] _ in
+                        guard let localizedTermsOfUseURL = localizedTermsOfUseURL else {
+                            return
+                        }
+                        await openURL(localizedTermsOfUseURL)
+                    }
                 }
                 
             case .destination:
@@ -197,29 +257,25 @@ public struct Connect: Reducer {
                 return .none
                 
             case .connect:
-                guard let profile = state.selectedProfile else {
-                    return .none
-                }
-                state.loadingState = .isLoading
-                let credentials = state.credentials
-                state.credentials = nil
-                state.promptForCredentials = false
-                return .task {
-                    await Action.connectResponse(TaskResult<ProviderInfo?> { try await connect(profile: profile, authClient: authClient, credentials: credentials) })
-                }
+                return connect(state: &state)
                 
             case let .connectResponse(.success(providerInfo)):
                 state.loadingState = .success
                 state.providerInfo = providerInfo
                 return .none
                 
-            case .connectResponse(.failure(EAPConfiguratorError.missingCredentials)):
+            case let .connectResponse(.failure(InstitutionSetupError.missingTermsAcceptance(providerInfo))):
+                state.providerInfo = providerInfo
+                return connect(state: &state)
+                
+            case let .connectResponse(.failure(InstitutionSetupError.eapConfigurationFailed(EAPConfiguratorError.missingCredentials, providerInfo))):
+                state.providerInfo = providerInfo
                 state.promptForCredentials = true
                 return .none
                 
             case let .connectResponse(.failure(error)):
-                // TODO: Read providerinfo if error has it so we can populate helpdesk
-                
+                // Read providerinfo if error has it so we can populate helpdesk
+                state.providerInfo = (error as? InstitutionSetupError)?.providerInfo
                 state.loadingState = .failure
                 
                 let nserror = error as NSError
@@ -227,7 +283,7 @@ public struct Connect: Reducer {
                 if nserror.domain == OIDGeneralErrorDomain && nserror.code == -3 {
                     return .none
                 }
-                let alert = AlertState<Destination.Action>(
+                let alert = AlertState<Destination.AlertAction>(
                     title: {
                         TextState("Failed to connect", bundle: .module)
                     }, actions: {
@@ -235,26 +291,11 @@ public struct Connect: Reducer {
                         TextState((error as NSError).localizedDescription)
                     })
                 state.destination = .alert(alert)
-                
-                // Check terms of use
-                let tosAlert = AlertState<Destination.Action.TermsAlert>(
-                    title: {
-                        TextState("Terms of Use", bundle: .module)
-                    }, actions: {
-                        ButtonState(action: .send(.agreeButtonTapped)) {
-                            TextState("Agree")
-                        }
-                        ButtonState(action: .send(.readTermsButtonTapped)) {
-                            TextState("Read Terms of Use")
-                        }
-                        ButtonState(role: .cancel, action: .send(.disagreeButtonTapped)) {
-                            TextState("Disagree")
-                        }
-                    }, message: {
-                        TextState("You must agree to the terms of use before you can use this network.")
-                    })
-                
                 return .none
+                
+            case .logInButtonTapped:
+                // TODO: Check sanity of credentials
+                return connect(state: &state)
                 
             case .startAgainTapped:
                 return .none
@@ -278,6 +319,8 @@ public struct Connect: Reducer {
             case .dismissPromptForCredentials:
                 state.promptForCredentials = false
                 state.credentials = nil
+                state.destination = nil
+                state.loadingState = .initial
                 return .none
                 
             }
@@ -296,7 +339,7 @@ public struct Connect: Reducer {
     
     @Dependency(\.date) var date
     
-    func connect(profile: Profile, authClient: AuthClient, credentials: Credentials?) async throws -> ProviderInfo? {
+    func connect(profile: Profile, authClient: AuthClient, credentials: Credentials?, agreedToTerms: Bool) async throws -> ProviderInfo? {
         let accessToken: String?
         if profile.oauth ?? false {
             guard let authorizationEndpoint = profile.authorization_endpoint else {
@@ -340,6 +383,10 @@ public struct Connect: Reducer {
         
         guard let firstValidProvider else {
             throw InstitutionSetupError.noValidProviderFound(providerList.providers.first?.providerInfo)
+        }
+        
+        guard agreedToTerms || firstValidProvider.providerInfo?.localizedTermsOfUseURL == nil else {
+            throw InstitutionSetupError.missingTermsAcceptance(firstValidProvider.providerInfo)
         }
         
         do {

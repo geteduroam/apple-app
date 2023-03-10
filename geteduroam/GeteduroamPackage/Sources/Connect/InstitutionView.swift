@@ -55,11 +55,12 @@ public struct ConnectView: View {
                     .listStyle(.plain)
                     .disabled(viewStore.canSelectProfile == false)
                 }
-                
-                if let providerInfo = viewStore.providerInfo {
-                    HelpdeskView(providerInfo: providerInfo)
-                        .padding(20)
-                }
+               
+                // Disabled to appease compilere struggles: the compiler is unable to type-check this expression in reasonable time
+//                if let providerInfo = viewStore.providerInfo {
+//                    HelpdeskView(providerInfo: providerInfo)
+//                        .padding(20)
+//                }
                 
                 HStack {
                     Spacer()
@@ -91,44 +92,41 @@ public struct ConnectView: View {
                 viewStore.send(.onAppear)
             }
             .background {
-                ZStack {
-                    Color("Background")
-                    VStack(spacing: 0) {
-                        Image("Heart")
-                            .resizable()
-                            .frame(width: 200, height: 200)
-                            .accessibility(hidden: true)
-                        Spacer()
-                            .frame(width: 200, height: 200)
-                    }
-                }
-                .edgesIgnoringSafeArea(.all)
+                BackgroundView(showLogo: false)
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-//            .alert(store: store.scope(state: \.$alert, action: Connect.Action.alert))
-            
-//            .alert("Login Required",
-//                   isPresented: viewStore.binding(
-//                    get: \.promptForCredentials,
-//                    send: Connect.Action.dismissPromptForCredentials),
-//                   actions: {
-//                TextField("Username", text: viewStore.binding(
-//                    get: \.username,
-//                    send: Connect.Action.updateUsername))
-//                .textContentType(.username)
-//                SecureField("Password", text: viewStore.binding(
-//                    get: \.password,
-//                    send: Connect.Action.updatePassword))
-//                .textContentType(.password)
-//                Button("Log In", action: {
-//                    viewStore.send(.connect)
-//                })
-//                Button("Cancel", role: .cancel, action: {
-//                    viewStore.send(.dismissPromptForCredentials)
-//                })
-//            }, message: {
-//                Text("Please enter your username and password.")
-//            })
+            .alert(
+                store: store.scope(state: \.$destination, action: Connect.Action.destination),
+                state: /Connect.Destination.State.termsAlert,
+                action: Connect.Destination.Action.termsAlert
+            )
+            .alert(
+                store: store.scope(state: \.$destination, action: Connect.Action.destination),
+                state: /Connect.Destination.State.alert,
+                action: Connect.Destination.Action.alert
+            )
+            .alert("Login Required",
+                   isPresented: viewStore.binding(
+                    get: \.promptForCredentials,
+                    send: Connect.Action.dismissPromptForCredentials),
+                   actions: {
+                TextField("Username", text: viewStore.binding(
+                    get: \.username,
+                    send: Connect.Action.updateUsername))
+                .textContentType(.username)
+                SecureField("Password", text: viewStore.binding(
+                    get: \.password,
+                    send: Connect.Action.updatePassword))
+                .textContentType(.password)
+                Button("Cancel", role: .cancel, action: {
+                    viewStore.send(.dismissPromptForCredentials)
+                })
+                Button("Log In", action: {
+                    viewStore.send(.logInButtonTapped)
+                })
+            }, message: {
+                Text("Please enter your username and password.")
+            })
         }
     }
 }

@@ -19,15 +19,15 @@ struct HelpdeskView: View {
             //            .frame(width: 200, height: 100)
             
             VStack(alignment: .leading) {
-                Text(providerInfo.displayName?.first?.value ?? "?")
+                Text(providerInfo.displayName?.localized() ?? "?")
                     .bold()
-                Text(providerInfo.description?.first?.value ?? "?")
+                Text(providerInfo.description?.localized() ?? "?")
                 Spacer()
                 Button(action: {
                     
                 }, label: {
                     Text("Terms Of Use")
-                    Text(providerInfo.termsOfUse?.first?.value ?? "?")
+                    Text(providerInfo.termsOfUse?.localized() ?? "?")
                 })
                 
                 
