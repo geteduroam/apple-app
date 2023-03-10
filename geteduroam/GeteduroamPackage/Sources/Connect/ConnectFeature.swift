@@ -15,13 +15,31 @@ public struct Connect: ReducerProtocol {
     }
     
     public struct State: Equatable {
-        public init(institution: Institution, loadingState: LoadingState = .initial) {
+        public init(institution: Institution, loadingState: LoadingState = .initial, credentials: Credentials? = nil) {
             self.institution = institution
             self.loadingState = loadingState
+            self.credentials = credentials
         }
         
         public let institution: Institution
         public var selectedProfileId: Profile.ID?
+        public var credentials: Credentials?
+        public var promptForCredentials: Bool = false
+        
+        public var username: String {
+            credentials?.username ?? ""
+        }
+        
+        public var password: String {
+            credentials?.password ?? ""
+        }
+        
+        public var promptForCredentialsLoginDisabled: Bool {
+            guard let credentials else {
+                return true
+            }
+            return credentials.username.isEmpty || credentials.password.isEmpty
+        }
         
         public var selectedProfile: Profile? {
             if let selectedProfileId {
@@ -101,6 +119,10 @@ public struct Connect: ReducerProtocol {
         case connectResponse(TaskResult<Void>)
         case dismissErrorTapped
         case startAgainTapped
+        
+        case updateUsername(String)
+        case updatePassword(String)
+        case dismissPromptForCredentials
     }
     
     public enum InstitutionSetupError: Error {
@@ -119,8 +141,9 @@ public struct Connect: ReducerProtocol {
             }
             // Auto connect if there is only a single profile
             state.loadingState = .isLoading
+            let credentials = state.credentials
             return .task {
-                await Action.connectResponse(TaskResult<Void> { try await connect(profile: profile, authClient: authClient) })
+                await Action.connectResponse(TaskResult<Void> { try await connect(profile: profile, authClient: authClient, credentials: credentials) })
             }
             
         case .dismissTapped:
@@ -135,12 +158,20 @@ public struct Connect: ReducerProtocol {
                 return .none
             }
             state.loadingState = .isLoading
+            let credentials = state.credentials
+            state.credentials = nil
+            state.promptForCredentials = false
             return .task {
-                await Action.connectResponse(TaskResult<Void> { try await connect(profile: profile, authClient: authClient) })
+                await Action.connectResponse(TaskResult<Void> { try await connect(profile: profile, authClient: authClient, credentials: credentials) })
             }
             
         case .connectResponse(.success):
             state.loadingState = .success
+            return .none
+            
+        case .connectResponse(.failure(EAPConfiguratorError.missingCredentials)):
+            print("prompt")
+            state.promptForCredentials = true
             return .none
             
         case let .connectResponse(.failure(error)):
@@ -165,6 +196,28 @@ public struct Connect: ReducerProtocol {
             
         case .startAgainTapped:
             return .none
+            
+        case let .updateUsername(username):
+            if let _ = state.credentials {
+                state.credentials?.username = username
+            } else {
+                state.credentials = Credentials(username: username)
+            }
+            return .none
+            
+        case let .updatePassword(password):
+            if let _ = state.credentials {
+                state.credentials?.password = password
+            } else {
+                state.credentials = Credentials(password: password)
+            }
+            return .none
+            
+        case .dismissPromptForCredentials:
+            state.promptForCredentials = false
+            state.credentials = nil
+            return .none
+
         }
     }
     
@@ -177,7 +230,7 @@ public struct Connect: ReducerProtocol {
     
     @Dependency(\.date) var date
     
-    func connect(profile: Profile, authClient: AuthClient) async throws {
+    func connect(profile: Profile, authClient: AuthClient, credentials: Credentials?) async throws {
         let accessToken: String?
         if profile.oauth ?? false {
             guard let authorizationEndpoint = profile.authorization_endpoint else {
@@ -223,7 +276,11 @@ public struct Connect: ReducerProtocol {
             throw InstitutionSetupError.noValidProviderFound
         }
         
-        try await EAPConfigurator().configure(identityProvider: firstValidProvider)
+        do {
+            try await EAPConfigurator().configure(identityProvider: firstValidProvider, credentials: credentials)
+        } catch {
+            throw error
+        }
         
         let info = SSID.fetchNetworkInfo()
         

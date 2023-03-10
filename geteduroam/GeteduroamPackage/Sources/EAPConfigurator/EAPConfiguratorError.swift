@@ -1,4 +1,5 @@
 import Foundation
+import Models
 
 public enum EAPConfiguratorError: Error {
     /// NSLog("☠️ createNetworkConfigurations: No OID or SSID in configuration")
@@ -39,6 +40,9 @@ public enum EAPConfiguratorError: Error {
     case noConfigurations
     
     case cannotCopySupportedInterfaces
+    
+    case missingCredentials(ClientCredential)
+    case invalidUsername(suffix: String)
 }
 
 extension EAPConfiguratorError: LocalizedError {
@@ -97,6 +101,11 @@ extension EAPConfiguratorError: LocalizedError {
         case .cannotCopySupportedInterfaces:
             return NSLocalizedString("Unable to read supported interfaces", comment: "cannotCopySupportedInterfaces")
             
+        case .missingCredentials:
+            return NSLocalizedString("No credentials in configuration", comment: "empty user/pass")
+            
+        case let .invalidUsername(suffix):
+            return String(format: NSLocalizedString("Username must end with \"%@\"", comment: "invalid username"), suffix)
         }
     }
 }

@@ -102,6 +102,28 @@ public struct ConnectView: View {
                 self.store.scope(state: \.alert),
                 dismiss: .dismissErrorTapped
             )
+            .alert("Login Required",
+                   isPresented: viewStore.binding(
+                    get: \.promptForCredentials,
+                    send: Connect.Action.dismissPromptForCredentials),
+                   actions: {
+                TextField("Username", text: viewStore.binding(
+                    get: \.username,
+                    send: Connect.Action.updateUsername))
+                .textContentType(.username)
+                SecureField("Password", text: viewStore.binding(
+                    get: \.password,
+                    send: Connect.Action.updatePassword))
+                .textContentType(.password)
+                Button("Log In", action: {
+                    viewStore.send(.connect)
+                })
+                Button("Cancel", role: .cancel, action: {
+                    viewStore.send(.dismissPromptForCredentials)
+                })
+            }, message: {
+                Text("Please enter your username and password.")
+            })
         }
     }
 }
