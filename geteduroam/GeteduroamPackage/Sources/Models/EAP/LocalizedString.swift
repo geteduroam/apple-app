@@ -10,7 +10,7 @@ import Foundation
 
 public extension LocalizedString {
     func localized(for locale: Locale = Locale.current) -> String? {
-        let fallback = first(where: { $0.language == nil })?.value
+        let fallback = first(where: { $0.language == "any" })?.value ?? first(where: { $0.language == nil })?.value
         guard let language = locale.languageCode else {
             return fallback
         }
