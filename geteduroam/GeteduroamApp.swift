@@ -12,7 +12,9 @@ struct GeteduroamApp: App {
     var store: StoreOf<Main>!
     
     init() {
-        store = .init(initialState: .init(), reducer: Main(authClient: appDelegate))
+        store = .init(initialState: .init(), reducer: Main(), prepareDependencies: { [appDelegate] in
+            $0.authClient = appDelegate
+        })
     }
     
     @StateObject var theme = Theme(

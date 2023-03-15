@@ -8,11 +8,7 @@ import SwiftUI
 import XMLCoder
 
 public struct Connect: Reducer {
-    public let authClient: AuthClient
-    
-    public init(authClient: AuthClient = FailingAuthClient()) {
-        self.authClient = authClient
-    }
+    public init() { }
     
     public struct State: Equatable {
         public init(institution: Institution, loadingState: LoadingState = .initial, credentials: Credentials? = nil, destination: Destination.State? = nil) {
@@ -182,6 +178,7 @@ public struct Connect: Reducer {
         }
     }
     
+    @Dependency(\.authClient) var authClient
     @Dependency(\.dismiss) var dismiss
     
     private func connect(state: inout State) -> Effect<Connect.Action> {

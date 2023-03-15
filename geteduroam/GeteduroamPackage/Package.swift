@@ -41,7 +41,8 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "0.0.1"),
         .package(url: "https://github.com/pointfreeco/swift-url-routing", from: "0.0.0"),
         .package(url: "https://github.com/pointfreeco/xctest-dynamic-overlay", from: "0.0.0"),
-        .package(url: "https://github.com/CoreOffice/XMLCoder.git", .upToNextMajor(from: "0.15.0"))
+        // .package(url: "https://github.com/CoreOffice/XMLCoder.git", .upToNextMajor(from: "0.15.0"))
+        .package(url: "https://github.com/egeniq-forks/XMLCoder.git", branch: "cdata-fix")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.

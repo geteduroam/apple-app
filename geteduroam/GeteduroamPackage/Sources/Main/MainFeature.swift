@@ -1,4 +1,3 @@
-import AuthClient
 import CacheClient
 import ComposableArchitecture
 import Connect
@@ -7,13 +6,10 @@ import Foundation
 import Models
 
 public struct Main: Reducer {
-    public let authClient: AuthClient
+    public init() { }
+    
     @Dependency(\.cacheClient) var cacheClient
     @Dependency(\.discoveryClient) var discoveryClient
-    
-    public init(authClient: AuthClient = FailingAuthClient()) {
-        self.authClient = authClient
-    }
     
     public struct State: Equatable {
         public init(searchQuery: String = "", institutions: IdentifiedArrayOf<Institution> = .init(uniqueElements: []), loadingState: LoadingState = .initial, destination: Destination.State? = nil) {
