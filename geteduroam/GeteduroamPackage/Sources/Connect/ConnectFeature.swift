@@ -270,9 +270,10 @@ public struct Connect: Reducer {
                 state.requiredUserNameSuffix = suffix
                 return .none
                 
-            case let .connectResponse(.failure(InstitutionSetupError.eapConfigurationFailed(EAPConfiguratorError.missingCredentials, providerInfo))):
+            case let .connectResponse(.failure(InstitutionSetupError.eapConfigurationFailed(EAPConfiguratorError.missingCredentials(_, requiredSuffix: suffix), providerInfo))):
                 state.providerInfo = providerInfo
                 state.promptForCredentials = true
+                state.requiredUserNameSuffix = suffix
                 return .none
                 
             case let .connectResponse(.failure(error)):

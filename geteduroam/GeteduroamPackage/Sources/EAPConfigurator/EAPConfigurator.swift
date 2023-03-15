@@ -226,7 +226,8 @@ public class EAPConfigurator {
                 }
                 password = credentials.password
             } else {
-                throw EAPConfiguratorError.missingCredentials(clientSideCredential)
+                let requiredSuffix = clientSideCredential.innerIdentitySuffix
+                throw EAPConfiguratorError.missingCredentials(clientSideCredential, requiredSuffix: requiredSuffix)
             }
 
             let outerEapTypes = identityProvider

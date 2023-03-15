@@ -45,7 +45,7 @@ public enum EAPConfiguratorError: Error {
     case cannotCopySupportedInterfaces
     
     /// No credentials in configuration
-    case missingCredentials(ClientCredential)
+    case missingCredentials(ClientCredential, requiredSuffix: String?)
     
     /// Username must end with
     case invalidUsername(suffix: String)
