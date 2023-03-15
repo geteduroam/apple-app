@@ -12,8 +12,10 @@ public struct ConnectView: View {
     
     @EnvironmentObject var theme: Theme
     
+    // TODO: Define ViewState
+    
     public var body: some View {
-        WithViewStore(store) { viewStore in
+        WithViewStore(store, observe: { $0 }) { viewStore in
             VStack(alignment: .leading) {
                 HStack(alignment: .firstTextBaseline) {
                     VStack(alignment: .leading) {
@@ -53,6 +55,12 @@ public struct ConnectView: View {
                     .listStyle(.plain)
                     .disabled(viewStore.canSelectProfile == false)
                 }
+               
+                // Disabled to appease compilere struggles: the compiler is unable to type-check this expression in reasonable time
+//                if let providerInfo = viewStore.providerInfo {
+//                    HelpdeskView(providerInfo: providerInfo)
+//                        .padding(20)
+//                }
                 
                 HStack {
                     Spacer()
@@ -84,23 +92,18 @@ public struct ConnectView: View {
                 viewStore.send(.onAppear)
             }
             .background {
-                ZStack {
-                    Color("Background")
-                    VStack(spacing: 0) {
-                        Image("Heart")
-                            .resizable()
-                            .frame(width: 200, height: 200)
-                            .accessibility(hidden: true)
-                        Spacer()
-                            .frame(width: 200, height: 200)
-                    }
-                }
-                .edgesIgnoringSafeArea(.all)
+                BackgroundView(showLogo: false)
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             .alert(
-                self.store.scope(state: \.alert),
-                dismiss: .dismissErrorTapped
+                store: store.scope(state: \.$destination, action: Connect.Action.destination),
+                state: /Connect.Destination.State.termsAlert,
+                action: Connect.Destination.Action.termsAlert
+            )
+            .alert(
+                store: store.scope(state: \.$destination, action: Connect.Action.destination),
+                state: /Connect.Destination.State.alert,
+                action: Connect.Destination.Action.alert
             )
             .alert("Login Required",
                    isPresented: viewStore.binding(
@@ -115,11 +118,11 @@ public struct ConnectView: View {
                     get: \.password,
                     send: Connect.Action.updatePassword))
                 .textContentType(.password)
-                Button("Log In", action: {
-                    viewStore.send(.connect)
-                })
                 Button("Cancel", role: .cancel, action: {
                     viewStore.send(.dismissPromptForCredentials)
+                })
+                Button("Log In", action: {
+                    viewStore.send(.logInButtonTapped)
                 })
             }, message: {
                 Text("Please enter your username and password.")
@@ -157,5 +160,6 @@ struct ConnectView_Previews: PreviewProvider {
                     ],
                     geo: [.init(lat: 0, lon: 0)])),
             reducer: Connect()))
+        .environmentObject(Theme.demo)
     }
 }

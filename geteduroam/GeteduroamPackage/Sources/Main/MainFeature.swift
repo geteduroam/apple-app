@@ -6,7 +6,7 @@ import DiscoveryClient
 import Foundation
 import Models
 
-public struct Main: ReducerProtocol {
+public struct Main: Reducer {
     public let authClient: AuthClient
     @Dependency(\.cacheClient) var cacheClient
     @Dependency(\.discoveryClient) var discoveryClient
@@ -16,23 +16,12 @@ public struct Main: ReducerProtocol {
     }
     
     public struct State: Equatable {
-        public init(searchQuery: String = "", institutions: IdentifiedArrayOf<Institution> = .init(uniqueElements: []), loadingState: LoadingState = .initial) {
+        public init(searchQuery: String = "", institutions: IdentifiedArrayOf<Institution> = .init(uniqueElements: []), loadingState: LoadingState = .initial, destination: Destination.State? = nil) {
             self.searchQuery = searchQuery
             self.institutions = institutions
             self.loadingState = loadingState
             self.searchResults = .init(uniqueElements: [])
-        }
-        
-        var searchQuery: String
-        var isSearching: Bool = false
-        var institutions: IdentifiedArrayOf<Institution>
-        
-        var selectedInstitutionState: Connect.State?
-        
-        var searchResults: IdentifiedArrayOf<Institution>
-
-        var isSheetVisible: Bool {
-            selectedInstitutionState != nil
+            self.destination = destination
         }
         
         public enum LoadingState: Equatable {
@@ -43,20 +32,45 @@ public struct Main: ReducerProtocol {
         }
         
         var loadingState: LoadingState
-        var alert: AlertState<Action>?
+        var institutions: IdentifiedArrayOf<Institution>
+        var isSearching: Bool = false
+        var searchQuery: String
+        var searchResults: IdentifiedArrayOf<Institution>
+        
+        @PresentationState public var destination: Destination.State?
     }
     
     public enum Action: Equatable {
+        case destination(PresentationAction<Destination.Action>)
         case discoveryResponse(TaskResult<InstitutionsResponse>)
         case onAppear
-        case searchQueryChanged(String)
         case searchQueryChangeDebounced
+        case searchQueryChanged(String)
         case searchResponse(TaskResult<IdentifiedArrayOf<Institution>>)
         case select(Institution)
-        case institution(Connect.Action)
-        case dismissSheet
         case tryAgainTapped
-        case dismissErrorTapped
+    }
+    
+    public struct Destination: Reducer {
+        public enum State: Equatable {
+            case connect(Connect.State)
+            case alert(AlertState<AlertAction>)
+        }
+        
+        public enum Action: Equatable {
+            case connect(Connect.Action)
+            case alert(AlertAction)
+        }
+        
+        public enum AlertAction {
+            case okButtonTapped
+        }
+        
+        public var body: some Reducer<State, Action>{
+            Scope(state: /State.connect, action: /Action.connect) {
+                Connect()
+            }
+        }
     }
     
     private enum SearchID {}
@@ -72,7 +86,7 @@ public struct Main: ReducerProtocol {
             .sorted(by: { $0.name < $1.name }))
     }
 
-    public var body: some ReducerProtocol<State, Action> {
+    public var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
             case .onAppear, .tryAgainTapped:
@@ -97,11 +111,16 @@ public struct Main: ReducerProtocol {
                 
             case let .discoveryResponse(.failure(error)):
                 state.loadingState = .failure
-                state.alert = AlertState(
-                    title: .init(NSLocalizedString("Failed to load institutions", bundle: .module, comment: "")),
-                    message: .init((error as NSError).localizedDescription),
-                    dismissButton: .default(.init(NSLocalizedString("OK", bundle: .module, comment: "OK")), action: .send(.dismissErrorTapped))
-                )
+                let alert = AlertState<Destination.AlertAction>(title: {
+                    TextState(NSLocalizedString("Failed to load institutions", bundle: .module, comment: ""))
+                }, actions: {
+                    ButtonState(role: .cancel, action: .send(.okButtonTapped)) {
+                        TextState(NSLocalizedString("OK", bundle: .module, comment: ""))
+                    }
+                }, message: {
+                    TextState((error as NSError).localizedDescription)
+                })
+                state.destination = .alert(alert)
                 return .none
                 
             case let .searchQueryChanged(query):
@@ -136,23 +155,15 @@ public struct Main: ReducerProtocol {
                 return .none
                 
             case let .select(institution):
-                state.selectedInstitutionState = .init(institution: institution)
+                state.destination = .connect(.init(institution: institution))
                 return .none
                 
-            case .institution(.dismissTapped), .institution(.startAgainTapped), .dismissSheet:
-                state.selectedInstitutionState = nil
-                return .none
-                
-            case .institution:
-                return .none
-                
-            case .dismissErrorTapped:
-                state.alert = nil
+            case .destination:
                 return .none
             }
         }
-        .ifLet(\.selectedInstitutionState, action: /Action.institution) {
-            Connect(authClient: authClient)
+        .ifLet(\.$destination, action: /Action.destination) {
+          Destination()
         }
     }
 }
