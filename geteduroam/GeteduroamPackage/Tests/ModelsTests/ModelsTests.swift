@@ -190,8 +190,6 @@ final class ModelsTests: XCTestCase {
     }
     
     func testLocalizedProviderInfoWithCData() throws {
-        throw XCTSkip("Reported here: https://github.com/CoreOffice/XMLCoder/issues/260")
-        /*
         let sourceXML = """
         <ProviderInfo>
           <TermsOfUse lang="any"><![CDATA[Terms Of Use]]></TermsOfUse>
@@ -209,6 +207,5 @@ final class ModelsTests: XCTestCase {
                 .init(language: "any", value: "Terms Of Use")
             ],
             helpdesk: nil))
-         */
     }
 }
