@@ -9,6 +9,7 @@ final class ModelsTests: XCTestCase {
         let decoder = XMLDecoder()
         decoder.shouldProcessNamespaces = true
         decoder.dateDecodingStrategy = .iso8601
+
         return decoder
     }()
     
@@ -186,5 +187,25 @@ final class ModelsTests: XCTestCase {
                 emailAdress: nil,
                 webAddress: .init(string: "https://www.example.com"),
                 phone: nil)))
+    }
+    
+    func testLocalizedProviderInfoWithCData() throws {
+        let sourceXML = """
+        <ProviderInfo>
+          <TermsOfUse lang="any"><![CDATA[Terms Of Use]]></TermsOfUse>
+        </ProviderInfo>
+        """
+
+        let decoded = try decoder.decode(ProviderInfo.self, from: Data(sourceXML.utf8))
+        
+        XCTAssertNoDifference(decoded, ProviderInfo(
+            displayName: nil,
+            description: nil,
+            providerLocations: [],
+            providerLogo: nil,
+            termsOfUse: [
+                .init(language: "any", value: "Terms Of Use")
+            ],
+            helpdesk: nil))
     }
 }

@@ -110,7 +110,7 @@ public struct ConnectView: View {
                     get: \.promptForCredentials,
                     send: Connect.Action.dismissPromptForCredentials),
                    actions: {
-                TextField("Username", text: viewStore.binding(
+                TextField(viewStore.usernamePrompt, text: viewStore.binding(
                     get: \.username,
                     send: Connect.Action.updateUsername))
                 .textContentType(.username)

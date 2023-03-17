@@ -18,12 +18,3 @@ public struct ProviderInfo: Codable, Equatable {
         case helpdesk = "Helpdesk"
     }
 }
-
-extension ProviderInfo {
-    public var localizedTermsOfUseURL: URL? {
-        guard let urlString = termsOfUse?.localized() else {
-            return nil
-        }
-        return URL(string: urlString)
-    }
-}

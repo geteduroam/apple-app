@@ -200,18 +200,20 @@ public class EAPConfigurator {
                       credentials.username.isEmpty == false,
                       credentials.password.isEmpty == false  {
                 if let requiredSuffix = clientSideCredential.innerIdentitySuffix {
-                    // Add required suffix to username if user didn't specify host
-                    if credentials.username.contains("@") {
-                        username = credentials.username
-                    } else {
-                        username = credentials.username + "@" + requiredSuffix
-                    }
-                    
                     if let hint = clientSideCredential.innerIdentityHint, hint == true {
+                        // Add required suffix to username if user didn't specify host
+                        if credentials.username.contains("@") {
+                            username = credentials.username
+                        } else {
+                            username = credentials.username + "@" + requiredSuffix
+                        }
+                        
                         guard username.hasSuffix("@\(requiredSuffix)") else {
                             throw EAPConfiguratorError.invalidUsername(suffix: requiredSuffix)
                         }
                     } else {
+                        username = credentials.username
+                        
                         guard username.hasSuffix("@\(requiredSuffix)") || username.hasSuffix(".\(requiredSuffix)") else {
                             throw EAPConfiguratorError.invalidUsername(suffix: requiredSuffix)
                         }
@@ -224,7 +226,8 @@ public class EAPConfigurator {
                 }
                 password = credentials.password
             } else {
-                throw EAPConfiguratorError.missingCredentials(clientSideCredential)
+                let requiredSuffix = clientSideCredential.innerIdentitySuffix
+                throw EAPConfiguratorError.missingCredentials(clientSideCredential, requiredSuffix: requiredSuffix)
             }
 
             let outerEapTypes = identityProvider

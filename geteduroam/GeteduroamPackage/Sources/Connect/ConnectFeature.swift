@@ -8,11 +8,7 @@ import SwiftUI
 import XMLCoder
 
 public struct Connect: Reducer {
-    public let authClient: AuthClient
-    
-    public init(authClient: AuthClient = FailingAuthClient()) {
-        self.authClient = authClient
-    }
+    public init() { }
     
     public struct State: Equatable {
         public init(institution: Institution, loadingState: LoadingState = .initial, credentials: Credentials? = nil, destination: Destination.State? = nil) {
@@ -28,10 +24,19 @@ public struct Connect: Reducer {
         public var providerInfo: ProviderInfo?
         public var agreedToTerms: Bool = false
         public var credentials: Credentials?
+        public var requiredUserNameSuffix: String? = nil
         public var promptForCredentials: Bool = false
         
         public var username: String {
             credentials?.username ?? ""
+        }
+        
+        public var usernamePrompt: String {
+            if let requiredUserNameSuffix {
+                return NSLocalizedString("Username", comment: "") + "@" + requiredUserNameSuffix
+            } else {
+                return NSLocalizedString("Username", comment: "")
+            }
         }
         
         public var password: String {
@@ -148,7 +153,6 @@ public struct Connect: Reducer {
         public enum TermsAlertAction: Equatable {
             case agreeButtonTapped
             case disagreeButtonTapped
-            case readTermsButtonTapped
         }
         
         public var body: some Reducer<State, Action> {
@@ -174,30 +178,31 @@ public struct Connect: Reducer {
         }
     }
     
+    @Dependency(\.authClient) var authClient
     @Dependency(\.dismiss) var dismiss
-    @Dependency(\.openURL) var openURL
     
     private func connect(state: inout State) -> Effect<Connect.Action> {
         guard let profile = state.selectedProfile else {
             return .none
         }
         
-        guard state.agreedToTerms || state.providerInfo?.localizedTermsOfUseURL == nil else {
+        guard state.agreedToTerms || state.providerInfo?.termsOfUse?.localized() == nil else {
             let termsAlert = AlertState<Destination.TermsAlertAction>(
                 title: {
                     TextState("Terms of Use", bundle: .module)
                 }, actions: {
-                    ButtonState(action: .send(.readTermsButtonTapped)) {
-                        TextState("Read Terms of Use")
-                    }
                     ButtonState(action: .send(.agreeButtonTapped)) {
                         TextState("Agree")
                     }
                     ButtonState(role: .cancel, action: .send(.disagreeButtonTapped)) {
                         TextState("Disagree")
                     }
-                }, message: {
-                    TextState("You must agree to the terms of use before you can use this network.")
+                }, message: { [termsOfUse = state.providerInfo?.termsOfUse?.localized()] in
+                    var message = "You must agree to the terms of use before you can use this network."
+                    if let termsOfUse {
+                        message = message + "\n\n" + termsOfUse
+                    }
+                    return TextState(message)
                 })
             state.destination = .termsAlert(termsAlert)
             return .none
@@ -233,15 +238,6 @@ public struct Connect: Reducer {
                     state.loadingState = .initial
                     state.agreedToTerms = false
                     return .none
-                    
-                case .readTermsButtonTapped:
-                    state.loadingState = .initial
-                    return .run { [localizedTermsOfUseURL = state.providerInfo?.localizedTermsOfUseURL] _ in
-                        guard let localizedTermsOfUseURL = localizedTermsOfUseURL else {
-                            return
-                        }
-                        await openURL(localizedTermsOfUseURL)
-                    }
                 }
                 
             case .destination:
@@ -268,15 +264,23 @@ public struct Connect: Reducer {
                 state.providerInfo = providerInfo
                 return connect(state: &state)
                 
-            case let .connectResponse(.failure(InstitutionSetupError.eapConfigurationFailed(EAPConfiguratorError.missingCredentials, providerInfo))):
+            case let .connectResponse(.failure(InstitutionSetupError.eapConfigurationFailed(EAPConfiguratorError.invalidUsername(suffix), providerInfo))):
                 state.providerInfo = providerInfo
                 state.promptForCredentials = true
+                state.requiredUserNameSuffix = suffix
+                return .none
+                
+            case let .connectResponse(.failure(InstitutionSetupError.eapConfigurationFailed(EAPConfiguratorError.missingCredentials(_, requiredSuffix: suffix), providerInfo))):
+                state.providerInfo = providerInfo
+                state.promptForCredentials = true
+                state.requiredUserNameSuffix = suffix
                 return .none
                 
             case let .connectResponse(.failure(error)):
                 // Read providerinfo if error has it so we can populate helpdesk
                 state.providerInfo = (error as? InstitutionSetupError)?.providerInfo
                 state.loadingState = .failure
+                state.requiredUserNameSuffix = nil
                 
                 let nserror = error as NSError
                 // Telling the user they cancelled isn't helping
@@ -318,6 +322,7 @@ public struct Connect: Reducer {
                 
             case .dismissPromptForCredentials:
                 state.promptForCredentials = false
+                state.requiredUserNameSuffix = nil
                 state.credentials = nil
                 state.destination = nil
                 state.loadingState = .initial
@@ -385,7 +390,7 @@ public struct Connect: Reducer {
             throw InstitutionSetupError.noValidProviderFound(providerList.providers.first?.providerInfo)
         }
         
-        guard agreedToTerms || firstValidProvider.providerInfo?.localizedTermsOfUseURL == nil else {
+        guard agreedToTerms || firstValidProvider.providerInfo?.termsOfUse?.localized() == nil else {
             throw InstitutionSetupError.missingTermsAcceptance(firstValidProvider.providerInfo)
         }
         
