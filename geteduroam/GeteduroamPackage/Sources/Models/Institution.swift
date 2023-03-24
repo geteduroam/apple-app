@@ -20,4 +20,12 @@ public struct Institution: Codable, Identifiable, Equatable {
     public var hasSingleProfile: Bool {
         profiles.count == 1
     }
+    
+    public var matchWords: [String] {
+        var words = name.components(separatedBy: .alphanumerics.inverted).filter({ $0.isEmpty == false })
+        let abbreviation = words.map({ $0.prefix(1) }).joined()
+        words.append(name)
+        words.append(abbreviation)
+        return words
+    }
 }

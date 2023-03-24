@@ -64,6 +64,7 @@ struct HelpdeskView: View {
             }
         }
         .font(theme.infoDetailFont)
+        .background(Color("Background"))
     }
     
     private func attributedString(_ text: String) -> AttributedString {
@@ -86,12 +87,14 @@ struct HelpdeskView: View {
                     break
                 }
                 attributed[range].link = url
+                attributed[range].foregroundColor = UIColor(named: "ListSeparator")
                 
             case .link:
                 guard let url = result.url else {
                     break
                 }
                 attributed[range].link = url
+                attributed[range].foregroundColor = UIColor(named: "ListSeparator")
                 
             default:
                 break
