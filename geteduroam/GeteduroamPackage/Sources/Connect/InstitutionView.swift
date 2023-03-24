@@ -66,7 +66,6 @@ public struct ConnectView: View {
                     Spacer()
                     VStack(alignment: .center) {
                         if viewStore.isConnected {
-                            Spacer()
                             Label(title: {
                                 Text("Connected", bundle: .module)
                             }, icon: {
