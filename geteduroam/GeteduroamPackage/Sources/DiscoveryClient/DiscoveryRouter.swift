@@ -1,3 +1,4 @@
+import CasePaths
 import Foundation
 import URLRouting
 

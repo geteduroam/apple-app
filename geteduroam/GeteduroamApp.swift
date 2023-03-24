@@ -32,6 +32,5 @@ struct GeteduroamApp: App {
             MainView(store: store)
                 .environmentObject(theme)
 		}
-      
 	}
 }

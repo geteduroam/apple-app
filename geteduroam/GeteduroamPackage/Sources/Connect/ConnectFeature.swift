@@ -200,7 +200,7 @@ public struct Connect: Reducer {
                 }, message: { [termsOfUse = state.providerInfo?.termsOfUse?.localized()] in
                     var message = "You must agree to the terms of use before you can use this network."
                     if let termsOfUse {
-                        message = message + "\n\n" + termsOfUse
+                        message = message + "\n\n" + termsOfUse.trimmingCharacters(in: .whitespacesAndNewlines)
                     }
                     return TextState(message)
                 })

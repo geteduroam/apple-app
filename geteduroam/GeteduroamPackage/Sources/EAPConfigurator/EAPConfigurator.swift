@@ -226,7 +226,8 @@ public class EAPConfigurator {
                 }
                 password = credentials.password
             } else {
-                let requiredSuffix = clientSideCredential.innerIdentitySuffix
+                // An required empty string as suffix makes no sense
+                let requiredSuffix = clientSideCredential.innerIdentitySuffix != "" ? clientSideCredential.innerIdentitySuffix : nil
                 throw EAPConfiguratorError.missingCredentials(clientSideCredential, requiredSuffix: requiredSuffix)
             }
 
