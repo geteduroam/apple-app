@@ -12,7 +12,9 @@ struct GetgovroamApp: App {
     var store: StoreOf<Main>!
     
     init() {
-        store = .init(initialState: .init(), reducer: Main(authClient: appDelegate))
+        store = .init(initialState: .init(), reducer: Main(), prepareDependencies: { [appDelegate] in
+            $0.authClient = appDelegate
+        })
     }
     
     @StateObject var theme = Theme(
@@ -23,7 +25,9 @@ struct GetgovroamApp: App {
         profilesHeaderFont: .caption,
         profileNameFont: .body,
         connectButtonFont: .body,
-        connectedFont: .body)
+        connectedFont: .body,
+        infoHeaderFont: .body,
+        infoDetailFont: .body)
     
 	var body: some Scene {
 		WindowGroup {

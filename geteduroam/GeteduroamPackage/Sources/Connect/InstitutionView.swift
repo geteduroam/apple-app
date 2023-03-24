@@ -56,11 +56,11 @@ public struct ConnectView: View {
                     .disabled(viewStore.canSelectProfile == false)
                 }
                
-                // Disabled to appease compilere struggles: the compiler is unable to type-check this expression in reasonable time
-//                if let providerInfo = viewStore.providerInfo {
-//                    HelpdeskView(providerInfo: providerInfo)
-//                        .padding(20)
-//                }
+                if let providerInfo = viewStore.providerInfo {
+                    Spacer()
+                    HelpdeskView(providerInfo: providerInfo)
+                        .padding(20)
+                }
                 
                 HStack {
                     Spacer()
@@ -86,7 +86,6 @@ public struct ConnectView: View {
                     }
                     Spacer()
                 }
-                Spacer()
             }
             .onAppear {
                 viewStore.send(.onAppear)
