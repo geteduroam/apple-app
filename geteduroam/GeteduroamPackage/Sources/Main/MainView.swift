@@ -6,6 +6,8 @@ import SwiftUI
 
 public struct MainView: View {
     public init(store: StoreOf<Main>) {
+        // Not exposed via SwiftUI, affects all TextFields…
+        UITextField.appearance().clearButtonMode = .whileEditing
         self.store = store
     }
     
@@ -47,15 +49,6 @@ public struct MainView: View {
                             .focused($focusedField, equals: .search)
                             .textInputAutocapitalization(.never)
                             .disableAutocorrection(true)
-                            
-                            Button {
-                                viewStore.send(.searchQueryChanged(""))
-                            } label: {
-                                Image(systemName: "xmark.circle.fill")
-                            }
-                            .buttonStyle(.plain)
-                            .opacity(focusedField == .search && viewStore.searchQuery.isEmpty == false ? 1 : 0)
-                            .accessibility(label: Text("Clear", bundle: .module))
                         }
                         Rectangle()
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0.33, maxHeight: 0.33)

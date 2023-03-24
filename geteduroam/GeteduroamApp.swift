@@ -25,13 +25,14 @@ struct GeteduroamApp: App {
         profilesHeaderFont: .custom("OpenSans-SemiBold", size: 12, relativeTo: .body),
         profileNameFont: .custom("OpenSans-Regular", size: 16, relativeTo: .body),
         connectButtonFont: .custom("OpenSans-Bold", size: 20, relativeTo: .body),
-        connectedFont: .custom("OpenSans-Bold", size: 14, relativeTo: .body))
+        connectedFont: .custom("OpenSans-Bold", size: 14, relativeTo: .body),
+        infoHeaderFont: .custom("OpenSans-Bold", size: 14, relativeTo: .body),
+        infoDetailFont: .custom("OpenSans-Regular", size: 14, relativeTo: .body))
     
 	var body: some Scene {
 		WindowGroup {
             MainView(store: store)
                 .environmentObject(theme)
 		}
-      
 	}
 }

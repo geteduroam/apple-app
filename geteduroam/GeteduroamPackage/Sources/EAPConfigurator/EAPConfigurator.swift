@@ -15,8 +15,11 @@ public class EAPConfigurator {
     // MARK: - Configuring Identity Provider
     
     /// Configure the network for an Identity Provider
-    /// - Parameter identityProvider: The Identity Provider
-    public func configure(identityProvider: EAPIdentityProvider, credentials: Credentials? = nil) async throws {
+    /// - Parameters:
+    ///   - identityProvider: The Identity Provider
+    ///   - credentials: Credentials entered by user
+    /// - Returns: Expected SSIDs for connection
+    public func configure(identityProvider: EAPIdentityProvider, credentials: Credentials? = nil) async throws -> [String] {
         // At this point, we're not certain this configuration can work,
         // but we can't do this any step later, because createNetworkConfigurations will import things to the keychain.
         // TODO: only remove keychain items that match these networks
@@ -35,6 +38,7 @@ public class EAPConfigurator {
             throw EAPConfiguratorError.noConfigurations
         }
         try await NEHotspotConfigurationManager.shared.apply(last)
+        return ssids
     }
     
     /// Create network configuration object
@@ -226,7 +230,8 @@ public class EAPConfigurator {
                 }
                 password = credentials.password
             } else {
-                let requiredSuffix = clientSideCredential.innerIdentitySuffix
+                // An required empty string as suffix makes no sense
+                let requiredSuffix = clientSideCredential.innerIdentitySuffix != "" ? clientSideCredential.innerIdentitySuffix : nil
                 throw EAPConfiguratorError.missingCredentials(clientSideCredential, requiredSuffix: requiredSuffix)
             }
 

@@ -160,20 +160,46 @@ public struct Connect: Reducer {
         }
     }
     
-    public enum InstitutionSetupError: Error {
+    public enum InstitutionSetupError: Error, LocalizedError {
         case missingAuthorizationEndpoint
         case missingTokenEndpoint
         case missingTermsAcceptance(ProviderInfo?)
         case noValidProviderFound(ProviderInfo?)
         case eapConfigurationFailed(EAPConfiguratorError, ProviderInfo?)
+        case notConnectedToExpectedSSID(ProviderInfo?)
         case unknownError(Error, ProviderInfo?)
         
         var providerInfo: ProviderInfo? {
             switch self {
             case .missingAuthorizationEndpoint, .missingTokenEndpoint:
                 return nil
-            case let .missingTermsAcceptance(info), let .noValidProviderFound(info), let .eapConfigurationFailed(_, info), let .unknownError(_, info):
+            case let .missingTermsAcceptance(info), let .noValidProviderFound(info), let .eapConfigurationFailed(_, info), let .notConnectedToExpectedSSID(info), let .unknownError(_, info):
                 return info
+            }
+        }
+ 
+        public var errorDescription: String? {
+            switch self {
+            case .missingAuthorizationEndpoint:
+                return NSLocalizedString("Missing information to start authentication.", comment: "missingAuthorizationEndpoint")
+                
+            case .missingTokenEndpoint:
+                return NSLocalizedString("Missing information to start authentication.", comment: "missingTokenEndpoint")
+                
+            case .missingTermsAcceptance:
+                return NSLocalizedString("You must agree to the terms of use.", comment: "missingTermsAcceptance")
+                
+            case .noValidProviderFound:
+                return NSLocalizedString("No valid provider found.", comment: "noValidProviderFound")
+                
+            case let .eapConfigurationFailed(error, _):
+                return error.errorDescription
+                
+            case .notConnectedToExpectedSSID(_):
+                return NSLocalizedString("Not connected with an expected network.", comment: "notConnectedToExpectedSSID")
+                
+            case let .unknownError(error, _):
+                return error.localizedDescription
             }
         }
     }
@@ -200,7 +226,7 @@ public struct Connect: Reducer {
                 }, message: { [termsOfUse = state.providerInfo?.termsOfUse?.localized()] in
                     var message = "You must agree to the terms of use before you can use this network."
                     if let termsOfUse {
-                        message = message + "\n\n" + termsOfUse
+                        message = message + "\n\n" + termsOfUse.trimmingCharacters(in: .whitespacesAndNewlines)
                     }
                     return TextState(message)
                 })
@@ -395,17 +421,19 @@ public struct Connect: Reducer {
         }
         
         do {
-            try await EAPConfigurator().configure(identityProvider: firstValidProvider, credentials: credentials)
+            let expectedSSIDs = try await EAPConfigurator().configure(identityProvider: firstValidProvider, credentials: credentials)
+            
+            // Check if we are connected to one of the expected SSIDs
+            let connectedSSIDs = SSID.fetchNetworkInfo().filter( { $0.success == true }).compactMap(\.ssid)
+            
+            guard connectedSSIDs.first(where: { expectedSSIDs.contains($0) }) != nil else {
+                throw InstitutionSetupError.notConnectedToExpectedSSID(firstValidProvider.providerInfo)
+            }
         } catch let error as EAPConfiguratorError {
             throw InstitutionSetupError.eapConfigurationFailed(error, firstValidProvider.providerInfo)
         } catch {
             throw InstitutionSetupError.unknownError(error, firstValidProvider.providerInfo)
         }
-        
-        let info = SSID.fetchNetworkInfo()
-        
-        print("Info: \(String(describing: info))")
-        // TODO: Check if connection works?
         
         return firstValidProvider.providerInfo
     }
