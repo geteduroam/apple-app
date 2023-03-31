@@ -405,6 +405,15 @@ public struct Connect: Reducer {
             urlRequest.allHTTPHeaderFields = ["Authorization": "Bearer \(accessToken)"]
         }
 
+        #if targetEnvironment(macCatalyst)
+        let urlString = profile.eapconfig_endpoint!.absoluteString + "&format=mobileconfig"
+        var urlRequest2 = URLRequest(url: URL(string: urlString)!)
+        urlRequest2.httpMethod = "POST"
+        
+        let (data, _) = try await URLSession.shared.data(for: urlRequest2)
+        print(data)
+        return nil
+        #else
         let (eapConfigData, _) = try await URLSession.shared.data(for: urlRequest)
         
         let providerList = try decoder.decode(EAPIdentityProviderList.self, from: eapConfigData)
@@ -436,6 +445,7 @@ public struct Connect: Reducer {
         }
         
         return firstValidProvider.providerInfo
+        #endif
     }
     
 }
