@@ -4,6 +4,7 @@ import ComposableArchitecture
 import EAPConfigurator
 import Foundation
 import Models
+import NotificationClient
 import SwiftUI
 import XMLCoder
 
@@ -206,6 +207,7 @@ public struct Connect: Reducer {
     
     @Dependency(\.authClient) var authClient
     @Dependency(\.dismiss) var dismiss
+    @Dependency(\.notificationClient) var notificationClient
     
     private func connect(state: inout State) -> Effect<Connect.Action> {
         guard let profile = state.selectedProfile else {
@@ -425,9 +427,15 @@ public struct Connect: Reducer {
             
             // Check if we are connected to one of the expected SSIDs
             let connectedSSIDs = SSID.fetchNetworkInfo().filter( { $0.success == true }).compactMap(\.ssid)
-            
             guard connectedSSIDs.first(where: { expectedSSIDs.contains($0) }) != nil else {
                 throw InstitutionSetupError.notConnectedToExpectedSSID(firstValidProvider.providerInfo)
+            }
+            
+            // Schedule reminder for user to renew network access
+            if let validUntil = firstValidProvider.validUntil {
+                let providerId = firstValidProvider.id
+                let profileId = profile.id
+                try await notificationClient.scheduleRenewReminder(validUntil, providerId, profileId)
             }
         } catch let error as EAPConfiguratorError {
             throw InstitutionSetupError.eapConfigurationFailed(error, firstValidProvider.providerInfo)
