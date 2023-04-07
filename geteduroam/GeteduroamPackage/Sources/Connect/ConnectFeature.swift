@@ -406,12 +406,19 @@ public struct Connect: Reducer {
         }
 
         #if targetEnvironment(macCatalyst)
-        let urlString = profile.eapconfig_endpoint!.absoluteString + "&format=mobileconfig"
+        let urlString = profile.eapconfig_endpoint!.absoluteString.replacingOccurrences(of: "device=eap-generic", with: "device=apple_global") + "&format=mobileconfig"
         var urlRequest2 = URLRequest(url: URL(string: urlString)!)
         urlRequest2.httpMethod = "POST"
         
         let (data, _) = try await URLSession.shared.data(for: urlRequest2)
-        print(data)
+        print(data as NSData)
+        
+        // open "x-apple.systempreferences:com.apple.preferences.configurationprofiles"
+        // open /System/Library/PreferencePanes/Profiles.prefPane  /Users/jkool/Downloads/eduroam-OS_X-eVAe.mobileconfig
+        
+//        let p = Process()
+//        p.
+//        p.arguments = ["/System/Library/PreferencePanes/Profiles.prefPane", "/Users/jkool/Downloads/eduroam-OS_X-eVAe.mobileconfig"]
         return nil
         #else
         let (eapConfigData, _) = try await URLSession.shared.data(for: urlRequest)
