@@ -1,4 +1,5 @@
 import AuthClient
+import Backport
 import ComposableArchitecture
 import Models
 import SwiftUI
@@ -10,22 +11,7 @@ public struct ConnectView: View {
     
     let store: StoreOf<Connect>
     
-#if targetEnvironment(macCatalyst)
-        // FIXME: EnvironmentObject broken on macCatalyst?!
-    let theme = Theme(
-        searchFont: .custom("OpenSans-Regular", size: 20, relativeTo: .body),
-        errorFont: .custom("OpenSans-Regular", size: 16, relativeTo: .body),
-        institutionNameFont: .custom("OpenSans-Bold", size: 16, relativeTo: .body),
-        institutionCountryFont: .custom("OpenSans-Regular", size: 11, relativeTo: .footnote),
-        profilesHeaderFont: .custom("OpenSans-SemiBold", size: 12, relativeTo: .body),
-        profileNameFont: .custom("OpenSans-Regular", size: 16, relativeTo: .body),
-        connectButtonFont: .custom("OpenSans-Bold", size: 20, relativeTo: .body),
-        connectedFont: .custom("OpenSans-Bold", size: 14, relativeTo: .body),
-        infoHeaderFont: .custom("OpenSans-Bold", size: 14, relativeTo: .body),
-        infoDetailFont: .custom("OpenSans-Regular", size: 14, relativeTo: .body))
-#else
     @EnvironmentObject var theme: Theme
-#endif
     
     // TODO: Define ViewState
     
@@ -59,6 +45,7 @@ public struct ConnectView: View {
                                 } label: {
                                     ProfileRowView(profile: profile, isSelected: selectedProfile == profile)
                                 }
+                                .backport
                                 .listRowSeparatorTint(Color("ListSeparator"))
                                 .listRowBackground(Color("Background"))
                             }
@@ -71,8 +58,8 @@ public struct ConnectView: View {
                     .disabled(viewStore.canSelectProfile == false)
                 }
                
+                Spacer()
                 if let providerInfo = viewStore.providerInfo {
-                    Spacer()
                     HelpdeskView(providerInfo: providerInfo)
                         .padding(20)
                 }
@@ -81,12 +68,21 @@ public struct ConnectView: View {
                     Spacer()
                     VStack(alignment: .center) {
                         if viewStore.isConnected {
+#if os(iOS)
                             Label(title: {
                                 Text("Connected", bundle: .module)
                             }, icon: {
                                 Image(systemName: "checkmark")
                             })
-                                .font(theme.connectedFont)
+                            .font(theme.connectedFont)
+#elseif os(macOS)
+                            Text("""
+                            Continue in System Settings
+                            
+                            Double-click to review the profile and then press the "Install…" button to setup the network on your computer.
+                            """, bundle: .module)
+                            .font(theme.connectedFont)
+#endif
                         } else {
                             Button {
                                 viewStore.send(.connect)

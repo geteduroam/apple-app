@@ -1,4 +1,6 @@
 import SwiftUI
+
+#if os(iOS)
 import UIKit
 
 // Source: https://mathijsbernson.nl/posts/using-readable-content-guides-in-swiftui/
@@ -65,3 +67,15 @@ public extension Backport where Content: View {
         content.modifier(ReadableContentWidthPadding())
     }
 }
+#elseif os(macOS)
+// Does nothing on macOS
+public extension Backport where Content: View {
+    @ViewBuilder func readableContentWidth() -> some View {
+        content
+    }
+    
+    @ViewBuilder func readableContentWidthPadding() -> some View {
+        content
+    }
+}
+#endif

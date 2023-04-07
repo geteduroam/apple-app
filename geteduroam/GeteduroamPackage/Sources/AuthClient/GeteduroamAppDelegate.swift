@@ -7,6 +7,7 @@ public enum StartAuthError: Error {
     case unknownError
 }
 
+#if os(iOS)
 public class GeteduroamAppDelegate: NSObject, UIApplicationDelegate, ObservableObject, AuthClient {
     private var currentAuthorizationFlow: OIDExternalUserAgentSession?
   
@@ -57,3 +58,25 @@ extension UIApplication {
     }
     
 }
+#elseif os(macOS)
+public class GeteduroamAppDelegate: NSObject, NSApplicationDelegate, ObservableObject, AuthClient {
+    private var currentAuthorizationFlow: OIDExternalUserAgentSession?
+  
+    public func startAuth(request: OIDAuthorizationRequest) async throws -> OIDAuthState {
+        guard let window = await NSApplication.shared.keyWindow else {
+            throw StartAuthError.noWindow
+        }
+        return try await withCheckedThrowingContinuation { continuation in
+            self.currentAuthorizationFlow = OIDAuthState.authState(byPresenting: request, presenting: window) { authState, error in
+                if let authState {
+                    continuation.resume(returning: authState)
+                } else if let error {
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume(throwing: StartAuthError.unknownError)
+                }
+            }
+        }
+    }
+}
+#endif

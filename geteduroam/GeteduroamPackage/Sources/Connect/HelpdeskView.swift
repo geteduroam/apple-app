@@ -12,12 +12,21 @@ struct HelpdeskView: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 8)
                         .fill(Color.white)
+#if os(iOS)
                     Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 88, height: 88)
                         .accessibility(hidden: true)
                         .padding(8)
+#elseif os(macOS)
+                    Image(nsImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 88, height: 88)
+                        .accessibility(hidden: true)
+                        .padding(8)
+#endif
                 }
                 .fixedSize()
             }
@@ -87,14 +96,21 @@ struct HelpdeskView: View {
                     break
                 }
                 attributed[range].link = url
+#if os(iOS)
                 attributed[range].foregroundColor = UIColor(named: "ListSeparator")
-                
+#elseif os(macOS)
+                attributed[range].foregroundColor = NSColor(named: "ListSeparator")
+#endif
             case .link:
                 guard let url = result.url else {
                     break
                 }
                 attributed[range].link = url
+#if os(iOS)
                 attributed[range].foregroundColor = UIColor(named: "ListSeparator")
+#elseif os(macOS)
+                attributed[range].foregroundColor = NSColor(named: "ListSeparator")
+#endif
                 
             default:
                 break
