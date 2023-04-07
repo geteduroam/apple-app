@@ -60,5 +60,7 @@
 	<false/>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>
+	<key>NSUserNotificationsUsageDescription</key>
+	<string>Reminding you when you need to renew your network access.</string>
 </dict>
 </plist>

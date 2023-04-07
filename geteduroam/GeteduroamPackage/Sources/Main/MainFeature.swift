@@ -12,6 +12,7 @@ public struct Main: Reducer {
     @Dependency(\.cacheClient) var cacheClient
     @Dependency(\.discoveryClient) var discoveryClient
     @Dependency(\.notificationClient) var notificationClient
+    @Dependency(\.date.now) var now
     
     public struct State: Equatable {
         public init(searchQuery: String = "", institutions: IdentifiedArrayOf<Institution> = .init(uniqueElements: []), loadingState: LoadingState = .initial, destination: Destination.State? = nil) {
@@ -98,6 +99,9 @@ public struct Main: Reducer {
                                 await send(.renewActionInReminderTapped(providerId: providerId, profileId: profileId))
                                 
                             case let .remindMeLaterActionTriggered(validUntil, providerId, profileId):
+                                guard validUntil.timeIntervalSince(now) > 0 else {
+                                    return
+                                }
                                 try await notificationClient.scheduleRenewReminder(validUntil, providerId, profileId)
                             }
                         }
