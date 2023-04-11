@@ -28,11 +28,14 @@ let package = Package(
             name: "Connect",
             targets: ["Connect"]),
         .library(
+            name: "EAPConfigurator",
+            targets: ["EAPConfigurator"]),
+        .library(
             name: "Models",
             targets: ["Models"]),
         .library(
-            name: "EAPConfigurator",
-            targets: ["EAPConfigurator"]),
+            name: "NotificationClient",
+            targets: ["NotificationClient"]),
     ],
     dependencies: [
         .package(url: "https://github.com/openid/AppAuth-iOS.git", from: "1.0.0"),
@@ -90,6 +93,7 @@ let package = Package(
                 "AuthClient",
                 "EAPConfigurator",
                 "Models",
+                "NotificationClient",
                 .product(name: "AppAuth", package: "AppAuth-iOS"),
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ]),
@@ -109,6 +113,11 @@ let package = Package(
             name: "EAPConfigurator",
             dependencies: [
                 "Models",
+            ]),
+        .target(
+            name: "NotificationClient",
+            dependencies: [
+                .product(name: "Dependencies", package: "swift-dependencies")
             ]),
     ]
 )
