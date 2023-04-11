@@ -58,5 +58,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>NSUserNotificationsUsageDescription</key>
+	<string>Reminding you when you need to renew your network access.</string>
 </dict>
 </plist>
