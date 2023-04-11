@@ -164,17 +164,19 @@ public struct Connect: Reducer {
     public enum InstitutionSetupError: Error, LocalizedError {
         case missingAuthorizationEndpoint
         case missingTokenEndpoint
+        case missingEAPConfigEndpoint
         case missingTermsAcceptance(ProviderInfo?)
         case noValidProviderFound(ProviderInfo?)
         case eapConfigurationFailed(EAPConfiguratorError, ProviderInfo?)
+        case mobileConfigFailed(ProviderInfo?)
         case notConnectedToExpectedSSID(ProviderInfo?)
         case unknownError(Error, ProviderInfo?)
         
         var providerInfo: ProviderInfo? {
             switch self {
-            case .missingAuthorizationEndpoint, .missingTokenEndpoint:
+            case .missingAuthorizationEndpoint, .missingTokenEndpoint, .missingEAPConfigEndpoint:
                 return nil
-            case let .missingTermsAcceptance(info), let .noValidProviderFound(info), let .eapConfigurationFailed(_, info), let .notConnectedToExpectedSSID(info), let .unknownError(_, info):
+            case let .missingTermsAcceptance(info), let .noValidProviderFound(info), let .eapConfigurationFailed(_, info), let .mobileConfigFailed(info), let .notConnectedToExpectedSSID(info), let .unknownError(_, info):
                 return info
             }
         }
@@ -187,6 +189,9 @@ public struct Connect: Reducer {
             case .missingTokenEndpoint:
                 return NSLocalizedString("Missing information to start authentication.", comment: "missingTokenEndpoint")
                 
+            case .missingEAPConfigEndpoint:
+                return NSLocalizedString("Missing information to start configuration.", comment: "missingEAPConfigEndpoint")
+                
             case .missingTermsAcceptance:
                 return NSLocalizedString("You must agree to the terms of use.", comment: "missingTermsAcceptance")
                 
@@ -195,6 +200,9 @@ public struct Connect: Reducer {
                 
             case let .eapConfigurationFailed(error, _):
                 return error.errorDescription
+                
+            case .mobileConfigFailed:
+                return NSLocalizedString("No valid profile found.", comment: "mobileConfigFailed")
                 
             case .notConnectedToExpectedSSID(_):
                 return NSLocalizedString("Not connected with an expected network.", comment: "notConnectedToExpectedSSID")
@@ -401,7 +409,11 @@ public struct Connect: Reducer {
             accessToken = nil
         }
         
-        var urlRequest = URLRequest(url: profile.eapconfig_endpoint!)
+        guard let eapConfigURL = profile.eapconfig_endpoint else {
+            throw InstitutionSetupError.missingEAPConfigEndpoint
+        }
+        
+        var urlRequest = URLRequest(url: eapConfigURL)
         urlRequest.httpMethod = "POST"
         if let accessToken {
             urlRequest.allHTTPHeaderFields = ["Authorization": "Bearer \(accessToken)"]
@@ -422,6 +434,7 @@ public struct Connect: Reducer {
             throw InstitutionSetupError.missingTermsAcceptance(firstValidProvider.providerInfo)
         }
         
+#if os(iOS)
         do {
             let expectedSSIDs = try await EAPConfigurator().configure(identityProvider: firstValidProvider, credentials: credentials)
             
@@ -442,6 +455,28 @@ public struct Connect: Reducer {
         } catch {
             throw InstitutionSetupError.unknownError(error, firstValidProvider.providerInfo)
         }
+#elseif os(macOS)
+        do {
+            // FIXME: Replace temporary hack!
+            let mobileConfigURL = eapConfigURL.absoluteString.replacingOccurrences(of: "device=eap-generic", with: "device=apple_global") + "&format=mobileconfig"
+            var mobileConfigURLRequest = URLRequest(url: URL(string: mobileConfigURL)!)
+            mobileConfigURLRequest.httpMethod = "POST"
+            if let accessToken {
+                mobileConfigURLRequest.allHTTPHeaderFields = ["Authorization": "Bearer \(accessToken)"]
+            }
+            
+            let (data, response) = try await URLSession.shared.data(for: mobileConfigURLRequest)
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, (200..<300).contains(statusCode) else {
+                throw InstitutionSetupError.mobileConfigFailed(firstValidProvider.providerInfo)
+            }
+            let temporaryDataURL = NSTemporaryDirectory() + "geteduroam.mobileconfig"
+            try data.write(to: URL(fileURLWithPath: temporaryDataURL))
+            
+            try Process.run(URL(fileURLWithPath: "/usr/bin/open"), arguments: ["/System/Library/PreferencePanes/Profiles.prefPane", temporaryDataURL])
+        } catch {
+            throw InstitutionSetupError.unknownError(error, firstValidProvider.providerInfo)
+        }
+#endif
         
         return firstValidProvider.providerInfo
     }

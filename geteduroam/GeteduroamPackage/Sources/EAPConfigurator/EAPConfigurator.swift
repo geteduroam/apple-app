@@ -12,6 +12,7 @@ extension Logger {
 public class EAPConfigurator {
     public init() { }
     
+#if os(iOS)
     // MARK: - Configuring Identity Provider
     
     /// Configure the network for an Identity Provider
@@ -633,4 +634,5 @@ public class EAPConfigurator {
             return nil
         }
     }
+#endif
 }

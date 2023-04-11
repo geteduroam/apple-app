@@ -7,7 +7,7 @@ public enum SearchFieldPlacement {
     
     // TODO: Other cases
 
-    @available(iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+    @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 12.0, *)
     var original: SwiftUI.SearchFieldPlacement {
         switch self {
         case .automatic:
@@ -33,7 +33,7 @@ public extension Backport where Content: View {
     @ViewBuilder func searchable(text: Binding<String>,
                                  placement: SearchFieldPlacement = .automatic,
                                  prompt: Text? = nil) -> some View {
-        if #available(iOS 16, tvOS 16.0, watchOS 9.0, *) {
+        if #available(iOS 16, tvOS 16.0, watchOS 9.0, macOS 12.0, *) {
             content.searchable(text: text, placement: placement.original, prompt: prompt)
         } else {
             VStack {
@@ -56,7 +56,7 @@ public extension Backport where Content: View {
     ///   - prompt: The key for the localized prompt of the search field
     ///     which provides users with guidance on what to search for.
     @ViewBuilder func searchable(text: Binding<String>, placement: SearchFieldPlacement = .automatic, prompt: LocalizedStringKey) -> some View {
-        if #available(iOS 16, tvOS 16.0, watchOS 9.0, *) {
+        if #available(iOS 16, tvOS 16.0, watchOS 9.0, macOS 12.0, *) {
             content.searchable(text: text, placement: placement.original, prompt: prompt)
         } else {
             VStack {
@@ -79,7 +79,7 @@ public extension Backport where Content: View {
     ///   - prompt: A string representing the prompt of the search field
     ///     which provides users with guidance on what to search for.
     @ViewBuilder func searchable<S>(text: Binding<String>, placement: SearchFieldPlacement = .automatic, prompt: S) -> some View where S : StringProtocol {
-        if #available(iOS 16, tvOS 16.0, watchOS 9.0, *) {
+        if #available(iOS 16, tvOS 16.0, watchOS 9.0, macOS 12.0, *) {
             content.searchable(text: text, placement: placement.original, prompt: prompt)
         } else {
             VStack {

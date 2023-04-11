@@ -182,7 +182,7 @@ public struct Main: Reducer {
             }
         }
         .ifLet(\.$destination, action: /Action.destination) {
-          Destination()
+            Destination()
         }
     }
 }

@@ -14,7 +14,7 @@ public enum ScrollDismissesKeyboardMode {
     /// Corresponds to [never](https://developer.apple.com/documentation/swiftui/scrolldismisseskeyboardmode/never)
     case never
 
-    @available(iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+    @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
     var original: SwiftUI.ScrollDismissesKeyboardMode {
         switch self {
         case .automatic:
@@ -34,7 +34,7 @@ public extension Backport where Content: View {
     /// - Parameter mode: Mode to apply
     /// - Returns: View with dismiss keyboard mode applied if available
     @ViewBuilder func scrollDismissesKeyboard(_ mode: ScrollDismissesKeyboardMode) -> some View {
-        if #available(iOS 16, tvOS 16.0, watchOS 9.0, *) {
+        if #available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *) {
             content.scrollDismissesKeyboard(mode.original)
         } else {
             content

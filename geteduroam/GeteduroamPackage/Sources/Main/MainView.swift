@@ -6,8 +6,10 @@ import SwiftUI
 
 public struct MainView: View {
     public init(store: StoreOf<Main>) {
+        #if os(iOS)
         // Not exposed via SwiftUI, affects all TextFields…
         UITextField.appearance().clearButtonMode = .whileEditing
+        #endif
         self.store = store
     }
     
@@ -47,6 +49,7 @@ public struct MainView: View {
                                 text: viewStore.binding(get: \.searchQuery, send: Main.Action.searchQueryChanged))
                             .font(theme.searchFont)
                             .focused($focusedField, equals: .search)
+                            .backport
                             .textInputAutocapitalization(.never)
                             .disableAutocorrection(true)
                         }
@@ -79,11 +82,13 @@ public struct MainView: View {
                         if viewStore.isSearching == false && viewStore.searchQuery.isEmpty == false && viewStore.searchResults.isEmpty {
                             Text("No matches found", bundle: .module)
                                 .font(theme.errorFont)
+                                .backport
                                 .listRowSeparatorTint(Color.clear)
                                 .listRowBackground(Color("Background"))
                         } else if viewStore.searchResults.isEmpty {
                             Text("")
                                 .accessibility(hidden: true)
+                                .backport
                                 .listRowSeparatorTint(Color.clear)
                                 .listRowBackground(Color.clear)
                         } else {
@@ -93,6 +98,7 @@ public struct MainView: View {
                                 } label: {
                                     InstitutionRowView(institution: institution)
                                 }
+                                .backport
                                 .listRowSeparatorTint(Color("ListSeparator"))
                                 .listRowBackground(Color("Background"))
                             }
@@ -123,6 +129,7 @@ public struct MainView: View {
                 action: Main.Destination.Action.connect
             ) {
                 ConnectView(store: $0)
+                    .frame(minWidth: 320, minHeight: 480)
             }
             .alert(
                 store: store.scope(state: \.$destination, action: Main.Action.destination),

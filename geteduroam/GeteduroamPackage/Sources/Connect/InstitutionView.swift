@@ -1,4 +1,5 @@
 import AuthClient
+import Backport
 import ComposableArchitecture
 import Models
 import SwiftUI
@@ -44,6 +45,7 @@ public struct ConnectView: View {
                                 } label: {
                                     ProfileRowView(profile: profile, isSelected: selectedProfile == profile)
                                 }
+                                .backport
                                 .listRowSeparatorTint(Color("ListSeparator"))
                                 .listRowBackground(Color("Background"))
                             }
@@ -56,8 +58,8 @@ public struct ConnectView: View {
                     .disabled(viewStore.canSelectProfile == false)
                 }
                
+                Spacer()
                 if let providerInfo = viewStore.providerInfo {
-                    Spacer()
                     HelpdeskView(providerInfo: providerInfo)
                         .padding(20)
                 }
@@ -66,12 +68,21 @@ public struct ConnectView: View {
                     Spacer()
                     VStack(alignment: .center) {
                         if viewStore.isConnected {
+#if os(iOS)
                             Label(title: {
                                 Text("Connected", bundle: .module)
                             }, icon: {
                                 Image(systemName: "checkmark")
                             })
-                                .font(theme.connectedFont)
+                            .font(theme.connectedFont)
+#elseif os(macOS)
+                            Text("""
+                            Continue in System Settings
+                            
+                            Double-click to review the profile and then press the "Install…" button to setup the network on your computer.
+                            """, bundle: .module)
+                            .font(theme.connectedFont)
+#endif
                         } else {
                             Button {
                                 viewStore.send(.connect)

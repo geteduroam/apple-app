@@ -7,7 +7,11 @@ import SwiftUI
 @main
 struct GeteduroamApp: App {
     
+    #if os(iOS)
     @UIApplicationDelegateAdaptor private var appDelegate: GeteduroamAppDelegate
+    #elseif os(macOS)
+    @NSApplicationDelegateAdaptor private var appDelegate: GeteduroamAppDelegate
+    #endif
     
     var store: StoreOf<Main>!
     
