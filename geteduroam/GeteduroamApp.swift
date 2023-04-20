@@ -4,6 +4,7 @@ import Main
 import Models
 import SwiftUI
 
+@available(macOS 13, *)
 @main
 struct GeteduroamApp: App {
     
@@ -34,9 +35,12 @@ struct GeteduroamApp: App {
         infoDetailFont: .custom("OpenSans-Regular", size: 14, relativeTo: .body))
     
 	var body: some Scene {
-		WindowGroup {
-            MainView(store: store)
-                .environmentObject(theme)
-		}
-	}
+        WindowGroup {
+            // TODO: Create bwc version
+//            NavigationStack {
+                MainView(store: store)
+                    .environmentObject(theme)
+//            }
+        }
+    }
 }

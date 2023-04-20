@@ -5,7 +5,8 @@ struct ProfileRowView: View {
     let profile: Profile
     let isSelected: Bool
     
-    @EnvironmentObject var theme: Theme
+//    @EnvironmentObject var theme: Theme
+    let theme = Theme.demo
     
     var body: some View {
         VStack(alignment: .leading) {

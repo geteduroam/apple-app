@@ -3,7 +3,8 @@ import SwiftUI
 
 struct ConnectButtonStyle: ButtonStyle {
     
-    @EnvironmentObject var theme: Theme
+//    @EnvironmentObject var theme: Theme
+    let theme = Theme.demo
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label

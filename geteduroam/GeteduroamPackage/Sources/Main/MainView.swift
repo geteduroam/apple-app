@@ -4,6 +4,7 @@ import Connect
 import Models
 import SwiftUI
 
+@available(macOS 13, *)
 public struct MainView: View {
     public init(store: StoreOf<Main>) {
         #if os(iOS)
@@ -20,7 +21,6 @@ public struct MainView: View {
     }
     
     @FocusState private var focusedField: Field?
-
     @EnvironmentObject var theme: Theme
     
     struct ViewState: Equatable {
@@ -40,6 +40,7 @@ public struct MainView: View {
             )
         }) { viewStore in
             VStack(alignment: .leading, spacing: 0) {
+#if os(iOS)
                 if viewStore.loadingState == .success {
                     VStack(spacing: 8) {
                         HStack {
@@ -57,11 +58,12 @@ public struct MainView: View {
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0.33, maxHeight: 0.33)
                             .foregroundColor(Color("ListSeparator"))
                             .padding(.trailing, -20)
-                        
+
                     }
                     .padding(.horizontal, 20)
                     .padding(.top, 20)
                 }
+#endif
                 
                 if viewStore.loadingState == .failure {
                     HStack {
@@ -98,6 +100,7 @@ public struct MainView: View {
                                 } label: {
                                     InstitutionRowView(institution: institution)
                                 }
+                                .buttonStyle(.plain)
                                 .backport
                                 .listRowSeparatorTint(Color("ListSeparator"))
                                 .listRowBackground(Color("Background"))
@@ -107,6 +110,7 @@ public struct MainView: View {
                     .listStyle(.plain)
                 }
             }
+            .searchable(text: viewStore.binding(get: \.searchQuery, send: Main.Action.searchQueryChanged), placement: .toolbar, prompt: NSLocalizedString("Search for your institution", bundle: .module, comment: ""))
             .backport
             .readableContentWidthPadding()
             .background {
@@ -123,7 +127,7 @@ public struct MainView: View {
                 // TODO: To focus or not to focus? searchFieldIsFocused = true
                 viewStore.send(.onAppear)
             }
-            .sheet(
+            .sheet( // TODO: Use navigationDestination on macOS
                 store: store.scope(state: \.$destination, action: Main.Action.destination),
                 state: /Main.Destination.State.connect,
                 action: Main.Destination.Action.connect
@@ -140,6 +144,7 @@ public struct MainView: View {
     }
 }
 
+@available(macOS 13, *)
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView(store: .init(initialState: .init(), reducer: Main()))
