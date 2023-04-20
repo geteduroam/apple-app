@@ -11,7 +11,8 @@ public struct ConnectView: View {
     
     let store: StoreOf<Connect>
     
-    @EnvironmentObject var theme: Theme
+   // @EnvironmentObject var theme: Theme
+    let theme = Theme.demo
     
     // TODO: Define ViewState
     
@@ -45,6 +46,7 @@ public struct ConnectView: View {
                                 } label: {
                                     ProfileRowView(profile: profile, isSelected: selectedProfile == profile)
                                 }
+                                .buttonStyle(.plain)
                                 .backport
                                 .listRowSeparatorTint(Color("ListSeparator"))
                                 .listRowBackground(Color("Background"))

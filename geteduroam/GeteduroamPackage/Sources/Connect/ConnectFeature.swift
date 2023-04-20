@@ -457,6 +457,18 @@ public struct Connect: Reducer {
         }
 #elseif os(macOS)
         do {
+            let temporaryDataURL = NSTemporaryDirectory() + "geteduroam.mobileconfig"
+           
+            defer {
+                Task {
+                    // Give prefPane a chance to copy file
+                    try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
+                    
+                    print("Removing \(temporaryDataURL)")
+                    try? FileManager.default.removeItem(atPath: temporaryDataURL)
+                }
+            }
+            
             // FIXME: Replace temporary hack!
             let mobileConfigURL = eapConfigURL.absoluteString.replacingOccurrences(of: "device=eap-generic", with: "device=apple_global") + "&format=mobileconfig"
             var mobileConfigURLRequest = URLRequest(url: URL(string: mobileConfigURL)!)
@@ -469,10 +481,19 @@ public struct Connect: Reducer {
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, (200..<300).contains(statusCode) else {
                 throw InstitutionSetupError.mobileConfigFailed(firstValidProvider.providerInfo)
             }
-            let temporaryDataURL = NSTemporaryDirectory() + "geteduroam.mobileconfig"
             try data.write(to: URL(fileURLWithPath: temporaryDataURL))
             
             try Process.run(URL(fileURLWithPath: "/usr/bin/open"), arguments: ["/System/Library/PreferencePanes/Profiles.prefPane", temporaryDataURL])
+            
+            // TODO: Get this working on macOS
+//            // Check if we are connected to one of the expected SSIDs
+//            let expectedSSIDs = ["eduroam"]
+//            let connectedSSIDs = try SSID.fetchNetworkInfo().filter( { $0.success == true }).compactMap(\.ssid)
+//            print("connectedSSIDs: \(connectedSSIDs)")
+//
+//            guard connectedSSIDs.first(where: { expectedSSIDs.contains($0) }) != nil else {
+//                throw InstitutionSetupError.notConnectedToExpectedSSID(firstValidProvider.providerInfo)
+//            }
         } catch {
             throw InstitutionSetupError.unknownError(error, firstValidProvider.providerInfo)
         }
