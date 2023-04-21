@@ -4,15 +4,14 @@ import ComposableArchitecture
 import Models
 import SwiftUI
 
-public struct ConnectView: View {
+public struct ConnectView_iOS: View {
     public init(store: StoreOf<Connect>) {
         self.store = store
     }
     
     let store: StoreOf<Connect>
     
-   // @EnvironmentObject var theme: Theme
-    let theme = Theme.demo
+    @EnvironmentObject var theme: Theme
     
     // TODO: Define ViewState
     
@@ -70,21 +69,12 @@ public struct ConnectView: View {
                     Spacer()
                     VStack(alignment: .center) {
                         if viewStore.isConnected {
-#if os(iOS)
                             Label(title: {
                                 Text("Connected", bundle: .module)
                             }, icon: {
                                 Image(systemName: "checkmark")
                             })
                             .font(theme.connectedFont)
-#elseif os(macOS)
-                            Text("""
-                            Continue in System Settings
-                            
-                            Double-click to review the profile and then press the "Install…" button to setup the network on your computer.
-                            """, bundle: .module)
-                            .font(theme.connectedFont)
-#endif
                         } else {
                             Button {
                                 viewStore.send(.connect)
@@ -144,7 +134,7 @@ public struct ConnectView: View {
 
 struct ConnectView_Previews: PreviewProvider {
     static var previews: some View {
-        ConnectView(store: .init(
+        ConnectView_iOS(store: .init(
             initialState: .init(
                 institution: .init(
                     id: "1",

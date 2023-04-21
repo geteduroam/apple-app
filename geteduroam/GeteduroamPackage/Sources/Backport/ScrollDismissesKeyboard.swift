@@ -8,7 +8,7 @@ public enum ScrollDismissesKeyboardMode {
     /// Corresponds to [immediately](https://developer.apple.com/documentation/swiftui/scrolldismisseskeyboardmode/immediately)
     case immediately
 
-    /// Corresponds to [interactively](https://developer.apple.com/documentation/swiftui/scrolldismisseskeyboardmode/automatic)
+    /// Corresponds to [interactively](https://developer.apple.com/documentation/swiftui/scrolldismisseskeyboardmode/interactively)
     case interactively
 
     /// Corresponds to [never](https://developer.apple.com/documentation/swiftui/scrolldismisseskeyboardmode/never)

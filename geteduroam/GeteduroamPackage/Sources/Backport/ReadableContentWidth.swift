@@ -47,6 +47,7 @@ struct ReadableContentWidthPadding: ViewModifier {
     }
     
     private func readableWidthPadding(for _: UIDeviceOrientation) -> EdgeInsets {
+        // FIXME: This gives weird results in splitview on iPad
         let screenBounds = UIScreen.main.bounds
         measureViewController.view.frame = screenBounds
         let readableContentFrame = measureViewController.view.readableContentGuide.layoutFrame
