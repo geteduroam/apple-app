@@ -51,25 +51,21 @@ public struct ConnectView_Mac: View {
                 Spacer()
                 
                 if viewStore.isConnected {
-                    Text("Continue in System Settings")
+                  HStack(alignment: .top) {
+                    Image(systemName: "doc.badge.gearshape.fill")
+                    VStack(alignment: .leading) {
+                      Text("Continue in System Settings")
                         .font(theme.connectButtonFont)
-                    Text("""
+                      Text("""
                     Double-click to review the profile and then press the "Install…" button to setup the network on your computer.
                     """, bundle: .module)
-                    .font(theme.connectedFont)
-                    
-                    // TODO: Prettify this:
-//                    VStack(alignment: .leading) {
-//                        InstructionView("Profile downloaded", systemImage: "arrow.down.doc")
-//
-//                        InstructionView("Continue in System Settings", systemImage: "gear", showsArrow: true)
-//
-//                        InstructionView("Double-click to review the profile", systemImage: "cursorarrow.click.2")
-//
-//                        InstructionView("Press the “Install…” button to setup the network", systemImage: "cursorarrow.click")
-//
-//                        InstructionView("Follow the instructions", systemImage: "checklist")
-//                    }
+                      .font(theme.connectedFont)
+                    }
+                  }
+                  .foregroundColor(.black)
+                  .padding()
+                  .background(Color.accentColor)
+                  .cornerRadius(6)
                 } else {
                     HStack {
                         Spacer()
