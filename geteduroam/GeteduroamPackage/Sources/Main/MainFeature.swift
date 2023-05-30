@@ -83,7 +83,7 @@ public struct Main: Reducer {
             // Apple recommends this, but that seems to be diacritic sensitive
             // .filter({ $0.name.localizedCaseInsensitiveContains(query) })
             .filter({ $0.matchWords.contains(where: { $0.range(of: query, options: [.caseInsensitive, .diacriticInsensitive, .anchored], locale: Locale.current) != nil } )})
-            .sorted(by: { $0.name.lowercased() < $1.name.lowercased() }))
+            .sorted(by: { $0.nameOrId.lowercased() < $1.nameOrId.lowercased() }))
     }
 
     public var body: some Reducer<State, Action> {
@@ -121,7 +121,7 @@ public struct Main: Reducer {
 
             case let .discoveryResponse(.success(response)):
                 state.loadingState = .success
-                state.institutions = .init(uniqueElements: response.instances)
+                state.institutions = .init(uniqueElements: response)
                 return .none
                 
             case let .discoveryResponse(.failure(error)):

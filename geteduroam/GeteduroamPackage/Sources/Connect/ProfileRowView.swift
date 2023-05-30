@@ -10,7 +10,7 @@ struct ProfileRowView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text(profile.name)
+                Text(profile.nameOrId)
                     .font(theme.profileNameFont)
                 Spacer()
                 if isSelected {

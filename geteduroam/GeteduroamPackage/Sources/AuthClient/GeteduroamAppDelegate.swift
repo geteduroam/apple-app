@@ -81,7 +81,7 @@ public class GeteduroamAppDelegate: NSObject, NSApplicationDelegate, ObservableO
     
     public func applicationWillUpdate(_ notification: Notification) {
         if let menu = NSApplication.shared.mainMenu {
-            menu.items.removeAll { $0.title == "View" } // TODO: Don't harcode title
+            menu.items.removeAll { $0.title == "View" } // TODO: Don't hardcode title
             // TODO: Also remove Zoom? menu.items.removeAll { $0.title == "Zoom" }
         }
     }

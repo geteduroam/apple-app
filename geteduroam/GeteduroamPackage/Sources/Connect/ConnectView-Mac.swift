@@ -83,7 +83,7 @@ public struct ConnectView_Mac: View {
                 }
             }
             .padding()
-            .navigationTitle(viewStore.institution.name)
+            .navigationTitle(viewStore.institution.nameOrId)
             .onAppear {
                 viewStore.send(.onAppear)
             }
@@ -102,72 +102,34 @@ public struct ConnectView_Mac: View {
     }
 }
 
-//@available(macOS 13.0, *)
-//struct InstructionView: View {
-//    internal init(_ text: String, systemImage: String, showsArrow: Bool = false) {
-//        self.text = text
-//        self.systemImage = systemImage
-//        self.showsArrow = showsArrow
-//    }
-//
-//
-//    let text: String
-//    let systemImage: String
-//    let showsArrow: Bool
-//
-//    let width = 24.0
-//
-//    var body: some View {
-//        HStack {
-//            if showsArrow {
-//                Image(systemName: "arrow.right")
-////                    .resizable()
-////                    .aspectRatio(contentMode: .fit)
-////                    .frame(height: width)
-//            } else {
-//
-////                Color.clear
-////                    .frame(width: width, height: width)
-//            }
-//            Image(systemName: systemImage)
-////                .resizable()
-////                .aspectRatio(contentMode: .fit)
-////                .frame(height: width)
-//            Text(text)
-//                .font(.system(.body, design: .default, weight: .bold))
-//        }
-//    }
-//}
-
-//struct ConnectView_Mac_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ConnectView_Mac(store: .init(
-//            initialState: .init(
-//                institution: .init(
-//                    id: "1",
-//                    name: "My Institution",
-//                    country: "NL",
-//                    cat_idp: 1,
-//                    profiles: [
-//                        .init(
-//                            id: "2",
-//                            name: "My Profile",
-//                            default: true,
-//                            eapconfig_endpoint: nil,
-//                            oauth: false,
-//                            authorization_endpoint: nil,
-//                            token_endpoint: nil),
-//                        .init(
-//                            id: "3",
-//                            name: "Other Profile",
-//                            default: false,
-//                            eapconfig_endpoint: nil,
-//                            oauth: false,
-//                            authorization_endpoint: nil,
-//                            token_endpoint: nil)
-//                    ],
-//                    geo: [.init(lat: 0, lon: 0)])),
-//            reducer: Connect()))
-//        .environmentObject(Theme.demo)
-//    }
-//}
+struct ConnectView_Mac_Previews: PreviewProvider {
+    static var previews: some View {
+        ConnectView_Mac(store: .init(
+            initialState: .init(
+                institution: .init(
+                    id: "1",
+                    name: "My Institution",
+                    country: "NL",
+                    profiles: [
+                        .init(
+                            id: "2",
+                            name: "My Profile",
+                            default: true,
+                            eapconfig_endpoint: nil,
+                            oauth: false,
+                            authorization_endpoint: nil,
+                            token_endpoint: nil),
+                        .init(
+                            id: "3",
+                            name: "Other Profile",
+                            default: false,
+                            eapconfig_endpoint: nil,
+                            oauth: false,
+                            authorization_endpoint: nil,
+                            token_endpoint: nil)
+                    ],
+                    geo: [.init(lat: 0, lon: 0)])),
+            reducer: Connect()))
+        .environmentObject(Theme.demo)
+    }
+}

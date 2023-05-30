@@ -34,7 +34,7 @@ extension CacheClient {
         },
         restoreInstitutions: {
             print("Should now restore cache")
-            return InstitutionsResponse(instances: [.init(id: "restored", name: "Restored Institution from Cache", country: "NL", cat_idp: 0, profiles: [], geo: [])])
+            return [.init(id: "restored", name: "Restored Institution from Cache", country: "NL", profiles: [], geo: [])]
         })
 }
 

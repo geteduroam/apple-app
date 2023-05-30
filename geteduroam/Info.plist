@@ -19,13 +19,15 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>DiscoveryURL</key>
-	<string>https://discovery.eduroam.app/v1/</string>
+	<string>https://discovery.eduroam.app/v2/</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSUserNotificationsUsageDescription</key>
+	<string>Reminding you when you need to renew your network access.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>OpenSans-Regular.ttf</string>
@@ -58,7 +60,5 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
-	<key>NSUserNotificationsUsageDescription</key>
-	<string>Reminding you when you need to renew your network access.</string>
 </dict>
 </plist>

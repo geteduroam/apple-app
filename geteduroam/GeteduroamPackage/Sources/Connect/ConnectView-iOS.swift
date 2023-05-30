@@ -20,7 +20,7 @@ public struct ConnectView_iOS: View {
             VStack(alignment: .leading) {
                 HStack(alignment: .firstTextBaseline) {
                     VStack(alignment: .leading) {
-                        Text(viewStore.institution.name)
+                        Text(viewStore.institution.nameOrId)
                             .font(theme.institutionNameFont)
                         Text(viewStore.institution.country)
                             .font(theme.institutionCountryFont)
@@ -140,7 +140,6 @@ struct ConnectView_Previews: PreviewProvider {
                     id: "1",
                     name: "My Institution",
                     country: "NL",
-                    cat_idp: 1,
                     profiles: [
                         .init(
                             id: "2",

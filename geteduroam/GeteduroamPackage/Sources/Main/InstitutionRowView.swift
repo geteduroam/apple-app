@@ -13,7 +13,7 @@ public struct InstitutionRowView: View {
     public var body: some View {
         HStack(alignment: .center) {
             VStack(alignment: .leading) {
-                Text(institution.name)
+                Text(institution.nameOrId)
                     .font(theme.institutionNameFont)
                 Text(institution.country)
                     .font(theme.institutionCountryFont)
@@ -27,7 +27,7 @@ public struct InstitutionRowView: View {
 struct InstitutionRowView_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            InstitutionRowView(institution: .init(id: "1", name: "My Institution", country: "NL", cat_idp: 1, profiles: [.init(id: "2", name: "My Profile", default: true, eapconfig_endpoint: nil, oauth: false, authorization_endpoint: nil, token_endpoint: nil)], geo: [.init(lat: 0, lon: 0)]))
+            InstitutionRowView(institution: .init(id: "1", name: "My Institution", country: "NL", profiles: [.init(id: "2", name: "My Profile", default: true, eapconfig_endpoint: nil, oauth: false, authorization_endpoint: nil, token_endpoint: nil)], geo: [.init(lat: 0, lon: 0)]))
         }
     }
 }

@@ -165,6 +165,7 @@ public struct Connect: Reducer {
         case missingAuthorizationEndpoint
         case missingTokenEndpoint
         case missingEAPConfigEndpoint
+        case missingMobileConfigEndpoint
         case missingTermsAcceptance(ProviderInfo?)
         case noValidProviderFound(ProviderInfo?)
         case eapConfigurationFailed(EAPConfiguratorError, ProviderInfo?)
@@ -174,7 +175,7 @@ public struct Connect: Reducer {
         
         var providerInfo: ProviderInfo? {
             switch self {
-            case .missingAuthorizationEndpoint, .missingTokenEndpoint, .missingEAPConfigEndpoint:
+            case .missingAuthorizationEndpoint, .missingTokenEndpoint, .missingEAPConfigEndpoint, .missingMobileConfigEndpoint:
                 return nil
             case let .missingTermsAcceptance(info), let .noValidProviderFound(info), let .eapConfigurationFailed(_, info), let .mobileConfigFailed(info), let .notConnectedToExpectedSSID(info), let .unknownError(_, info):
                 return info
@@ -191,6 +192,9 @@ public struct Connect: Reducer {
                 
             case .missingEAPConfigEndpoint:
                 return NSLocalizedString("Missing information to start configuration.", comment: "missingEAPConfigEndpoint")
+
+            case .missingMobileConfigEndpoint:
+                return NSLocalizedString("Missing information to start configuration.", comment: "missingMobileConfigEndpoint")
                 
             case .missingTermsAcceptance:
                 return NSLocalizedString("You must agree to the terms of use.", comment: "missingTermsAcceptance")
@@ -456,6 +460,11 @@ public struct Connect: Reducer {
             throw InstitutionSetupError.unknownError(error, firstValidProvider.providerInfo)
         }
 #elseif os(macOS)
+
+        guard let mobileConfigURL = profile.mobileconfig_endpoint else {
+            throw InstitutionSetupError.missingMobileConfigEndpoint
+        }
+
         do {
             let temporaryDataURL = NSTemporaryDirectory() + "geteduroam.mobileconfig"
            
@@ -468,10 +477,8 @@ public struct Connect: Reducer {
                     try? FileManager.default.removeItem(atPath: temporaryDataURL)
                 }
             }
-            
-            // FIXME: Replace temporary hack!
-            let mobileConfigURL = eapConfigURL.absoluteString.replacingOccurrences(of: "device=eap-generic", with: "device=apple_global") + "&format=mobileconfig"
-            var mobileConfigURLRequest = URLRequest(url: URL(string: mobileConfigURL)!)
+
+            var mobileConfigURLRequest = URLRequest(url: mobileConfigURL)
             mobileConfigURLRequest.httpMethod = "POST"
             if let accessToken {
                 mobileConfigURLRequest.allHTTPHeaderFields = ["Authorization": "Bearer \(accessToken)"]
