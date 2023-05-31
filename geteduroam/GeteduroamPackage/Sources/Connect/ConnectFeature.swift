@@ -12,8 +12,10 @@ public struct Connect: Reducer {
     public init() { }
     
     public struct State: Equatable {
-        public init(institution: Institution, loadingState: LoadingState = .initial, credentials: Credentials? = nil, destination: Destination.State? = nil) {
+        public init(institution: Institution, selectedProfileId: Profile.ID? = nil, autoConnectOnAppear: Bool = false, loadingState: LoadingState = .initial, credentials: Credentials? = nil, destination: Destination.State? = nil) {
             self.institution = institution
+            self.selectedProfileId = selectedProfileId
+            self.autoConnectOnAppear = autoConnectOnAppear
             self.loadingState = loadingState
             self.credentials = credentials
             self.destination = destination
@@ -21,7 +23,8 @@ public struct Connect: Reducer {
         
         public let institution: Institution
         public var selectedProfileId: Profile.ID?
-        
+        public var autoConnectOnAppear: Bool
+
         public var providerInfo: ProviderInfo?
         public var agreedToTerms: Bool = false
         public var credentials: Credentials?
@@ -245,12 +248,13 @@ public struct Connect: Reducer {
         }
         
         state.loadingState = .isLoading
+        let institution = state.institution
         let credentials = state.credentials
         state.credentials = nil
         state.promptForCredentials = false
         let agreedToTerms = state.agreedToTerms
         return .task {
-            await Action.connectResponse(TaskResult<ProviderInfo?> { try await connect(profile: profile, authClient: authClient, credentials: credentials, agreedToTerms: agreedToTerms) })
+            await Action.connectResponse(TaskResult<ProviderInfo?> { try await connect(institution: institution, profile: profile, authClient: authClient, credentials: credentials, agreedToTerms: agreedToTerms) })
         }
     }
     
@@ -258,10 +262,13 @@ public struct Connect: Reducer {
         Reduce { state, action in
             switch action {
             case .onAppear:
-                guard let _ = state.selectedProfile, state.institution.hasSingleProfile else {
+                defer {
+                    state.autoConnectOnAppear = false
+                }
+                guard let _ = state.selectedProfile, (state.institution.hasSingleProfile || state.autoConnectOnAppear) else {
                     return .none
                 }
-                // Auto connect if there is only a single profile
+                // Auto connect if there is only a single profile or a reminder was tapped
                 return connect(state: &state)
                 
             case let .destination(.presented(.termsAlert(action))):
@@ -380,7 +387,7 @@ public struct Connect: Reducer {
     
     @Dependency(\.date) var date
     
-    func connect(profile: Profile, authClient: AuthClient, credentials: Credentials?, agreedToTerms: Bool) async throws -> ProviderInfo? {
+    func connect(institution: Institution, profile: Profile, authClient: AuthClient, credentials: Credentials?, agreedToTerms: Bool) async throws -> ProviderInfo? {
         let accessToken: String?
         if profile.oauth ?? false {
             guard let authorizationEndpoint = profile.authorization_endpoint else {
@@ -443,12 +450,12 @@ public struct Connect: Reducer {
             guard connectedSSIDs.first(where: { expectedSSIDs.contains($0) }) != nil else {
                 throw InstitutionSetupError.notConnectedToExpectedSSID(firstValidProvider.providerInfo)
             }
-            
+
             // Schedule reminder for user to renew network access
             if let validUntil = firstValidProvider.validUntil {
-                let providerId = firstValidProvider.id
+                let institutionId = institution.id
                 let profileId = profile.id
-                try await notificationClient.scheduleRenewReminder(validUntil, providerId, profileId)
+                try await notificationClient.scheduleRenewReminder(validUntil, institutionId, profileId)
             }
         } catch let error as EAPConfiguratorError {
             throw InstitutionSetupError.eapConfigurationFailed(error, firstValidProvider.providerInfo)
@@ -494,6 +501,14 @@ public struct Connect: Reducer {
 //            guard connectedSSIDs.first(where: { expectedSSIDs.contains($0) }) != nil else {
 //                throw InstitutionSetupError.notConnectedToExpectedSSID(firstValidProvider.providerInfo)
 //            }
+
+            // TODO: Get this working on macOS: validUntil unknown, reconnect doesn't trigger navigation in UI
+//            // Schedule reminder for user to renew network access
+//            let validUntil = Date(timeIntervalSinceNow: 30) // Debug date
+//            let institutionId = institution.id
+//            let profileId = profile.id
+//            try await notificationClient.scheduleRenewReminder(validUntil, institutionId, profileId)
+
         } catch {
             throw InstitutionSetupError.unknownError(error, firstValidProvider.providerInfo)
         }
