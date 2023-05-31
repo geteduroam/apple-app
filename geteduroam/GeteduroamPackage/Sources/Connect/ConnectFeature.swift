@@ -348,18 +348,20 @@ public struct Connect: Reducer {
                 return .none
                 
             case let .updateUsername(username):
+                let trimmedUsername = username.trimmingCharacters(in: .whitespacesAndNewlines)
                 if let _ = state.credentials {
-                    state.credentials?.username = username
+                    state.credentials?.username = trimmedUsername
                 } else {
-                    state.credentials = Credentials(username: username)
+                    state.credentials = Credentials(username: trimmedUsername)
                 }
                 return .none
                 
             case let .updatePassword(password):
+                let trimmedPassword = password.trimmingCharacters(in: .whitespacesAndNewlines)
                 if let _ = state.credentials {
-                    state.credentials?.password = password
+                    state.credentials?.password = trimmedPassword
                 } else {
-                    state.credentials = Credentials(password: password)
+                    state.credentials = Credentials(password: trimmedPassword)
                 }
                 return .none
                 
