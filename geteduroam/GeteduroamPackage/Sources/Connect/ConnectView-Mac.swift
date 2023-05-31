@@ -139,6 +139,7 @@ public struct ConnectView_Mac: View {
 //    }
 //}
 
+#if DEBUG
 //struct ConnectView_Mac_Previews: PreviewProvider {
 //    static var previews: some View {
 //        ConnectView_Mac(store: .init(
@@ -171,3 +172,4 @@ public struct ConnectView_Mac: View {
 //        .environmentObject(Theme.demo)
 //    }
 //}
+#endif

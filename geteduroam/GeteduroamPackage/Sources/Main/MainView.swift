@@ -156,11 +156,12 @@ extension View {
 #if os(iOS)
         self.sheet(store: store, state: toDestinationState, action: fromDestinationAction, content: content)
 #elseif os(macOS)
-        if #available(macOS 13.0, *) {
+        // TODO: See if we can enable macOS 12 again, but this code would cause the compiler to crash when archiving
+//        if #available(macOS 13.0, *) {
             return self.navigationDestination(store: store, state: toDestinationState, action: fromDestinationAction, destination: content)
-        } else {
-            return self.sheet(store: store, state: toDestinationState, action: fromDestinationAction, content: content)
-        }
+//        } else {
+//            return self.sheet(store: store, state: toDestinationState, action: fromDestinationAction, content: content)
+//        }
 #endif
     }
 
@@ -201,8 +202,10 @@ struct NavigationWrapped<Content>: View where Content: View {
     }
 }
 
+#if DEBUG
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView(store: .init(initialState: .init(), reducer: Main()))
     }
 }
+#endif
