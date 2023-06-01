@@ -479,8 +479,16 @@ public struct Connect: Reducer {
             }
             
             // FIXME: Replace temporary hack!
-            let mobileConfigURL = eapConfigURL.absoluteString.replacingOccurrences(of: "device=eap-generic", with: "device=apple_global") + "&format=mobileconfig"
-            var mobileConfigURLRequest = URLRequest(url: URL(string: mobileConfigURL)!)
+            var mobileConfigURLComponents = URLComponents(url: eapConfigURL, resolvingAgainstBaseURL: true)!
+            var queryItems = mobileConfigURLComponents.queryItems ?? []
+            queryItems.removeAll(where: { item in
+                item.name == "device" && item.value == "eap-generic"
+            })
+            queryItems.append(URLQueryItem(name: "device", value: "apple_global"))
+            queryItems.append(URLQueryItem(name: "format", value: "mobileconfig"))
+            mobileConfigURLComponents.queryItems = queryItems
+            let mobileConfigURL = mobileConfigURLComponents.url!
+            var mobileConfigURLRequest = URLRequest(url: mobileConfigURL)
             mobileConfigURLRequest.httpMethod = "POST"
             if let accessToken {
                 mobileConfigURLRequest.allHTTPHeaderFields = ["Authorization": "Bearer \(accessToken)"]
