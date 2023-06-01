@@ -43,6 +43,7 @@
 		C74A11F0294CCAF600ECC19A /* institutions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = institutions.json; sourceTree = "<group>"; };
 		C759A6DB291E800B009B30C1 /* geteduroam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = geteduroam.entitlements; sourceTree = "<group>"; };
 		C77F52042913F0430056530E /* Pods_geteduroam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_geteduroam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C79715A02A28910A00828465 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C7A20B3F297ADB8E0004EB5D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C7A20B41297ADB990004EB5D /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C7A20B4D297ADFDD0004EB5D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -94,6 +95,7 @@
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
+				C79715A02A28910A00828465 /* README.md */,
 				C7D61036291EA763007C9D6B /* Packages */,
 				7555FF7D242A565900829871 /* geteduroam */,
 				C7F45A59297ABD050005508D /* getgovroam */,
