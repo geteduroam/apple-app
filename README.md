@@ -2,7 +2,9 @@
 
 ## What is it?
 
-This is the geteduroam app for iPhone, iPad and Macs. Its purpose is to help people configure their devices for use with the eduroam network. The eduroam network allows them use the network at their institution of education or when visiting other participating institutions.
+This is the [geteduroam](https://geteduroam.app/) app for iPhone, iPad and Mac. Its purpose is to help people configure their devices for use with the [eduroam](https://eduroam.org) network. The eduroam network allows them use the network at their institution of education or when visiting other participating institutions.
+
+This is the code for version 2.0 and newer.
 
 ## Minimum Requirements
 
@@ -18,6 +20,7 @@ A: !
 
 ## License
 
+See [license](LICENSE.md).
 
 ## Building
 
