@@ -46,7 +46,7 @@ public struct Main: Reducer {
         case renewActionInReminderTapped(institutionId: String, profileId: String)
         case searchQueryChangeDebounced
         case searchQueryChanged(String)
-        case searchResponse(TaskResult<IdentifiedArrayOf<Institution>>)
+        case searchResponse(IdentifiedArrayOf<Institution>)
         case select(Institution)
         case tryAgainTapped
     }
@@ -75,7 +75,7 @@ public struct Main: Reducer {
 
     private enum CancelID { case search }
 
-    func search(query: String, institutions: IdentifiedArrayOf<Institution>) -> IdentifiedArrayOf<Institution> {
+    func search(query: String, institutions: IdentifiedArrayOf<Institution>) async -> IdentifiedArrayOf<Institution> {
         guard query.isEmpty == false else {
             return .init(uniqueElements: [])
         }
@@ -173,16 +173,13 @@ public struct Main: Reducer {
                     return .none
                 }
                 return .task { [query = state.searchQuery, institutions = state.institutions] in
-                    await .searchResponse(TaskResult { self.search(query: query, institutions: institutions) })
+                    let searchResults = await self.search(query: query, institutions: institutions)
+                    return .searchResponse(searchResults)
                 }
                 .cancellable(id: CancelID.search)
                 
-            case let .searchResponse(.success(searchResults)):
+            case let .searchResponse(searchResults):
                 state.searchResults = searchResults
-                state.isSearching = false
-                return .none
-                
-            case .searchResponse(.failure):
                 state.isSearching = false
                 return .none
                 
