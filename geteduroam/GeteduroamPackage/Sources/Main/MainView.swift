@@ -21,7 +21,6 @@ public struct MainView: View {
     
     @FocusState private var focusedField: Field?
     @EnvironmentObject var theme: Theme
-    @Dependency(\.continuousClock) var clock
 
     struct ViewState: Equatable {
         let loadingState: Main.State.LoadingState
@@ -122,7 +121,7 @@ public struct MainView: View {
                 .task(id: viewStore.searchQuery) {
                     do {
                         // TODO: Bounce belongs in reducer?
-                        try await self.clock.sleep(for: .milliseconds(200))
+                        try await Task.sleep(nanoseconds: NSEC_PER_SEC / 5)
                         await viewStore.send(.searchQueryChangeDebounced).finish()
                     } catch {}
                 }
