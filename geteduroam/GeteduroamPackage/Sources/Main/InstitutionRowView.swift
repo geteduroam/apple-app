@@ -24,6 +24,7 @@ public struct InstitutionRowView: View {
     }
 }
 
+#if DEBUG
 struct InstitutionRowView_Previews: PreviewProvider {
     static var previews: some View {
         List {
@@ -31,3 +32,4 @@ struct InstitutionRowView_Previews: PreviewProvider {
         }
     }
 }
+#endif

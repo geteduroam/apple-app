@@ -43,10 +43,10 @@ public struct Main: Reducer {
         case destination(PresentationAction<Destination.Action>)
         case discoveryResponse(TaskResult<InstitutionsResponse>)
         case onAppear
-        case renewActionInReminderTapped(providerId: String, profileId: String)
+        case renewActionInReminderTapped(institutionId: String, profileId: String)
         case searchQueryChangeDebounced
         case searchQueryChanged(String)
-        case searchResponse(TaskResult<IdentifiedArrayOf<Institution>>)
+        case searchResponse(IdentifiedArrayOf<Institution>)
         case select(Institution)
         case tryAgainTapped
     }
@@ -72,10 +72,10 @@ public struct Main: Reducer {
             }
         }
     }
-    
-    private enum SearchID {}
-    
-    func search(query: String, institutions: IdentifiedArrayOf<Institution>) -> IdentifiedArrayOf<Institution> {
+
+    private enum CancelID { case search }
+
+    func search(query: String, institutions: IdentifiedArrayOf<Institution>) async -> IdentifiedArrayOf<Institution> {
         guard query.isEmpty == false else {
             return .init(uniqueElements: [])
         }
@@ -95,14 +95,14 @@ public struct Main: Reducer {
                     .run { send in
                         for await event in notificationClient.delegate() {
                             switch event {
-                            case .renewActionTriggered(providerId: let providerId, profileId: let profileId):
-                                await send(.renewActionInReminderTapped(providerId: providerId, profileId: profileId))
+                            case .renewActionTriggered(institutionId: let institutionId, profileId: let profileId):
+                                await send(.renewActionInReminderTapped(institutionId: institutionId, profileId: profileId))
                                 
-                            case let .remindMeLaterActionTriggered(validUntil, providerId, profileId):
+                            case let .remindMeLaterActionTriggered(validUntil, institutionId, profileId):
                                 guard validUntil.timeIntervalSince(now) > 0 else {
                                     return
                                 }
-                                try await notificationClient.scheduleRenewReminder(validUntil, providerId, profileId)
+                                try await notificationClient.scheduleRenewReminder(validUntil, institutionId, profileId)
                             }
                         }
                     },
@@ -138,8 +138,21 @@ public struct Main: Reducer {
                 state.destination = .alert(alert)
                 return .none
                 
-            case let .renewActionInReminderTapped(provider, profile):
-                // TODO: Open destination and trigger reconnect
+            case let .renewActionInReminderTapped(institutionId, profile):
+                if let institution = state.institutions[id: institutionId] {
+                    state.destination = .connect(.init(institution: institution, selectedProfileId: profile, autoConnectOnAppear: true))
+                } else {
+                    let alert = AlertState<Destination.AlertAction>(title: {
+                        TextState(NSLocalizedString("Unknown institution", bundle: .module, comment: ""))
+                    }, actions: {
+                        ButtonState(role: .cancel, action: .send(.okButtonTapped)) {
+                            TextState(NSLocalizedString("OK", bundle: .module, comment: ""))
+                        }
+                    }, message: {
+                        TextState(NSLocalizedString("The institution is no longer listed.", bundle: .module, comment: ""))
+                    })
+                    state.destination = .alert(alert)
+                }
                 return .none
                 
             case let .searchQueryChanged(query):
@@ -151,7 +164,7 @@ public struct Main: Reducer {
                 guard !query.isEmpty else {
                     state.searchResults = []
                     state.isSearching = false
-                    return .cancel(id: SearchID.self)
+                    return .cancel(id: CancelID.search)
                 }
                 return .none
                 
@@ -160,16 +173,13 @@ public struct Main: Reducer {
                     return .none
                 }
                 return .task { [query = state.searchQuery, institutions = state.institutions] in
-                    await .searchResponse(TaskResult { self.search(query: query, institutions: institutions) })
+                    let searchResults = await self.search(query: query, institutions: institutions)
+                    return .searchResponse(searchResults)
                 }
-                .cancellable(id: SearchID.self)
+                .cancellable(id: CancelID.search)
                 
-            case let .searchResponse(.success(searchResults)):
+            case let .searchResponse(searchResults):
                 state.searchResults = searchResults
-                state.isSearching = false
-                return .none
-                
-            case .searchResponse(.failure):
                 state.isSearching = false
                 return .none
                 

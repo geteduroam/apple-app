@@ -132,6 +132,7 @@ public struct ConnectView_iOS: View {
     }
 }
 
+#if DEBUG
 struct ConnectView_Previews: PreviewProvider {
     static var previews: some View {
         ConnectView_iOS(store: .init(
@@ -163,3 +164,4 @@ struct ConnectView_Previews: PreviewProvider {
         .environmentObject(Theme.demo)
     }
 }
+#endif

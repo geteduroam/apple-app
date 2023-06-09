@@ -21,7 +21,7 @@ public struct MainView: View {
     
     @FocusState private var focusedField: Field?
     @EnvironmentObject var theme: Theme
-    
+
     struct ViewState: Equatable {
         let loadingState: Main.State.LoadingState
         let isSearching: Bool
@@ -120,7 +120,8 @@ public struct MainView: View {
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                 .task(id: viewStore.searchQuery) {
                     do {
-                        try await Task.sleep(nanoseconds: NSEC_PER_SEC / 4)
+                        // TODO: Bounce belongs in reducer?
+                        try await Task.sleep(nanoseconds: NSEC_PER_SEC / 5)
                         await viewStore.send(.searchQueryChangeDebounced).finish()
                     } catch {}
                 }
@@ -157,9 +158,9 @@ extension View {
         self.sheet(store: store, state: toDestinationState, action: fromDestinationAction, content: content)
 #elseif os(macOS)
         if #available(macOS 13.0, *) {
-            return self.navigationDestination(store: store, state: toDestinationState, action: fromDestinationAction, destination: content)
+            return AnyView(self.navigationDestination(store: store, state: toDestinationState, action: fromDestinationAction, destination: content))
         } else {
-            return self.sheet(store: store, state: toDestinationState, action: fromDestinationAction, content: content)
+            return AnyView(self.sheet(store: store, state: toDestinationState, action: fromDestinationAction, content: content))
         }
 #endif
     }
@@ -201,8 +202,10 @@ struct NavigationWrapped<Content>: View where Content: View {
     }
 }
 
+#if DEBUG
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView(store: .init(initialState: .init(), reducer: Main()))
     }
 }
+#endif

@@ -21,6 +21,7 @@ struct ProfileRowView: View {
     }
 }
 
+#if DEBUG
 struct ProfileRowView_Previews: PreviewProvider {
     static var previews: some View {
         List {
@@ -29,3 +30,4 @@ struct ProfileRowView_Previews: PreviewProvider {
         }
     }
 }
+#endif
