@@ -165,6 +165,7 @@ public struct Connect: Reducer {
     }
     
     public enum InstitutionSetupError: Error, LocalizedError {
+        case missingProfileType
         case missingAuthorizationEndpoint
         case missingTokenEndpoint
         case missingEAPConfigEndpoint
@@ -174,6 +175,7 @@ public struct Connect: Reducer {
         case eapConfigurationFailed(EAPConfiguratorError, ProviderInfo?)
         case mobileConfigFailed(ProviderInfo?)
         case notConnectedToExpectedSSID(ProviderInfo?)
+        case redirectToWebsite(URL)
         case unknownError(Error, ProviderInfo?)
         
         var providerInfo: ProviderInfo? {
@@ -187,6 +189,9 @@ public struct Connect: Reducer {
  
         public var errorDescription: String? {
             switch self {
+            case .missingProfileType:
+                return NSLocalizedString("Missing information about profile.", comment: "missingProfileType")
+
             case .missingAuthorizationEndpoint:
                 return NSLocalizedString("Missing information to start authentication.", comment: "missingAuthorizationEndpoint")
                 
@@ -223,7 +228,8 @@ public struct Connect: Reducer {
     @Dependency(\.authClient) var authClient
     @Dependency(\.dismiss) var dismiss
     @Dependency(\.notificationClient) var notificationClient
-    
+    @Dependency(\.openURL) var openURL
+
     private func connect(state: inout State) -> Effect<Connect.Action> {
         guard let profile = state.selectedProfile else {
             return .none
@@ -310,7 +316,12 @@ public struct Connect: Reducer {
             case let .connectResponse(.failure(InstitutionSetupError.missingTermsAcceptance(providerInfo))):
                 state.providerInfo = providerInfo
                 return connect(state: &state)
-                
+
+            case let .connectResponse(.failure(InstitutionSetupError.redirectToWebsite(url))):
+                return .run { _ in
+                    await self.openURL(url)
+                }
+
             case let .connectResponse(.failure(InstitutionSetupError.eapConfigurationFailed(EAPConfiguratorError.invalidUsername(suffix), providerInfo))):
                 state.providerInfo = providerInfo
                 state.promptForCredentials = true
@@ -395,11 +406,18 @@ public struct Connect: Reducer {
     
     func connect(institution: Institution, profile: Profile, authClient: AuthClient, credentials: Credentials?, agreedToTerms: Bool) async throws -> ProviderInfo? {
         let accessToken: String?
-        if profile.oauth ?? false {
-            guard let authorizationEndpoint = profile.authorization_endpoint else {
+        guard let profileType = profile.type else {
+            throw InstitutionSetupError.missingProfileType
+        }
+        switch profileType {
+        case .letswifi:
+
+            let (data, response) = try await URLSession.shared.data(for: mobileConfigURLRequest)
+
+            guard let authorizationEndpoint = profile.letswifi_endpoint else {
                 throw InstitutionSetupError.missingAuthorizationEndpoint
             }
-            guard let tokenEndpoint = profile.token_endpoint else {
+            guard let tokenEndpoint = profile.letswifi_endpoint else {
                 throw InstitutionSetupError.missingTokenEndpoint
             }
             let configuration = OIDServiceConfiguration(authorizationEndpoint: authorizationEndpoint, tokenEndpoint: tokenEndpoint)
@@ -412,14 +430,17 @@ public struct Connect: Reducer {
             let codeChallange = OIDAuthorizationRequest.codeChallengeS256(forVerifier: codeVerifier)
             let state = UUID().uuidString
             let nonce = UUID().uuidString
-         
+
             let request = OIDAuthorizationRequest(configuration: configuration, clientId: clientId, clientSecret: nil, scope: scope, redirectURL: redirectURL, responseType: OIDResponseTypeCode, state: state, nonce: nonce, codeVerifier: codeVerifier, codeChallenge: codeChallange, codeChallengeMethod: OIDOAuthorizationRequestCodeChallengeMethodS256, additionalParameters: nil)
 
             (accessToken, _) = try await authClient
                 .startAuth(request: request)
                 .tokens()
-        } else {
+        case .eapConfig:
             accessToken = nil
+
+        case .portal:
+            throw InstitutionSetupError.redirectToWebsite(profile.portal_endpoint!)
         }
         
         guard let eapConfigURL = profile.eapconfig_endpoint else {
@@ -446,7 +467,7 @@ public struct Connect: Reducer {
         guard agreedToTerms || firstValidProvider.providerInfo?.termsOfUse?.localized() == nil else {
             throw InstitutionSetupError.missingTermsAcceptance(firstValidProvider.providerInfo)
         }
-        
+
 #if os(iOS)
         do {
             let expectedSSIDs = try await EAPConfigurator().configure(identityProvider: firstValidProvider, credentials: credentials)

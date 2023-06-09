@@ -114,19 +114,10 @@ struct ConnectView_Mac_Previews: PreviewProvider {
                         .init(
                             id: "2",
                             name: "My Profile",
-                            default: true,
-                            eapconfig_endpoint: nil,
-                            oauth: false,
-                            authorization_endpoint: nil,
-                            token_endpoint: nil),
+                            default: true),
                         .init(
                             id: "3",
-                            name: "Other Profile",
-                            default: false,
-                            eapconfig_endpoint: nil,
-                            oauth: false,
-                            authorization_endpoint: nil,
-                            token_endpoint: nil)
+                            name: "Other Profile")
                     ],
                     geo: [.init(lat: 0, lon: 0)])),
             reducer: Connect()))
