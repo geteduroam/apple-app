@@ -18,9 +18,29 @@ public struct ConnectView_Mac: View {
     public var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             VStack(alignment: .leading) {
+                if #available(macOS 13.0, *) {
+                    // On macOS 13 we push instead of present a sheet and therefor these controls aren't needed
+                } else {
+                    HStack(alignment: .firstTextBaseline) {
+                        VStack(alignment: .leading) {
+                            Text(viewStore.institution.name)
+                                .font(theme.institutionNameFont)
+                            Text(viewStore.institution.country)
+                                .font(theme.institutionCountryFont)
+                        }
+                        Spacer()
+                        Button(action: {
+                            viewStore.send(.dismissTapped)
+                        }, label: {
+                            Image(systemName: "xmark")
+                        })
+                        .buttonStyle(.plain)
+                    }
+                    Spacer()
+                }
+
                 if let providerInfo = viewStore.providerInfo {
                     HelpdeskView(providerInfo: providerInfo)
-                    //                        .padding(20)
                     Spacer()
                 }
                 
