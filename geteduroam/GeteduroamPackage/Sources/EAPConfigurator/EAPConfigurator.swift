@@ -35,10 +35,14 @@ public class EAPConfigurator {
         
         let configurations = try createNetworkConfigurations(identityProvider: identityProvider, credentials: credentials)
         
-        guard let last = configurations.last else {
+        guard configurations.isEmpty == false else {
             throw EAPConfiguratorError.noConfigurations
         }
-        try await NEHotspotConfigurationManager.shared.apply(last)
+
+        for configuration in configurations {
+            try await NEHotspotConfigurationManager.shared.apply(configuration)
+        }
+
         return ssids
     }
     

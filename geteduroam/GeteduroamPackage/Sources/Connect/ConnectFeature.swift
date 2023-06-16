@@ -172,14 +172,14 @@ public struct Connect: Reducer {
         case noValidProviderFound(ProviderInfo?)
         case eapConfigurationFailed(EAPConfiguratorError, ProviderInfo?)
         case mobileConfigFailed(ProviderInfo?)
-        case notConnectedToExpectedSSID(ProviderInfo?)
+        case notConnectedToExpectedSSID(ProviderInfo?, String)
         case unknownError(Error, ProviderInfo?)
         
         var providerInfo: ProviderInfo? {
             switch self {
             case .missingAuthorizationEndpoint, .missingTokenEndpoint, .missingEAPConfigEndpoint:
                 return nil
-            case let .missingTermsAcceptance(info), let .noValidProviderFound(info), let .eapConfigurationFailed(_, info), let .mobileConfigFailed(info), let .notConnectedToExpectedSSID(info), let .unknownError(_, info):
+            case let .missingTermsAcceptance(info), let .noValidProviderFound(info), let .eapConfigurationFailed(_, info), let .mobileConfigFailed(info), let .notConnectedToExpectedSSID(info, _), let .unknownError(_, info):
                 return info
             }
         }
@@ -207,8 +207,8 @@ public struct Connect: Reducer {
             case .mobileConfigFailed:
                 return NSLocalizedString("No valid profile found.", comment: "mobileConfigFailed")
                 
-            case .notConnectedToExpectedSSID(_):
-                return NSLocalizedString("Not connected with an expected network.", comment: "notConnectedToExpectedSSID")
+            case let .notConnectedToExpectedSSID(_, ssid):
+                return NSLocalizedString("The network is configured, but could not connect with \"\(ssid)\" network. You may not be near this network currently.", comment: "notConnectedToExpectedSSID")
                 
             case let .unknownError(error, _):
                 return error.localizedDescription
@@ -450,7 +450,7 @@ public struct Connect: Reducer {
             // Check if we are connected to one of the expected SSIDs
             let connectedSSIDs = SSID.fetchNetworkInfo().filter( { $0.success == true }).compactMap(\.ssid)
             guard connectedSSIDs.first(where: { expectedSSIDs.contains($0) }) != nil else {
-                throw InstitutionSetupError.notConnectedToExpectedSSID(firstValidProvider.providerInfo)
+                throw InstitutionSetupError.notConnectedToExpectedSSID(firstValidProvider.providerInfo, expectedSSIDs.first ?? "?")
             }
 
             // Schedule reminder for user to renew network access
