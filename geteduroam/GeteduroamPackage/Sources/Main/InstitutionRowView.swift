@@ -21,6 +21,7 @@ public struct InstitutionRowView: View {
             Spacer()
             Image(systemName: "chevron.right")
         }
+        .contentShape(Rectangle())
     }
 }
 

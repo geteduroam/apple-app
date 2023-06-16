@@ -18,6 +18,7 @@ struct ProfileRowView: View {
                 }
             }
         }
+        .contentShape(Rectangle())
     }
 }
 
