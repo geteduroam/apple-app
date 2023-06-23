@@ -64,6 +64,34 @@ public struct MainView: View {
                         .padding(.top, 20)
                     }
 #endif
+                    
+                    if #available(macOS 13.0, *) {
+                       // Nothing, using .searchable
+                    } else {
+                        if viewStore.loadingState == .success {
+                            VStack(spacing: 8) {
+                                HStack {
+                                    Image(systemName: "magnifyingglass")
+                                    TextField(
+                                        NSLocalizedString("Search for your institution", bundle: .module, comment: ""),
+                                        text: viewStore.binding(get: \.searchQuery, send: Main.Action.searchQueryChanged))
+                                    .font(theme.searchFont)
+                                    .focused($focusedField, equals: .search)
+                                    .backport
+                                    .textInputAutocapitalization(.never)
+                                    .disableAutocorrection(true)
+                                }
+                                Rectangle()
+                                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0.33, maxHeight: 0.33)
+                                    .foregroundColor(Color("ListSeparator"))
+                                    .padding(.trailing, -20)
+                                
+                            }
+                            .padding(.horizontal, 20)
+                            .padding(.top, 20)
+                        }
+                    }
+                    
                     if viewStore.loadingState == .failure {
                         HStack {
                             Image(systemName: "exclamationmark.triangle")
@@ -194,9 +222,7 @@ struct NavigationWrapped<Content>: View where Content: View {
                 content()
             }
         } else {
-            NavigationView {
-                content()
-            }
+            content()
         }
 #endif
     }
