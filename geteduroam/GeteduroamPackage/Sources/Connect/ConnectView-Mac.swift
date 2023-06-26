@@ -74,12 +74,21 @@ public struct ConnectView_Mac: View {
                   HStack(alignment: .top) {
                     Image(systemName: "doc.badge.gearshape.fill")
                     VStack(alignment: .leading) {
-                      Text("Continue in System Settings")
-                        .font(theme.connectButtonFont)
-                      Text("""
-                    Double-click to review the profile and then press the "Install…" button to setup the network on your computer.
-                    """, bundle: .module)
-                      .font(theme.connectedFont)
+                        if #available(macOS 13.0, *) {
+                            Text("Continue in System Settings")
+                                .font(theme.connectButtonFont)
+                            Text("""
+                                Double-click to review the profile and then press the "Install…" button to setup the network on your computer.
+                                """, bundle: .module)
+                                .font(theme.connectedFont)
+                        } else {
+                            Text("Continue in System Preferences")
+                                .font(theme.connectButtonFont)
+                            Text("""
+                                Review the profile and then press the "Install…" button to setup the network on your computer.
+                                """, bundle: .module)
+                                .font(theme.connectedFont)
+                        }
                     }
                   }
                   .foregroundColor(.black)

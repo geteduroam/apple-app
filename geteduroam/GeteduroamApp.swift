@@ -4,7 +4,6 @@ import Main
 import Models
 import SwiftUI
 
-@available(macOS 13, *)
 @main
 struct GeteduroamApp: App {
     
@@ -25,18 +24,18 @@ struct GeteduroamApp: App {
 
     #elseif os(macOS)
     @NSApplicationDelegateAdaptor private var appDelegate: GeteduroamAppDelegate
-    
+
     @StateObject var theme = Theme(
-        searchFont: .system(.body, design: .default, weight: .regular),
-        errorFont: .system(.body, design: .default, weight: .regular),
-        institutionNameFont: .system(.body, design: .default, weight: .bold),
-        institutionCountryFont: .system(.footnote, design: .default, weight: .regular),
-        profilesHeaderFont: .system(.body, design: .default, weight: .bold),
-        profileNameFont: .system(.body, design: .default, weight: .regular),
-        connectButtonFont: .system(.callout, design: .default, weight: .bold),
-        connectedFont: .system(.body, design: .default, weight: .regular),
-        infoHeaderFont: .system(.body, design: .default, weight: .bold),
-        infoDetailFont: .system(.body, design: .default, weight: .regular))
+        searchFont: .system(.body, design: .default),
+        errorFont: .system(.body, design: .default),
+        institutionNameFont: .system(.body, design: .default).bold(),
+        institutionCountryFont: .system(.footnote, design: .default),
+        profilesHeaderFont: .system(.body, design: .default).bold(),
+        profileNameFont: .system(.body, design: .default),
+        connectButtonFont: .system(.callout, design: .default).bold(),
+        connectedFont: .system(.body, design: .default),
+        infoHeaderFont: .system(.body, design: .default).bold(),
+        infoDetailFont: .system(.body, design: .default))
     #endif
     
     var store: StoreOf<Main>!
@@ -57,8 +56,9 @@ struct GeteduroamApp: App {
         }
     }
 #elseif os(macOS)
+    // On macOS 13 and up using Window and .defaultPosition and .defaultSize would be better, but can't use control flow statement with 'SceneBuilder'
     var body: some Scene {
-        Window("geteduroam", id: "mainWindow") {
+        WindowGroup("geteduroam", id: "mainWindow") {
             MainView(store: store)
                 .environmentObject(theme)
                 .onAppear {
@@ -68,11 +68,17 @@ struct GeteduroamApp: App {
                         }
                     }
                 }
-                .frame(minWidth: 300, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity, alignment: .center)
+                .frame(minWidth: 300, idealWidth: 540, maxWidth: .infinity, minHeight: 400, idealHeight: 640, maxHeight: .infinity, alignment: .center)
+                .onDisappear {
+                    // Quit app on close
+                    NSApplication.shared.terminate(nil)
+                }
         }
-        .defaultPosition(.center)
-        .defaultSize(width: 540, height: 640)
         .commands {
+            // Avoid multiple windows
+            CommandGroup(replacing: CommandGroupPlacement.newItem) {
+                EmptyView()
+            }
             CommandGroup(replacing: CommandGroupPlacement.help) {
                 Button("geteduroam Help") {
                     openURL(URL(string: "https://eduroam.org")!)
