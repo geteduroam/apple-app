@@ -12,8 +12,8 @@ public struct Connect: Reducer {
     public init() { }
     
     public struct State: Equatable {
-        public init(institution: Institution, selectedProfileId: Profile.ID? = nil, autoConnectOnAppear: Bool = false, loadingState: LoadingState = .initial, credentials: Credentials? = nil, destination: Destination.State? = nil) {
-            self.institution = institution
+        public init(organization: Organization, selectedProfileId: Profile.ID? = nil, autoConnectOnAppear: Bool = false, loadingState: LoadingState = .initial, credentials: Credentials? = nil, destination: Destination.State? = nil) {
+            self.organization = organization
             self.selectedProfileId = selectedProfileId
             self.autoConnectOnAppear = autoConnectOnAppear
             self.loadingState = loadingState
@@ -21,7 +21,7 @@ public struct Connect: Reducer {
             self.destination = destination
         }
         
-        public let institution: Institution
+        public let organization: Organization
         public var selectedProfileId: Profile.ID?
         public var autoConnectOnAppear: Bool
 
@@ -57,11 +57,11 @@ public struct Connect: Reducer {
         public var selectedProfile: Profile? {
             if let selectedProfileId {
                 // Selected profile
-                return institution.profiles.first(where: { $0.id == selectedProfileId })
-            } else if let firstDefaultProfile = institution.profiles.first(where: { ($0.default ?? false) == true }) {
+                return organization.profiles.first(where: { $0.id == selectedProfileId })
+            } else if let firstDefaultProfile = organization.profiles.first(where: { ($0.default ?? false) == true }) {
                 // Otherwise the first default
                 return firstDefaultProfile
-            } else if let firstProfile = institution.profiles.first {
+            } else if let firstProfile = organization.profiles.first {
                 // Otherwise the first
                 return firstProfile
             } else {
@@ -164,7 +164,7 @@ public struct Connect: Reducer {
         }
     }
     
-    public enum InstitutionSetupError: Error, LocalizedError {
+    public enum OrganizationSetupError: Error, LocalizedError {
         case missingAuthorizationEndpoint
         case missingTokenEndpoint
         case missingEAPConfigEndpoint
@@ -248,13 +248,13 @@ public struct Connect: Reducer {
         }
         
         state.loadingState = .isLoading
-        let institution = state.institution
+        let organization = state.organization
         let credentials = state.credentials
         state.credentials = nil
         state.promptForCredentials = false
         let agreedToTerms = state.agreedToTerms
         return .task {
-            await Action.connectResponse(TaskResult<ProviderInfo?> { try await connect(institution: institution, profile: profile, authClient: authClient, credentials: credentials, agreedToTerms: agreedToTerms) })
+            await Action.connectResponse(TaskResult<ProviderInfo?> { try await connect(organization: organization, profile: profile, authClient: authClient, credentials: credentials, agreedToTerms: agreedToTerms) })
         }
     }
     
@@ -265,7 +265,7 @@ public struct Connect: Reducer {
                 defer {
                     state.autoConnectOnAppear = false
                 }
-                guard let _ = state.selectedProfile, (state.institution.hasSingleProfile || state.autoConnectOnAppear) else {
+                guard let _ = state.selectedProfile, (state.organization.hasSingleProfile || state.autoConnectOnAppear) else {
                     return .none
                 }
                 // Auto connect if there is only a single profile or a reminder was tapped
@@ -303,17 +303,17 @@ public struct Connect: Reducer {
                 state.providerInfo = providerInfo
                 return .none
                 
-            case let .connectResponse(.failure(InstitutionSetupError.missingTermsAcceptance(providerInfo))):
+            case let .connectResponse(.failure(OrganizationSetupError.missingTermsAcceptance(providerInfo))):
                 state.providerInfo = providerInfo
                 return connect(state: &state)
                 
-            case let .connectResponse(.failure(InstitutionSetupError.eapConfigurationFailed(EAPConfiguratorError.invalidUsername(suffix), providerInfo))):
+            case let .connectResponse(.failure(OrganizationSetupError.eapConfigurationFailed(EAPConfiguratorError.invalidUsername(suffix), providerInfo))):
                 state.providerInfo = providerInfo
                 state.promptForCredentials = true
                 state.requiredUserNameSuffix = suffix
                 return .none
                 
-            case let .connectResponse(.failure(InstitutionSetupError.eapConfigurationFailed(EAPConfiguratorError.missingCredentials(_, requiredSuffix: suffix), providerInfo))):
+            case let .connectResponse(.failure(OrganizationSetupError.eapConfigurationFailed(EAPConfiguratorError.missingCredentials(_, requiredSuffix: suffix), providerInfo))):
                 state.providerInfo = providerInfo
                 state.promptForCredentials = true
                 state.requiredUserNameSuffix = suffix
@@ -321,7 +321,7 @@ public struct Connect: Reducer {
                 
             case let .connectResponse(.failure(error)):
                 // Read providerinfo if error has it so we can populate helpdesk
-                state.providerInfo = (error as? InstitutionSetupError)?.providerInfo
+                state.providerInfo = (error as? OrganizationSetupError)?.providerInfo
                 state.loadingState = .failure
                 state.requiredUserNameSuffix = nil
                 
@@ -389,14 +389,14 @@ public struct Connect: Reducer {
     
     @Dependency(\.date) var date
     
-    func connect(institution: Institution, profile: Profile, authClient: AuthClient, credentials: Credentials?, agreedToTerms: Bool) async throws -> ProviderInfo? {
+    func connect(organization: Organization, profile: Profile, authClient: AuthClient, credentials: Credentials?, agreedToTerms: Bool) async throws -> ProviderInfo? {
         let accessToken: String?
         if profile.oauth ?? false {
             guard let authorizationEndpoint = profile.authorization_endpoint else {
-                throw InstitutionSetupError.missingAuthorizationEndpoint
+                throw OrganizationSetupError.missingAuthorizationEndpoint
             }
             guard let tokenEndpoint = profile.token_endpoint else {
-                throw InstitutionSetupError.missingTokenEndpoint
+                throw OrganizationSetupError.missingTokenEndpoint
             }
             let configuration = OIDServiceConfiguration(authorizationEndpoint: authorizationEndpoint, tokenEndpoint: tokenEndpoint)
 
@@ -419,7 +419,7 @@ public struct Connect: Reducer {
         }
         
         guard let eapConfigURL = profile.eapconfig_endpoint else {
-            throw InstitutionSetupError.missingEAPConfigEndpoint
+            throw OrganizationSetupError.missingEAPConfigEndpoint
         }
         
         var urlRequest = URLRequest(url: eapConfigURL)
@@ -436,11 +436,11 @@ public struct Connect: Reducer {
             .first(where: { ($0.validUntil?.timeIntervalSince(date()) ?? 0) >= 0 })
         
         guard let firstValidProvider else {
-            throw InstitutionSetupError.noValidProviderFound(providerList.providers.first?.providerInfo)
+            throw OrganizationSetupError.noValidProviderFound(providerList.providers.first?.providerInfo)
         }
         
         guard agreedToTerms || firstValidProvider.providerInfo?.termsOfUse?.localized() == nil else {
-            throw InstitutionSetupError.missingTermsAcceptance(firstValidProvider.providerInfo)
+            throw OrganizationSetupError.missingTermsAcceptance(firstValidProvider.providerInfo)
         }
         
 #if os(iOS)
@@ -450,19 +450,19 @@ public struct Connect: Reducer {
             // Check if we are connected to one of the expected SSIDs
             let connectedSSIDs = SSID.fetchNetworkInfo().filter( { $0.success == true }).compactMap(\.ssid)
             guard connectedSSIDs.first(where: { expectedSSIDs.contains($0) }) != nil else {
-                throw InstitutionSetupError.notConnectedToExpectedSSID(firstValidProvider.providerInfo, expectedSSIDs.first ?? "?")
+                throw OrganizationSetupError.notConnectedToExpectedSSID(firstValidProvider.providerInfo, expectedSSIDs.first ?? "?")
             }
 
             // Schedule reminder for user to renew network access
             if let validUntil = firstValidProvider.validUntil {
-                let institutionId = institution.id
+                let organizationId = organization.id
                 let profileId = profile.id
-                try await notificationClient.scheduleRenewReminder(validUntil, institutionId, profileId)
+                try await notificationClient.scheduleRenewReminder(validUntil, organizationId, profileId)
             }
         } catch let error as EAPConfiguratorError {
-            throw InstitutionSetupError.eapConfigurationFailed(error, firstValidProvider.providerInfo)
+            throw OrganizationSetupError.eapConfigurationFailed(error, firstValidProvider.providerInfo)
         } catch {
-            throw InstitutionSetupError.unknownError(error, firstValidProvider.providerInfo)
+            throw OrganizationSetupError.unknownError(error, firstValidProvider.providerInfo)
         }
 #elseif os(macOS)
         do {
@@ -496,7 +496,7 @@ public struct Connect: Reducer {
             
             let (data, response) = try await URLSession.shared.data(for: mobileConfigURLRequest)
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, (200..<300).contains(statusCode) else {
-                throw InstitutionSetupError.mobileConfigFailed(firstValidProvider.providerInfo)
+                throw OrganizationSetupError.mobileConfigFailed(firstValidProvider.providerInfo)
             }
             try data.write(to: URL(fileURLWithPath: temporaryDataURL))
             
@@ -509,18 +509,18 @@ public struct Connect: Reducer {
 //            print("connectedSSIDs: \(connectedSSIDs)")
 //
 //            guard connectedSSIDs.first(where: { expectedSSIDs.contains($0) }) != nil else {
-//                throw InstitutionSetupError.notConnectedToExpectedSSID(firstValidProvider.providerInfo)
+//                throw OrganizationSetupError.notConnectedToExpectedSSID(firstValidProvider.providerInfo)
 //            }
 
             // TODO: Get this working on macOS: validUntil unknown, reconnect doesn't trigger navigation in UI
 //            // Schedule reminder for user to renew network access
 //            let validUntil = Date(timeIntervalSinceNow: 30) // Debug date
-//            let institutionId = institution.id
+//            let organizationId = organization.id
 //            let profileId = profile.id
-//            try await notificationClient.scheduleRenewReminder(validUntil, institutionId, profileId)
+//            try await notificationClient.scheduleRenewReminder(validUntil, organizationId, profileId)
 
         } catch {
-            throw InstitutionSetupError.unknownError(error, firstValidProvider.providerInfo)
+            throw OrganizationSetupError.unknownError(error, firstValidProvider.providerInfo)
         }
 #endif
         

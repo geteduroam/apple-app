@@ -8,7 +8,7 @@ import XCTest
 @MainActor
 final class MainTests: XCTestCase {
 
-    let demoInstance = Institution(id: "cat_7016", name: "Môreelsepark Cöllege", country: "NL", cat_idp: 7016, profiles: [Profile(id: "letswifi_cat_7830", name: "Mijn Moreelsepark", default: true, eapconfig_endpoint: URL(string: "https://moreelsepark.geteduroam.nl/api/eap-config/")!, oauth: true, authorization_endpoint: URL(string: "https://moreelsepark.geteduroam.nl/oauth/authorize/")!, token_endpoint: URL(string: "https://moreelsepark.geteduroam.nl/oauth/token/")!)], geo: [Coordinate(lat: 52.088999999999999, lon: 5.1130000000000004)])
+    let demoInstance = Organization(id: "cat_7016", name: "Môreelsepark Cöllege", country: "NL", cat_idp: 7016, profiles: [Profile(id: "letswifi_cat_7830", name: "Mijn Moreelsepark", default: true, eapconfig_endpoint: URL(string: "https://moreelsepark.geteduroam.nl/api/eap-config/")!, oauth: true, authorization_endpoint: URL(string: "https://moreelsepark.geteduroam.nl/oauth/authorize/")!, token_endpoint: URL(string: "https://moreelsepark.geteduroam.nl/oauth/token/")!)], geo: [Coordinate(lat: 52.088999999999999, lon: 5.1130000000000004)])
 
     func testLoading() async throws {
         let store = TestStore(
@@ -55,13 +55,13 @@ final class MainTests: XCTestCase {
 
         await store.receive(.discoveryResponse(.success(.init(instances: [demoInstance])))) { [self] in
             $0.loadingState = .success
-            $0.institutions = [demoInstance]
+            $0.organizations = [demoInstance]
         }
     }
 
     func testSearchByFullname() async throws {
         let store = TestStore(
-            initialState: Main.State(institutions: [demoInstance], loadingState: .success),
+            initialState: Main.State(organizations: [demoInstance], loadingState: .success),
             reducer: Main(),
             prepareDependencies: {
                 $0.notificationClient.delegate = { .finished }
@@ -82,7 +82,7 @@ final class MainTests: XCTestCase {
 
     func testSearchByAbbreviation() async throws {
         let store = TestStore(
-            initialState: Main.State(institutions: [demoInstance], loadingState: .success),
+            initialState: Main.State(organizations: [demoInstance], loadingState: .success),
             reducer: Main(),
             prepareDependencies: {
                 $0.notificationClient.delegate = { .finished }
@@ -103,7 +103,7 @@ final class MainTests: XCTestCase {
 
     func testSearchCaseInsensitive() async throws {
         let store = TestStore(
-            initialState: Main.State(institutions: [demoInstance], loadingState: .success),
+            initialState: Main.State(organizations: [demoInstance], loadingState: .success),
             reducer: Main(),
             prepareDependencies: {
                 $0.notificationClient.delegate = { .finished }
@@ -124,7 +124,7 @@ final class MainTests: XCTestCase {
 
     func testSearchDiacriticInsensitive() async throws {
         let store = TestStore(
-            initialState: Main.State(institutions: [demoInstance], loadingState: .success),
+            initialState: Main.State(organizations: [demoInstance], loadingState: .success),
             reducer: Main(),
             prepareDependencies: {
                 $0.notificationClient.delegate = { .finished }
@@ -145,7 +145,7 @@ final class MainTests: XCTestCase {
 
     func testSearchWithPrefixOnly() async throws {
         let store = TestStore(
-            initialState: Main.State(institutions: [demoInstance], loadingState: .success),
+            initialState: Main.State(organizations: [demoInstance], loadingState: .success),
             reducer: Main(),
             prepareDependencies: {
                 $0.notificationClient.delegate = { .finished }

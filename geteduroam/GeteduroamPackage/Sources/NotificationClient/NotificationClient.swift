@@ -8,7 +8,7 @@ extension String {
     public static let hasExpiredCategoryId = "HAS_EXPIRED_CATEGORY"
     public static let renewNowActionId = "RENEW_NOW_ACTION"
     public static let remindMeActionId = "REMIND_ME_ACTION"
-    public static let institutionIdKey = "INSTITUTION_ID"
+    public static let organizationIdKey = "ORGANIZATION_ID"
     public static let profileIdKey = "PROFILE_ID"
     public static let validUntilKey = "VALID_UNTIL"
 }
@@ -29,12 +29,12 @@ extension DependencyValues.NotificationClientKey: DependencyKey {
 }
 
 public struct NotificationClient {
-    public var scheduleRenewReminder: (/* validUntil: */ Date, /* institutionId: */ String, /* profileId: */ String) async throws -> Void
+    public var scheduleRenewReminder: (/* validUntil: */ Date, /* organizationId: */ String, /* profileId: */ String) async throws -> Void
     public var delegate: @Sendable () -> AsyncStream<DelegateEvent>
     
     public enum DelegateEvent: Equatable {
-        case renewActionTriggered(institutionId: String, profileId: String)
-        case remindMeLaterActionTriggered(validUntil: Date, institutionId: String, profileId: String)
+        case renewActionTriggered(organizationId: String, profileId: String)
+        case remindMeLaterActionTriggered(validUntil: Date, organizationId: String, profileId: String)
     }
 }
 
@@ -50,8 +50,8 @@ extension Logger {
 
 extension NotificationClient {
     static var live: Self = .init(
-        scheduleRenewReminder: { validUntil, institutionId, profileId in
-            Logger.notifications.info("Try to schedule renew reminder for institution \(institutionId) profile \(profileId) valid until \(validUntil)")
+        scheduleRenewReminder: { validUntil, organizationId, profileId in
+            Logger.notifications.info("Try to schedule renew reminder for organization \(organizationId) profile \(profileId) valid until \(validUntil)")
             
             @Dependency(\.calendar) var calendar
             @Dependency(\.date.now) var now
@@ -78,7 +78,7 @@ extension NotificationClient {
             let settings = await center.notificationSettings()
             
             // Create notification content
-            let userInfo: [String: Any] = [.institutionIdKey: institutionId, .profileIdKey: profileId, .validUntilKey: validUntil]
+            let userInfo: [String: Any] = [.organizationIdKey: organizationId, .profileIdKey: profileId, .validUntilKey: validUntil]
             
             let willExpireContent = UNMutableNotificationContent()
             willExpireContent.title = NSLocalizedString("Your network access is about to expire", comment: "Your network access is about to expire")
@@ -144,12 +144,12 @@ extension NotificationClient {
             if let willExpireTrigger {
                 let willExpireRequest = UNNotificationRequest(identifier: .willExpireCategoryId, content: willExpireContent, trigger: willExpireTrigger)
                 try await center.add(willExpireRequest)
-                Logger.notifications.info("Scheduled renew reminder for institution \(institutionId) profile \(profileId) valid until \(validUntil) on \(triggerDate!)")
+                Logger.notifications.info("Scheduled renew reminder for organization \(organizationId) profile \(profileId) valid until \(validUntil) on \(triggerDate!)")
             }
             
             let hasExpiredRequest = UNNotificationRequest(identifier: .hasExpiredCategoryId, content: hasExpiredContent, trigger: hasExpiredTrigger)
             try await center.add(hasExpiredRequest)
-            Logger.notifications.info("Scheduled expiration notification for institution \(institutionId) profile \(profileId) on \(validUntil)")
+            Logger.notifications.info("Scheduled expiration notification for organization \(organizationId) profile \(profileId) on \(validUntil)")
         },
         delegate: {
             AsyncStream { continuation in
@@ -190,20 +190,20 @@ extension NotificationClient {
             Logger.notifications.info("Removed delivered notifications")
             
             let userInfo = response.notification.request.content.userInfo
-            guard let institutionId = userInfo[String.institutionIdKey] as? String, let profileId = userInfo[String.profileIdKey] as? String, let validUntil = userInfo[String.validUntilKey] as? Date else { return }
+            guard let organizationId = userInfo[String.organizationIdKey] as? String, let profileId = userInfo[String.profileIdKey] as? String, let validUntil = userInfo[String.validUntilKey] as? Date else { return }
 
             switch response.actionIdentifier {
             case .renewNowActionId:
-                Logger.notifications.info("Renew now for institution \(institutionId) profile \(profileId)")
-                continuation.yield(.renewActionTriggered(institutionId: institutionId, profileId: profileId))
+                Logger.notifications.info("Renew now for organization \(organizationId) profile \(profileId)")
+                continuation.yield(.renewActionTriggered(organizationId: organizationId, profileId: profileId))
 
             case .remindMeActionId:
-                Logger.notifications.info("Remind me later for institution \(institutionId) profile \(profileId) valid until \(validUntil)")
-                continuation.yield(.remindMeLaterActionTriggered(validUntil: validUntil, institutionId: institutionId, profileId: profileId))
+                Logger.notifications.info("Remind me later for organization \(organizationId) profile \(profileId) valid until \(validUntil)")
+                continuation.yield(.remindMeLaterActionTriggered(validUntil: validUntil, organizationId: organizationId, profileId: profileId))
 
             default:
-                Logger.notifications.info("Renew now for institution \(institutionId) profile \(profileId)")
-                continuation.yield(.renewActionTriggered(institutionId: institutionId, profileId: profileId))
+                Logger.notifications.info("Renew now for organization \(organizationId) profile \(profileId)")
+                continuation.yield(.renewActionTriggered(organizationId: organizationId, profileId: profileId))
             }
         }
     }
