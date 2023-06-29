@@ -46,7 +46,6 @@ public struct ConnectView_iOS: View {
                                     ProfileRowView(profile: profile, isSelected: selectedProfile == profile)
                                 }
                                 .buttonStyle(.plain)
-                                .backport
                                 .listRowSeparatorTint(Color("ListSeparator"))
                                 .listRowBackground(Color("Background"))
                             }
@@ -106,28 +105,33 @@ public struct ConnectView_iOS: View {
                 state: /Connect.Destination.State.alert,
                 action: Connect.Destination.Action.alert
             )
-            .alert("Login Required",
-                   isPresented: viewStore.binding(
-                    get: \.promptForCredentials,
-                    send: Connect.Action.dismissPromptForCredentials),
-                   actions: {
-                TextField(viewStore.usernamePrompt, text: viewStore.binding(
-                    get: \.username,
-                    send: Connect.Action.updateUsername))
-                .textContentType(.username)
-                SecureField("Password", text: viewStore.binding(
-                    get: \.password,
-                    send: Connect.Action.updatePassword))
-                .textContentType(.password)
-                Button("Cancel", role: .cancel, action: {
-                    viewStore.send(.dismissPromptForCredentials)
-                })
-                Button("Log In", action: {
-                    viewStore.send(.logInButtonTapped)
-                })
-            }, message: {
-                Text("Please enter your username and password.")
-            })
+            .backport
+            .credentialAlert(
+                CredentialAlert(
+                    title: NSLocalizedString("Login Required", comment: ""),
+                    isPresented: viewStore
+                        .binding(
+                            get: \.promptForCredentials,
+                            send: Connect.Action.dismissPromptForCredentials),
+                    usernamePrompt: viewStore.usernamePrompt,
+                    username: viewStore
+                        .binding(
+                            get: \.username,
+                            send: Connect.Action.updateUsername),
+                    passwordPrompt: NSLocalizedString("Password", comment: ""),
+                    password:  viewStore
+                        .binding(
+                            get: \.password,
+                            send: Connect.Action.updatePassword),
+                    cancelButtonTitle: NSLocalizedString("Cancel", comment: ""),
+                    cancelAction: {
+                        viewStore.send(.dismissPromptForCredentials)
+                    },
+                    doneButtonTitle: NSLocalizedString("Log In", comment: ""),
+                    doneAction: {
+                        viewStore.send(.logInButtonTapped)
+                    },
+                    message: NSLocalizedString("Please enter your username and password.", comment: "")))
         }
     }
 }

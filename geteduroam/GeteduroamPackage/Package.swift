@@ -90,6 +90,7 @@ let package = Package(
             name: "Connect",
             dependencies: [
                 "AuthClient",
+                "Backport",
                 "EAPConfigurator",
                 "Models",
                 "NotificationClient",
