@@ -1,3 +1,4 @@
+#if os(iOS)
 import AuthClient
 import Backport
 import ComposableArchitecture
@@ -46,6 +47,7 @@ public struct ConnectView_iOS: View {
                                     ProfileRowView(profile: profile, isSelected: selectedProfile == profile)
                                 }
                                 .buttonStyle(.plain)
+                                .backport
                                 .listRowSeparatorTint(Color("ListSeparator"))
                                 .listRowBackground(Color("Background"))
                             }
@@ -169,4 +171,5 @@ struct ConnectView_Previews: PreviewProvider {
         .environmentObject(Theme.demo)
     }
 }
+#endif
 #endif

@@ -1,5 +1,5 @@
 // Based on https://stackoverflow.com/a/61902990/60488
-
+#if os(iOS)
 import SwiftUI
 
 public struct CredentialAlert {
@@ -91,3 +91,4 @@ public extension Backport where Content: View {
         }
     }
 }
+#endif

@@ -1,5 +1,5 @@
 // From https://stackoverflow.com/a/61902990/60488
-
+#if os(iOS)
 import Combine
 import SwiftUI
 import UIKit
@@ -73,3 +73,4 @@ public class CredentialAlertViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
 }
+#endif
