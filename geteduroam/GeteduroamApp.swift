@@ -13,8 +13,8 @@ struct GeteduroamApp: App {
     @StateObject var theme = Theme(
         searchFont: .custom("OpenSans-Regular", size: 20, relativeTo: .body),
         errorFont: .custom("OpenSans-Regular", size: 16, relativeTo: .body),
-        institutionNameFont: .custom("OpenSans-Bold", size: 16, relativeTo: .body),
-        institutionCountryFont: .custom("OpenSans-Regular", size: 11, relativeTo: .footnote),
+        organizationNameFont: .custom("OpenSans-Bold", size: 16, relativeTo: .body),
+        organizationCountryFont: .custom("OpenSans-Regular", size: 11, relativeTo: .footnote),
         profilesHeaderFont: .custom("OpenSans-SemiBold", size: 12, relativeTo: .body),
         profileNameFont: .custom("OpenSans-Regular", size: 16, relativeTo: .body),
         connectButtonFont: .custom("OpenSans-Bold", size: 20, relativeTo: .body),
@@ -28,8 +28,8 @@ struct GeteduroamApp: App {
     @StateObject var theme = Theme(
         searchFont: .system(.body, design: .default),
         errorFont: .system(.body, design: .default),
-        institutionNameFont: .system(.body, design: .default).bold(),
-        institutionCountryFont: .system(.footnote, design: .default),
+        organizationNameFont: .system(.body, design: .default).bold(),
+        organizationCountryFont: .system(.footnote, design: .default),
         profilesHeaderFont: .system(.body, design: .default).bold(),
         profileNameFont: .system(.body, design: .default),
         connectButtonFont: .system(.callout, design: .default).bold(),

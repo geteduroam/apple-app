@@ -26,7 +26,7 @@ public struct MainView: View {
         let loadingState: Main.State.LoadingState
         let isSearching: Bool
         let searchQuery: String
-        let searchResults: IdentifiedArrayOf<Institution>
+        let searchResults: IdentifiedArrayOf<Organization>
     }
     
     public var body: some View {
@@ -46,7 +46,7 @@ public struct MainView: View {
                             HStack {
                                 Image(systemName: "magnifyingglass")
                                 TextField(
-                                    NSLocalizedString("Search for your institution", bundle: .module, comment: ""),
+                                    NSLocalizedString("Search for your organization", bundle: .module, comment: ""),
                                     text: viewStore.binding(get: \.searchQuery, send: Main.Action.searchQueryChanged))
                                 .font(theme.searchFont)
                                 .focused($focusedField, equals: .search)
@@ -73,7 +73,7 @@ public struct MainView: View {
                                 HStack {
                                     Image(systemName: "magnifyingglass")
                                     TextField(
-                                        NSLocalizedString("Search for your institution", bundle: .module, comment: ""),
+                                        NSLocalizedString("Search for your organization", bundle: .module, comment: ""),
                                         text: viewStore.binding(get: \.searchQuery, send: Main.Action.searchQueryChanged))
                                     .font(theme.searchFont)
                                     .focused($focusedField, equals: .search)
@@ -95,7 +95,7 @@ public struct MainView: View {
                     if viewStore.loadingState == .failure {
                         HStack {
                             Image(systemName: "exclamationmark.triangle")
-                            Text("Failed to load institutions", bundle: .module)
+                            Text("Failed to load organizations", bundle: .module)
                                 .font(theme.errorFont)
                             Button {
                                 viewStore.send(.tryAgainTapped)
@@ -121,11 +121,11 @@ public struct MainView: View {
                                     .listRowSeparatorTint(Color.clear)
                                     .listRowBackground(Color.clear)
                             } else {
-                                ForEach(viewStore.searchResults) { institution in
+                                ForEach(viewStore.searchResults) { organization in
                                     Button {
-                                        viewStore.send(.select(institution))
+                                        viewStore.send(.select(organization))
                                     } label: {
-                                        InstitutionRowView(institution: institution)
+                                        OrganizationRowView(organization: organization)
                                     }
                                     .buttonStyle(.plain)
                                     .backport
@@ -139,7 +139,7 @@ public struct MainView: View {
                         .scrollContentBackground(.hidden)
                     }
                 }
-                .searchableMacOnly(text: viewStore.binding(get: \.searchQuery, send: Main.Action.searchQueryChanged), prompt: NSLocalizedString("Search for your institution", bundle: .module, comment: ""))
+                .searchableMacOnly(text: viewStore.binding(get: \.searchQuery, send: Main.Action.searchQueryChanged), prompt: NSLocalizedString("Search for your organization", bundle: .module, comment: ""))
                 .backport
                 .readableContentWidthPadding()
                 .background {

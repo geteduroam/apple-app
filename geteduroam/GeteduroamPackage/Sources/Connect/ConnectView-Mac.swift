@@ -24,10 +24,10 @@ public struct ConnectView_Mac: View {
                 } else {
                     HStack(alignment: .firstTextBaseline) {
                         VStack(alignment: .leading) {
-                            Text(viewStore.institution.name)
-                                .font(theme.institutionNameFont)
-                            Text(viewStore.institution.country)
-                                .font(theme.institutionCountryFont)
+                            Text(viewStore.organization.name)
+                                .font(theme.organizationNameFont)
+                            Text(viewStore.organization.country)
+                                .font(theme.organizationCountryFont)
                         }
                         Spacer()
                         Button(action: {
@@ -49,7 +49,7 @@ public struct ConnectView_Mac: View {
                     List {
                         Section {
                             let selectedProfile = viewStore.selectedProfile
-                            ForEach(viewStore.institution.profiles) { profile in
+                            ForEach(viewStore.organization.profiles) { profile in
                                 Button {
                                     viewStore.send(.select(profile.id))
                                 } label: {
@@ -113,7 +113,7 @@ public struct ConnectView_Mac: View {
                 }
             }
             .padding()
-            .navigationTitle(viewStore.institution.name)
+            .navigationTitle(viewStore.organization.name)
             .onAppear {
                 viewStore.send(.onAppear)
             }
@@ -175,9 +175,9 @@ public struct ConnectView_Mac: View {
 //    static var previews: some View {
 //        ConnectView_Mac(store: .init(
 //            initialState: .init(
-//                institution: .init(
+//                organization: .init(
 //                    id: "1",
-//                    name: "My Institution",
+//                    name: "My Organization",
 //                    country: "NL",
 //                    cat_idp: 1,
 //                    profiles: [

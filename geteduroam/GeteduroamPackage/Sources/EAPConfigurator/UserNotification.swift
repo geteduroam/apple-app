@@ -30,12 +30,12 @@ import Foundation
         }
 }
 
-public func writeToSharedPref(institutionId: String) {
-    UserDefaults.standard.set(institutionId, forKey: "institutionId")
+public func writeToSharedPref(organizationId: String) {
+    UserDefaults.standard.set(organizationId, forKey: "organizationId")
 }
 
 public func readFromSharedPref() -> String {
-     return UserDefaults.standard.string(forKey: "institutionId") ?? ""
+     return UserDefaults.standard.string(forKey: "organizationId") ?? ""
 }
 
 public func checkIfOpenThroughNotifications() -> Bool {

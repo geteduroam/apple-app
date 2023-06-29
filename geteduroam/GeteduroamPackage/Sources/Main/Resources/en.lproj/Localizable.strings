@@ -1,14 +1,14 @@
-/* Failed to load institutions */
-"Failed to load institutions" = "Failed to load institutions";
+/* Failed to load organizations */
+"Failed to load organizations" = "Failed to load organizations";
 
 "OK" = "OK";
 
-"Search for your institution" = "Search for your institution";
+"Search for your organization" = "Search for your organization";
 
 "No matches found" = "No matches found";
 
 "Clear" = "Clear";
 
-"Unknown institution" = "Unknown institution";
+"Unknown organization" = "Unknown organization";
 
-"The institution is no longer listed." = "The institution is no longer listed.";
+"The organization is no longer listed." = "The organization is no longer listed.";

@@ -20,8 +20,8 @@ struct GetgovroamApp: App {
     @StateObject var theme = Theme(
         searchFont: .body,
         errorFont: .body,
-        institutionNameFont: .headline,
-        institutionCountryFont: .footnote,
+        organizationNameFont: .headline,
+        organizationCountryFont: .footnote,
         profilesHeaderFont: .caption,
         profileNameFont: .body,
         connectButtonFont: .body,

@@ -3,17 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* GeteduroamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* GeteduroamApp.swift */; };
+		C72D66D72A4DCE9A007FDB68 /* discovery.json in Resources */ = {isa = PBXBuildFile; fileRef = C72D66D62A4DCE9A007FDB68 /* discovery.json */; };
 		C74A11ED294CA56100ECC19A /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C74A11EA294CA56100ECC19A /* OpenSans-SemiBold.ttf */; };
 		C74A11EE294CA56100ECC19A /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C74A11EB294CA56100ECC19A /* OpenSans-Bold.ttf */; };
 		C74A11EF294CA56100ECC19A /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C74A11EC294CA56100ECC19A /* OpenSans-Regular.ttf */; };
-		C74A11F1294CCAF600ECC19A /* institutions.json in Resources */ = {isa = PBXBuildFile; fileRef = C74A11F0294CCAF600ECC19A /* institutions.json */; };
 		C774FA1C29E05DDD001E560C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C74A11E7294C9FB600ECC19A /* Launch Screen.storyboard */; platformFilter = ios; };
 		C78BB7722A29D210001799ED /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = C78BB7712A293D93001799ED /* LICENSE.md */; };
 		C78BB7732A29D212001799ED /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = C78BB7712A293D93001799ED /* LICENSE.md */; };
@@ -27,7 +27,7 @@
 		C7F45A53297ABC5C0005508D /* AuthClient in Frameworks */ = {isa = PBXBuildFile; productRef = C7F45A45297ABC5C0005508D /* AuthClient */; };
 		C7F45A66297AC83D0005508D /* GetgovroamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F45A5A297ABD050005508D /* GetgovroamApp.swift */; };
 		C7F45A67297AC8850005508D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7F45A5B297ABD050005508D /* Assets.xcassets */; };
-		C7F45A68297AC88C0005508D /* institutions.json in Resources */ = {isa = PBXBuildFile; fileRef = C7F45A5E297ABD050005508D /* institutions.json */; };
+		C7F45A68297AC88C0005508D /* discovery.json in Resources */ = {isa = PBXBuildFile; fileRef = C7F45A5E297ABD050005508D /* discovery.json */; };
 		C7F45A69297AC89A0005508D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7F45A60297ABD050005508D /* Launch Screen.storyboard */; platformFilter = maccatalyst; };
 		C7F45A6A297AC8E30005508D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7F45A5D297ABD050005508D /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -38,11 +38,11 @@
 		2152FB032600AC8F00CF470E /* GeteduroamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeteduroamApp.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* geteduroam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = geteduroam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C72D66D62A4DCE9A007FDB68 /* discovery.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = discovery.json; sourceTree = "<group>"; };
 		C74A11E7294C9FB600ECC19A /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		C74A11EA294CA56100ECC19A /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		C74A11EB294CA56100ECC19A /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		C74A11EC294CA56100ECC19A /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
-		C74A11F0294CCAF600ECC19A /* institutions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = institutions.json; sourceTree = "<group>"; };
 		C759A6DB291E800B009B30C1 /* geteduroam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = geteduroam.entitlements; sourceTree = "<group>"; };
 		C77F52042913F0430056530E /* Pods_geteduroam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_geteduroam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C78BB7712A293D93001799ED /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
@@ -58,7 +58,7 @@
 		C7F45A5A297ABD050005508D /* GetgovroamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetgovroamApp.swift; sourceTree = "<group>"; };
 		C7F45A5B297ABD050005508D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C7F45A5D297ABD050005508D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		C7F45A5E297ABD050005508D /* institutions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = institutions.json; sourceTree = "<group>"; };
+		C7F45A5E297ABD050005508D /* discovery.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = discovery.json; sourceTree = "<group>"; };
 		C7F45A5F297ABD050005508D /* getgovroam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = getgovroam.entitlements; sourceTree = "<group>"; };
 		C7F45A60297ABD050005508D /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		C7F45A65297ABD050005508D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 			children = (
 				C7AF86292931150A00BDEB69 /* Documentation.docc */,
 				C759A6DB291E800B009B30C1 /* geteduroam.entitlements */,
-				C74A11F0294CCAF600ECC19A /* institutions.json */,
+				C72D66D62A4DCE9A007FDB68 /* discovery.json */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				C74A11E7294C9FB600ECC19A /* Launch Screen.storyboard */,
 				2152FB032600AC8F00CF470E /* GeteduroamApp.swift */,
@@ -166,7 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				C7F45A5F297ABD050005508D /* getgovroam.entitlements */,
-				C7F45A5E297ABD050005508D /* institutions.json */,
+				C7F45A5E297ABD050005508D /* discovery.json */,
 				C7F45A65297ABD050005508D /* Info.plist */,
 				C7F45A60297ABD050005508D /* Launch Screen.storyboard */,
 				C7F45A5A297ABD050005508D /* GetgovroamApp.swift */,
@@ -192,6 +192,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "geteduroam" */;
 			buildPhases = (
+				C72D66D52A4DCBB9007FDB68 /* Update Included Discovery */,
 				7555FF77242A565900829871 /* Sources */,
 				7555FF79242A565900829871 /* Resources */,
 				AE51E588014A6F22C35EF08B /* Frameworks */,
@@ -213,6 +214,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C7F45A54297ABC5C0005508D /* Build configuration list for PBXNativeTarget "getgovroam" */;
 			buildPhases = (
+				C72D66D82A4DCFAB007FDB68 /* Update Included Discovery */,
 				C7F45A46297ABC5C0005508D /* Sources */,
 				C7F45A49297ABC5C0005508D /* Resources */,
 				C7F45A51297ABC5C0005508D /* Frameworks */,
@@ -277,8 +279,8 @@
 				C78BB7722A29D210001799ED /* LICENSE.md in Resources */,
 				058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */,
 				C774FA1C29E05DDD001E560C /* Launch Screen.storyboard in Resources */,
-				C74A11F1294CCAF600ECC19A /* institutions.json in Resources */,
 				C74A11EE294CA56100ECC19A /* OpenSans-Bold.ttf in Resources */,
+				C72D66D72A4DCE9A007FDB68 /* discovery.json in Resources */,
 				C7A20B3E297ADB8E0004EB5D /* Localizable.strings in Resources */,
 				C74A11EF294CA56100ECC19A /* OpenSans-Regular.ttf in Resources */,
 				058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */,
@@ -291,7 +293,7 @@
 			files = (
 				C7A20B4E297ADFDD0004EB5D /* Localizable.strings in Resources */,
 				C7F45A6A297AC8E30005508D /* Preview Assets.xcassets in Resources */,
-				C7F45A68297AC88C0005508D /* institutions.json in Resources */,
+				C7F45A68297AC88C0005508D /* discovery.json in Resources */,
 				C7F45A69297AC89A0005508D /* Launch Screen.storyboard in Resources */,
 				C78BB7732A29D212001799ED /* LICENSE.md in Resources */,
 				C7F45A67297AC8850005508D /* Assets.xcassets in Resources */,
@@ -299,6 +301,49 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C72D66D52A4DCBB9007FDB68 /* Update Included Discovery */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Update Included Discovery";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "curl --compressed 'https://discovery.eduroam.app/v1/discovery.json' > geteduroam/discovery.json\n";
+			showEnvVarsInLog = 0;
+		};
+		C72D66D82A4DCFAB007FDB68 /* Update Included Discovery */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Update Included Discovery";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "curl --compressed 'https://discovery.eduroam.app/v1/discovery.json' > geteduroam/discovery.json\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7555FF77242A565900829871 /* Sources */ = {
