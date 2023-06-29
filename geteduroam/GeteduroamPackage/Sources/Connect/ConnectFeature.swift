@@ -447,12 +447,16 @@ public struct Connect: Reducer {
         do {
             let expectedSSIDs = try await EAPConfigurator().configure(identityProvider: firstValidProvider, credentials: credentials)
             
-            // Check if we are connected to one of the expected SSIDs
-            let connectedSSIDs = SSID.fetchNetworkInfo().filter( { $0.success == true }).compactMap(\.ssid)
-            guard connectedSSIDs.first(where: { expectedSSIDs.contains($0) }) != nil else {
-                throw OrganizationSetupError.notConnectedToExpectedSSID(firstValidProvider.providerInfo, expectedSSIDs.first ?? "?")
+            if expectedSSIDs.isEmpty == false {
+                // Check if we are connected to one of the expected SSIDs
+                let connectedSSIDs = SSID.fetchNetworkInfo().filter( { $0.success == true }).compactMap(\.ssid)
+                guard connectedSSIDs.first(where: { expectedSSIDs.contains($0) }) != nil else {
+                    throw OrganizationSetupError.notConnectedToExpectedSSID(firstValidProvider.providerInfo, expectedSSIDs.first ?? "?")
+                }
+            } else {
+                // When connected to Hotspot 2.0 or Passpoint network there is no SSID
             }
-
+            
             // Schedule reminder for user to renew network access
             if let validUntil = firstValidProvider.validUntil {
                 let organizationId = organization.id
