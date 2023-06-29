@@ -4,6 +4,7 @@ import ComposableArchitecture
 import Models
 import SwiftUI
 
+#if os(macOS)
 public struct ConnectView_Mac: View {
     public init(store: StoreOf<Connect>) {
         self.store = store
@@ -130,6 +131,7 @@ public struct ConnectView_Mac: View {
         }
     }
 }
+#endif
 
 //@available(macOS 13.0, *)
 //struct InstructionView: View {
