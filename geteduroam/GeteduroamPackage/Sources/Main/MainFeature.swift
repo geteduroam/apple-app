@@ -187,6 +187,11 @@ public struct Main: Reducer {
                 state.destination = .connect(.init(organization: organization))
                 return .none
                 
+            case .destination(.presented(.connect(.onDisappear))):
+                // Hacky way to fix destination not getting nilled on macOS 13+
+                state.destination = nil
+                return .none
+                
             case .destination:
                 return .none
             }
