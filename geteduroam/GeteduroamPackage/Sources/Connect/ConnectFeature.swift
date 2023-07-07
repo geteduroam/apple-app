@@ -108,6 +108,11 @@ public struct Connect: Reducer {
         @PresentationState public var destination: Destination.State?
     }
     
+    public enum ConnectResult {
+        case verified(credentials: Credentials?)
+        case applied
+    }
+    
     public indirect enum Action: Equatable {
         public static func == (lhs: Connect.Action, rhs: Connect.Action) -> Bool {
             switch (lhs, rhs) {
@@ -127,7 +132,7 @@ public struct Connect: Reducer {
         }
         
         case connect
-        case connectResponse(TaskResult<ProviderInfo?>)
+        case connectResponse(TaskResult<(ProviderInfo?, ConnectResult)>)
         case destination(PresentationAction<Destination.Action>)
         case dismissPromptForCredentials
         case dismissTapped
@@ -220,7 +225,7 @@ public struct Connect: Reducer {
     @Dependency(\.dismiss) var dismiss
     @Dependency(\.notificationClient) var notificationClient
     
-    private func connect(state: inout State) -> Effect<Connect.Action> {
+    private func connect(state: inout State, dryRun: Bool) -> Effect<Connect.Action> {
         guard let profile = state.selectedProfile else {
             return .none
         }
@@ -254,7 +259,10 @@ public struct Connect: Reducer {
         state.promptForCredentials = false
         let agreedToTerms = state.agreedToTerms
         return .task {
-            await Action.connectResponse(TaskResult<ProviderInfo?> { try await connect(organization: organization, profile: profile, authClient: authClient, credentials: credentials, agreedToTerms: agreedToTerms) })
+            await Action.connectResponse(TaskResult<(ProviderInfo?, ConnectResult)> {
+                let providerInfo = try await connect(organization: organization, profile: profile, authClient: authClient, credentials: credentials, agreedToTerms: agreedToTerms, dryRun: dryRun)
+                return (providerInfo, dryRun ? .verified(credentials: credentials) : .applied)
+            })
         }
     }
     
@@ -269,13 +277,13 @@ public struct Connect: Reducer {
                     return .none
                 }
                 // Auto connect if there is only a single profile or a reminder was tapped
-                return connect(state: &state)
+                return connect(state: &state, dryRun: true)
                 
             case let .destination(.presented(.termsAlert(action))):
                 switch action {
                 case .agreeButtonTapped:
                     state.agreedToTerms = true
-                    return connect(state: &state)
+                    return connect(state: &state, dryRun: true)
                     
                 case .disagreeButtonTapped:
                     state.loadingState = .initial
@@ -296,16 +304,24 @@ public struct Connect: Reducer {
                 return .none
                 
             case .connect:
-                return connect(state: &state)
+                return connect(state: &state, dryRun: true)
                 
-            case let .connectResponse(.success(providerInfo)):
-                state.loadingState = .success
-                state.providerInfo = providerInfo
-                return .none
+            case let .connectResponse(.success((providerInfo, connectResult))):
+                switch connectResult {
+                case let .verified(credentials):
+                    // Verified that we should be able to make the connection without errors/prompts, so go ahead and actually setup the network
+                    state.providerInfo = providerInfo
+                    state.credentials = credentials
+                    return connect(state: &state, dryRun: false)
+                case .applied:
+                    state.loadingState = .success
+                    state.providerInfo = providerInfo
+                    return .none
+                }
                 
             case let .connectResponse(.failure(OrganizationSetupError.missingTermsAcceptance(providerInfo))):
                 state.providerInfo = providerInfo
-                return connect(state: &state)
+                return connect(state: &state, dryRun: true)
                 
             case let .connectResponse(.failure(OrganizationSetupError.eapConfigurationFailed(EAPConfiguratorError.invalidUsername(suffix), providerInfo))):
                 state.providerInfo = providerInfo
@@ -342,7 +358,7 @@ public struct Connect: Reducer {
                 
             case .logInButtonTapped:
                 // TODO: Check sanity of credentials
-                return connect(state: &state)
+                return connect(state: &state, dryRun: true)
                 
             case .startAgainTapped:
                 return .none
@@ -389,7 +405,7 @@ public struct Connect: Reducer {
     
     @Dependency(\.date) var date
     
-    func connect(organization: Organization, profile: Profile, authClient: AuthClient, credentials: Credentials?, agreedToTerms: Bool) async throws -> ProviderInfo? {
+    func connect(organization: Organization, profile: Profile, authClient: AuthClient, credentials: Credentials?, agreedToTerms: Bool, dryRun: Bool) async throws -> ProviderInfo? {
         let accessToken: String?
         if profile.oauth ?? false {
             guard let authorizationEndpoint = profile.authorization_endpoint else {
@@ -445,23 +461,25 @@ public struct Connect: Reducer {
         
 #if os(iOS)
         do {
-            let expectedSSIDs = try await EAPConfigurator().configure(identityProvider: firstValidProvider, credentials: credentials)
+            let expectedSSIDs = try await EAPConfigurator().configure(identityProvider: firstValidProvider, credentials: credentials, dryRun: dryRun)
             
-            if expectedSSIDs.isEmpty == false {
-                // Check if we are connected to one of the expected SSIDs
-                let connectedSSIDs = SSID.fetchNetworkInfo().filter( { $0.success == true }).compactMap(\.ssid)
-                guard connectedSSIDs.first(where: { expectedSSIDs.contains($0) }) != nil else {
-                    throw OrganizationSetupError.notConnectedToExpectedSSID(firstValidProvider.providerInfo, expectedSSIDs.first ?? "?")
+            if !dryRun {
+                if expectedSSIDs.isEmpty == false {
+                    // Check if we are connected to one of the expected SSIDs
+                    let connectedSSIDs = SSID.fetchNetworkInfo().filter( { $0.success == true }).compactMap(\.ssid)
+                    guard connectedSSIDs.first(where: { expectedSSIDs.contains($0) }) != nil else {
+                        throw OrganizationSetupError.notConnectedToExpectedSSID(firstValidProvider.providerInfo, expectedSSIDs.first ?? "?")
+                    }
+                } else {
+                    // When connected to Hotspot 2.0 or Passpoint network there is no SSID
                 }
-            } else {
-                // When connected to Hotspot 2.0 or Passpoint network there is no SSID
-            }
-            
-            // Schedule reminder for user to renew network access
-            if let validUntil = firstValidProvider.validUntil {
-                let organizationId = organization.id
-                let profileId = profile.id
-                try await notificationClient.scheduleRenewReminder(validUntil, organizationId, profileId)
+                
+                // Schedule reminder for user to renew network access
+                if let validUntil = firstValidProvider.validUntil {
+                    let organizationId = organization.id
+                    let profileId = profile.id
+                    try await notificationClient.scheduleRenewReminder(validUntil, organizationId, profileId)
+                }
             }
         } catch let error as EAPConfiguratorError {
             throw OrganizationSetupError.eapConfigurationFailed(error, firstValidProvider.providerInfo)
