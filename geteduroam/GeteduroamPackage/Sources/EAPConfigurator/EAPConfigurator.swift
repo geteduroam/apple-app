@@ -20,10 +20,11 @@ public class EAPConfigurator {
     ///   - identityProvider: The Identity Provider
     ///   - credentials: Credentials entered by user
     /// - Returns: Expected SSIDs for connection
-    public func configure(identityProvider: EAPIdentityProvider, credentials: Credentials? = nil) async throws -> [String] {
+    public func configure(identityProvider: EAPIdentityProvider, credentials: Credentials? = nil, dryRun: Bool) async throws -> [String] {
         // At this point, we're not certain this configuration can work,
         // but we can't do this any step later, because createNetworkConfigurations will import things to the keychain.
-        // TODO: only remove keychain items that match these networks
+        let name = identityProvider.providerInfo?.displayName?.localized() ?? "unnamed identity provider"
+        Logger.eap.info("Started configuring for \(name) \(dryRun ? "with dry run" : "")")
         let ssids = identityProvider
             .credentialApplicability
             .IEEE80211
@@ -31,18 +32,27 @@ public class EAPConfigurator {
                 $0.ssid
             }
         let domain = identityProvider.id
-        removeNetwork(ssids: ssids, domains: [domain])
+        if !dryRun {
+            // TODO: only remove keychain items that match these networks
+            Logger.eap.info("Removing network(s) \(ssids)")
+            removeNetwork(ssids: ssids, domains: [domain])
+        }
         
+        Logger.eap.info("Creating network configurations")
         let configurations = try createNetworkConfigurations(identityProvider: identityProvider, credentials: credentials)
         
         guard configurations.isEmpty == false else {
             throw EAPConfiguratorError.noConfigurations
         }
-
-        for configuration in configurations {
-            try await NEHotspotConfigurationManager.shared.apply(configuration)
+        
+        if !dryRun {
+            Logger.eap.info("Applying network configurations")
+            for configuration in configurations {
+                try await NEHotspotConfigurationManager.shared.apply(configuration)
+            }
         }
-
+        
+        Logger.eap.info("Finished configuring for \(name) \(dryRun ? "with dry run" : "")")
         return ssids
     }
     
