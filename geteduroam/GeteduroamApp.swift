@@ -43,7 +43,11 @@ struct GeteduroamApp: App {
     @Environment(\.openURL) var openURL
     
     init() {
-        store = .init(initialState: .init(), reducer: Main(), prepareDependencies: { [appDelegate] in
+#if os(macOS)
+        fakeInitialWindowPositionPreference()
+#endif
+
+        store = .init(initialState: .init(), reducer: { Main() }, withDependencies: { [appDelegate] in
             $0.authClient = appDelegate
         })
     }
@@ -85,6 +89,33 @@ struct GeteduroamApp: App {
                 }
             }
         }
+    }
+    
+    private func fakeInitialWindowPositionPreference() {
+        guard let main = NSScreen.main else {
+            return
+        }
+        
+        let key = "NSWindow Frame mainWindow-AppWindow-1"
+        guard UserDefaults.standard.string(forKey: key) == nil else {
+            return
+        }
+        
+        let desiredWidth: CGFloat = 540
+        let desiredHeight: CGFloat = 640
+        
+        let screenWidth = main.frame.width
+        let screenHeightWithoutMenuBar = main.frame.height - 25 // menu bar
+        let visibleFrame = main.visibleFrame
+
+        let contentWidth = desiredWidth
+        let contentHeight = desiredHeight + 54 // window title bar
+
+        let windowX = visibleFrame.midX - contentWidth / 2
+        let windowY = visibleFrame.midY - contentHeight / 2
+
+        let newFramePreference = "\(Int(windowX)) \(Int(windowY)) \(Int(contentWidth)) \(Int(contentHeight)) 0 0 \(Int(screenWidth)) \(Int(screenHeightWithoutMenuBar))"
+        UserDefaults.standard.set(newFramePreference, forKey: key)
     }
 #endif
     
