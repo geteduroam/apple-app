@@ -231,7 +231,7 @@ struct NavigationWrapped<Content>: View where Content: View {
 #if DEBUG
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(store: .init(initialState: .init(), reducer: Main()))
+        MainView(store: .init(initialState: .init(), reducer: { Main() }))
     }
 }
 #endif

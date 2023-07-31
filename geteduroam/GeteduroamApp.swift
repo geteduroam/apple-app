@@ -43,7 +43,7 @@ struct GeteduroamApp: App {
     @Environment(\.openURL) var openURL
     
     init() {
-        store = .init(initialState: .init(), reducer: Main(), prepareDependencies: { [appDelegate] in
+        store = .init(initialState: .init(), reducer: { Main() }, withDependencies: { [appDelegate] in
             $0.authClient = appDelegate
         })
     }

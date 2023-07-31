@@ -138,7 +138,6 @@ public struct Connect: Reducer {
         case dismissTapped
         case logInButtonTapped
         case onAppear
-        case onDisappear // Hacky way to fix destination not getting nilled on macOS 13+
         case select(Profile.ID)
         case startAgainTapped
         case updatePassword(String)
@@ -259,11 +258,11 @@ public struct Connect: Reducer {
         state.credentials = nil
         state.promptForCredentials = false
         let agreedToTerms = state.agreedToTerms
-        return .task {
-            await Action.connectResponse(TaskResult<(ProviderInfo?, ConnectResult)> {
+        return .run { send in
+            await send(.connectResponse(TaskResult<(ProviderInfo?, ConnectResult)> {
                 let providerInfo = try await connect(organization: organization, profile: profile, authClient: authClient, credentials: credentials, agreedToTerms: agreedToTerms, dryRun: dryRun)
                 return (providerInfo, dryRun ? .verified(credentials: credentials) : .applied)
-            })
+            }))
         }
     }
     
@@ -279,9 +278,6 @@ public struct Connect: Reducer {
                 }
                 // Auto connect if there is only a single profile or a reminder was tapped
                 return connect(state: &state, dryRun: true)
-                
-            case .onDisappear:
-                return .none
                 
             case let .destination(.presented(.termsAlert(action))):
                 switch action {
