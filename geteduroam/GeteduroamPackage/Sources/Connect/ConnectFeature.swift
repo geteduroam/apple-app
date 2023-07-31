@@ -258,11 +258,11 @@ public struct Connect: Reducer {
         state.credentials = nil
         state.promptForCredentials = false
         let agreedToTerms = state.agreedToTerms
-        return .task {
-            await Action.connectResponse(TaskResult<(ProviderInfo?, ConnectResult)> {
+        return .run { send in
+            await send(.connectResponse(TaskResult<(ProviderInfo?, ConnectResult)> {
                 let providerInfo = try await connect(organization: organization, profile: profile, authClient: authClient, credentials: credentials, agreedToTerms: agreedToTerms, dryRun: dryRun)
                 return (providerInfo, dryRun ? .verified(credentials: credentials) : .applied)
-            })
+            }))
         }
     }
     

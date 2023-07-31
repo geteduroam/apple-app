@@ -149,7 +149,7 @@ struct ConnectView_Previews: PreviewProvider {
                     country: "NL",
                     cat_idp: 1,
                     profiles: [
-                        .init(
+                        Profile(
                             id: "2",
                             name: "My Profile",
                             default: true,
@@ -157,7 +157,7 @@ struct ConnectView_Previews: PreviewProvider {
                             oauth: false,
                             authorization_endpoint: nil,
                             token_endpoint: nil),
-                        .init(
+                        Profile(
                             id: "3",
                             name: "Other Profile",
                             default: false,
@@ -166,8 +166,8 @@ struct ConnectView_Previews: PreviewProvider {
                             authorization_endpoint: nil,
                             token_endpoint: nil)
                     ],
-                    geo: [.init(lat: 0, lon: 0)])),
-            reducer: Connect()))
+                    geo: [Coordinate(lat: 0, lon: 0)])),
+            reducer: { Connect() }))
         .environmentObject(Theme.demo)
     }
 }

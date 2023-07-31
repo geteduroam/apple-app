@@ -106,8 +106,8 @@ public struct Main: Reducer {
                             }
                         }
                     },
-                    .task {
-                        await .discoveryResponse(TaskResult {
+                    .run { send in
+                        await send(.discoveryResponse(TaskResult {
                             do {
                                 let (value, _) = try await discoveryClient.decodedResponse(for: .discover, as: OrganizationsResponse.self)
                                 cacheClient.cacheOrganizations(value)
@@ -116,7 +116,7 @@ public struct Main: Reducer {
                                 let restoredValue = try cacheClient.restoreOrganizations()
                                 return restoredValue
                             }
-                        })
+                        }))
                     })
 
             case let .discoveryResponse(.success(response)):
@@ -172,9 +172,9 @@ public struct Main: Reducer {
                 guard !state.searchQuery.isEmpty else {
                     return .none
                 }
-                return .task { [query = state.searchQuery, organizations = state.organizations] in
+                return .run { [query = state.searchQuery, organizations = state.organizations] send in
                     let searchResults = await self.search(query: query, organizations: organizations)
-                    return .searchResponse(searchResults)
+                    await send(.searchResponse(searchResults))
                 }
                 .cancellable(id: CancelID.search)
                 
