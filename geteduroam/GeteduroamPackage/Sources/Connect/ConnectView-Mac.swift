@@ -117,12 +117,6 @@ public struct ConnectView_Mac: View {
             .onAppear {
                 viewStore.send(.onAppear)
             }
-            .onDisappear {
-                // Hacky way to fix destination not getting nilled on macOS 13+
-                if #available(macOS 13.0, *) {
-                    viewStore.send(.onDisappear)
-                }
-            }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             .alert(
                 store: store.scope(state: \.$destination, action: Connect.Action.destination),

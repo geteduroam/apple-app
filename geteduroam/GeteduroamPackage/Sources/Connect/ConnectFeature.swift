@@ -138,7 +138,6 @@ public struct Connect: Reducer {
         case dismissTapped
         case logInButtonTapped
         case onAppear
-        case onDisappear // Hacky way to fix destination not getting nilled on macOS 13+
         case select(Profile.ID)
         case startAgainTapped
         case updatePassword(String)
@@ -279,9 +278,6 @@ public struct Connect: Reducer {
                 }
                 // Auto connect if there is only a single profile or a reminder was tapped
                 return connect(state: &state, dryRun: true)
-                
-            case .onDisappear:
-                return .none
                 
             case let .destination(.presented(.termsAlert(action))):
                 switch action {
