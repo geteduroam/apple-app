@@ -46,7 +46,7 @@ struct GeteduroamApp: App {
 #if os(macOS)
         fakeInitialWindowPositionPreference()
 #endif
-
+      
         store = .init(initialState: .init(), reducer: { Main() }, withDependencies: { [appDelegate] in
             $0.authClient = appDelegate
         })
