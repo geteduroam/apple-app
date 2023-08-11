@@ -31,6 +31,9 @@ let package = Package(
             name: "EAPConfigurator",
             targets: ["EAPConfigurator"]),
         .library(
+            name: "HotspotNetworkClient",
+            targets: ["HotspotNetworkClient"]),
+        .library(
             name: "Models",
             targets: ["Models"]),
         .library(
@@ -92,10 +95,16 @@ let package = Package(
                 "AuthClient",
                 "Backport",
                 "EAPConfigurator",
+                "HotspotNetworkClient",
                 "Models",
                 "NotificationClient",
                 .product(name: "AppAuth", package: "AppAuth-iOS"),
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ]),
+        .target(
+            name: "HotspotNetworkClient",
+            dependencies: [
+                .product(name: "Dependencies", package: "swift-dependencies"),
             ]),
         .target(
             name: "Models",
