@@ -1,6 +1,7 @@
 import Dependencies
 import Foundation
 import NetworkExtension
+import XCTestDynamicOverlay
 
 public struct HotspotNetworkClient {
     public var fetchCurrent: () async -> NetworkInfo?
@@ -19,9 +20,7 @@ extension DependencyValues {
 
 extension HotspotNetworkClient {
     static var mock: Self = .init(
-        fetchCurrent: {
-            NetworkInfo(ssid: "mock", bssid: "mock", signalStrength: 0.5, isSecure: true, didAutoJoin: false, didJustJoin: true, isChosenHelper: false)
-        }
+        fetchCurrent: unimplemented()
     )
 }
 

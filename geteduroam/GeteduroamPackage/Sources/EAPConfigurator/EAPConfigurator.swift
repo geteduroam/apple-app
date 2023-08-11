@@ -1,17 +1,50 @@
 import CoreLocation
+import Dependencies
 import Foundation
 import Models
 import NetworkExtension
-import SystemConfiguration.CaptiveNetwork
 import OSLog
+import SystemConfiguration.CaptiveNetwork
+import XCTestDynamicOverlay
 
-extension Logger {
-  static var eap = Logger(subsystem: Bundle.main.bundleIdentifier ?? "EAPConfigurator", category: "eap")
+public struct EAPClient {
+    public var configure: (EAPIdentityProvider, Credentials?, Bool) async throws -> [String]
 }
 
-public class EAPConfigurator {
-    public init() { }
+extension DependencyValues {
+    public var eapClient: EAPClient {
+        get { self[EAPClientKey.self] }
+        set { self[EAPClientKey.self] = newValue }
+    }
     
+    public enum EAPClientKey: TestDependencyKey {
+        public static var testValue = EAPClient.mock
+    }
+}
+
+extension EAPClient {
+    static var mock: Self = .init(
+        configure: unimplemented()
+    )
+}
+
+extension DependencyValues.EAPClientKey: DependencyKey {
+    public static var liveValue = EAPClient.live
+}
+
+extension EAPClient {
+    static var live: Self = .init(
+        configure: {
+            try await EAPConfigurator().configure(identityProvider: $0, credentials: $1, dryRun: $2)
+        }
+    )
+}
+
+extension Logger {
+    static var eap = Logger(subsystem: Bundle.main.bundleIdentifier ?? "EAPConfigurator", category: "eap")
+}
+
+class EAPConfigurator {
 #if os(iOS)
     // MARK: - Configuring Identity Provider
     
@@ -20,7 +53,7 @@ public class EAPConfigurator {
     ///   - identityProvider: The Identity Provider
     ///   - credentials: Credentials entered by user
     /// - Returns: Expected SSIDs for connection
-    public func configure(identityProvider: EAPIdentityProvider, credentials: Credentials? = nil, dryRun: Bool) async throws -> [String] {
+    func configure(identityProvider: EAPIdentityProvider, credentials: Credentials? = nil, dryRun: Bool) async throws -> [String] {
         // At this point, we're not certain this configuration can work,
         // but we can't do this any step later, because createNetworkConfigurations will import things to the keychain.
         let name = identityProvider.providerInfo?.displayName?.localized() ?? "unnamed identity provider"

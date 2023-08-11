@@ -259,6 +259,7 @@ public struct Connect: Reducer {
     
     @Dependency(\.authClient) var authClient
     @Dependency(\.dismiss) var dismiss
+    @Dependency(\.eapClient) var eapClient
     @Dependency(\.hotspotNetworkClient) var hotspotNetworkClient
     @Dependency(\.notificationClient) var notificationClient
     
@@ -525,7 +526,7 @@ public struct Connect: Reducer {
         
 #if os(iOS)
         do {
-            let expectedSSIDs = try await EAPConfigurator().configure(identityProvider: firstValidProvider, credentials: credentials, dryRun: dryRun)
+            let expectedSSIDs = try await eapClient.configure(firstValidProvider, credentials, dryRun)
             
             if !dryRun {
                 // Schedule reminder for user to renew network access
