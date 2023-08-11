@@ -35,7 +35,11 @@ extension DependencyValues.EAPClientKey: DependencyKey {
 extension EAPClient {
     static var live: Self = .init(
         configure: {
+            #if os(iOS)
             try await EAPConfigurator().configure(identityProvider: $0, credentials: $1, dryRun: $2)
+            #else
+            fatalError("EAPConfigurator not available")
+            #endif
         }
     )
 }
