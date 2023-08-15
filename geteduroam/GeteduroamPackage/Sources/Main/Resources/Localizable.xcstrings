@@ -1,0 +1,70 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Failed to load organizations" : {
+      "comment" : "Message when organizations can't be loaded and the fallback fails too",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laden van organisaties mislukt"
+          }
+        }
+      }
+    },
+    "No matches found" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geen resultaten gevonden"
+          }
+        }
+      }
+    },
+    "OK" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
+    "Search for your organization" : {
+      "comment" : "Search prompt",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zoek jouw organisatie"
+          }
+        }
+      }
+    },
+    "The organization is no longer listed." : {
+      "comment" : "Message when user asked to renew but the organization could not be found",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De organisatie wordt niet meer vermeld."
+          }
+        }
+      }
+    },
+    "Unknown organization" : {
+      "comment" : "Title when user asked to renew but the organization could not be found",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Onbekende organisatie"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

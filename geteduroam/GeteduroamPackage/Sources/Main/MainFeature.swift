@@ -127,7 +127,7 @@ public struct Main: Reducer {
             case let .discoveryResponse(.failure(error)):
                 state.loadingState = .failure
                 let alert = AlertState<Destination.AlertAction>(title: {
-                    TextState(NSLocalizedString("Failed to load organizations", bundle: .module, comment: ""))
+                    TextState(NSLocalizedString("Failed to load organizations", bundle: .module, comment: "Message when organizations can't be loaded and the fallback fails too"))
                 }, actions: {
                     ButtonState(role: .cancel, action: .send(.okButtonTapped)) {
                         TextState(NSLocalizedString("OK", bundle: .module, comment: ""))
@@ -143,13 +143,13 @@ public struct Main: Reducer {
                     state.destination = .connect(.init(organization: organization, selectedProfileId: profile, autoConnectOnAppear: true))
                 } else {
                     let alert = AlertState<Destination.AlertAction>(title: {
-                        TextState(NSLocalizedString("Unknown organization", bundle: .module, comment: ""))
+                        TextState(NSLocalizedString("Unknown organization", bundle: .module, comment: "Title when user asked to renew but the organization could not be found"))
                     }, actions: {
                         ButtonState(role: .cancel, action: .send(.okButtonTapped)) {
                             TextState(NSLocalizedString("OK", bundle: .module, comment: ""))
                         }
                     }, message: {
-                        TextState(NSLocalizedString("The organization is no longer listed.", bundle: .module, comment: ""))
+                        TextState(NSLocalizedString("The organization is no longer listed.", bundle: .module, comment: "Message when user asked to renew but the organization could not be found"))
                     })
                     state.destination = .alert(alert)
                 }

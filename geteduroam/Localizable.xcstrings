@@ -1,0 +1,16 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "geteduroam Help" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam Help"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

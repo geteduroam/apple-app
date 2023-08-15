@@ -63,11 +63,11 @@ extension NotificationClient {
             guard granted else { return }
             
             // Declare custom actions: Renew Now | Remind Me Later
-            let renewNowAction = UNNotificationAction(identifier: .renewNowActionId, title: NSLocalizedString("Renew Now", comment: "Renew Now"), options: [.authenticationRequired], icon: UNNotificationActionIcon(systemImageName: "arrow.triangle.2.circlepath"))
-            let remindMeAction = UNNotificationAction(identifier: .remindMeActionId, title: NSLocalizedString("Remind Me Later", comment: "Remind Me Later"), options: [], icon: UNNotificationActionIcon(systemImageName: "alarm"))
+            let renewNowAction = UNNotificationAction(identifier: .renewNowActionId, title: NSLocalizedString("Renew Now", bundle: .module, comment: "Renew Now"), options: [.authenticationRequired], icon: UNNotificationActionIcon(systemImageName: "arrow.triangle.2.circlepath"))
+            let remindMeAction = UNNotificationAction(identifier: .remindMeActionId, title: NSLocalizedString("Remind Me Later", bundle: .module, comment: "Remind Me Later"), options: [], icon: UNNotificationActionIcon(systemImageName: "alarm"))
             
-            let willExpireCategory = UNNotificationCategory(identifier: .willExpireCategoryId, actions: [renewNowAction, remindMeAction], intentIdentifiers: [], hiddenPreviewsBodyPlaceholder: NSLocalizedString("Renew your connection to extend your access.", comment: "Renew your connection to extend your access."), categorySummaryFormat: nil, options: [.hiddenPreviewsShowTitle])
-            let hasExpiredCategory = UNNotificationCategory(identifier: .hasExpiredCategoryId, actions: [renewNowAction], intentIdentifiers: [], hiddenPreviewsBodyPlaceholder: NSLocalizedString("Renew your connection to extend your access.", comment: "Renew your connection to extend your access."), categorySummaryFormat: nil, options: [.hiddenPreviewsShowTitle])
+            let willExpireCategory = UNNotificationCategory(identifier: .willExpireCategoryId, actions: [renewNowAction, remindMeAction], intentIdentifiers: [], hiddenPreviewsBodyPlaceholder: NSLocalizedString("Renew your connection to extend your access.", bundle: .module, comment: "Renew your connection to extend your access."), categorySummaryFormat: nil, options: [.hiddenPreviewsShowTitle])
+            let hasExpiredCategory = UNNotificationCategory(identifier: .hasExpiredCategoryId, actions: [renewNowAction], intentIdentifiers: [], hiddenPreviewsBodyPlaceholder: NSLocalizedString("Renew your connection to extend your access.", bundle: .module, comment: "Renew your connection to extend your access."), categorySummaryFormat: nil, options: [.hiddenPreviewsShowTitle])
             center.setNotificationCategories([willExpireCategory, hasExpiredCategory])
             
             // Cancel any pending or delivered reminders
@@ -81,16 +81,16 @@ extension NotificationClient {
             let userInfo: [String: Any] = [.organizationIdKey: organizationId, .profileIdKey: profileId, .validUntilKey: validUntil]
             
             let willExpireContent = UNMutableNotificationContent()
-            willExpireContent.title = NSLocalizedString("Your network access is about to expire", comment: "Your network access is about to expire")
-            willExpireContent.body = String(format: NSLocalizedString("You have access until %@. Renew your connection to extend your access.", comment: "You have access until <date>. Renew your connection to extend your access."), DateFormatter.localizedString(from: validUntil, dateStyle: .medium, timeStyle: .short))
+            willExpireContent.title = NSLocalizedString("Your network access is about to expire", bundle: .module, comment: "Your network access is about to expire")
+            willExpireContent.body = String(format: NSLocalizedString("You have access until %@. Renew your connection to extend your access.", bundle: .module, comment: "You have access until <date>. Renew your connection to extend your access."), DateFormatter.localizedString(from: validUntil, dateStyle: .medium, timeStyle: .short))
             willExpireContent.userInfo = userInfo
             willExpireContent.categoryIdentifier = .willExpireCategoryId
             willExpireContent.sound = .default
             willExpireContent.interruptionLevel = .passive
             
             let hasExpiredContent = UNMutableNotificationContent()
-            hasExpiredContent.title = NSLocalizedString("Your network access has expired", comment: "Your network access has expired")
-            hasExpiredContent.body = String(format: NSLocalizedString("You had access until %@. Renew your connection to extend your access.", comment: "You had access until <date>. Renew your connection to extend your access."), DateFormatter.localizedString(from: validUntil, dateStyle: .medium, timeStyle: .short))
+            hasExpiredContent.title = NSLocalizedString("Your network access has expired", bundle: .module, comment: "Your network access has expired")
+            hasExpiredContent.body = String(format: NSLocalizedString("You had access until %@. Renew your connection to extend your access.", bundle: .module, comment: "You had access until <date>. Renew your connection to extend your access."), DateFormatter.localizedString(from: validUntil, dateStyle: .medium, timeStyle: .short))
             hasExpiredContent.userInfo = userInfo
             hasExpiredContent.categoryIdentifier = .hasExpiredCategoryId
             hasExpiredContent.sound = .default

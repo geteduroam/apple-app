@@ -1,4 +1,4 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -62,7 +62,8 @@ let package = Package(
                 .product(name: "Dependencies", package: "swift-dependencies"),
                 "DiscoveryClient",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
-            ]),
+            ]
+        ),
         .testTarget(
             name: "MainTests",
             dependencies: ["Main"]),
@@ -83,13 +84,6 @@ let package = Package(
                 .product(name: "Dependencies", package: "swift-dependencies"),
             ]),
         .target(
-            name: "DiscoveryClient",
-            dependencies: [
-                "Models",
-                .product(name: "Dependencies", package: "swift-dependencies"),
-                .product(name: "URLRouting", package: "swift-url-routing")
-            ]),
-        .target(
             name: "Connect",
             dependencies: [
                 "AuthClient",
@@ -100,6 +94,13 @@ let package = Package(
                 "NotificationClient",
                 .product(name: "AppAuth", package: "AppAuth-iOS"),
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ]),
+        .target(
+            name: "DiscoveryClient",
+            dependencies: [
+                "Models",
+                .product(name: "Dependencies", package: "swift-dependencies"),
+                .product(name: "URLRouting", package: "swift-url-routing")
             ]),
         .target(
             name: "HotspotNetworkClient",
