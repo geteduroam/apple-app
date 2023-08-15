@@ -3,6 +3,7 @@ import AuthClient
 import ComposableArchitecture
 import EAPConfigurator
 import Foundation
+import HotspotNetworkClient
 import Models
 import NotificationClient
 import SwiftUI
@@ -87,7 +88,7 @@ public struct Connect: Reducer {
             }
         }
         
-        public var isConnected: Bool {
+        public var isConfigured: Bool {
             switch loadingState {
             case .initial, .failure, .isLoading:
                 return false
@@ -96,10 +97,37 @@ public struct Connect: Reducer {
             }
         }
         
+        public var isConfiguredAndConnected: Bool {
+            switch loadingState {
+            case .initial, .failure, .isLoading:
+                return false
+            case let .success(connected):
+                return connected == .connected
+            }
+        }
+        
+        public var isConfiguredButConnectionUnknown: Bool {
+            switch loadingState {
+            case .initial, .failure, .isLoading:
+                return false
+            case let .success(connected):
+                return connected == .unknown
+            }
+        }
+        
+        public var isConfiguredButDisconnected: Bool {
+            switch loadingState {
+            case .initial, .failure, .isLoading:
+                return false
+            case let .success(connected):
+                return connected == .disconnected
+            }
+        }
+        
         public enum LoadingState: Equatable {
             case initial
             case isLoading
-            case success
+            case success(ConnectionState)
             case failure
         }
         
@@ -110,9 +138,20 @@ public struct Connect: Reducer {
     
     public enum ConnectResult {
         case verified(credentials: Credentials?)
-        case applied
+        case applied(ConnectionType)
     }
     
+    public enum ConnectionType {
+        case ssids(expectedSSIDs: [String])
+        case hotspot20
+    }
+    
+    public enum ConnectionState {
+        case unknown
+        case disconnected
+        case connected
+    }
+
     public indirect enum Action: Equatable {
         public static func == (lhs: Connect.Action, rhs: Connect.Action) -> Bool {
             switch (lhs, rhs) {
@@ -136,6 +175,7 @@ public struct Connect: Reducer {
         case destination(PresentationAction<Destination.Action>)
         case dismissPromptForCredentials
         case dismissTapped
+        case foundSSID(String)
         case logInButtonTapped
         case onAppear
         case select(Profile.ID)
@@ -177,14 +217,13 @@ public struct Connect: Reducer {
         case noValidProviderFound(ProviderInfo?)
         case eapConfigurationFailed(EAPConfiguratorError, ProviderInfo?)
         case mobileConfigFailed(ProviderInfo?)
-        case notConnectedToExpectedSSID(ProviderInfo?, String)
         case unknownError(Error, ProviderInfo?)
         
         var providerInfo: ProviderInfo? {
             switch self {
             case .missingAuthorizationEndpoint, .missingTokenEndpoint, .missingEAPConfigEndpoint:
                 return nil
-            case let .missingTermsAcceptance(info), let .noValidProviderFound(info), let .eapConfigurationFailed(_, info), let .mobileConfigFailed(info), let .notConnectedToExpectedSSID(info, _), let .unknownError(_, info):
+            case let .missingTermsAcceptance(info), let .noValidProviderFound(info), let .eapConfigurationFailed(_, info), let .mobileConfigFailed(info), let .unknownError(_, info):
                 return info
             }
         }
@@ -212,9 +251,6 @@ public struct Connect: Reducer {
             case .mobileConfigFailed:
                 return NSLocalizedString("No valid profile found.", comment: "mobileConfigFailed")
                 
-            case let .notConnectedToExpectedSSID(_, ssid):
-                return NSLocalizedString("The network is configured, but could not connect with \"\(ssid)\" network. You may not be near this network currently.", comment: "notConnectedToExpectedSSID")
-                
             case let .unknownError(error, _):
                 return error.localizedDescription
             }
@@ -223,6 +259,8 @@ public struct Connect: Reducer {
     
     @Dependency(\.authClient) var authClient
     @Dependency(\.dismiss) var dismiss
+    @Dependency(\.eapClient) var eapClient
+    @Dependency(\.hotspotNetworkClient) var hotspotNetworkClient
     @Dependency(\.notificationClient) var notificationClient
     
     private func connect(state: inout State, dryRun: Bool) -> Effect<Connect.Action> {
@@ -260,8 +298,14 @@ public struct Connect: Reducer {
         let agreedToTerms = state.agreedToTerms
         return .run { send in
             await send(.connectResponse(TaskResult<(ProviderInfo?, ConnectResult)> {
-                let providerInfo = try await connect(organization: organization, profile: profile, authClient: authClient, credentials: credentials, agreedToTerms: agreedToTerms, dryRun: dryRun)
-                return (providerInfo, dryRun ? .verified(credentials: credentials) : .applied)
+                let (providerInfo, expectedSSIDs) = try await connect(organization: organization, profile: profile, authClient: authClient, credentials: credentials, agreedToTerms: agreedToTerms, dryRun: dryRun)
+                let connection: ConnectionType
+                if expectedSSIDs.isEmpty {
+                    connection = .hotspot20
+                } else {
+                    connection = .ssids(expectedSSIDs: expectedSSIDs)
+                }
+                return (providerInfo, dryRun ? .verified(credentials: credentials) : .applied(connection))
             }))
         }
     }
@@ -313,10 +357,24 @@ public struct Connect: Reducer {
                     state.providerInfo = providerInfo
                     state.credentials = credentials
                     return connect(state: &state, dryRun: false)
-                case .applied:
-                    state.loadingState = .success
+                    
+                case let .applied(connection):
                     state.providerInfo = providerInfo
-                    return .none
+                    
+                    switch connection {
+                    case .hotspot20:
+                        state.loadingState = .success(.unknown)
+                        return .none
+                        
+                    case let .ssids(expectedSSIDs: expectedSSIDs):
+                        state.loadingState = .success(.disconnected)
+                        return .run { send in
+                            let currentNetwork = await hotspotNetworkClient.fetchCurrent()
+                            if let currentNetwork, expectedSSIDs.contains(currentNetwork.ssid) {
+                                await send(.foundSSID(currentNetwork.ssid))
+                            }
+                        }
+                    }
                 }
                 
             case let .connectResponse(.failure(OrganizationSetupError.missingTermsAcceptance(providerInfo))):
@@ -359,6 +417,13 @@ public struct Connect: Reducer {
             case .logInButtonTapped:
                 // TODO: Check sanity of credentials
                 return connect(state: &state, dryRun: true)
+                
+            case .foundSSID:
+                guard case .success = state.loadingState else {
+                    return .none
+                }
+                state.loadingState = .success(.connected)
+                return .none
                 
             case .startAgainTapped:
                 return .none
@@ -405,7 +470,7 @@ public struct Connect: Reducer {
     
     @Dependency(\.date) var date
     
-    func connect(organization: Organization, profile: Profile, authClient: AuthClient, credentials: Credentials?, agreedToTerms: Bool, dryRun: Bool) async throws -> ProviderInfo? {
+    func connect(organization: Organization, profile: Profile, authClient: AuthClient, credentials: Credentials?, agreedToTerms: Bool, dryRun: Bool) async throws -> (ProviderInfo?, [String]) {
         let accessToken: String?
         if profile.oauth ?? false {
             guard let authorizationEndpoint = profile.authorization_endpoint else {
@@ -461,19 +526,9 @@ public struct Connect: Reducer {
         
 #if os(iOS)
         do {
-            let expectedSSIDs = try await EAPConfigurator().configure(identityProvider: firstValidProvider, credentials: credentials, dryRun: dryRun)
+            let expectedSSIDs = try await eapClient.configure(firstValidProvider, credentials, dryRun)
             
             if !dryRun {
-                if expectedSSIDs.isEmpty == false {
-                    // Check if we are connected to one of the expected SSIDs
-                    let connectedSSIDs = SSID.fetchNetworkInfo().filter( { $0.success == true }).compactMap(\.ssid)
-                    guard connectedSSIDs.first(where: { expectedSSIDs.contains($0) }) != nil else {
-                        throw OrganizationSetupError.notConnectedToExpectedSSID(firstValidProvider.providerInfo, expectedSSIDs.first ?? "?")
-                    }
-                } else {
-                    // When connected to Hotspot 2.0 or Passpoint network there is no SSID
-                }
-                
                 // Schedule reminder for user to renew network access
                 if let validUntil = firstValidProvider.validUntil {
                     let organizationId = organization.id
@@ -481,6 +536,9 @@ public struct Connect: Reducer {
                     try await notificationClient.scheduleRenewReminder(validUntil, organizationId, profileId)
                 }
             }
+            
+            return (firstValidProvider.providerInfo, expectedSSIDs)
+            
         } catch let error as EAPConfiguratorError {
             throw OrganizationSetupError.eapConfigurationFailed(error, firstValidProvider.providerInfo)
         } catch {
@@ -541,12 +599,11 @@ public struct Connect: Reducer {
 //            let profileId = profile.id
 //            try await notificationClient.scheduleRenewReminder(validUntil, organizationId, profileId)
 
+            return (firstValidProvider.providerInfo, [])
         } catch {
             throw OrganizationSetupError.unknownError(error, firstValidProvider.providerInfo)
         }
 #endif
-        
-        return firstValidProvider.providerInfo
     }
     
 }

@@ -36,7 +36,7 @@ public struct ConnectView_iOS: View {
                 }
                 .padding(20)
                 
-                if viewStore.isConnected == false {
+                if viewStore.isConfigured == false {
                     List {
                         Section {
                             let selectedProfile = viewStore.selectedProfile
@@ -69,11 +69,25 @@ public struct ConnectView_iOS: View {
                 HStack {
                     Spacer()
                     VStack(alignment: .center) {
-                        if viewStore.isConnected {
+                        if viewStore.isConfiguredAndConnected {
                             Label(title: {
                                 Text("Connected", bundle: .module)
                             }, icon: {
-                                Image(systemName: "checkmark")
+                                Image(systemName: "checkmark.circle")
+                            })
+                            .font(theme.connectedFont)
+                        } else if viewStore.isConfiguredButDisconnected {
+                            Label(title: {
+                                Text("Configured, but not connected", bundle: .module)
+                            }, icon: {
+                                Image(systemName: "checkmark.circle.trianglebadge.exclamationmark")
+                            })
+                            .font(theme.connectedFont)
+                        } else if viewStore.isConfiguredButConnectionUnknown {
+                            Label(title: {
+                                Text("Configured", bundle: .module)
+                            }, icon: {
+                                Image(systemName: "checkmark.circle")
                             })
                             .font(theme.connectedFont)
                         } else {
