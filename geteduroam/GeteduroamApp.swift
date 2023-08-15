@@ -65,14 +65,7 @@ struct GeteduroamApp: App {
         WindowGroup("geteduroam", id: "mainWindow") {
             MainView(store: store)
                 .environmentObject(theme)
-                .onAppear {
-                    DispatchQueue.main.async {
-                        NSApplication.shared.windows.forEach { window in
-                            window.standardWindowButton(.zoomButton)?.isEnabled = false
-                        }
-                    }
-                }
-                .frame(minWidth: 300, idealWidth: 540, maxWidth: .infinity, minHeight: 400, idealHeight: 640, maxHeight: .infinity, alignment: .center)
+                .frame(minWidth: 300, idealWidth: 540, maxWidth: .infinity, minHeight: 460, idealHeight: 640, maxHeight: .infinity, alignment: .center)
                 .onDisappear {
                     // Quit app on close
                     NSApplication.shared.terminate(nil)
