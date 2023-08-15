@@ -122,6 +122,7 @@ let package = Package(
             name: "EAPConfigurator",
             dependencies: [
                 "Models",
+                .product(name: "Dependencies", package: "swift-dependencies")
             ]),
         .target(
             name: "NotificationClient",
