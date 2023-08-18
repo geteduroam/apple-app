@@ -46,7 +46,7 @@ public struct MainView: View {
                             HStack {
                                 Image(systemName: "magnifyingglass")
                                 TextField(
-                                    NSLocalizedString("Search for your organization", bundle: .module, comment: ""),
+                                    NSLocalizedString("Search for your organization", bundle: .module, comment: "Search prompt"),
                                     text: viewStore.binding(get: \.searchQuery, send: Main.Action.searchQueryChanged))
                                 .font(theme.searchFont)
                                 .focused($focusedField, equals: .search)
@@ -73,7 +73,7 @@ public struct MainView: View {
                                 HStack {
                                     Image(systemName: "magnifyingglass")
                                     TextField(
-                                        NSLocalizedString("Search for your organization", bundle: .module, comment: ""),
+                                        NSLocalizedString("Search for your organization", bundle: .module, comment: "Search prompt"),
                                         text: viewStore.binding(get: \.searchQuery, send: Main.Action.searchQueryChanged))
                                     .font(theme.searchFont)
                                     .focused($focusedField, equals: .search)
@@ -115,7 +115,7 @@ public struct MainView: View {
                                     .listRowSeparatorTint(Color.clear)
                                     .listRowBackground(Color("Background"))
                             } else if viewStore.searchResults.isEmpty {
-                                Text("")
+                                Text(verbatim: "")
                                     .accessibility(hidden: true)
                                     .backport
                                     .listRowSeparatorTint(Color.clear)
@@ -139,7 +139,7 @@ public struct MainView: View {
                         .scrollContentBackground(.hidden)
                     }
                 }
-                .searchableMacOnly(text: viewStore.binding(get: \.searchQuery, send: Main.Action.searchQueryChanged), prompt: NSLocalizedString("Search for your organization", bundle: .module, comment: ""))
+                .searchableMacOnly(text: viewStore.binding(get: \.searchQuery, send: Main.Action.searchQueryChanged), prompt: NSLocalizedString("Search for your organization", bundle: .module, comment: "Search prompt"))
                 .backport
                 .readableContentWidthPadding()
                 .background {

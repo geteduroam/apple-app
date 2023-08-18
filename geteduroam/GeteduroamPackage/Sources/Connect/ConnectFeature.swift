@@ -38,9 +38,9 @@ public struct Connect: Reducer {
         
         public var usernamePrompt: String {
             if let requiredUserNameSuffix {
-                return NSLocalizedString("Username", comment: "") + "@" + requiredUserNameSuffix
+                return NSLocalizedString("Username", bundle: .module, comment: "") + "@" + requiredUserNameSuffix
             } else {
-                return NSLocalizedString("Username", comment: "")
+                return NSLocalizedString("Username", bundle: .module, comment: "")
             }
         }
         
@@ -217,13 +217,14 @@ public struct Connect: Reducer {
         case noValidProviderFound(ProviderInfo?)
         case eapConfigurationFailed(EAPConfiguratorError, ProviderInfo?)
         case mobileConfigFailed(ProviderInfo?)
+        case userCancelled(ProviderInfo?)
         case unknownError(Error, ProviderInfo?)
         
         var providerInfo: ProviderInfo? {
             switch self {
             case .missingAuthorizationEndpoint, .missingTokenEndpoint, .missingEAPConfigEndpoint:
                 return nil
-            case let .missingTermsAcceptance(info), let .noValidProviderFound(info), let .eapConfigurationFailed(_, info), let .mobileConfigFailed(info), let .unknownError(_, info):
+            case let .missingTermsAcceptance(info), let .noValidProviderFound(info), let .eapConfigurationFailed(_, info), let .mobileConfigFailed(info), let .userCancelled(info), let .unknownError(_, info):
                 return info
             }
         }
@@ -231,25 +232,28 @@ public struct Connect: Reducer {
         public var errorDescription: String? {
             switch self {
             case .missingAuthorizationEndpoint:
-                return NSLocalizedString("Missing information to start authentication.", comment: "missingAuthorizationEndpoint")
+                return NSLocalizedString("Missing information to start authentication.", bundle: .module, comment: "missingAuthorizationEndpoint")
                 
             case .missingTokenEndpoint:
-                return NSLocalizedString("Missing information to start authentication.", comment: "missingTokenEndpoint")
+                return NSLocalizedString("Missing information to start authentication.", bundle: .module, comment: "missingTokenEndpoint")
                 
             case .missingEAPConfigEndpoint:
-                return NSLocalizedString("Missing information to start configuration.", comment: "missingEAPConfigEndpoint")
+                return NSLocalizedString("Missing information to start configuration.", bundle: .module, comment: "missingEAPConfigEndpoint")
                 
             case .missingTermsAcceptance:
-                return NSLocalizedString("You must agree to the terms of use.", comment: "missingTermsAcceptance")
+                return NSLocalizedString("You must agree to the terms of use.", bundle: .module, comment: "missingTermsAcceptance")
                 
             case .noValidProviderFound:
-                return NSLocalizedString("No valid provider found.", comment: "noValidProviderFound")
+                return NSLocalizedString("No valid provider found.", bundle: .module, comment: "noValidProviderFound")
                 
             case let .eapConfigurationFailed(error, _):
                 return error.errorDescription
                 
             case .mobileConfigFailed:
-                return NSLocalizedString("No valid profile found.", comment: "mobileConfigFailed")
+                return NSLocalizedString("No valid profile found.", bundle: .module, comment: "mobileConfigFailed")
+                
+            case .userCancelled:
+                return NSLocalizedString("The configuration process was cancelled.", bundle: .module, comment: "userCancelled")
                 
             case let .unknownError(error, _):
                 return error.localizedDescription
@@ -274,13 +278,13 @@ public struct Connect: Reducer {
                     TextState("Terms of Use", bundle: .module)
                 }, actions: {
                     ButtonState(action: .send(.agreeButtonTapped)) {
-                        TextState("Agree")
+                        TextState("Agree", bundle: .module)
                     }
                     ButtonState(role: .cancel, action: .send(.disagreeButtonTapped)) {
-                        TextState("Disagree")
+                        TextState("Disagree", bundle: .module)
                     }
                 }, message: { [termsOfUse = state.providerInfo?.termsOfUse?.localized()] in
-                    var message = "You must agree to the terms of use before you can use this network."
+                    var message = NSLocalizedString("You must agree to the terms of use before you can use this network.", bundle: .module, comment: "")
                     if let termsOfUse {
                         message = message + "\n\n" + termsOfUse.trimmingCharacters(in: .whitespacesAndNewlines)
                     }
@@ -391,6 +395,12 @@ public struct Connect: Reducer {
                 state.providerInfo = providerInfo
                 state.promptForCredentials = true
                 state.requiredUserNameSuffix = suffix
+                return .none
+                
+            case let .connectResponse(.failure(OrganizationSetupError.userCancelled(providerInfo))):
+                state.providerInfo = providerInfo
+                state.loadingState = .failure
+                // Telling the user they cancelled isn't helping
                 return .none
                 
             case let .connectResponse(.failure(error)):
@@ -542,7 +552,13 @@ public struct Connect: Reducer {
         } catch let error as EAPConfiguratorError {
             throw OrganizationSetupError.eapConfigurationFailed(error, firstValidProvider.providerInfo)
         } catch {
-            throw OrganizationSetupError.unknownError(error, firstValidProvider.providerInfo)
+            let nserror = error as NSError
+            switch (nserror.domain, nserror.code) {
+            case ("NEHotspotConfigurationErrorDomain", 7):
+                throw OrganizationSetupError.userCancelled(firstValidProvider.providerInfo)
+            default:
+                throw OrganizationSetupError.unknownError(error, firstValidProvider.providerInfo)
+            }
         }
 #elseif os(macOS)
         do {

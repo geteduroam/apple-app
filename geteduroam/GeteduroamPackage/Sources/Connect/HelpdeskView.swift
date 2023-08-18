@@ -45,7 +45,7 @@ struct HelpdeskView: View {
                 }
                 if let termsOfUse = providerInfo.termsOfUse?.localized()?.trimmingCharacters(in: .whitespacesAndNewlines) {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Terms Of Use")
+                        Text("Terms of Use", bundle: .module)
                             .font(theme.infoHeaderFont)
                         Text(termsOfUse)
                             .multilineTextAlignment(.leading)
@@ -57,7 +57,7 @@ struct HelpdeskView: View {
                     let emailAdress = helpdesk?.emailAdress?.localized()
                     let phone = helpdesk?.phone?.localized()
                     if webAddress ?? emailAdress ?? phone != nil {
-                        Text("Helpdesk")
+                        Text("Helpdesk", bundle: .module)
                             .font(theme.infoHeaderFont)
                         if let webAddress {
                             Text(attributedString(webAddress))

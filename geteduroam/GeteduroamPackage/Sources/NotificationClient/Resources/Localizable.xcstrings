@@ -1,0 +1,83 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Remind Me Later" : {
+      "comment" : "Remind Me Later",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Herinner me later"
+          }
+        }
+      }
+    },
+    "Renew Now" : {
+      "comment" : "Renew Now",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vernieuw nu"
+          }
+        }
+      }
+    },
+    "Renew your connection to extend your access." : {
+      "comment" : "Renew your connection to extend your access.",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vernieuw je verbinding om je toegang te verlengen."
+          }
+        }
+      }
+    },
+    "You had access until %@. Renew your connection to extend your access." : {
+      "comment" : "You had access until <date>. Renew your connection to extend your access.",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je had toegang tot %@. Vernieuw je verbinding om je toegang te verlengen."
+          }
+        }
+      }
+    },
+    "You have access until %@. Renew your connection to extend your access." : {
+      "comment" : "You have access until <date>. Renew your connection to extend your access.",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je hebt toegang tot %@. Vernieuw je verbinding om je toegang te verlengen."
+          }
+        }
+      }
+    },
+    "Your network access has expired" : {
+      "comment" : "Your network access has expired",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je netwerktoegang is verlopen"
+          }
+        }
+      }
+    },
+    "Your network access is about to expire" : {
+      "comment" : "Your network access is about to expire",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je netwerktoegang verloopt binnenkort"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

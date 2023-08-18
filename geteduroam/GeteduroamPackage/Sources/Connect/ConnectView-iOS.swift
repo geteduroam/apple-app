@@ -124,7 +124,7 @@ public struct ConnectView_iOS: View {
             .backport
             .credentialAlert(
                 CredentialAlert(
-                    title: NSLocalizedString("Login Required", comment: ""),
+                    title: NSLocalizedString("Login Required", bundle: .module, comment: ""),
                     isPresented: viewStore
                         .binding(
                             get: \.promptForCredentials,
@@ -134,20 +134,20 @@ public struct ConnectView_iOS: View {
                         .binding(
                             get: \.username,
                             send: Connect.Action.updateUsername),
-                    passwordPrompt: NSLocalizedString("Password", comment: ""),
+                    passwordPrompt: NSLocalizedString("Password", bundle: .module, comment: ""),
                     password:  viewStore
                         .binding(
                             get: \.password,
                             send: Connect.Action.updatePassword),
-                    cancelButtonTitle: NSLocalizedString("Cancel", comment: ""),
+                    cancelButtonTitle: NSLocalizedString("Cancel", bundle: .module, comment: ""),
                     cancelAction: {
                         viewStore.send(.dismissPromptForCredentials)
                     },
-                    doneButtonTitle: NSLocalizedString("Log In", comment: ""),
+                    doneButtonTitle: NSLocalizedString("Log In", bundle: .module, comment: ""),
                     doneAction: {
                         viewStore.send(.logInButtonTapped)
                     },
-                    message: NSLocalizedString("Please enter your username and password.", comment: "")))
+                    message: NSLocalizedString("Please enter your username and password.", bundle: .module, comment: "")))
         }
     }
 }

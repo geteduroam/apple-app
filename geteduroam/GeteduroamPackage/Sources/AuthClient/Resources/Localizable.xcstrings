@@ -1,0 +1,23 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "No access token obtained for unknown reason" : {
+      "comment" : "OIDAuthStateError neitherAccessTokenNorErrorAvailable",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No access token obtained for unknown reason"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geen toegangstoken verkregen om onbekende reden"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
