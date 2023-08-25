@@ -41,6 +41,9 @@
         }
       }
     },
+    "Connect" : {
+
+    },
     "CONNECT" : {
       "localizations" : {
         "nl" : {
@@ -61,6 +64,12 @@
         }
       }
     },
+    "Continue in System Preferences" : {
+
+    },
+    "Continue in System Settings" : {
+
+    },
     "Disagree" : {
       "localizations" : {
         "nl" : {
@@ -70,6 +79,9 @@
           }
         }
       }
+    },
+    "Double-click to review the profile and then press the \"Install…\" button to setup the network on your computer." : {
+
     },
     "Failed to connect" : {
       "comment" : "Failed to connect",
@@ -203,6 +215,9 @@
           }
         }
       }
+    },
+    "Review the profile and then press the \"Install…\" button to setup the network on your computer." : {
+
     },
     "Terms of Use" : {
       "localizations" : {

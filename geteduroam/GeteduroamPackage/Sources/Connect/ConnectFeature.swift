@@ -29,6 +29,7 @@ public struct Connect: Reducer {
         public var providerInfo: ProviderInfo?
         public var agreedToTerms: Bool = false
         public var credentials: Credentials?
+        public var accessToken: String?
         public var requiredUserNameSuffix: String? = nil
         public var promptForCredentials: Bool = false
         
@@ -136,14 +137,24 @@ public struct Connect: Reducer {
         @PresentationState public var destination: Destination.State?
     }
     
-    public enum ConnectResult {
-        case verified(credentials: Credentials?)
+    public enum ConnectResult: Equatable {
+        case verified(credentials: Credentials?, accessToken: String?)
         case applied(ConnectionType)
     }
     
-    public enum ConnectionType {
+    public enum ConnectionType: Equatable {
         case ssids(expectedSSIDs: [String])
         case hotspot20
+    }
+    
+    public struct ConnectResponse: Equatable {
+        public init(providerInfo: ProviderInfo? = nil, result: Connect.ConnectResult) {
+            self.providerInfo = providerInfo
+            self.result = result
+        }
+        
+        public let providerInfo: ProviderInfo?
+        public let result: Connect.ConnectResult
     }
     
     public enum ConnectionState {
@@ -153,25 +164,8 @@ public struct Connect: Reducer {
     }
 
     public indirect enum Action: Equatable {
-        public static func == (lhs: Connect.Action, rhs: Connect.Action) -> Bool {
-            switch (lhs, rhs) {
-            case (.onAppear, .onAppear):
-                return true
-            case let (.select(lhs), .select(rhs)):
-                return lhs == rhs
-            case (.connect, .connect):
-                return true
-            case (.connectResponse(.success), .connectResponse(.success)):
-                return true
-            case let (.connectResponse(.failure(lhs as NSError)), .connectResponse(.failure(rhs as NSError))):
-                return lhs == rhs
-            default:
-                return false
-            }
-        }
-        
         case connect
-        case connectResponse(TaskResult<(ProviderInfo?, ConnectResult)>)
+        case connectResponse(TaskResult<ConnectResponse>)
         case destination(PresentationAction<Destination.Action>)
         case dismissPromptForCredentials
         case dismissTapped
@@ -209,7 +203,11 @@ public struct Connect: Reducer {
         }
     }
     
-    public enum OrganizationSetupError: Error, LocalizedError {
+    public enum OrganizationSetupError: Error, LocalizedError, Equatable {
+        public static func == (lhs: Connect.OrganizationSetupError, rhs: Connect.OrganizationSetupError) -> Bool {
+            (lhs as NSError) == (rhs as NSError)
+        }
+        
         case missingAuthorizationEndpoint
         case missingTokenEndpoint
         case missingEAPConfigEndpoint
@@ -262,10 +260,12 @@ public struct Connect: Reducer {
     }
     
     @Dependency(\.authClient) var authClient
+    @Dependency(\.date) var date
     @Dependency(\.dismiss) var dismiss
     @Dependency(\.eapClient) var eapClient
     @Dependency(\.hotspotNetworkClient) var hotspotNetworkClient
     @Dependency(\.notificationClient) var notificationClient
+    @Dependency(\.urlSession) var urlSession
     
     private func connect(state: inout State, dryRun: Bool) -> Effect<Connect.Action> {
         guard let profile = state.selectedProfile else {
@@ -299,17 +299,19 @@ public struct Connect: Reducer {
         let credentials = state.credentials
         state.credentials = nil
         state.promptForCredentials = false
+        let accessToken = state.accessToken
+        state.accessToken = nil
         let agreedToTerms = state.agreedToTerms
         return .run { send in
-            await send(.connectResponse(TaskResult<(ProviderInfo?, ConnectResult)> {
-                let (providerInfo, expectedSSIDs) = try await connect(organization: organization, profile: profile, authClient: authClient, credentials: credentials, agreedToTerms: agreedToTerms, dryRun: dryRun)
+            await send(.connectResponse(TaskResult<ConnectResponse> {
+                let (providerInfo, expectedSSIDs, accessToken) = try await connect(organization: organization, profile: profile, authClient: authClient, credentials: credentials, previousAccessToken: accessToken, agreedToTerms: agreedToTerms, dryRun: dryRun)
                 let connection: ConnectionType
                 if expectedSSIDs.isEmpty {
                     connection = .hotspot20
                 } else {
                     connection = .ssids(expectedSSIDs: expectedSSIDs)
                 }
-                return (providerInfo, dryRun ? .verified(credentials: credentials) : .applied(connection))
+                return .init(providerInfo: providerInfo, result: dryRun ? .verified(credentials: credentials, accessToken: accessToken) : .applied(connection))
             }))
         }
     }
@@ -354,16 +356,17 @@ public struct Connect: Reducer {
             case .connect:
                 return connect(state: &state, dryRun: true)
                 
-            case let .connectResponse(.success((providerInfo, connectResult))):
-                switch connectResult {
-                case let .verified(credentials):
+            case let .connectResponse(.success(connectResponse)):
+                switch connectResponse.result {
+                case let .verified(credentials, accessToken):
                     // Verified that we should be able to make the connection without errors/prompts, so go ahead and actually setup the network
-                    state.providerInfo = providerInfo
+                    state.providerInfo = connectResponse.providerInfo
                     state.credentials = credentials
+                    state.accessToken = accessToken
                     return connect(state: &state, dryRun: false)
                     
                 case let .applied(connection):
-                    state.providerInfo = providerInfo
+                    state.providerInfo = connectResponse.providerInfo
                     
                     switch connection {
                     case .hotspot20:
@@ -478,11 +481,11 @@ public struct Connect: Reducer {
         return decoder
     }()
     
-    @Dependency(\.date) var date
-    
-    func connect(organization: Organization, profile: Profile, authClient: AuthClient, credentials: Credentials?, agreedToTerms: Bool, dryRun: Bool) async throws -> (ProviderInfo?, [String]) {
+    func connect(organization: Organization, profile: Profile, authClient: AuthClient, credentials: Credentials?, previousAccessToken: String?, agreedToTerms: Bool, dryRun: Bool) async throws -> (ProviderInfo?, [String], String?) {
         let accessToken: String?
-        if profile.oauth ?? false {
+        if let previousAccessToken {
+            accessToken = previousAccessToken
+        } else if profile.oauth ?? false {
             guard let authorizationEndpoint = profile.authorization_endpoint else {
                 throw OrganizationSetupError.missingAuthorizationEndpoint
             }
@@ -519,7 +522,7 @@ public struct Connect: Reducer {
             urlRequest.allHTTPHeaderFields = ["Authorization": "Bearer \(accessToken)"]
         }
 
-        let (eapConfigData, _) = try await URLSession.shared.data(for: urlRequest)
+        let (eapConfigData, _) = try await urlSession.data(for: urlRequest)
         
         let providerList = try decoder.decode(EAPIdentityProviderList.self, from: eapConfigData)
         let firstValidProvider = providerList
@@ -547,7 +550,7 @@ public struct Connect: Reducer {
                 }
             }
             
-            return (firstValidProvider.providerInfo, expectedSSIDs)
+            return (firstValidProvider.providerInfo, expectedSSIDs, accessToken)
             
         } catch let error as EAPConfiguratorError {
             throw OrganizationSetupError.eapConfigurationFailed(error, firstValidProvider.providerInfo)
@@ -590,7 +593,7 @@ public struct Connect: Reducer {
                 mobileConfigURLRequest.allHTTPHeaderFields = ["Authorization": "Bearer \(accessToken)"]
             }
             
-            let (data, response) = try await URLSession.shared.data(for: mobileConfigURLRequest)
+            let (data, response) = try await urlSession.data(for: mobileConfigURLRequest)
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, (200..<300).contains(statusCode) else {
                 throw OrganizationSetupError.mobileConfigFailed(firstValidProvider.providerInfo)
             }
@@ -615,7 +618,7 @@ public struct Connect: Reducer {
 //            let profileId = profile.id
 //            try await notificationClient.scheduleRenewReminder(validUntil, organizationId, profileId)
 
-            return (firstValidProvider.providerInfo, [])
+            return (firstValidProvider.providerInfo, [], accessToken)
         } catch {
             throw OrganizationSetupError.unknownError(error, firstValidProvider.providerInfo)
         }

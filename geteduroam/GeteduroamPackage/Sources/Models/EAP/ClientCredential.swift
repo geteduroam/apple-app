@@ -2,6 +2,21 @@ import Foundation
 import XMLCoder
 
 public struct ClientCredential: Codable, Equatable {
+    public init(outerIdentity: String? = nil, innerIdentityPrefix: String? = nil, innerIdentitySuffix: String? = nil, innerIdentityHint: Bool? = nil, userName: String? = nil, password: String? = nil, clientCertificate: CertificateData? = nil, intermediateCACertificates: [CertificateData], passphrase: String? = nil, PAC: String? = nil, provisionPAC: Bool? = nil, allowSave: Bool? = nil) {
+        self.outerIdentity = outerIdentity
+        self.innerIdentityPrefix = innerIdentityPrefix
+        self.innerIdentitySuffix = innerIdentitySuffix
+        self.innerIdentityHint = innerIdentityHint
+        self.userName = userName
+        self.password = password
+        self.clientCertificate = clientCertificate
+        self.intermediateCACertificates = intermediateCACertificates
+        self.passphrase = passphrase
+        self.PAC = PAC
+        self.provisionPAC = provisionPAC
+        self.allowSave = allowSave
+    }
+    
     public let outerIdentity: String?
     public let innerIdentityPrefix: String?
     public let innerIdentitySuffix: String?

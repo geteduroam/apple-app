@@ -44,6 +44,15 @@ extension HotspotNetworkClient {
 }
 
 public struct NetworkInfo {
+    public init(ssid: String, bssid: String, signalStrength: Double, isSecure: Bool, didAutoJoin: Bool, didJustJoin: Bool, isChosenHelper: Bool) {
+        self.ssid = ssid
+        self.bssid = bssid
+        self.signalStrength = signalStrength
+        self.isSecure = isSecure
+        self.didAutoJoin = didAutoJoin
+        self.didJustJoin = didJustJoin
+        self.isChosenHelper = isChosenHelper
+    }
 
     /// The SSID for the Wi-Fi network.
     public let ssid: String

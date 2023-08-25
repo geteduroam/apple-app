@@ -2,6 +2,11 @@ import Foundation
 import XMLCoder
 
 public struct LocalizedStringEntry: Codable, Equatable {
+    public init(language: String? = nil, value: String) {
+        self.language = language
+        self.value = value
+    }
+    
     public let language: String?
     public let value: String
     

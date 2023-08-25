@@ -41,13 +41,14 @@ let package = Package(
             targets: ["NotificationClient"]),
     ],
     dependencies: [
+        .package(url: "https://github.com/CoreOffice/XMLCoder.git", .upToNextMajor(from: "0.16.0")),
+        .package(url: "https://github.com/egeniq/network-ios.git", branch: "main"),
         .package(url: "https://github.com/openid/AppAuth-iOS.git", from: "1.0.0"),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.0.0"),
         .package(url: "https://github.com/pointfreeco/swift-custom-dump", from: "1.0.0"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.0.0"),
         .package(url: "https://github.com/pointfreeco/swift-url-routing", from: "0.6.0"),
-        .package(url: "https://github.com/pointfreeco/xctest-dynamic-overlay", from: "1.0.0"),
-        .package(url: "https://github.com/CoreOffice/XMLCoder.git", .upToNextMajor(from: "0.16.0"))
+        .package(url: "https://github.com/pointfreeco/xctest-dynamic-overlay", from: "1.0.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -94,6 +95,12 @@ let package = Package(
                 "NotificationClient",
                 .product(name: "AppAuth", package: "AppAuth-iOS"),
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+            ]),
+        .testTarget(
+            name: "ConnectTests",
+            dependencies: [
+                "Connect",
+                .product(name: "MockNetwork", package: "network-ios"),
             ]),
         .target(
             name: "DiscoveryClient",
