@@ -56,6 +56,7 @@ class EAPConfigurator {
     /// - Parameters:
     ///   - identityProvider: The Identity Provider
     ///   - credentials: Credentials entered by user
+    ///   - dryRun: If true only checks if information is complete without actually applying the network settings
     /// - Returns: Expected SSIDs for connection
     func configure(identityProvider: EAPIdentityProvider, credentials: Credentials? = nil, dryRun: Bool) async throws -> [String] {
         // At this point, we're not certain this configuration can work,

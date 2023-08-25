@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "network-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/egeniq/network-ios.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "fb603b9031bbd7f3fc2d80ab12ba7ab919bd7417"
+      }
+    },
+    {
       "identity" : "swift-case-paths",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-case-paths",
@@ -50,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-composable-architecture",
       "state" : {
-        "revision" : "195284b94b799b326729640453f547f08892293a",
-        "version" : "1.0.0"
+        "revision" : "a7c1f799b55ecb418f85094b142565834f7ee7c7",
+        "version" : "1.2.0"
       }
     },
     {

@@ -48,6 +48,16 @@
                ReferencedContainer = "container:geteduroam/GeteduroamPackage">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "ConnectTests"
+               BuildableName = "ConnectTests"
+               BlueprintName = "ConnectTests"
+               ReferencedContainer = "container:geteduroam/GeteduroamPackage">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
