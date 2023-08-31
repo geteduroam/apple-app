@@ -4,10 +4,10 @@ import Models
 import OSLog
 
 public struct CacheClient {
-    public var cacheOrganizations: (OrganizationsResponse) -> Void
-    public var restoreOrganizations: () throws -> OrganizationsResponse
+    public var cacheDiscovery: (DiscoveryResponse) -> Void
+    public var restoreDiscovery: () throws -> DiscoveryResponse
     
-    static func cacheURLForOrganizations() throws -> URL {
+    static func cacheURLForDiscovery() throws -> URL {
         guard let directoryURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).last else {
             throw CacheClientError.noDocumentsFolder
         }
@@ -29,12 +29,12 @@ extension DependencyValues {
 
 extension CacheClient {
     static var mock: Self = .init(
-        cacheOrganizations: { _ in
+        cacheDiscovery: { _ in
             print("Should now create cache")
         },
-        restoreOrganizations: {
+        restoreDiscovery: {
             print("Should now restore cache")
-            return OrganizationsResponse(instances: [.init(id: "restored", name: "Restored Organization from Cache", country: "NL", cat_idp: 0, profiles: [], geo: [])])
+            return .init(content: .init(organizations: [.init(id: "restored", name: ["any": "Restored discovery from Cache"], country: "NL", profiles: [], geo: [])]))
         })
 }
 
@@ -48,31 +48,32 @@ extension Logger {
 
 extension CacheClient {
     static var live: Self = .init(
-        cacheOrganizations: { organizations in
-            guard let data = try? JSONEncoder().encode(organizations), let cacheURL = try? Self.cacheURLForOrganizations() else {
-                Logger.cache.error("Failed to cache organizations")
+        cacheDiscovery: { organizations in
+            guard let data = try? JSONEncoder().encode(organizations), let cacheURL = try? Self.cacheURLForDiscovery() else {
+                Logger.cache.error("Failed to cache discovery")
                 return
             }
             try? data.write(to: cacheURL)
-            Logger.cache.info("Cached organizations to \(cacheURL)")
+            Logger.cache.info("Cached discovery to \(cacheURL)")
         },
-        restoreOrganizations: {
+        restoreDiscovery: {
             do {
-                let cacheURL = try Self.cacheURLForOrganizations()
+                let cacheURL = try Self.cacheURLForDiscovery()
                 let data = try Data(contentsOf: cacheURL)
-                let organizations = try JSONDecoder().decode(OrganizationsResponse.self, from: data)
-                Logger.cache.info("Restored organizations from \(cacheURL)")
-                return organizations
+                let discovery = try JSONDecoder().decode(DiscoveryResponse.self, from: data)
+                Logger.cache.info("Restored discovery from \(cacheURL)")
+                return discovery
             } catch {
-                Logger.cache.warning("No organizations cache found, using bundled cache")
+                Logger.cache.error("Restoring discovery failed \(error)")
+                Logger.cache.warning("No discovery cache found, using bundled cache")
                 guard let cacheURL = Bundle.main.url(forResource: "discovery", withExtension: "json") else {
-                    Logger.cache.error("Failed to restore organizations from bundled cache")
+                    Logger.cache.error("Failed to restore discovery from bundled cache")
                     throw CacheClientError.noCacheInBundle
                 }
                 let data = try Data(contentsOf: cacheURL)
-                Logger.cache.info("Restored organizations from \(cacheURL)")
-                let organizations = try JSONDecoder().decode(OrganizationsResponse.self, from: data)
-                return organizations
+                Logger.cache.info("Restored discovery from \(cacheURL)")
+                let discovery = try JSONDecoder().decode(DiscoveryResponse.self, from: data)
+                return discovery
             }
         })
 }

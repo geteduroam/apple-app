@@ -113,11 +113,7 @@ public struct ConnectView_Mac: View {
                 }
             }
             .padding()
-<<<<<<< ours
-            .navigationTitle(viewStore.institution.nameOrId)
-=======
             .navigationTitle(viewStore.organization.name)
->>>>>>> theirs
             .onAppear {
                 viewStore.send(.onAppear)
             }
@@ -135,30 +131,4 @@ public struct ConnectView_Mac: View {
         }
     }
 }
-<<<<<<< ours
-
-struct ConnectView_Mac_Previews: PreviewProvider {
-    static var previews: some View {
-        ConnectView_Mac(store: .init(
-            initialState: .init(
-                institution: .init(
-                    id: "1",
-                    name: "My Institution",
-                    country: "NL",
-                    profiles: [
-                        .init(
-                            id: "2",
-                            name: "My Profile",
-                            default: true),
-                        .init(
-                            id: "3",
-                            name: "Other Profile")
-                    ],
-                    geo: [.init(lat: 0, lon: 0)])),
-            reducer: Connect()))
-        .environmentObject(Theme.demo)
-    }
-}
-=======
 #endif
->>>>>>> theirs

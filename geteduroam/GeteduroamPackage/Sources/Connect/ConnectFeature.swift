@@ -208,22 +208,22 @@ public struct Connect: Reducer {
             (lhs as NSError) == (rhs as NSError)
         }
         
+        case eapConfigurationFailed(EAPConfiguratorError, ProviderInfo?)
         case missingAuthorizationEndpoint
-        case missingTokenEndpoint
         case missingEAPConfigEndpoint
         case missingMobileConfigEndpoint
         case missingProfileType
         case missingTermsAcceptance(ProviderInfo?)
-        case noValidProviderFound(ProviderInfo?)
-        case eapConfigurationFailed(EAPConfiguratorError, ProviderInfo?)
+        case missingTokenEndpoint
         case mobileConfigFailed(ProviderInfo?)
-        case userCancelled(ProviderInfo?)
- case redirectToWebsite(URL)
+        case noValidProviderFound(ProviderInfo?)
+        case redirectToWebsite(URL)
         case unknownError(Error, ProviderInfo?)
+        case userCancelled(ProviderInfo?)
         
         var providerInfo: ProviderInfo? {
             switch self {
-            case .missingAuthorizationEndpoint, .missingTokenEndpoint, .missingEAPConfigEndpoint, .missingMobileConfigEndpoint:
+            case .missingAuthorizationEndpoint, .missingTokenEndpoint, .missingEAPConfigEndpoint, .missingProfileType, .missingMobileConfigEndpoint, .redirectToWebsite:
                 return nil
             case let .missingTermsAcceptance(info), let .noValidProviderFound(info), let .eapConfigurationFailed(_, info), let .mobileConfigFailed(info), let .userCancelled(info), let .unknownError(_, info):
                 return info
@@ -264,6 +264,9 @@ public struct Connect: Reducer {
                 
             case let .unknownError(error, _):
                 return error.localizedDescription
+                
+            case .redirectToWebsite:
+                return nil
             }
         }
     }
@@ -274,10 +277,9 @@ public struct Connect: Reducer {
     @Dependency(\.eapClient) var eapClient
     @Dependency(\.hotspotNetworkClient) var hotspotNetworkClient
     @Dependency(\.notificationClient) var notificationClient
+    @Dependency(\.openURL) var openURL
     @Dependency(\.urlSession) var urlSession
-@Dependency(\.openURL) var openURL
-
-
+    
     private func connect(state: inout State, dryRun: Bool) -> Effect<Connect.Action> {
         guard let profile = state.selectedProfile else {
             return .none
@@ -417,10 +419,10 @@ public struct Connect: Reducer {
                 // Telling the user they cancelled isn't helping
                 return .none
                 
-case let .connectResponse(.failure(InstitutionSetupError.redirectToWebsite(url))):
-return .run { _ in
-await self.openURL(url)
-}
+            case let .connectResponse(.failure(OrganizationSetupError.redirectToWebsite(url))):
+                return .run { _ in
+                    await self.openURL(url)
+                }
 
             case let .connectResponse(.failure(error)):
                 // Read providerinfo if error has it so we can populate helpdesk
@@ -498,18 +500,32 @@ await self.openURL(url)
     }()
     
     func connect(organization: Organization, profile: Profile, authClient: AuthClient, credentials: Credentials?, previousAccessToken: String?, agreedToTerms: Bool, dryRun: Bool) async throws -> (ProviderInfo?, [String], String?) {
+        switch profile.type {
+        case .none:
+            throw OrganizationSetupError.missingProfileType
+            
+        case .eapConfig:
+            break
+            
+        case .letswifi:
+            break
+            
+        case .webview:
+            throw OrganizationSetupError.redirectToWebsite(profile.webview_endpoint!)
+        }
+        
         let accessToken: String?
         if let previousAccessToken {
             accessToken = previousAccessToken
-        } else if profile.oauth ?? false {
-            guard let authorizationEndpoint = profile.authorization_endpoint else {
-                throw OrganizationSetupError.missingAuthorizationEndpoint
-            }
+        } else if let type = profile.type, type == .letswifi {
+//            guard let authorizationEndpoint = profile.portal_endpoint else {
+//                throw OrganizationSetupError.missingAuthorizationEndpoint
+//            }
             guard let tokenEndpoint = profile.letswifi_endpoint else {
-                throw InstitutionSetupError.missingTokenEndpoint
+                throw OrganizationSetupError.missingTokenEndpoint
             }
-            let configuration = OIDServiceConfiguration(authorizationEndpoint: authorizationEndpoint, tokenEndpoint: tokenEndpoint)
-
+            let configuration = OIDServiceConfiguration(authorizationEndpoint: tokenEndpoint, tokenEndpoint: tokenEndpoint)
+            
             // Build authentication request
             let clientId = "app.eduroam.geteduroam"
             let scope = "eap-metadata"
@@ -518,17 +534,14 @@ await self.openURL(url)
             let codeChallange = OIDAuthorizationRequest.codeChallengeS256(forVerifier: codeVerifier)
             let state = UUID().uuidString
             let nonce = UUID().uuidString
-
+            
             let request = OIDAuthorizationRequest(configuration: configuration, clientId: clientId, clientSecret: nil, scope: scope, redirectURL: redirectURL, responseType: OIDResponseTypeCode, state: state, nonce: nonce, codeVerifier: codeVerifier, codeChallenge: codeChallange, codeChallengeMethod: OIDOAuthorizationRequestCodeChallengeMethodS256, additionalParameters: nil)
-
+            
             (accessToken, _) = try await authClient
                 .startAuth(request: request)
                 .tokens()
-        case .eapConfig:
+        } else {
             accessToken = nil
-
-        case .portal:
-            throw InstitutionSetupError.redirectToWebsite(profile.portal_endpoint!)
         }
         
         guard let eapConfigURL = profile.eapconfig_endpoint else {
@@ -585,7 +598,7 @@ await self.openURL(url)
 #elseif os(macOS)
 
         guard let mobileConfigURL = profile.mobileconfig_endpoint else {
-            throw InstitutionSetupError.missingMobileConfigEndpoint
+            throw OrganizationSetupError.missingMobileConfigEndpoint
         }
 
         do {

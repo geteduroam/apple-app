@@ -124,6 +124,9 @@
         }
       }
     },
+    "Missing information about profile." : {
+      "comment" : "missingProfileType"
+    },
     "Missing information to start authentication." : {
       "comment" : "missingAuthorizationEndpoint\n   missingTokenEndpoint",
       "localizations" : {
@@ -136,7 +139,7 @@
       }
     },
     "Missing information to start configuration." : {
-      "comment" : "missingEAPConfigEndpoint",
+      "comment" : "missingEAPConfigEndpoint\n   missingMobileConfigEndpoint",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

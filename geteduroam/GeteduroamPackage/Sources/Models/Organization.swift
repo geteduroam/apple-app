@@ -1,12 +1,7 @@
 import Foundation
 
-<<<<<<< ours:geteduroam/GeteduroamPackage/Sources/Models/Institution.swift
-public struct Institution: Codable, Identifiable, Equatable {
-    public init(id: String, name: String, country: String, profiles: [Profile], geo: [Coordinate]) {
-=======
 public struct Organization: Codable, Identifiable, Equatable {
-    public init(id: String, name: String, country: String, cat_idp: Int, profiles: [Profile], geo: [Coordinate]) {
->>>>>>> theirs:geteduroam/GeteduroamPackage/Sources/Models/Organization.swift
+    public init(id: String, name: [String: String], country: String, profiles: [Profile], geo: [Coordinate]) {
         self.id = id
         self.name = name
         self.country = country
@@ -15,13 +10,13 @@ public struct Organization: Codable, Identifiable, Equatable {
     }
     
     public let id: String
-    public let name: String?
+    public let name: [String: String]?
     public let country: String
     public let profiles: [Profile]
     public let geo: [Coordinate]
 
     public var nameOrId: String {
-        name ?? id
+        name?["any"] ?? id
     }
 
     public var hasSingleProfile: Bool {
