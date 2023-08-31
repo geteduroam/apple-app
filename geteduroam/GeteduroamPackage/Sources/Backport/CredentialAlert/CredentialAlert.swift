@@ -3,11 +3,12 @@
 import SwiftUI
 
 public struct CredentialAlert {
-    public init(title: String, isPresented: Binding<Bool>, usernamePrompt: String, username: Binding<String>, passwordPrompt: String, password: Binding<String>, cancelButtonTitle: String, cancelAction: @escaping () -> (), doneButtonTitle: String, doneAction: @escaping () -> (), message: String) {
+    public init(title: String, isPresented: Binding<Bool>, usernamePrompt: String, username: Binding<String>, onUsernameSubmit: @escaping () -> (), passwordPrompt: String, password: Binding<String>, cancelButtonTitle: String, cancelAction: @escaping () -> (), doneButtonTitle: String, doneAction: @escaping () -> (), message: String) {
         self.title = title
         self.isPresented = isPresented
         self.usernamePrompt = usernamePrompt
         self.username = username
+        self.onUsernameSubmit = onUsernameSubmit
         self.passwordPrompt = passwordPrompt
         self.password = password
         self.cancelButtonTitle = cancelButtonTitle
@@ -21,6 +22,7 @@ public struct CredentialAlert {
     let isPresented: Binding<Bool>
     let usernamePrompt: String
     let username: Binding<String>
+    let onUsernameSubmit: () -> ()
     let passwordPrompt: String
     let password: Binding<String>
     let cancelButtonTitle: String
@@ -77,6 +79,7 @@ public extension Backport where Content: View {
                 actions: {
                     TextField(alert.usernamePrompt, text: alert.username)
                         .textContentType(.username)
+                        .onSubmit(alert.onUsernameSubmit)
                     SecureField(alert.passwordPrompt, text: alert.password)
                         .textContentType(.password)
                     Button(alert.cancelButtonTitle, role: .cancel, action: alert.cancelAction)

@@ -45,6 +45,13 @@ public struct Connect: Reducer {
             }
         }
         
+        public mutating func appendRequiredUserNameSuffix() {
+            guard let requiredUserNameSuffix, let username = credentials?.username, !username.isEmpty, !username.contains("@") else {
+                return
+            }
+            credentials?.username = username + "@" + requiredUserNameSuffix
+        }
+        
         public var password: String {
             credentials?.password ?? ""
         }
@@ -172,6 +179,7 @@ public struct Connect: Reducer {
         case foundSSID(String)
         case logInButtonTapped
         case onAppear
+        case onUsernameSubmit
         case select(Profile.ID)
         case startAgainTapped
         case updatePassword(String)
@@ -450,7 +458,12 @@ public struct Connect: Reducer {
                 }
                 return .none
                 
+            case .onUsernameSubmit:
+                state.appendRequiredUserNameSuffix()
+                return .none
+                
             case let .updatePassword(password):
+                state.appendRequiredUserNameSuffix()
                 let trimmedPassword = password.trimmingCharacters(in: .whitespacesAndNewlines)
                 if let _ = state.credentials {
                     state.credentials?.password = trimmedPassword

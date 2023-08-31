@@ -134,6 +134,9 @@ public struct ConnectView_iOS: View {
                         .binding(
                             get: \.username,
                             send: Connect.Action.updateUsername),
+                    onUsernameSubmit: {
+                        viewStore.send(.onUsernameSubmit)
+                    },
                     passwordPrompt: NSLocalizedString("Password", bundle: .module, comment: ""),
                     password:  viewStore
                         .binding(
