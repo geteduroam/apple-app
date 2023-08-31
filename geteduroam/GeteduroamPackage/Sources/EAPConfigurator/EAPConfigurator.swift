@@ -1,17 +1,54 @@
 import CoreLocation
+import Dependencies
 import Foundation
 import Models
 import NetworkExtension
-import SystemConfiguration.CaptiveNetwork
 import OSLog
+import SystemConfiguration.CaptiveNetwork
+import XCTestDynamicOverlay
 
-extension Logger {
-  static var eap = Logger(subsystem: Bundle.main.bundleIdentifier ?? "EAPConfigurator", category: "eap")
+public struct EAPClient {
+    public var configure: (EAPIdentityProvider, Credentials?, Bool) async throws -> [String]
 }
 
-public class EAPConfigurator {
-    public init() { }
+extension DependencyValues {
+    public var eapClient: EAPClient {
+        get { self[EAPClientKey.self] }
+        set { self[EAPClientKey.self] = newValue }
+    }
     
+    public enum EAPClientKey: TestDependencyKey {
+        public static var testValue = EAPClient.mock
+    }
+}
+
+extension EAPClient {
+    static var mock: Self = .init(
+        configure: unimplemented()
+    )
+}
+
+extension DependencyValues.EAPClientKey: DependencyKey {
+    public static var liveValue = EAPClient.live
+}
+
+extension EAPClient {
+    static var live: Self = .init(
+        configure: {
+            #if os(iOS)
+            try await EAPConfigurator().configure(identityProvider: $0, credentials: $1, dryRun: $2)
+            #else
+            fatalError("EAPConfigurator not available")
+            #endif
+        }
+    )
+}
+
+extension Logger {
+    static var eap = Logger(subsystem: Bundle.main.bundleIdentifier ?? "EAPConfigurator", category: "eap")
+}
+
+class EAPConfigurator {
 #if os(iOS)
     // MARK: - Configuring Identity Provider
     
@@ -19,11 +56,13 @@ public class EAPConfigurator {
     /// - Parameters:
     ///   - identityProvider: The Identity Provider
     ///   - credentials: Credentials entered by user
+    ///   - dryRun: If true only checks if information is complete without actually applying the network settings
     /// - Returns: Expected SSIDs for connection
-    public func configure(identityProvider: EAPIdentityProvider, credentials: Credentials? = nil) async throws -> [String] {
+    func configure(identityProvider: EAPIdentityProvider, credentials: Credentials? = nil, dryRun: Bool) async throws -> [String] {
         // At this point, we're not certain this configuration can work,
         // but we can't do this any step later, because createNetworkConfigurations will import things to the keychain.
-        // TODO: only remove keychain items that match these networks
+        let name = identityProvider.providerInfo?.displayName?.localized() ?? "unnamed identity provider"
+        Logger.eap.info("Started configuring for \(name) \(dryRun ? "with dry run" : "")")
         let ssids = identityProvider
             .credentialApplicability
             .IEEE80211
@@ -31,14 +70,27 @@ public class EAPConfigurator {
                 $0.ssid
             }
         let domain = identityProvider.id
-        removeNetwork(ssids: ssids, domains: [domain])
+        if !dryRun {
+            // TODO: only remove keychain items that match these networks
+            Logger.eap.info("Removing network(s) \(ssids)")
+            removeNetwork(ssids: ssids, domains: [domain])
+        }
         
+        Logger.eap.info("Creating network configurations")
         let configurations = try createNetworkConfigurations(identityProvider: identityProvider, credentials: credentials)
         
-        guard let last = configurations.last else {
+        guard configurations.isEmpty == false else {
             throw EAPConfiguratorError.noConfigurations
         }
-        try await NEHotspotConfigurationManager.shared.apply(last)
+        
+        if !dryRun {
+            Logger.eap.info("Applying network configurations")
+            for configuration in configurations {
+                try await NEHotspotConfigurationManager.shared.apply(configuration)
+            }
+        }
+        
+        Logger.eap.info("Finished configuring for \(name) \(dryRun ? "with dry run" : "")")
         return ssids
     }
     
@@ -532,30 +584,6 @@ public class EAPConfigurator {
         case noNetworksFound
         case associated
         case missing
-    }
-    
-    
-    func fetchNetworkInfo() throws -> [NetworkInfo] {
-        guard let interfaces: NSArray = CNCopySupportedInterfaces() else {
-            throw EAPConfiguratorError.cannotCopySupportedInterfaces
-        }
-        
-        return interfaces.map { interface in
-            let interfaceName = interface as! String
-            let success: Bool
-            let ssid: String?
-            let bssid: String?
-            if let dict = CNCopyCurrentNetworkInfo(interfaceName as CFString) as NSDictionary? {
-                success = true
-                ssid = dict[kCNNetworkInfoKeySSID as String] as? String
-                bssid = dict[kCNNetworkInfoKeyBSSID as String] as? String
-            } else {
-                success = false
-                ssid = nil
-                bssid = nil
-            }
-            return NetworkInfo(interface: interfaceName, success: success, ssid: ssid, bssid: bssid)
-        }
     }
     
     /**

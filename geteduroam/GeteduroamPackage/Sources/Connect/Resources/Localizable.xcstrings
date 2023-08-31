@@ -1,0 +1,276 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Agree" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accepteer"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annuleer"
+          }
+        }
+      }
+    },
+    "Configured" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingesteld"
+          }
+        }
+      }
+    },
+    "Configured, but not connected" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingesteld, maar niet verbonden"
+          }
+        }
+      }
+    },
+    "Connect" : {
+
+    },
+    "CONNECT" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VERBIND"
+          }
+        }
+      }
+    },
+    "Connected" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbonden"
+          }
+        }
+      }
+    },
+    "Continue in System Preferences" : {
+
+    },
+    "Continue in System Settings" : {
+
+    },
+    "Disagree" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weiger"
+          }
+        }
+      }
+    },
+    "Double-click to review the profile and then press the \"Install…\" button to setup the network on your computer." : {
+
+    },
+    "Failed to connect" : {
+      "comment" : "Failed to connect",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbinding maken mislukt"
+          }
+        }
+      }
+    },
+    "Helpdesk" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Helpdesk"
+          }
+        }
+      }
+    },
+    "Log In" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Log in"
+          }
+        }
+      }
+    },
+    "Login Required" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inloggen vereist"
+          }
+        }
+      }
+    },
+    "Missing information to start authentication." : {
+      "comment" : "missingAuthorizationEndpoint\n   missingTokenEndpoint",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informatie ontbreekt om authenticatie te kunnen starten."
+          }
+        }
+      }
+    },
+    "Missing information to start configuration." : {
+      "comment" : "missingEAPConfigEndpoint",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informatie ontbreekt om configuratie te kunnen starten."
+          }
+        }
+      }
+    },
+    "No valid profile found." : {
+      "comment" : "mobileConfigFailed",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geen geldig profiel gevonden."
+          }
+        }
+      }
+    },
+    "No valid provider found." : {
+      "comment" : "noValidProviderFound",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geen geldige provider gevonden."
+          }
+        }
+      }
+    },
+    "OK" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
+    "Password" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wachtwoord"
+          }
+        }
+      }
+    },
+    "Please enter your username and password." : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voer gebruikersnaam en wachtwoord in."
+          }
+        }
+      }
+    },
+    "Profiles" : {
+      "comment" : "Profiles",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profielen"
+          }
+        }
+      }
+    },
+    "Review the profile and then press the \"Install…\" button to setup the network on your computer." : {
+
+    },
+    "Terms of Use" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gebruiksvoorwaarden"
+          }
+        }
+      }
+    },
+    "The configuration process was cancelled." : {
+      "comment" : "userCancelled",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Het configuratieproces is geannuleerd."
+          }
+        }
+      }
+    },
+    "Username" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gebruikersnaam"
+          }
+        }
+      }
+    },
+    "You must agree to the terms of use before you can use this network." : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je moet de gebruiksvoorwaarden accepteren voordat je gebruik kan maken van dit netwerk."
+          }
+        }
+      }
+    },
+    "You must agree to the terms of use." : {
+      "comment" : "missingTermsAcceptance",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je moet de gebruiksvoorwaarden accepteren."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

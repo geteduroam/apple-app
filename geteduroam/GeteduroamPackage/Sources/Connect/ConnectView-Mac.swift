@@ -4,6 +4,7 @@ import ComposableArchitecture
 import Models
 import SwiftUI
 
+#if os(macOS)
 public struct ConnectView_Mac: View {
     public init(store: StoreOf<Connect>) {
         self.store = store
@@ -18,17 +19,37 @@ public struct ConnectView_Mac: View {
     public var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             VStack(alignment: .leading) {
+                if #available(macOS 13.0, *) {
+                    // On macOS 13 we push instead of present a sheet and therefor these controls aren't needed
+                } else {
+                    HStack(alignment: .firstTextBaseline) {
+                        VStack(alignment: .leading) {
+                            Text(viewStore.organization.name)
+                                .font(theme.organizationNameFont)
+                            Text(viewStore.organization.country)
+                                .font(theme.organizationCountryFont)
+                        }
+                        Spacer()
+                        Button(action: {
+                            viewStore.send(.dismissTapped)
+                        }, label: {
+                            Image(systemName: "xmark")
+                        })
+                        .buttonStyle(.plain)
+                    }
+                    Spacer()
+                }
+
                 if let providerInfo = viewStore.providerInfo {
                     HelpdeskView(providerInfo: providerInfo)
-                    //                        .padding(20)
                     Spacer()
                 }
                 
-                if viewStore.isConnected == false {
+                if viewStore.isConfigured == false {
                     List {
                         Section {
                             let selectedProfile = viewStore.selectedProfile
-                            ForEach(viewStore.institution.profiles) { profile in
+                            ForEach(viewStore.organization.profiles) { profile in
                                 Button {
                                     viewStore.send(.select(profile.id))
                                 } label: {
@@ -50,16 +71,25 @@ public struct ConnectView_Mac: View {
                 
                 Spacer()
                 
-                if viewStore.isConnected {
+                if viewStore.isConfigured {
                   HStack(alignment: .top) {
                     Image(systemName: "doc.badge.gearshape.fill")
                     VStack(alignment: .leading) {
-                      Text("Continue in System Settings")
-                        .font(theme.connectButtonFont)
-                      Text("""
-                    Double-click to review the profile and then press the "Install…" button to setup the network on your computer.
-                    """, bundle: .module)
-                      .font(theme.connectedFont)
+                        if #available(macOS 13.0, *) {
+                            Text("Continue in System Settings")
+                                .font(theme.connectButtonFont)
+                            Text("""
+                                Double-click to review the profile and then press the "Install…" button to setup the network on your computer.
+                                """, bundle: .module)
+                                .font(theme.connectedFont)
+                        } else {
+                            Text("Continue in System Preferences")
+                                .font(theme.connectButtonFont)
+                            Text("""
+                                Review the profile and then press the "Install…" button to setup the network on your computer.
+                                """, bundle: .module)
+                                .font(theme.connectedFont)
+                        }
                     }
                   }
                   .foregroundColor(.black)
@@ -83,7 +113,11 @@ public struct ConnectView_Mac: View {
                 }
             }
             .padding()
+<<<<<<< ours
             .navigationTitle(viewStore.institution.nameOrId)
+=======
+            .navigationTitle(viewStore.organization.name)
+>>>>>>> theirs
             .onAppear {
                 viewStore.send(.onAppear)
             }
@@ -101,6 +135,7 @@ public struct ConnectView_Mac: View {
         }
     }
 }
+<<<<<<< ours
 
 struct ConnectView_Mac_Previews: PreviewProvider {
     static var previews: some View {
@@ -124,3 +159,6 @@ struct ConnectView_Mac_Previews: PreviewProvider {
         .environmentObject(Theme.demo)
     }
 }
+=======
+#endif
+>>>>>>> theirs

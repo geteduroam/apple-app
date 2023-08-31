@@ -4,14 +4,14 @@ import Models
 import OSLog
 
 public struct CacheClient {
-    public var cacheInstitutions: (InstitutionsResponse) -> Void
-    public var restoreInstitutions: () throws -> InstitutionsResponse
+    public var cacheOrganizations: (OrganizationsResponse) -> Void
+    public var restoreOrganizations: () throws -> OrganizationsResponse
     
-    static func cacheURLForInstitutions() throws -> URL {
+    static func cacheURLForOrganizations() throws -> URL {
         guard let directoryURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).last else {
             throw CacheClientError.noDocumentsFolder
         }
-        let cacheURL = directoryURL.appendingPathComponent("institutions.json")
+        let cacheURL = directoryURL.appendingPathComponent("discovery.json")
         return cacheURL
     }
 }
@@ -29,12 +29,12 @@ extension DependencyValues {
 
 extension CacheClient {
     static var mock: Self = .init(
-        cacheInstitutions: { _ in
+        cacheOrganizations: { _ in
             print("Should now create cache")
         },
-        restoreInstitutions: {
+        restoreOrganizations: {
             print("Should now restore cache")
-            return [.init(id: "restored", name: "Restored Institution from Cache", country: "NL", profiles: [], geo: [])]
+            return OrganizationsResponse(instances: [.init(id: "restored", name: "Restored Organization from Cache", country: "NL", cat_idp: 0, profiles: [], geo: [])])
         })
 }
 
@@ -48,31 +48,31 @@ extension Logger {
 
 extension CacheClient {
     static var live: Self = .init(
-        cacheInstitutions: { institutions in
-            guard let data = try? JSONEncoder().encode(institutions), let cacheURL = try? Self.cacheURLForInstitutions() else {
-                Logger.cache.error("Failed to cache institutions")
+        cacheOrganizations: { organizations in
+            guard let data = try? JSONEncoder().encode(organizations), let cacheURL = try? Self.cacheURLForOrganizations() else {
+                Logger.cache.error("Failed to cache organizations")
                 return
             }
             try? data.write(to: cacheURL)
-            Logger.cache.info("Cached institutions to \(cacheURL)")
+            Logger.cache.info("Cached organizations to \(cacheURL)")
         },
-        restoreInstitutions: {
+        restoreOrganizations: {
             do {
-                let cacheURL = try Self.cacheURLForInstitutions()
+                let cacheURL = try Self.cacheURLForOrganizations()
                 let data = try Data(contentsOf: cacheURL)
-                let institutions = try JSONDecoder().decode(InstitutionsResponse.self, from: data)
-                Logger.cache.info("Restored institutions from \(cacheURL)")
-                return institutions
+                let organizations = try JSONDecoder().decode(OrganizationsResponse.self, from: data)
+                Logger.cache.info("Restored organizations from \(cacheURL)")
+                return organizations
             } catch {
-                Logger.cache.warning("No institutions cache found, using bundled cache")
-                guard let cacheURL = Bundle.main.url(forResource: "institutions", withExtension: "json") else {
-                    Logger.cache.error("Failed to restore institutions from bundled cache")
+                Logger.cache.warning("No organizations cache found, using bundled cache")
+                guard let cacheURL = Bundle.main.url(forResource: "discovery", withExtension: "json") else {
+                    Logger.cache.error("Failed to restore organizations from bundled cache")
                     throw CacheClientError.noCacheInBundle
                 }
                 let data = try Data(contentsOf: cacheURL)
-                Logger.cache.info("Restored institutions from \(cacheURL)")
-                let institutions = try JSONDecoder().decode(InstitutionsResponse.self, from: data)
-                return institutions
+                Logger.cache.info("Restored organizations from \(cacheURL)")
+                let organizations = try JSONDecoder().decode(OrganizationsResponse.self, from: data)
+                return organizations
             }
         })
 }

@@ -1,3 +1,4 @@
+#if os(iOS)
 import AuthClient
 import Backport
 import ComposableArchitecture
@@ -20,10 +21,10 @@ public struct ConnectView_iOS: View {
             VStack(alignment: .leading) {
                 HStack(alignment: .firstTextBaseline) {
                     VStack(alignment: .leading) {
-                        Text(viewStore.institution.nameOrId)
-                            .font(theme.institutionNameFont)
-                        Text(viewStore.institution.country)
-                            .font(theme.institutionCountryFont)
+                        Text(viewStore.organization.name)
+                            .font(theme.organizationNameFont)
+                        Text(viewStore.organization.country)
+                            .font(theme.organizationCountryFont)
                     }
                     Spacer()
                     Button(action: {
@@ -35,11 +36,11 @@ public struct ConnectView_iOS: View {
                 }
                 .padding(20)
                 
-                if viewStore.isConnected == false {
+                if viewStore.isConfigured == false {
                     List {
                         Section {
                             let selectedProfile = viewStore.selectedProfile
-                            ForEach(viewStore.institution.profiles) { profile in
+                            ForEach(viewStore.organization.profiles) { profile in
                                 Button {
                                     viewStore.send(.select(profile.id))
                                 } label: {
@@ -68,11 +69,25 @@ public struct ConnectView_iOS: View {
                 HStack {
                     Spacer()
                     VStack(alignment: .center) {
-                        if viewStore.isConnected {
+                        if viewStore.isConfiguredAndConnected {
                             Label(title: {
                                 Text("Connected", bundle: .module)
                             }, icon: {
-                                Image(systemName: "checkmark")
+                                Image(systemName: "checkmark.circle")
+                            })
+                            .font(theme.connectedFont)
+                        } else if viewStore.isConfiguredButDisconnected {
+                            Label(title: {
+                                Text("Configured, but not connected", bundle: .module)
+                            }, icon: {
+                                Image(systemName: "checkmark.circle.trianglebadge.exclamationmark")
+                            })
+                            .font(theme.connectedFont)
+                        } else if viewStore.isConfiguredButConnectionUnknown {
+                            Label(title: {
+                                Text("Configured", bundle: .module)
+                            }, icon: {
+                                Image(systemName: "checkmark.circle")
                             })
                             .font(theme.connectedFont)
                         } else {
@@ -106,28 +121,33 @@ public struct ConnectView_iOS: View {
                 state: /Connect.Destination.State.alert,
                 action: Connect.Destination.Action.alert
             )
-            .alert("Login Required",
-                   isPresented: viewStore.binding(
-                    get: \.promptForCredentials,
-                    send: Connect.Action.dismissPromptForCredentials),
-                   actions: {
-                TextField(viewStore.usernamePrompt, text: viewStore.binding(
-                    get: \.username,
-                    send: Connect.Action.updateUsername))
-                .textContentType(.username)
-                SecureField("Password", text: viewStore.binding(
-                    get: \.password,
-                    send: Connect.Action.updatePassword))
-                .textContentType(.password)
-                Button("Cancel", role: .cancel, action: {
-                    viewStore.send(.dismissPromptForCredentials)
-                })
-                Button("Log In", action: {
-                    viewStore.send(.logInButtonTapped)
-                })
-            }, message: {
-                Text("Please enter your username and password.")
-            })
+            .backport
+            .credentialAlert(
+                CredentialAlert(
+                    title: NSLocalizedString("Login Required", bundle: .module, comment: ""),
+                    isPresented: viewStore
+                        .binding(
+                            get: \.promptForCredentials,
+                            send: Connect.Action.dismissPromptForCredentials),
+                    usernamePrompt: viewStore.usernamePrompt,
+                    username: viewStore
+                        .binding(
+                            get: \.username,
+                            send: Connect.Action.updateUsername),
+                    passwordPrompt: NSLocalizedString("Password", bundle: .module, comment: ""),
+                    password:  viewStore
+                        .binding(
+                            get: \.password,
+                            send: Connect.Action.updatePassword),
+                    cancelButtonTitle: NSLocalizedString("Cancel", bundle: .module, comment: ""),
+                    cancelAction: {
+                        viewStore.send(.dismissPromptForCredentials)
+                    },
+                    doneButtonTitle: NSLocalizedString("Log In", bundle: .module, comment: ""),
+                    doneAction: {
+                        viewStore.send(.logInButtonTapped)
+                    },
+                    message: NSLocalizedString("Please enter your username and password.", bundle: .module, comment: "")))
         }
     }
 }
@@ -137,12 +157,12 @@ struct ConnectView_Previews: PreviewProvider {
     static var previews: some View {
         ConnectView_iOS(store: .init(
             initialState: .init(
-                institution: .init(
+                organization: .init(
                     id: "1",
-                    name: "My Institution",
+                    name: "My Organization",
                     country: "NL",
                     profiles: [
-                        .init(
+                        Profile(
                             id: "2",
                             name: "My Profile",
                             default: true,
@@ -150,7 +170,7 @@ struct ConnectView_Previews: PreviewProvider {
                             oauth: false,
                             authorization_endpoint: nil,
                             token_endpoint: nil),
-                        .init(
+                        Profile(
                             id: "3",
                             name: "Other Profile",
                             default: false,
@@ -159,9 +179,10 @@ struct ConnectView_Previews: PreviewProvider {
                             authorization_endpoint: nil,
                             token_endpoint: nil)
                     ],
-                    geo: [.init(lat: 0, lon: 0)])),
-            reducer: Connect()))
+                    geo: [Coordinate(lat: 0, lon: 0)])),
+            reducer: { Connect() }))
         .environmentObject(Theme.demo)
     }
 }
+#endif
 #endif

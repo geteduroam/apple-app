@@ -2,6 +2,15 @@ import Foundation
 import XMLCoder
 
 public struct ProviderInfo: Codable, Equatable {
+    public init(displayName: LocalizedString? = nil, description: LocalizedString? = nil, providerLocations: [Location], providerLogo: LogoData? = nil, termsOfUse: LocalizedString? = nil, helpdesk: HelpdeskDetails? = nil) {
+        self.displayName = displayName
+        self.description = description
+        self.providerLocations = providerLocations
+        self.providerLogo = providerLogo
+        self.termsOfUse = termsOfUse
+        self.helpdesk = helpdesk
+    }
+    
     public let displayName: LocalizedString?
     public let description: LocalizedString?
     public let providerLocations: [Location]

@@ -26,7 +26,7 @@ public struct MainView: View {
         let loadingState: Main.State.LoadingState
         let isSearching: Bool
         let searchQuery: String
-        let searchResults: IdentifiedArrayOf<Institution>
+        let searchResults: IdentifiedArrayOf<Organization>
     }
     
     public var body: some View {
@@ -46,7 +46,7 @@ public struct MainView: View {
                             HStack {
                                 Image(systemName: "magnifyingglass")
                                 TextField(
-                                    NSLocalizedString("Search for your institution", bundle: .module, comment: ""),
+                                    NSLocalizedString("Search for your organization", bundle: .module, comment: "Search prompt"),
                                     text: viewStore.binding(get: \.searchQuery, send: Main.Action.searchQueryChanged))
                                 .font(theme.searchFont)
                                 .focused($focusedField, equals: .search)
@@ -64,10 +64,38 @@ public struct MainView: View {
                         .padding(.top, 20)
                     }
 #endif
+                    
+                    if #available(macOS 13.0, *) {
+                       // Nothing, using .searchable
+                    } else {
+                        if viewStore.loadingState == .success {
+                            VStack(spacing: 8) {
+                                HStack {
+                                    Image(systemName: "magnifyingglass")
+                                    TextField(
+                                        NSLocalizedString("Search for your organization", bundle: .module, comment: "Search prompt"),
+                                        text: viewStore.binding(get: \.searchQuery, send: Main.Action.searchQueryChanged))
+                                    .font(theme.searchFont)
+                                    .focused($focusedField, equals: .search)
+                                    .backport
+                                    .textInputAutocapitalization(.never)
+                                    .disableAutocorrection(true)
+                                }
+                                Rectangle()
+                                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0.33, maxHeight: 0.33)
+                                    .foregroundColor(Color("ListSeparator"))
+                                    .padding(.trailing, -20)
+                                
+                            }
+                            .padding(.horizontal, 20)
+                            .padding(.top, 20)
+                        }
+                    }
+                    
                     if viewStore.loadingState == .failure {
                         HStack {
                             Image(systemName: "exclamationmark.triangle")
-                            Text("Failed to load institutions", bundle: .module)
+                            Text("Failed to load organizations", bundle: .module)
                                 .font(theme.errorFont)
                             Button {
                                 viewStore.send(.tryAgainTapped)
@@ -87,17 +115,17 @@ public struct MainView: View {
                                     .listRowSeparatorTint(Color.clear)
                                     .listRowBackground(Color("Background"))
                             } else if viewStore.searchResults.isEmpty {
-                                Text("")
+                                Text(verbatim: "")
                                     .accessibility(hidden: true)
                                     .backport
                                     .listRowSeparatorTint(Color.clear)
                                     .listRowBackground(Color.clear)
                             } else {
-                                ForEach(viewStore.searchResults) { institution in
+                                ForEach(viewStore.searchResults) { organization in
                                     Button {
-                                        viewStore.send(.select(institution))
+                                        viewStore.send(.select(organization))
                                     } label: {
-                                        InstitutionRowView(institution: institution)
+                                        OrganizationRowView(organization: organization)
                                     }
                                     .buttonStyle(.plain)
                                     .backport
@@ -111,7 +139,7 @@ public struct MainView: View {
                         .scrollContentBackground(.hidden)
                     }
                 }
-                .searchableMacOnly(text: viewStore.binding(get: \.searchQuery, send: Main.Action.searchQueryChanged), prompt: NSLocalizedString("Search for your institution", bundle: .module, comment: ""))
+                .searchableMacOnly(text: viewStore.binding(get: \.searchQuery, send: Main.Action.searchQueryChanged), prompt: NSLocalizedString("Search for your organization", bundle: .module, comment: "Search prompt"))
                 .backport
                 .readableContentWidthPadding()
                 .background {
@@ -194,9 +222,7 @@ struct NavigationWrapped<Content>: View where Content: View {
                 content()
             }
         } else {
-            NavigationView {
-                content()
-            }
+            content()
         }
 #endif
     }
@@ -205,7 +231,7 @@ struct NavigationWrapped<Content>: View where Content: View {
 #if DEBUG
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(store: .init(initialState: .init(), reducer: Main()))
+        MainView(store: .init(initialState: .init(), reducer: { Main() }))
     }
 }
 #endif

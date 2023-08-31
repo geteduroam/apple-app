@@ -34,10 +34,10 @@
       "color" : {
         "color-space" : "display-p3",
         "components" : {
-          "alpha" : "0.000",
-          "blue" : "0.000",
-          "green" : "0.000",
-          "red" : "0.000"
+          "alpha" : "1.000",
+          "blue" : "0.965",
+          "green" : "0.965",
+          "red" : "0.965"
         }
       },
       "idiom" : "mac"
@@ -52,10 +52,10 @@
       "color" : {
         "color-space" : "display-p3",
         "components" : {
-          "alpha" : "0.000",
-          "blue" : "0.000",
-          "green" : "0.000",
-          "red" : "0.000"
+          "alpha" : "1.000",
+          "blue" : "0.157",
+          "green" : "0.157",
+          "red" : "0.157"
         }
       },
       "idiom" : "mac"

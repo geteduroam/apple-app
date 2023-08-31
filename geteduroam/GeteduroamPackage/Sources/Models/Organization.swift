@@ -1,7 +1,12 @@
 import Foundation
 
+<<<<<<< ours:geteduroam/GeteduroamPackage/Sources/Models/Institution.swift
 public struct Institution: Codable, Identifiable, Equatable {
     public init(id: String, name: String, country: String, profiles: [Profile], geo: [Coordinate]) {
+=======
+public struct Organization: Codable, Identifiable, Equatable {
+    public init(id: String, name: String, country: String, cat_idp: Int, profiles: [Profile], geo: [Coordinate]) {
+>>>>>>> theirs:geteduroam/GeteduroamPackage/Sources/Models/Organization.swift
         self.id = id
         self.name = name
         self.country = country

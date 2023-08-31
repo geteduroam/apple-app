@@ -15,9 +15,9 @@ public struct Main: Reducer {
     @Dependency(\.date.now) var now
     
     public struct State: Equatable {
-        public init(searchQuery: String = "", institutions: IdentifiedArrayOf<Institution> = .init(uniqueElements: []), loadingState: LoadingState = .initial, destination: Destination.State? = nil) {
+        public init(searchQuery: String = "", organizations: IdentifiedArrayOf<Organization> = .init(uniqueElements: []), loadingState: LoadingState = .initial, destination: Destination.State? = nil) {
             self.searchQuery = searchQuery
-            self.institutions = institutions
+            self.organizations = organizations
             self.loadingState = loadingState
             self.searchResults = .init(uniqueElements: [])
             self.destination = destination
@@ -31,23 +31,23 @@ public struct Main: Reducer {
         }
         
         var loadingState: LoadingState
-        var institutions: IdentifiedArrayOf<Institution>
+        var organizations: IdentifiedArrayOf<Organization>
         var isSearching: Bool = false
         var searchQuery: String
-        var searchResults: IdentifiedArrayOf<Institution>
+        var searchResults: IdentifiedArrayOf<Organization>
         
         @PresentationState public var destination: Destination.State?
     }
     
     public enum Action: Equatable {
         case destination(PresentationAction<Destination.Action>)
-        case discoveryResponse(TaskResult<InstitutionsResponse>)
+        case discoveryResponse(TaskResult<OrganizationsResponse>)
         case onAppear
-        case renewActionInReminderTapped(institutionId: String, profileId: String)
+        case renewActionInReminderTapped(organizationId: String, profileId: String)
         case searchQueryChangeDebounced
         case searchQueryChanged(String)
-        case searchResponse(IdentifiedArrayOf<Institution>)
-        case select(Institution)
+        case searchResponse(IdentifiedArrayOf<Organization>)
+        case select(Organization)
         case tryAgainTapped
     }
     
@@ -75,11 +75,11 @@ public struct Main: Reducer {
 
     private enum CancelID { case search }
 
-    func search(query: String, institutions: IdentifiedArrayOf<Institution>) async -> IdentifiedArrayOf<Institution> {
+    func search(query: String, organizations: IdentifiedArrayOf<Organization>) async -> IdentifiedArrayOf<Organization> {
         guard query.isEmpty == false else {
             return .init(uniqueElements: [])
         }
-        return .init(uniqueElements: institutions
+        return .init(uniqueElements: organizations
             // Apple recommends this, but that seems to be diacritic sensitive
             // .filter({ $0.name.localizedCaseInsensitiveContains(query) })
             .filter({ $0.matchWords.contains(where: { $0.range(of: query, options: [.caseInsensitive, .diacriticInsensitive, .anchored], locale: Locale.current) != nil } )})
@@ -95,39 +95,43 @@ public struct Main: Reducer {
                     .run { send in
                         for await event in notificationClient.delegate() {
                             switch event {
-                            case .renewActionTriggered(institutionId: let institutionId, profileId: let profileId):
-                                await send(.renewActionInReminderTapped(institutionId: institutionId, profileId: profileId))
+                            case .renewActionTriggered(organizationId: let organizationId, profileId: let profileId):
+                                await send(.renewActionInReminderTapped(organizationId: organizationId, profileId: profileId))
                                 
-                            case let .remindMeLaterActionTriggered(validUntil, institutionId, profileId):
+                            case let .remindMeLaterActionTriggered(validUntil, organizationId, profileId):
                                 guard validUntil.timeIntervalSince(now) > 0 else {
                                     return
                                 }
-                                try await notificationClient.scheduleRenewReminder(validUntil, institutionId, profileId)
+                                try await notificationClient.scheduleRenewReminder(validUntil, organizationId, profileId)
                             }
                         }
                     },
-                    .task {
-                        await .discoveryResponse(TaskResult {
+                    .run { send in
+                        await send(.discoveryResponse(TaskResult {
                             do {
-                                let (value, _) = try await discoveryClient.decodedResponse(for: .discover, as: InstitutionsResponse.self)
-                                cacheClient.cacheInstitutions(value)
+                                let (value, _) = try await discoveryClient.decodedResponse(for: .discover, as: OrganizationsResponse.self)
+                                cacheClient.cacheOrganizations(value)
                                 return value
                             } catch {
-                                let restoredValue = try cacheClient.restoreInstitutions()
+                                let restoredValue = try cacheClient.restoreOrganizations()
                                 return restoredValue
                             }
-                        })
+                        }))
                     })
 
             case let .discoveryResponse(.success(response)):
                 state.loadingState = .success
+<<<<<<< ours
                 state.institutions = .init(uniqueElements: response)
+=======
+                state.organizations = .init(uniqueElements: response.instances)
+>>>>>>> theirs
                 return .none
                 
             case let .discoveryResponse(.failure(error)):
                 state.loadingState = .failure
                 let alert = AlertState<Destination.AlertAction>(title: {
-                    TextState(NSLocalizedString("Failed to load institutions", bundle: .module, comment: ""))
+                    TextState(NSLocalizedString("Failed to load organizations", bundle: .module, comment: "Message when organizations can't be loaded and the fallback fails too"))
                 }, actions: {
                     ButtonState(role: .cancel, action: .send(.okButtonTapped)) {
                         TextState(NSLocalizedString("OK", bundle: .module, comment: ""))
@@ -138,18 +142,18 @@ public struct Main: Reducer {
                 state.destination = .alert(alert)
                 return .none
                 
-            case let .renewActionInReminderTapped(institutionId, profile):
-                if let institution = state.institutions[id: institutionId] {
-                    state.destination = .connect(.init(institution: institution, selectedProfileId: profile, autoConnectOnAppear: true))
+            case let .renewActionInReminderTapped(organizationId, profile):
+                if let organization = state.organizations[id: organizationId] {
+                    state.destination = .connect(.init(organization: organization, selectedProfileId: profile, autoConnectOnAppear: true))
                 } else {
                     let alert = AlertState<Destination.AlertAction>(title: {
-                        TextState(NSLocalizedString("Unknown institution", bundle: .module, comment: ""))
+                        TextState(NSLocalizedString("Unknown organization", bundle: .module, comment: "Title when user asked to renew but the organization could not be found"))
                     }, actions: {
                         ButtonState(role: .cancel, action: .send(.okButtonTapped)) {
                             TextState(NSLocalizedString("OK", bundle: .module, comment: ""))
                         }
                     }, message: {
-                        TextState(NSLocalizedString("The institution is no longer listed.", bundle: .module, comment: ""))
+                        TextState(NSLocalizedString("The organization is no longer listed.", bundle: .module, comment: "Message when user asked to renew but the organization could not be found"))
                     })
                     state.destination = .alert(alert)
                 }
@@ -172,9 +176,9 @@ public struct Main: Reducer {
                 guard !state.searchQuery.isEmpty else {
                     return .none
                 }
-                return .task { [query = state.searchQuery, institutions = state.institutions] in
-                    let searchResults = await self.search(query: query, institutions: institutions)
-                    return .searchResponse(searchResults)
+                return .run { [query = state.searchQuery, organizations = state.organizations] send in
+                    let searchResults = await self.search(query: query, organizations: organizations)
+                    await send(.searchResponse(searchResults))
                 }
                 .cancellable(id: CancelID.search)
                 
@@ -183,8 +187,8 @@ public struct Main: Reducer {
                 state.isSearching = false
                 return .none
                 
-            case let .select(institution):
-                state.destination = .connect(.init(institution: institution))
+            case let .select(organization):
+                state.destination = .connect(.init(organization: organization))
                 return .none
                 
             case .destination:

@@ -2,7 +2,7 @@
 
 ## What is it?
 
-This is the [geteduroam](https://geteduroam.app/) app for iPhone, iPad and Mac. Its purpose is to help people configure their devices for use with the [eduroam](https://eduroam.org) network. The eduroam network allows them use the network at their institution of education or when visiting other participating institutions.
+This is the [geteduroam](https://geteduroam.app/) app for iPhone, iPad and Mac. Its purpose is to help people configure their devices for use with the [eduroam](https://eduroam.org) network. The eduroam network allows them use the network at their organization of education or when visiting other participating organizations.
 
 This is the code for version 2.0 and newer.
 
@@ -34,7 +34,7 @@ The modules are all defined in the GeteduroamPackage package.
 
 ### AuthClient
 
-Minimal wrapper around the [AppAuth](https://github.com/openid/AppAuth-iOS.git) library for authenticating with institutions that require OAuth for authentication.
+Minimal wrapper around the [AppAuth](https://github.com/openid/AppAuth-iOS.git) library for authenticating with organizations that require OAuth for authentication.
 
 ### Backport
 
@@ -42,7 +42,7 @@ Sometimes features in SwiftUI aren't available on all supported os versions. Thi
 
 ### CacheClient
 
-Stores the responses from the discovery client to disk and helps to ensure there is always a list of institutions to show.
+Stores the responses from the discovery client to disk and helps to ensure there is always a list of organizations to show.
 
 ### Connect
 
@@ -50,7 +50,7 @@ The detail screen with profile selection, helpdesk info and connect functionalit
 
 ### DiscoveryClient
 
-Retreives the list of institutions from the backend.
+Retreives the list of organizations from the backend.
 
 ### EAPConfigurator
 
