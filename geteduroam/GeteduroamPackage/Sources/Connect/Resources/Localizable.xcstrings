@@ -64,10 +64,16 @@
         }
       }
     },
+    "Continue" : {
+
+    },
     "Continue in System Preferences" : {
 
     },
     "Continue in System Settings" : {
+
+    },
+    "Continue to Website" : {
 
     },
     "Disagree" : {
@@ -252,6 +258,9 @@
           }
         }
       }
+    },
+    "You are redirected to a website.\n\n(url)" : {
+
     },
     "You must agree to the terms of use before you can use this network." : {
       "localizations" : {

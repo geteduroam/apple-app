@@ -121,6 +121,11 @@ public struct ConnectView_iOS: View {
                 state: /Connect.Destination.State.alert,
                 action: Connect.Destination.Action.alert
             )
+            .alert(
+                store: store.scope(state: \.$destination, action: Connect.Action.destination),
+                state: /Connect.Destination.State.websiteAlert,
+                action: Connect.Destination.Action.websiteAlert
+            )
             .backport
             .credentialAlert(
                 CredentialAlert(
