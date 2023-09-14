@@ -8,7 +8,10 @@ import XCTest
 @MainActor
 final class MainTests: XCTestCase {
 
-    let demoInstance = Organization(id: "cat_7016", name: "Môreelsepark Cöllege", country: "NL", cat_idp: 7016, profiles: [Profile(id: "letswifi_cat_7830", name: "Mijn Moreelsepark", default: true, eapconfig_endpoint: URL(string: "https://moreelsepark.geteduroam.nl/api/eap-config/")!, oauth: true, authorization_endpoint: URL(string: "https://moreelsepark.geteduroam.nl/oauth/authorize/")!, token_endpoint: URL(string: "https://moreelsepark.geteduroam.nl/oauth/token/")!)], geo: [Coordinate(lat: 52.088999999999999, lon: 5.1130000000000004)])
+    static let eapConfigEndpoint = URL(string: "https://www.example.com/eapconfig")!
+    static let letsWifiEndpoint = URL(string: "https://www.example.com/letswifi")!
+    
+    let demoInstance = Organization(id: "cat_7016", name: ["any": "Môreelsepark Cöllege"], country: "NL", profiles: [Profile(id: "letswifi_cat_7830", name: ["any": "Mijn Moreelsepark"], default: true, letsWiFiEndpoint: MainTests.letsWifiEndpoint, type: .letswifi)], geo: [Coordinate(lat: 52.088999999999999, lon: 5.1130000000000004)])
 
     func testLoading() async throws {
         let store = TestStore(
@@ -16,36 +19,41 @@ final class MainTests: XCTestCase {
             reducer: { Main() },
             withDependencies: {
                 $0.discoveryClient = URLRoutingClient<DiscoveryRoute>.failing.override(.discover) {
-                    .success((data: """
+                    .success((data: 
+                    """
                     {
-                        "instances": [
-                            {
-                                "id": "cat_7016",
-                                "country": "NL",
-                                "cat_idp": 7016,
-                                "name": "Môreelsepark Cöllege",
-                                "profiles": [
-                                    {
-                                        "default": true,
-                                        "authorization_endpoint": "https://moreelsepark.geteduroam.nl/oauth/authorize/",
-                                        "oauth": true,
-                                        "id": "letswifi_cat_7830",
-                                        "eapconfig_endpoint": "https://moreelsepark.geteduroam.nl/api/eap-config/",
-                                        "name": "Mijn Moreelsepark",
-                                        "token_endpoint": "https://moreelsepark.geteduroam.nl/oauth/token/"
-                                    }
-                                ],
-                                "geo": [
-                                    {
-                                        "lat": 52.088999999999999,
-                                        "lon": 5.1130000000000004
-                                    }
-                                ]
-                            }
-                        ]
+                        "http://letswifi.app/discovery#v2": {
+                            "institutions": [
+                                {
+                                    "id": "cat_7016",
+                                    "country": "NL",
+                                    "name": {
+                                        "any": "Môreelsepark Cöllege"
+                                    },
+                                    "profiles": [
+                                        {
+                                            "default": true,
+                                            "id": "letswifi_cat_7830",
+                                            "letswifi_endpoint": "https://www.example.com/letswifi",
+                                            "name": {
+                                                "any": "Mijn Moreelsepark"
+                                            },
+                                            "type": "letswifi"
+                                        }
+                                    ],
+                                    "geo": [
+                                        {
+                                            "lat": 52.088999999999999,
+                                            "lon": 5.1130000000000004
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
                     }
                     """.data(using: .utf8)!, response: URLResponse()))
                 }
+                $0.cacheClient.restoreDiscovery = { .init(content: .init(organizations: []))}
                 $0.notificationClient.delegate = { .finished }
             })
 
@@ -53,7 +61,7 @@ final class MainTests: XCTestCase {
             $0.loadingState = .isLoading
         }
 
-        await store.receive(.discoveryResponse(.success(.init(instances: [demoInstance])))) { [self] in
+        await store.receive(.discoveryResponse(.success(.init(content: .init(organizations: [demoInstance]))))) { [self] in
             $0.loadingState = .success
             $0.organizations = [demoInstance]
         }

@@ -1,7 +1,7 @@
 import Foundation
 
 public struct Organization: Codable, Identifiable, Equatable {
-    public init(id: String, name: [String: String], country: String, profiles: [Profile], geo: [Coordinate]) {
+    public init(id: String, name: [String: String]?, country: String, profiles: [Profile], geo: [Coordinate]) {
         self.id = id
         self.name = name
         self.country = country
@@ -16,7 +16,7 @@ public struct Organization: Codable, Identifiable, Equatable {
     public let geo: [Coordinate]
 
     public var nameOrId: String {
-        name?["any"] ?? id
+        name?.localized() ?? id
     }
 
     public var hasSingleProfile: Bool {
@@ -29,5 +29,15 @@ public struct Organization: Codable, Identifiable, Equatable {
         words.append(nameOrId)
         words.append(abbreviation)
         return words
+    }
+}
+
+public extension [String: String] {
+    func localized(for locale: Locale = Locale.current) -> String? {
+        let fallback = first(where: { $0.key == "any" })?.value
+        guard let language = locale.languageCode else {
+            return fallback
+        }
+        return first(where: { $0.key == language })?.value ?? fallback
     }
 }
