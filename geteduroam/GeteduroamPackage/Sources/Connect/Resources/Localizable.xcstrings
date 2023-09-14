@@ -64,10 +64,16 @@
         }
       }
     },
+    "Continue" : {
+
+    },
     "Continue in System Preferences" : {
 
     },
     "Continue in System Settings" : {
+
+    },
+    "Continue to Website" : {
 
     },
     "Disagree" : {
@@ -124,6 +130,9 @@
         }
       }
     },
+    "Missing information about profile." : {
+      "comment" : "missingProfileType"
+    },
     "Missing information to start authentication." : {
       "comment" : "missingAuthorizationEndpoint\n   missingTokenEndpoint",
       "localizations" : {
@@ -136,7 +145,7 @@
       }
     },
     "Missing information to start configuration." : {
-      "comment" : "missingEAPConfigEndpoint",
+      "comment" : "missingEAPConfigEndpoint\n   missingMobileConfigEndpoint",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -249,6 +258,9 @@
           }
         }
       }
+    },
+    "You are redirected to a website.\n\n(url)" : {
+
     },
     "You must agree to the terms of use before you can use this network." : {
       "localizations" : {

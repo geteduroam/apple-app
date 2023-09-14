@@ -10,11 +10,12 @@ import XMLCoder
 @MainActor
 final class ConnectTests: XCTestCase {
     
-    static let eapconfigEndpoint = URL(string: "https://www.example.com/profile")!
+    static let eapConfigEndpoint = URL(string: "https://www.example.com/eapconfig")!
+    static let letsWifiEndpoint = URL(string: "https://www.example.com/letswifi")!
     
-    let demoInstance = Organization(id: "cat_7016", name: "Môreelsepark Cöllege", country: "NL", cat_idp: 7016, profiles: [
-        Profile(id: "letswifi_cat_7830", name: "Mijn Moreelsepark", default: true, eapconfig_endpoint: URL(string: "https://moreelsepark.geteduroam.nl/api/eap-config/")!, oauth: true, authorization_endpoint: URL(string: "https://moreelsepark.geteduroam.nl/oauth/authorize/")!, token_endpoint: URL(string: "https://moreelsepark.geteduroam.nl/oauth/token/")!),
-        Profile(id: "profile2", name: "Profle", eapconfig_endpoint: ConnectTests.eapconfigEndpoint)
+    let demoInstance = Organization(id: "cat_7016", name: ["any": "Môreelsepark Cöllege"], country: "NL", profiles: [
+        Profile(id: "letswifi_cat_7830", name: ["any": "Mijn Moreelsepark"], default: true, letsWiFiEndpoint: ConnectTests.letsWifiEndpoint, type: .letswifi),
+        Profile(id: "profile2", name: ["any": "Profle"], eapConfigEndpoint: ConnectTests.eapConfigEndpoint, type: .eapConfig)
     ], geo: [Coordinate(lat: 52.088999999999999, lon: 5.1130000000000004)])
     
     #if !os(macOS) // TODO: Write tests for macOS
@@ -23,7 +24,7 @@ final class ConnectTests: XCTestCase {
             initialState: Connect.State(organization: demoInstance),
             reducer: { Connect() },
             withDependencies: {
-                var urlRequest = URLRequest(url: ConnectTests.eapconfigEndpoint)
+                var urlRequest = URLRequest(url: ConnectTests.eapConfigEndpoint)
                 urlRequest.httpMethod = "POST"
                 let networkExchange = NetworkExchange(
                     urlRequest: urlRequest,
@@ -106,16 +107,7 @@ final class ConnectTests: XCTestCase {
             )]
         )
         
-        let store = TestStore(
-            initialState: Connect.State(organization: demoInstance),
-            reducer: { Connect() },
-            withDependencies: {
-                var urlRequest = URLRequest(url: ConnectTests.eapconfigEndpoint)
-                urlRequest.httpMethod = "POST"
-                let networkExchange = NetworkExchange(
-                    urlRequest: urlRequest,
-                    response: ServerResponse(
-                        data: #"""
+        let eapConfigData = #"""
                             <EAPIdentityProviderList>
                                 <EAPIdentityProvider>
                                     <ID>test</ID>
@@ -175,6 +167,17 @@ final class ConnectTests: XCTestCase {
                                 </EAPIdentityProvider>
                             </EAPIdentityProviderList>
                             """#.data(using: .utf8)
+        
+        let store = TestStore(
+            initialState: Connect.State(organization: demoInstance),
+            reducer: { Connect() },
+            withDependencies: {
+                var urlRequest = URLRequest(url: ConnectTests.eapConfigEndpoint)
+                urlRequest.httpMethod = "POST"
+                let networkExchange = NetworkExchange(
+                    urlRequest: urlRequest,
+                    response: ServerResponse(
+                        data: eapConfigData
                     )
                 )
                 class Mock: MockURLProtocol { }
@@ -204,7 +207,7 @@ final class ConnectTests: XCTestCase {
         }
         
         let providerInfo = config.providers[0].providerInfo
-        await store.receive(.connectResponse(.success(.init(providerInfo: providerInfo, result: .verified(credentials: nil, accessToken: nil))))) {
+        await store.receive(.connectResponse(.success(.init(providerInfo: providerInfo, result: .verified(credentials: nil, reusableInfo: .init(eapConfigData: eapConfigData)))))) {
             $0.loadingState = .isLoading
             $0.providerInfo = providerInfo
         }

@@ -41,7 +41,7 @@ public struct Main: Reducer {
     
     public enum Action: Equatable {
         case destination(PresentationAction<Destination.Action>)
-        case discoveryResponse(TaskResult<OrganizationsResponse>)
+        case discoveryResponse(TaskResult<DiscoveryResponse>)
         case onAppear
         case renewActionInReminderTapped(organizationId: String, profileId: String)
         case searchQueryChangeDebounced
@@ -83,7 +83,7 @@ public struct Main: Reducer {
             // Apple recommends this, but that seems to be diacritic sensitive
             // .filter({ $0.name.localizedCaseInsensitiveContains(query) })
             .filter({ $0.matchWords.contains(where: { $0.range(of: query, options: [.caseInsensitive, .diacriticInsensitive, .anchored], locale: Locale.current) != nil } )})
-            .sorted(by: { $0.name.lowercased() < $1.name.lowercased() }))
+            .sorted(by: { $0.nameOrId.lowercased() < $1.nameOrId.lowercased() }))
     }
 
     public var body: some Reducer<State, Action> {
@@ -109,11 +109,11 @@ public struct Main: Reducer {
                     .run { send in
                         await send(.discoveryResponse(TaskResult {
                             do {
-                                let (value, _) = try await discoveryClient.decodedResponse(for: .discover, as: OrganizationsResponse.self)
-                                cacheClient.cacheOrganizations(value)
+                                let (value, _) = try await discoveryClient.decodedResponse(for: .discover, as: DiscoveryResponse.self)
+                                cacheClient.cacheDiscovery(value)
                                 return value
                             } catch {
-                                let restoredValue = try cacheClient.restoreOrganizations()
+                                let restoredValue = try cacheClient.restoreDiscovery()
                                 return restoredValue
                             }
                         }))
@@ -121,7 +121,7 @@ public struct Main: Reducer {
 
             case let .discoveryResponse(.success(response)):
                 state.loadingState = .success
-                state.organizations = .init(uniqueElements: response.instances)
+                state.organizations = .init(uniqueElements: response.content.organizations)
                 return .none
                 
             case let .discoveryResponse(.failure(error)):

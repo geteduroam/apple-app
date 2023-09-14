@@ -24,7 +24,7 @@ public struct ConnectView_Mac: View {
                 } else {
                     HStack(alignment: .firstTextBaseline) {
                         VStack(alignment: .leading) {
-                            Text(viewStore.organization.name)
+                            Text(viewStore.organization.nameOrId)
                                 .font(theme.organizationNameFont)
                             Text(viewStore.organization.country)
                                 .font(theme.organizationCountryFont)
@@ -113,7 +113,7 @@ public struct ConnectView_Mac: View {
                 }
             }
             .padding()
-            .navigationTitle(viewStore.organization.name)
+            .navigationTitle(viewStore.organization.nameOrId)
             .onAppear {
                 viewStore.send(.onAppear)
             }
@@ -127,6 +127,11 @@ public struct ConnectView_Mac: View {
                 store: store.scope(state: \.$destination, action: Connect.Action.destination),
                 state: /Connect.Destination.State.alert,
                 action: Connect.Destination.Action.alert
+            )
+            .alert(
+                store: store.scope(state: \.$destination, action: Connect.Action.destination),
+                state: /Connect.Destination.State.websiteAlert,
+                action: Connect.Destination.Action.websiteAlert
             )
         }
     }

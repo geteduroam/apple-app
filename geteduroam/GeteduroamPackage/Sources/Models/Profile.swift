@@ -1,21 +1,44 @@
 import Foundation
 
 public struct Profile: Codable, Equatable, Identifiable {
-    public init(id: String, name: String, `default`: Bool? = nil, eapconfig_endpoint: URL? = nil, oauth: Bool? = nil, authorization_endpoint: URL? = nil, token_endpoint: URL? = nil) {
+    public init(id: String, name: [String : String]? = nil, `default`: Bool? = nil, eapConfigEndpoint: URL? = nil, mobileConfigEndpoint: URL? = nil, letsWiFiEndpoint: URL? = nil, webviewEndpoint: String? = nil, type: ProfileType? = nil) {
         self.id = id
         self.name = name
         self.`default` = `default`
-        self.eapconfig_endpoint = eapconfig_endpoint
-        self.oauth = oauth
-        self.authorization_endpoint = authorization_endpoint
-        self.token_endpoint = token_endpoint
+        self.eapConfigEndpoint = eapConfigEndpoint
+        self.mobileConfigEndpoint = mobileConfigEndpoint
+        self.letsWiFiEndpoint = letsWiFiEndpoint
+        self.webviewEndpoint = webviewEndpoint
+        self.type = type
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case `default`
+        case eapConfigEndpoint = "eapconfig_endpoint"
+        case mobileConfigEndpoint = "mobileconfig_endpoint"
+        case letsWiFiEndpoint = "letswifi_endpoint"
+        case webviewEndpoint = "webview_endpoint"
+        case type
     }
     
     public let id: String
-    public let name: String
+    public let name: [String: String]?
     public let `default`: Bool?
-    public let eapconfig_endpoint: URL?
-    public let oauth: Bool?
-    public let authorization_endpoint: URL?
-    public let token_endpoint: URL?
+    public let type: ProfileType?
+    public let eapConfigEndpoint: URL?
+    public let mobileConfigEndpoint: URL?
+    public let letsWiFiEndpoint: URL?
+    public let webviewEndpoint: String?
+    
+    public var nameOrId: String {
+        name?["any"] ?? id
+    }
+}
+
+public enum ProfileType: String, Codable {
+    case eapConfig = "eap-config"
+    case letswifi
+    case webview
 }

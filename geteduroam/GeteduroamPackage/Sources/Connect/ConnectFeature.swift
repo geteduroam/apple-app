@@ -29,7 +29,7 @@ public struct Connect: Reducer {
         public var providerInfo: ProviderInfo?
         public var agreedToTerms: Bool = false
         public var credentials: Credentials?
-        public var accessToken: String?
+        public var reusableInfo: ReusableInfo?
         public var requiredUserNameSuffix: String? = nil
         public var promptForCredentials: Bool = false
         
@@ -145,8 +145,14 @@ public struct Connect: Reducer {
     }
     
     public enum ConnectResult: Equatable {
-        case verified(credentials: Credentials?, accessToken: String?)
+        case verified(credentials: Credentials?, reusableInfo: ReusableInfo?)
         case applied(ConnectionType)
+    }
+    
+    public struct ReusableInfo: Equatable {
+        var accessToken: String?
+        var letsWiFiVersion: LetsWiFiVersion?
+        var eapConfigData: Data?
     }
     
     public enum ConnectionType: Equatable {
@@ -192,11 +198,13 @@ public struct Connect: Reducer {
         public enum State: Equatable {
             case alert(AlertState<AlertAction>)
             case termsAlert(AlertState<TermsAlertAction>)
+            case websiteAlert(AlertState<WebsiteAlertAction>)
         }
         
         public enum Action: Equatable {
             case alert(AlertAction)
             case termsAlert(TermsAlertAction)
+            case websiteAlert(WebsiteAlertAction)
         }
         
         public enum AlertAction: Equatable { }
@@ -204,6 +212,10 @@ public struct Connect: Reducer {
         public enum TermsAlertAction: Equatable {
             case agreeButtonTapped
             case disagreeButtonTapped
+        }
+        
+        public enum WebsiteAlertAction: Equatable {
+            case continueButtonTapped(URL)
         }
         
         public var body: some Reducer<State, Action> {
@@ -216,19 +228,22 @@ public struct Connect: Reducer {
             (lhs as NSError) == (rhs as NSError)
         }
         
-        case missingAuthorizationEndpoint
-        case missingTokenEndpoint
-        case missingEAPConfigEndpoint
-        case missingTermsAcceptance(ProviderInfo?)
-        case noValidProviderFound(ProviderInfo?)
         case eapConfigurationFailed(EAPConfiguratorError, ProviderInfo?)
+        case missingAuthorizationEndpoint
+        case missingEAPConfigEndpoint
+        case missingMobileConfigEndpoint
+        case missingProfileType
+        case missingTermsAcceptance(ProviderInfo?)
+        case missingTokenEndpoint
         case mobileConfigFailed(ProviderInfo?)
-        case userCancelled(ProviderInfo?)
+        case noValidProviderFound(ProviderInfo?)
+        case redirectToWebsite(URL?)
         case unknownError(Error, ProviderInfo?)
+        case userCancelled(ProviderInfo?)
         
         var providerInfo: ProviderInfo? {
             switch self {
-            case .missingAuthorizationEndpoint, .missingTokenEndpoint, .missingEAPConfigEndpoint:
+            case .missingAuthorizationEndpoint, .missingTokenEndpoint, .missingEAPConfigEndpoint, .missingProfileType, .missingMobileConfigEndpoint, .redirectToWebsite:
                 return nil
             case let .missingTermsAcceptance(info), let .noValidProviderFound(info), let .eapConfigurationFailed(_, info), let .mobileConfigFailed(info), let .userCancelled(info), let .unknownError(_, info):
                 return info
@@ -237,6 +252,9 @@ public struct Connect: Reducer {
  
         public var errorDescription: String? {
             switch self {
+            case .missingProfileType:
+                return NSLocalizedString("Missing information about profile.", comment: "missingProfileType")
+
             case .missingAuthorizationEndpoint:
                 return NSLocalizedString("Missing information to start authentication.", bundle: .module, comment: "missingAuthorizationEndpoint")
                 
@@ -244,7 +262,10 @@ public struct Connect: Reducer {
                 return NSLocalizedString("Missing information to start authentication.", bundle: .module, comment: "missingTokenEndpoint")
                 
             case .missingEAPConfigEndpoint:
-                return NSLocalizedString("Missing information to start configuration.", bundle: .module, comment: "missingEAPConfigEndpoint")
+                return NSLocalizedString("Missing information to start configuration.", comment: "missingEAPConfigEndpoint")
+
+            case .missingMobileConfigEndpoint:
+                return NSLocalizedString("Missing information to start configuration.", comment: "missingMobileConfigEndpoint")
                 
             case .missingTermsAcceptance:
                 return NSLocalizedString("You must agree to the terms of use.", bundle: .module, comment: "missingTermsAcceptance")
@@ -263,6 +284,9 @@ public struct Connect: Reducer {
                 
             case let .unknownError(error, _):
                 return error.localizedDescription
+                
+            case .redirectToWebsite:
+                return nil
             }
         }
     }
@@ -273,6 +297,7 @@ public struct Connect: Reducer {
     @Dependency(\.eapClient) var eapClient
     @Dependency(\.hotspotNetworkClient) var hotspotNetworkClient
     @Dependency(\.notificationClient) var notificationClient
+    @Dependency(\.openURL) var openURL
     @Dependency(\.urlSession) var urlSession
     
     private func connect(state: inout State, dryRun: Bool) -> Effect<Connect.Action> {
@@ -307,19 +332,19 @@ public struct Connect: Reducer {
         let credentials = state.credentials
         state.credentials = nil
         state.promptForCredentials = false
-        let accessToken = state.accessToken
-        state.accessToken = nil
+        let reusableInfo = state.reusableInfo
+        state.reusableInfo = nil
         let agreedToTerms = state.agreedToTerms
         return .run { send in
             await send(.connectResponse(TaskResult<ConnectResponse> {
-                let (providerInfo, expectedSSIDs, accessToken) = try await connect(organization: organization, profile: profile, authClient: authClient, credentials: credentials, previousAccessToken: accessToken, agreedToTerms: agreedToTerms, dryRun: dryRun)
+                let (providerInfo, expectedSSIDs, reusableInfo) = try await connect(organization: organization, profile: profile, authClient: authClient, credentials: credentials, previousReusableInfo: reusableInfo, agreedToTerms: agreedToTerms, dryRun: dryRun)
                 let connection: ConnectionType
                 if expectedSSIDs.isEmpty {
                     connection = .hotspot20
                 } else {
                     connection = .ssids(expectedSSIDs: expectedSSIDs)
                 }
-                return .init(providerInfo: providerInfo, result: dryRun ? .verified(credentials: credentials, accessToken: accessToken) : .applied(connection))
+                return .init(providerInfo: providerInfo, result: dryRun ? .verified(credentials: credentials, reusableInfo: reusableInfo) : .applied(connection))
             }))
         }
     }
@@ -349,6 +374,11 @@ public struct Connect: Reducer {
                     return .none
                 }
                 
+            case let .destination(.presented(.websiteAlert(.continueButtonTapped(url)))):
+                return .run { _ in
+                    await self.openURL(url)
+                }
+                
             case .destination:
                 return .none
                 
@@ -366,11 +396,11 @@ public struct Connect: Reducer {
                 
             case let .connectResponse(.success(connectResponse)):
                 switch connectResponse.result {
-                case let .verified(credentials, accessToken):
+                case let .verified(credentials, reusableInfo):
                     // Verified that we should be able to make the connection without errors/prompts, so go ahead and actually setup the network
                     state.providerInfo = connectResponse.providerInfo
                     state.credentials = credentials
-                    state.accessToken = accessToken
+                    state.reusableInfo = reusableInfo
                     return connect(state: &state, dryRun: false)
                     
                 case let .applied(connection):
@@ -414,6 +444,28 @@ public struct Connect: Reducer {
                 // Telling the user they cancelled isn't helping
                 return .none
                 
+            case let .connectResponse(.failure(OrganizationSetupError.redirectToWebsite(url))):
+                guard let url else {
+                    // TODO: Tell user there is no URL?
+                    return .none
+                }
+                let websiteAlert = AlertState<Destination.WebsiteAlertAction>(
+                    title: {
+                        TextState("Continue to Website", bundle: .module)
+                    }, actions: {
+                        ButtonState(action: .send(.continueButtonTapped(url))) {
+                            TextState("Continue", bundle: .module)
+                        }
+                        ButtonState(role: .cancel) {
+                            TextState("Cancel", bundle: .module)
+                        }
+                    }, message: {
+                        let message = NSLocalizedString("You are redirected to a website.\n\n\(url)", bundle: .module, comment: "")
+                        return TextState(message)
+                    })
+                state.destination = .websiteAlert(websiteAlert)
+                return .none
+
             case let .connectResponse(.failure(error)):
                 // Read providerinfo if error has it so we can populate helpdesk
                 state.providerInfo = (error as? OrganizationSetupError)?.providerInfo
@@ -487,45 +539,84 @@ public struct Connect: Reducer {
         }
     }
     
-    var decoder: XMLDecoder = {
+    var xmlDecoder: XMLDecoder = {
         let decoder = XMLDecoder()
         decoder.shouldProcessNamespaces = true
         decoder.dateDecodingStrategy = .iso8601
         return decoder
     }()
     
-    func connect(organization: Organization, profile: Profile, authClient: AuthClient, credentials: Credentials?, previousAccessToken: String?, agreedToTerms: Bool, dryRun: Bool) async throws -> (ProviderInfo?, [String], String?) {
+    var jsonDecoder: JSONDecoder = {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return decoder
+    }()
+    
+    func connect(organization: Organization, profile: Profile, authClient: AuthClient, credentials: Credentials?, previousReusableInfo: ReusableInfo?, agreedToTerms: Bool, dryRun: Bool) async throws -> (ProviderInfo?, [String], ReusableInfo?) {
         let accessToken: String?
-        if let previousAccessToken {
-            accessToken = previousAccessToken
-        } else if profile.oauth ?? false {
-            guard let authorizationEndpoint = profile.authorization_endpoint else {
-                throw OrganizationSetupError.missingAuthorizationEndpoint
-            }
-            guard let tokenEndpoint = profile.token_endpoint else {
-                throw OrganizationSetupError.missingTokenEndpoint
-            }
-            let configuration = OIDServiceConfiguration(authorizationEndpoint: authorizationEndpoint, tokenEndpoint: tokenEndpoint)
-
-            // Build authentication request
-            let clientId = "app.eduroam.geteduroam"
-            let scope = "eap-metadata"
-            let redirectURL = URL(string: "app.eduroam.geteduroam:/")!
-            let codeVerifier = OIDAuthorizationRequest.generateCodeVerifier()
-            let codeChallange = OIDAuthorizationRequest.codeChallengeS256(forVerifier: codeVerifier)
-            let state = UUID().uuidString
-            let nonce = UUID().uuidString
-         
-            let request = OIDAuthorizationRequest(configuration: configuration, clientId: clientId, clientSecret: nil, scope: scope, redirectURL: redirectURL, responseType: OIDResponseTypeCode, state: state, nonce: nonce, codeVerifier: codeVerifier, codeChallenge: codeChallange, codeChallengeMethod: OIDOAuthorizationRequestCodeChallengeMethodS256, additionalParameters: nil)
-
-            (accessToken, _) = try await authClient
-                .startAuth(request: request)
-                .tokens()
-        } else {
+        let eapConfigURL: URL?
+        let mobileConfigURL: URL?
+        var reusableInfo = ReusableInfo()
+        switch profile.type {
+        case .none:
+            throw OrganizationSetupError.missingProfileType
+            
+        case .eapConfig:
             accessToken = nil
+            eapConfigURL = profile.eapConfigEndpoint
+            mobileConfigURL = profile.mobileConfigEndpoint
+            
+        case .letswifi:
+            if let previousReusableInfo, let previousAccessToken = previousReusableInfo.accessToken {
+                accessToken = previousAccessToken
+                eapConfigURL = previousReusableInfo.letsWiFiVersion?.eapConfigEndpoint
+                mobileConfigURL = previousReusableInfo.letsWiFiVersion?.mobileConfigEndpoint
+            } else {
+                guard let letsWiFiURL = profile.letsWiFiEndpoint else {
+                    throw OrganizationSetupError.missingEAPConfigEndpoint
+                }
+                
+                let urlRequest = URLRequest(url: letsWiFiURL)
+                
+                let (letsWiFiData, _) = try await urlSession.data(for: urlRequest)
+                
+                let letsWiFi = try jsonDecoder.decode(LetsWiFiResponse.self, from: letsWiFiData)
+                reusableInfo.letsWiFiVersion = letsWiFi.content
+                
+                guard let authorizationEndpoint = letsWiFi.content.authorizationEndpoint else {
+                    throw OrganizationSetupError.missingAuthorizationEndpoint
+                }
+                
+                guard let tokenEndpoint = letsWiFi.content.tokenEndpoint else {
+                    throw OrganizationSetupError.missingTokenEndpoint
+                }
+                
+                let configuration = OIDServiceConfiguration(authorizationEndpoint: authorizationEndpoint, tokenEndpoint: tokenEndpoint)
+                
+                // Build authentication request
+                let clientId = "app.eduroam.geteduroam"
+                let scope = "eap-metadata"
+                let redirectURL = URL(string: "app.eduroam.geteduroam:/")!
+                let codeVerifier = OIDAuthorizationRequest.generateCodeVerifier()
+                let codeChallange = OIDAuthorizationRequest.codeChallengeS256(forVerifier: codeVerifier)
+                let state = UUID().uuidString
+                let nonce = UUID().uuidString
+                
+                let request = OIDAuthorizationRequest(configuration: configuration, clientId: clientId, clientSecret: nil, scope: scope, redirectURL: redirectURL, responseType: OIDResponseTypeCode, state: state, nonce: nonce, codeVerifier: codeVerifier, codeChallenge: codeChallange, codeChallengeMethod: OIDOAuthorizationRequestCodeChallengeMethodS256, additionalParameters: nil)
+                
+                (accessToken, _) = try await authClient
+                    .startAuth(request: request)
+                    .tokens()
+                reusableInfo.accessToken = accessToken
+                
+                eapConfigURL = letsWiFi.content.eapConfigEndpoint
+                mobileConfigURL = letsWiFi.content.mobileConfigEndpoint
+            }
+        case .webview:
+            throw OrganizationSetupError.redirectToWebsite(URL(string: profile.webviewEndpoint ?? ""))
         }
         
-        guard let eapConfigURL = profile.eapconfig_endpoint else {
+        guard let eapConfigURL else {
             throw OrganizationSetupError.missingEAPConfigEndpoint
         }
         
@@ -535,9 +626,15 @@ public struct Connect: Reducer {
             urlRequest.allHTTPHeaderFields = ["Authorization": "Bearer \(accessToken)"]
         }
 
-        let (eapConfigData, _) = try await urlSession.data(for: urlRequest)
+        let eapConfigData: Data
+        if let previousEapConfigData = previousReusableInfo?.eapConfigData {
+            eapConfigData = previousEapConfigData
+        } else {
+            (eapConfigData, _) = try await urlSession.data(for: urlRequest)
+            reusableInfo.eapConfigData = eapConfigData
+        }
         
-        let providerList = try decoder.decode(EAPIdentityProviderList.self, from: eapConfigData)
+        let providerList = try xmlDecoder.decode(EAPIdentityProviderList.self, from: eapConfigData)
         let firstValidProvider = providerList
             .providers
             .first(where: { ($0.validUntil?.timeIntervalSince(date()) ?? 0) >= 0 })
@@ -549,7 +646,7 @@ public struct Connect: Reducer {
         guard agreedToTerms || firstValidProvider.providerInfo?.termsOfUse?.localized() == nil else {
             throw OrganizationSetupError.missingTermsAcceptance(firstValidProvider.providerInfo)
         }
-        
+
 #if os(iOS)
         do {
             let expectedSSIDs = try await eapClient.configure(firstValidProvider, credentials, dryRun)
@@ -563,7 +660,7 @@ public struct Connect: Reducer {
                 }
             }
             
-            return (firstValidProvider.providerInfo, expectedSSIDs, accessToken)
+            return (firstValidProvider.providerInfo, expectedSSIDs, reusableInfo)
             
         } catch let error as EAPConfiguratorError {
             throw OrganizationSetupError.eapConfigurationFailed(error, firstValidProvider.providerInfo)
@@ -577,6 +674,11 @@ public struct Connect: Reducer {
             }
         }
 #elseif os(macOS)
+
+        guard let mobileConfigURL else {
+            throw OrganizationSetupError.missingMobileConfigEndpoint
+        }
+
         do {
             let temporaryDataURL = NSTemporaryDirectory() + "geteduroam.mobileconfig"
            
@@ -589,17 +691,7 @@ public struct Connect: Reducer {
                     try? FileManager.default.removeItem(atPath: temporaryDataURL)
                 }
             }
-            
-            // FIXME: Replace temporary hack!
-            var mobileConfigURLComponents = URLComponents(url: eapConfigURL, resolvingAgainstBaseURL: true)!
-            var queryItems = mobileConfigURLComponents.queryItems ?? []
-            queryItems.removeAll(where: { item in
-                item.name == "device" && item.value == "eap-generic"
-            })
-            queryItems.append(URLQueryItem(name: "device", value: "apple_global"))
-            queryItems.append(URLQueryItem(name: "format", value: "mobileconfig"))
-            mobileConfigURLComponents.queryItems = queryItems
-            let mobileConfigURL = mobileConfigURLComponents.url!
+
             var mobileConfigURLRequest = URLRequest(url: mobileConfigURL)
             mobileConfigURLRequest.httpMethod = "POST"
             if let accessToken {
@@ -613,16 +705,6 @@ public struct Connect: Reducer {
             try data.write(to: URL(fileURLWithPath: temporaryDataURL))
             
             try Process.run(URL(fileURLWithPath: "/usr/bin/open"), arguments: ["/System/Library/PreferencePanes/Profiles.prefPane", temporaryDataURL])
-            
-            // TODO: Get this working on macOS
-//            // Check if we are connected to one of the expected SSIDs
-//            let expectedSSIDs = ["eduroam"]
-//            let connectedSSIDs = try SSID.fetchNetworkInfo().filter( { $0.success == true }).compactMap(\.ssid)
-//            print("connectedSSIDs: \(connectedSSIDs)")
-//
-//            guard connectedSSIDs.first(where: { expectedSSIDs.contains($0) }) != nil else {
-//                throw OrganizationSetupError.notConnectedToExpectedSSID(firstValidProvider.providerInfo)
-//            }
 
             // TODO: Get this working on macOS: validUntil unknown, reconnect doesn't trigger navigation in UI
 //            // Schedule reminder for user to renew network access
@@ -631,7 +713,7 @@ public struct Connect: Reducer {
 //            let profileId = profile.id
 //            try await notificationClient.scheduleRenewReminder(validUntil, organizationId, profileId)
 
-            return (firstValidProvider.providerInfo, [], accessToken)
+            return (firstValidProvider.providerInfo, [], reusableInfo)
         } catch {
             throw OrganizationSetupError.unknownError(error, firstValidProvider.providerInfo)
         }

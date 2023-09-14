@@ -10,7 +10,7 @@ struct ProfileRowView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text(profile.name)
+                Text(profile.nameOrId)
                     .font(theme.profileNameFont)
                 Spacer()
                 if isSelected {
@@ -22,13 +22,10 @@ struct ProfileRowView: View {
     }
 }
 
-#if DEBUG
-struct ProfileRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            ProfileRowView(profile: .init(id: "profile1", name: "My Profile"), isSelected: true)
-            ProfileRowView(profile: .init(id: "profile2", name: "My Other Profile"), isSelected: false)
-        }
-    }
+#Preview {
+    ProfileRowView(profile: .init(id: "profile1", name: ["any": "My Profile"]), isSelected: true)
 }
-#endif
+
+#Preview {
+    ProfileRowView(profile: .init(id: "profile2", name: ["any": "My Other Profile"]), isSelected: false)
+}

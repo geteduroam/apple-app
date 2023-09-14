@@ -21,7 +21,7 @@ public struct ConnectView_iOS: View {
             VStack(alignment: .leading) {
                 HStack(alignment: .firstTextBaseline) {
                     VStack(alignment: .leading) {
-                        Text(viewStore.organization.name)
+                        Text(viewStore.organization.nameOrId)
                             .font(theme.organizationNameFont)
                         Text(viewStore.organization.country)
                             .font(theme.organizationCountryFont)
@@ -121,6 +121,11 @@ public struct ConnectView_iOS: View {
                 state: /Connect.Destination.State.alert,
                 action: Connect.Destination.Action.alert
             )
+            .alert(
+                store: store.scope(state: \.$destination, action: Connect.Action.destination),
+                state: /Connect.Destination.State.websiteAlert,
+                action: Connect.Destination.Action.websiteAlert
+            )
             .backport
             .credentialAlert(
                 CredentialAlert(
@@ -155,38 +160,27 @@ public struct ConnectView_iOS: View {
     }
 }
 
-#if DEBUG
-struct ConnectView_Previews: PreviewProvider {
-    static var previews: some View {
-        ConnectView_iOS(store: .init(
-            initialState: .init(
-                organization: .init(
-                    id: "1",
-                    name: "My Organization",
-                    country: "NL",
-                    cat_idp: 1,
-                    profiles: [
-                        Profile(
-                            id: "2",
-                            name: "My Profile",
-                            default: true,
-                            eapconfig_endpoint: nil,
-                            oauth: false,
-                            authorization_endpoint: nil,
-                            token_endpoint: nil),
-                        Profile(
-                            id: "3",
-                            name: "Other Profile",
-                            default: false,
-                            eapconfig_endpoint: nil,
-                            oauth: false,
-                            authorization_endpoint: nil,
-                            token_endpoint: nil)
-                    ],
-                    geo: [Coordinate(lat: 0, lon: 0)])),
-            reducer: { Connect() }))
-        .environmentObject(Theme.demo)
-    }
+#Preview {
+    ConnectView_iOS(store: .init(
+        initialState: .init(
+            organization: .init(
+                id: "1",
+                name: ["any": "My Organization"],
+                country: "NL",
+                profiles: [
+                    Profile(
+                        id: "2",
+                        name: ["any": "My Profile"],
+                        default: true,
+                        type: .letswifi),
+                    Profile(
+                        id: "3",
+                        name: ["any": "Other Profile"],
+                        default: false,
+                        type: .eapConfig)
+                ],
+                geo: [Coordinate(lat: 0, lon: 0)])),
+        reducer: { Connect() }))
+    .environmentObject(Theme.demo)
 }
-#endif
 #endif
