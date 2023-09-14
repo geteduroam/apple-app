@@ -318,7 +318,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "curl --compressed 'https://discovery.eduroam.app/v2/discovery.json' > geteduroam/discovery.json\n";
+			shellScript = "curl --silent --compressed 'https://discovery.eduroam.app/v2/discovery.json' > geteduroam/discovery.json\n";
 			showEnvVarsInLog = 0;
 		};
 		C72D66D82A4DCFAB007FDB68 /* Update Included Discovery */ = {
@@ -338,7 +338,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "curl --compressed 'https://discovery.eduroam.app/v2/discovery.json' > geteduroam/discovery.json\n";
+			shellScript = "curl --silent --compressed 'https://discovery.eduroam.app/v2/discovery.json' > geteduroam/discovery.json\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

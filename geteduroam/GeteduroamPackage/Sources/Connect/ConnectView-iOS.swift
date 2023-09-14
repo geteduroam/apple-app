@@ -157,33 +157,27 @@ public struct ConnectView_iOS: View {
     }
 }
 
-//#if DEBUG
-//struct ConnectView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ConnectView_iOS(store: .init(
-//            initialState: .init(
-//                organization: .init(
-//                    id: "1",
-//                    name: "My Organization",
-//                    country: "NL",
-//                    profiles: [
-//                        Profile(
-//                            id: "2",
-//                            name: "My Profile",
-//                            default: true,
-//                            eapconfig_endpoint: nil,
-//                            portal_endpoint: nil),
-//                        Profile(
-//                            id: "3",
-//                            name: "Other Profile",
-//                            default: false,
-//                            eapconfig_endpoint: nil,
-//                            portal_endpoint: nil)
-//                    ],
-//                    geo: [Coordinate(lat: 0, lon: 0)])),
-//            reducer: { Connect() }))
-//        .environmentObject(Theme.demo)
-//    }
-//}
-//#endif
+#Preview {
+    ConnectView_iOS(store: .init(
+        initialState: .init(
+            organization: .init(
+                id: "1",
+                name: ["any": "My Organization"],
+                country: "NL",
+                profiles: [
+                    Profile(
+                        id: "2",
+                        name: ["any": "My Profile"],
+                        default: true,
+                        type: .letswifi),
+                    Profile(
+                        id: "3",
+                        name: ["any": "Other Profile"],
+                        default: false,
+                        type: .eapConfig)
+                ],
+                geo: [Coordinate(lat: 0, lon: 0)])),
+        reducer: { Connect() }))
+    .environmentObject(Theme.demo)
+}
 #endif
