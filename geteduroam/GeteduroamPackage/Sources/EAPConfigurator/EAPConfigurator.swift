@@ -522,9 +522,10 @@ class EAPConfigurator {
             //kSecAttrAccessGroup as String: "ZYJ4TZX4UU.com.apple.networkextensionsharing", // Should be TEAMID.com.apple.networkextensionsharing, but works without?
         ]
         var status: OSStatus = SecItemAdd(addquery as CFDictionary, nil)
-        guard status == errSecSuccess else {
+        guard status == errSecSuccess || status == errSecDuplicateItem else {
             // -34018 = errSecMissingEntitlement
             // -26276 = errSecInternal
+            // -25299 = errSecDuplicateItem
             Logger.eap.error("addClientCertificate: SecItemAdd: \(String(status), privacy: .public)")
             throw EAPConfiguratorError.failedSecItemAdd(status)
         }
