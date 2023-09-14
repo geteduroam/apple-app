@@ -145,6 +145,7 @@ public struct Connect: Reducer {
     public struct ReusableInfo: Equatable {
         var accessToken: String?
         var letsWiFiVersion: LetsWiFiVersion?
+        var eapConfigData: Data?
     }
     
     public enum ConnectionType: Equatable {
@@ -612,7 +613,13 @@ public struct Connect: Reducer {
             urlRequest.allHTTPHeaderFields = ["Authorization": "Bearer \(accessToken)"]
         }
 
-        let (eapConfigData, _) = try await urlSession.data(for: urlRequest)
+        let eapConfigData: Data
+        if let previousEapConfigData = previousReusableInfo?.eapConfigData {
+            eapConfigData = previousEapConfigData
+        } else {
+            (eapConfigData, _) = try await urlSession.data(for: urlRequest)
+            reusableInfo.eapConfigData = eapConfigData
+        }
         
         let providerList = try xmlDecoder.decode(EAPIdentityProviderList.self, from: eapConfigData)
         let firstValidProvider = providerList
