@@ -15,7 +15,7 @@ public struct BackgroundView: View {
             if showLogo {
                 VStack(alignment: .trailing) {
                     Spacer()
-                    Image("Eduroam")
+                    Image("Logo")
                         .resizable()
                         .frame(width: 160, height: 74)
                         .padding(.bottom, 80)

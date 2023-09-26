@@ -14,6 +14,9 @@
 		C74A11ED294CA56100ECC19A /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C74A11EA294CA56100ECC19A /* OpenSans-SemiBold.ttf */; };
 		C74A11EE294CA56100ECC19A /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C74A11EB294CA56100ECC19A /* OpenSans-Bold.ttf */; };
 		C74A11EF294CA56100ECC19A /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C74A11EC294CA56100ECC19A /* OpenSans-Regular.ttf */; };
+		C755640C2AB9C69100244B45 /* Muli.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C755640A2AB9C64E00244B45 /* Muli.ttf */; };
+		C755640D2AB9C69100244B45 /* Muli-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C75564062AB9C64E00244B45 /* Muli-Bold.ttf */; };
+		C755640E2AB9C69100244B45 /* Muli-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C75564082AB9C64E00244B45 /* Muli-SemiBold.ttf */; };
 		C76B786D2A86F45B00A651EB /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C76B786C2A86F45B00A651EB /* Localizable.xcstrings */; };
 		C76B786F2A86F45B00A651EB /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C76B786E2A86F45B00A651EB /* Localizable.xcstrings */; };
 		C774FA1C29E05DDD001E560C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C74A11E7294C9FB600ECC19A /* Launch Screen.storyboard */; platformFilter = ios; };
@@ -43,6 +46,17 @@
 		C74A11EA294CA56100ECC19A /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		C74A11EB294CA56100ECC19A /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		C74A11EC294CA56100ECC19A /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		C75564012AB9C64E00244B45 /* Muli-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraLight.ttf"; sourceTree = "<group>"; };
+		C75564022AB9C64E00244B45 /* Muli-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		C75564032AB9C64E00244B45 /* Muli-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-BoldItalic.ttf"; sourceTree = "<group>"; };
+		C75564042AB9C64E00244B45 /* SIL Open Font License.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "SIL Open Font License.txt"; sourceTree = "<group>"; };
+		C75564052AB9C64E00244B45 /* Muli-Semi-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Semi-BoldItalic.ttf"; sourceTree = "<group>"; };
+		C75564062AB9C64E00244B45 /* Muli-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Bold.ttf"; sourceTree = "<group>"; };
+		C75564072AB9C64E00244B45 /* Muli-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Italic.ttf"; sourceTree = "<group>"; };
+		C75564082AB9C64E00244B45 /* Muli-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-SemiBold.ttf"; sourceTree = "<group>"; };
+		C75564092AB9C64E00244B45 /* Muli-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-Light.ttf"; sourceTree = "<group>"; };
+		C755640A2AB9C64E00244B45 /* Muli.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Muli.ttf; sourceTree = "<group>"; };
+		C755640B2AB9C64E00244B45 /* Muli-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Muli-LightItalic.ttf"; sourceTree = "<group>"; };
 		C759A6DB291E800B009B30C1 /* geteduroam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = geteduroam.entitlements; sourceTree = "<group>"; };
 		C76B786C2A86F45B00A651EB /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		C76B786E2A86F45B00A651EB /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -152,6 +166,24 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		C75564002AB9C64E00244B45 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C75564012AB9C64E00244B45 /* Muli-ExtraLight.ttf */,
+				C75564022AB9C64E00244B45 /* Muli-ExtraLightItalic.ttf */,
+				C75564032AB9C64E00244B45 /* Muli-BoldItalic.ttf */,
+				C75564042AB9C64E00244B45 /* SIL Open Font License.txt */,
+				C75564052AB9C64E00244B45 /* Muli-Semi-BoldItalic.ttf */,
+				C75564062AB9C64E00244B45 /* Muli-Bold.ttf */,
+				C75564072AB9C64E00244B45 /* Muli-Italic.ttf */,
+				C75564082AB9C64E00244B45 /* Muli-SemiBold.ttf */,
+				C75564092AB9C64E00244B45 /* Muli-Light.ttf */,
+				C755640A2AB9C64E00244B45 /* Muli.ttf */,
+				C755640B2AB9C64E00244B45 /* Muli-LightItalic.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		C7D61036291EA763007C9D6B /* Packages */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +200,7 @@
 				C7F45A65297ABD050005508D /* Info.plist */,
 				C7F45A60297ABD050005508D /* Launch Screen.storyboard */,
 				C7F45A5A297ABD050005508D /* GetgovroamApp.swift */,
+				C75564002AB9C64E00244B45 /* Fonts */,
 				C7F45A5B297ABD050005508D /* Assets.xcassets */,
 				C76B786E2A86F45B00A651EB /* Localizable.xcstrings */,
 				C7F45A5C297ABD050005508D /* Preview Content */,
@@ -289,11 +322,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C755640E2AB9C69100244B45 /* Muli-SemiBold.ttf in Resources */,
 				C7F45A6A297AC8E30005508D /* Preview Assets.xcassets in Resources */,
 				C7F45A68297AC88C0005508D /* discovery.json in Resources */,
+				C755640C2AB9C69100244B45 /* Muli.ttf in Resources */,
 				C7F45A69297AC89A0005508D /* Launch Screen.storyboard in Resources */,
 				C78BB7732A29D212001799ED /* LICENSE.md in Resources */,
 				C76B786F2A86F45B00A651EB /* Localizable.xcstrings in Resources */,
+				C755640D2AB9C69100244B45 /* Muli-Bold.ttf in Resources */,
 				C7F45A67297AC8850005508D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -338,7 +374,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "curl --silent --compressed 'https://discovery.eduroam.app/v2/discovery.json' > geteduroam/discovery.json\n";
+			shellScript = "# curl --silent --compressed 'https://discovery.govroam.app/v2/discovery.json' > getgovroam/discovery.json\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -665,16 +701,18 @@
 				INFOPLIST_FILE = getgovroam/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = getgovroam;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				"INFOPLIST_KEY_UILaunchStoryboardName[sdk=*]" = "Launch Screen";
+				"INFOPLIST_KEY_UILaunchStoryboardName[sdk=macosx*]" = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.govroam.getgovroam;
+				PRODUCT_BUNDLE_IDENTIFIER = app.govroam.getgovroam.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -796,16 +834,18 @@
 				INFOPLIST_FILE = getgovroam/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = getgovroam;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				"INFOPLIST_KEY_UILaunchStoryboardName[sdk=*]" = "Launch Screen";
+				"INFOPLIST_KEY_UILaunchStoryboardName[sdk=macosx*]" = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.govroam.getgovroam;
+				PRODUCT_BUNDLE_IDENTIFIER = app.govroam.getgovroam.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -828,6 +868,8 @@
 				INFOPLIST_FILE = getgovroam/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = getgovroam;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				"INFOPLIST_KEY_UILaunchStoryboardName[sdk=*]" = "Launch Screen";
+				"INFOPLIST_KEY_UILaunchStoryboardName[sdk=macosx*]" = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -836,8 +878,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = app.govroam.getgovroam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -860,6 +902,8 @@
 				INFOPLIST_FILE = getgovroam/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = getgovroam;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				"INFOPLIST_KEY_UILaunchStoryboardName[sdk=*]" = "Launch Screen";
+				"INFOPLIST_KEY_UILaunchStoryboardName[sdk=macosx*]" = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -868,8 +912,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = app.govroam.getgovroam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
