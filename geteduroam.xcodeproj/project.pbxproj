@@ -223,7 +223,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "geteduroam" */;
 			buildPhases = (
-				C72D66D52A4DCBB9007FDB68 /* Update Included Discovery */,
 				7555FF77242A565900829871 /* Sources */,
 				7555FF79242A565900829871 /* Resources */,
 				AE51E588014A6F22C35EF08B /* Frameworks */,
@@ -245,7 +244,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C7F45A54297ABC5C0005508D /* Build configuration list for PBXNativeTarget "getgovroam" */;
 			buildPhases = (
-				C72D66D82A4DCFAB007FDB68 /* Update Included Discovery */,
 				C7F45A46297ABC5C0005508D /* Sources */,
 				C7F45A49297ABC5C0005508D /* Resources */,
 				C7F45A51297ABC5C0005508D /* Frameworks */,
@@ -335,49 +333,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		C72D66D52A4DCBB9007FDB68 /* Update Included Discovery */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Update Included Discovery";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "curl --silent --compressed 'https://discovery.eduroam.app/v2/discovery.json' > geteduroam/discovery.json\n";
-			showEnvVarsInLog = 0;
-		};
-		C72D66D82A4DCFAB007FDB68 /* Update Included Discovery */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Update Included Discovery";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# curl --silent --compressed 'https://discovery.govroam.app/v2/discovery.json' > getgovroam/discovery.json\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7555FF77242A565900829871 /* Sources */ = {
