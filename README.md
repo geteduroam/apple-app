@@ -2,7 +2,7 @@
 
 ## What is it?
 
-This is the [geteduroam](https://geteduroam.app/) app for iPhone, iPad and Mac. Its purpose is to help people configure their devices for use with the [eduroam](https://eduroam.org) network. The eduroam network allows them use the network at their organization of education or when visiting other participating organizations.
+These are the [geteduroam](https://geteduroam.app/) and getgovroam apps for iPhone, iPad and Mac. Their purposes are to help people configure their devices for use with the [eduroam](https://eduroam.org) and [govroam](https://govroam.nl) networks. The eduroam and govroam networks allows them use the network at their organization of education or government or when visiting other participating organizations.
 
 This is the code for version 2.0 and newer.
 
