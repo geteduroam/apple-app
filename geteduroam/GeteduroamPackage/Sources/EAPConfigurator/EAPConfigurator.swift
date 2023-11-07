@@ -71,9 +71,12 @@ class EAPConfigurator {
             }
         let domain = identityProvider.id
         if !dryRun {
-            // TODO: only remove keychain items that match these networks
             Logger.eap.info("Removing network(s) \(ssids)")
             removeNetwork(ssids: ssids, domains: [domain])
+            
+            // TODO: only remove keychain items that match these networks
+            Logger.eap.info("Resetting keychain")
+            resetKeychain()
         }
         
         Logger.eap.info("Creating network configurations")
