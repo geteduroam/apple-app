@@ -20,7 +20,7 @@ public struct ConnectView_Mac: View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             VStack(alignment: .leading) {
                 if #available(macOS 13.0, *) {
-                    // On macOS 13 we push instead of present a sheet and therefor these controls aren't needed
+                    // On macOS 13 we push instead of present a sheet and therefore these controls aren't needed
                 } else {
                     HStack(alignment: .firstTextBaseline) {
                         VStack(alignment: .leading) {
