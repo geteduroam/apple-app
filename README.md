@@ -31,7 +31,7 @@ Open geteduroam.xcodeproj in a current version of Xcode (at least 14.3) and sele
 
 ## Technical Design
 
-The app is designed using [The Composable Architecture](https://github.com/pointfreeco/swift-composable-architecture) (TCA) with SwiftUI. It uses modules its various features. The app itself only contains a minimal amount of code as well as some theming.
+The app is designed using [The Composable Architecture](https://github.com/pointfreeco/swift-composable-architecture) (TCA) with SwiftUI. It uses modules to implement its various features. The app itself only contains a minimal amount of code as well as some theming.
 
 The modules are all defined in the GeteduroamPackage package.
 
@@ -53,7 +53,7 @@ The detail screen with profile selection, helpdesk info and connect functionalit
 
 ### DiscoveryClient
 
-Retreives the list of organizations from the backend.
+Retrieves the list of organizations from the backend.
 
 ### EAPConfigurator
 
@@ -65,7 +65,7 @@ The main screen with the search functionality.
 
 ### Models
 
-Models used troughout the app.
+Models used throughout the app.
 
 ### NotificationClient
 
