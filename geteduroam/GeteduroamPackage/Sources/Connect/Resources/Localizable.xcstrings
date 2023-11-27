@@ -42,7 +42,14 @@
       }
     },
     "Connect" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbind"
+          }
+        }
+      }
     },
     "CONNECT" : {
       "localizations" : {
@@ -65,16 +72,44 @@
       }
     },
     "Continue" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ga verder"
+          }
+        }
+      }
     },
     "Continue in System Preferences" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ga verder in Systeemvoorkeuren"
+          }
+        }
+      }
     },
     "Continue in System Settings" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ga verder in Systeeminstellingen"
+          }
+        }
+      }
     },
     "Continue to Website" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ga verder naar webpagina"
+          }
+        }
+      }
     },
     "Disagree" : {
       "localizations" : {
@@ -87,7 +122,14 @@
       }
     },
     "Double-click to review the profile and then press the \"Install…\" button to setup the network on your computer." : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dubbelklik om het profiel te controleren en druk vervolgens op de \"Installeer\"-knop om het netwerk in te stellen op deze computer."
+          }
+        }
+      }
     },
     "Failed to connect" : {
       "comment" : "Failed to connect",
@@ -131,10 +173,18 @@
       }
     },
     "Missing information about profile." : {
-      "comment" : "missingProfileType"
+      "comment" : "missingProfileType",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informatie ontbreekt over profiel."
+          }
+        }
+      }
     },
     "Missing information to start authentication." : {
-      "comment" : "missingAuthorizationEndpoint\n   missingTokenEndpoint",
+      "comment" : "missingAuthorizationEndpoint\n   missingOAuthInfo\n   missingTokenEndpoint",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -226,7 +276,14 @@
       }
     },
     "Review the profile and then press the \"Install…\" button to setup the network on your computer." : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Controleeer het profiel en druk vervolgens op de \"Installeer\"-knop om het netwerk in te stellen op deze computer."
+          }
+        }
+      }
     },
     "Terms of Use" : {
       "localizations" : {
@@ -260,7 +317,14 @@
       }
     },
     "You are redirected to a website.\n\n(url)" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je wordt doorverwezen naar een webpagina.\n\n(url)"
+          }
+        }
+      }
     },
     "You must agree to the terms of use before you can use this network." : {
       "localizations" : {

@@ -6,6 +6,7 @@ import Foundation
 import Models
 import NotificationClient
 
+@Reducer
 public struct Main: Reducer {
     public init() { }
     
@@ -51,6 +52,7 @@ public struct Main: Reducer {
         case tryAgainTapped
     }
     
+    @Reducer
     public struct Destination: Reducer {
         public enum State: Equatable {
             case connect(Connect.State)
@@ -67,7 +69,7 @@ public struct Main: Reducer {
         }
         
         public var body: some Reducer<State, Action>{
-            Scope(state: /State.connect, action: /Action.connect) {
+            Scope(state: \.connect, action: \.connect) {
                 Connect()
             }
         }
@@ -191,7 +193,7 @@ public struct Main: Reducer {
                 return .none
             }
         }
-        .ifLet(\.$destination, action: /Action.destination) {
+        .ifLet(\.$destination, action: \.destination) {
             Destination()
         }
     }
