@@ -2,10 +2,24 @@
   "sourceLanguage" : "en",
   "strings" : {
     "getgovroam" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "getgovroam"
+          }
+        }
+      }
     },
     "getgovroam Help" : {
-
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "getgovroam Help"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

@@ -19,7 +19,7 @@ Q: How to update the included discovery fallback files?
 A: Run these commands:
 
     curl --silent --compressed 'https://discovery.eduroam.app/v2/discovery.json' > geteduroam/discovery.json
-    curl --silent --compressed 'https://discovery.govroam.app/v2/discovery.json' > getgovroam/discovery.json
+    curl --silent --compressed 'https://getgovroam.nl/v2/discovery.json' > getgovroam/discovery.json
 
 ## License
 

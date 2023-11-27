@@ -9,6 +9,7 @@ import NotificationClient
 import SwiftUI
 import XMLCoder
 
+@Reducer
 public struct Connect: Reducer {
     public init() { }
     
@@ -194,6 +195,7 @@ public struct Connect: Reducer {
         public enum Alert: Equatable { }
     }
     
+    @Reducer
     public struct Destination: Reducer {
         public enum State: Equatable {
             case alert(AlertState<AlertAction>)
@@ -235,6 +237,7 @@ public struct Connect: Reducer {
         case missingProfileType
         case missingTermsAcceptance(ProviderInfo?)
         case missingTokenEndpoint
+        case missingOAuthInfo
         case mobileConfigFailed(ProviderInfo?)
         case noValidProviderFound(ProviderInfo?)
         case redirectToWebsite(URL?)
@@ -243,7 +246,7 @@ public struct Connect: Reducer {
         
         var providerInfo: ProviderInfo? {
             switch self {
-            case .missingAuthorizationEndpoint, .missingTokenEndpoint, .missingEAPConfigEndpoint, .missingProfileType, .missingMobileConfigEndpoint, .redirectToWebsite:
+            case .missingAuthorizationEndpoint, .missingTokenEndpoint, .missingOAuthInfo, .missingEAPConfigEndpoint, .missingProfileType, .missingMobileConfigEndpoint, .redirectToWebsite:
                 return nil
             case let .missingTermsAcceptance(info), let .noValidProviderFound(info), let .eapConfigurationFailed(_, info), let .mobileConfigFailed(info), let .userCancelled(info), let .unknownError(_, info):
                 return info
@@ -261,6 +264,9 @@ public struct Connect: Reducer {
             case .missingTokenEndpoint:
                 return NSLocalizedString("Missing information to start authentication.", bundle: .module, comment: "missingTokenEndpoint")
                 
+            case .missingOAuthInfo:
+                return NSLocalizedString("Missing information to start authentication.", bundle: .module, comment: "missingOAuthInfo")
+       
             case .missingEAPConfigEndpoint:
                 return NSLocalizedString("Missing information to start configuration.", comment: "missingEAPConfigEndpoint")
 
@@ -534,7 +540,7 @@ public struct Connect: Reducer {
                 
             }
         }
-        .ifLet(\.$destination, action: /Action.destination) {
+        .ifLet(\.$destination, action: \.destination) {
           Destination()
         }
     }
@@ -594,9 +600,10 @@ public struct Connect: Reducer {
                 let configuration = OIDServiceConfiguration(authorizationEndpoint: authorizationEndpoint, tokenEndpoint: tokenEndpoint)
                 
                 // Build authentication request
-                let clientId = "app.eduroam.geteduroam"
+                guard let clientId = Bundle.main.bundleIdentifier, let redirectURLString = Bundle.main.infoDictionary?["OAuthRedirectURL"] as? String, let redirectURL = URL(string: redirectURLString) else {
+                    throw OrganizationSetupError.missingOAuthInfo
+                }
                 let scope = "eap-metadata"
-                let redirectURL = URL(string: "app.eduroam.geteduroam:/")!
                 let codeVerifier = OIDAuthorizationRequest.generateCodeVerifier()
                 let codeChallange = OIDAuthorizationRequest.codeChallengeS256(forVerifier: codeVerifier)
                 let state = UUID().uuidString
