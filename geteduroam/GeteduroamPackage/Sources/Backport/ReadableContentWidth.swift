@@ -68,6 +68,64 @@ public extension Backport where Content: View {
         content.modifier(ReadableContentWidthPadding())
     }
 }
+
+struct SimplisticReadableContentWidth: ViewModifier {
+
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
+    
+    func maxWidth(for size: DynamicTypeSize) -> CGFloat {
+        switch size {
+        case .xSmall:
+            600
+        case .small:
+            600
+        case .medium:
+            600
+        case .large:
+            600
+        case .xLarge:
+            720
+        case .xxLarge:
+            720
+        case .xxxLarge:
+            960
+        case .accessibility1:
+            960
+        case .accessibility2:
+            1024
+        case .accessibility3:
+            1024
+        case .accessibility4:
+            2048
+        case .accessibility5:
+            2048
+        @unknown default:
+            600
+        }
+    }
+    
+    func body(content: Content) -> some View {
+        switch horizontalSizeClass {
+        case .regular:
+            HStack {
+                Spacer()
+                content
+                    .frame(maxWidth: maxWidth(for: dynamicTypeSize))
+                Spacer()
+            }
+        default:
+            content
+        }
+    }
+}
+
+public extension Backport where Content: View {
+    @ViewBuilder func simplisticReadableContentWidth() -> some View {
+        content.modifier(SimplisticReadableContentWidth())
+    }
+}
+
 #elseif os(macOS)
 // Does nothing on macOS
 public extension Backport where Content: View {
@@ -76,6 +134,10 @@ public extension Backport where Content: View {
     }
     
     @ViewBuilder func readableContentWidthPadding() -> some View {
+        content
+    }
+    
+    @ViewBuilder func simplisticReadableContentWidth() -> some View {
         content
     }
 }
