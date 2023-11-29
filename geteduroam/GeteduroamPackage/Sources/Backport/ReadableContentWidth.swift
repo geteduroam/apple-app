@@ -136,5 +136,9 @@ public extension Backport where Content: View {
     @ViewBuilder func readableContentWidthPadding() -> some View {
         content
     }
+    
+    @ViewBuilder func simplisticReadableContentWidth() -> some View {
+        content
+    }
 }
 #endif
