@@ -141,7 +141,7 @@ public struct MainView: View {
                 }
                 .searchableMacOnly(text: viewStore.binding(get: \.searchQuery, send: Main.Action.searchQueryChanged), prompt: NSLocalizedString("Search for your organization", bundle: .module, comment: "Search prompt"))
                 .backport
-                .readableContentWidthPadding()
+                .simplisticReadableContentWidth()
                 .background {
                     BackgroundView(showLogo: true)
                 }
