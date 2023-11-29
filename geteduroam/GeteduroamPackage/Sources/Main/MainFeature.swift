@@ -81,10 +81,12 @@ public struct Main: Reducer {
         guard query.isEmpty == false else {
             return .init(uniqueElements: [])
         }
+        let locale = Locale.current
+        let languageCode = locale.languageCode
         return .init(uniqueElements: organizations
             // Apple recommends this, but that seems to be diacritic sensitive
             // .filter({ $0.name.localizedCaseInsensitiveContains(query) })
-            .filter({ $0.matchWords.contains(where: { $0.range(of: query, options: [.caseInsensitive, .diacriticInsensitive, .anchored], locale: Locale.current) != nil } )})
+            .filter({ $0.matchWords(for: languageCode).contains(where: { $0.range(of: query, options: [.caseInsensitive, .diacriticInsensitive, .anchored], locale: locale) != nil } )})
             .sorted(by: { $0.nameOrId.lowercased() < $1.nameOrId.lowercased() }))
     }
 
