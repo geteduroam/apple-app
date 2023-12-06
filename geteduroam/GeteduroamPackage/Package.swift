@@ -47,8 +47,9 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.0.0"),
         .package(url: "https://github.com/pointfreeco/swift-custom-dump", from: "1.0.0"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.0.0"),
+        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.12.0"),
         .package(url: "https://github.com/pointfreeco/swift-url-routing", from: "0.6.0"),
-        .package(url: "https://github.com/pointfreeco/xctest-dynamic-overlay", from: "1.0.0")
+        .package(url: "https://github.com/pointfreeco/xctest-dynamic-overlay", from: "1.0.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -101,6 +102,7 @@ let package = Package(
             dependencies: [
                 "Connect",
                 .product(name: "MockNetwork", package: "network-ios"),
+                .product(name: "SnapshotTesting", package: "swift-snapshot-testing")
             ]),
         .target(
             name: "DiscoveryClient",

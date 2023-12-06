@@ -4,13 +4,9 @@ import Main
 import Models
 import SwiftUI
 
-@main
-struct GeteduroamApp: App {
-    
-    #if os(iOS)
-    @UIApplicationDelegateAdaptor private var appDelegate: GeteduroamAppDelegate
-    
-    @StateObject var theme = Theme(
+#if os(iOS)
+extension Theme {
+    static var theme = Theme(
         searchFont: .custom("Muli", size: 20, relativeTo: .body),
         errorFont: .custom("Muli", size: 16, relativeTo: .body),
         organizationNameFont: .custom("Muli-Bold", size: 16, relativeTo: .body),
@@ -21,11 +17,10 @@ struct GeteduroamApp: App {
         connectedFont: .custom("Muli-Bold", size: 14, relativeTo: .body),
         infoHeaderFont: .custom("Muli-Bold", size: 14, relativeTo: .body),
         infoDetailFont: .custom("Muli", size: 14, relativeTo: .body))
-
-    #elseif os(macOS)
-    @NSApplicationDelegateAdaptor private var appDelegate: GeteduroamAppDelegate
-
-    @StateObject var theme = Theme(
+}
+#elseif os(macOS)
+extension Theme {
+    static var theme =  Theme(
         searchFont: .system(.body, design: .default),
         errorFont: .system(.body, design: .default),
         organizationNameFont: .system(.body, design: .default).bold(),
@@ -36,7 +31,19 @@ struct GeteduroamApp: App {
         connectedFont: .system(.body, design: .default),
         infoHeaderFont: .system(.body, design: .default).bold(),
         infoDetailFont: .system(.body, design: .default))
-    #endif
+}
+#endif
+
+@main
+struct GeteduroamApp: App {
+    
+#if os(iOS)
+    @UIApplicationDelegateAdaptor private var appDelegate: GeteduroamAppDelegate
+#elseif os(macOS)
+    @NSApplicationDelegateAdaptor private var appDelegate: GeteduroamAppDelegate
+#endif
+    
+    @StateObject var theme = Theme.theme
     
     var store: StoreOf<Main>!
     
@@ -47,7 +54,18 @@ struct GeteduroamApp: App {
         fakeInitialWindowPositionPreference()
 #endif
       
-        store = .init(initialState: .init(), reducer: { Main() }, withDependencies: { [appDelegate] in
+#if DEBUG
+        let initialState: Main.State
+        if let scenario = UserDefaults.standard.string(forKey: "Scenario"),  let scenario = Scenario(rawValue: scenario) {
+            initialState = scenario.initialState
+        } else {
+            initialState = .init()
+        }
+#else
+        let initialState = Main.State()
+#endif
+        
+        store = .init(initialState: initialState, reducer: { Main() }, withDependencies: { [appDelegate] in
             $0.authClient = appDelegate
         })
     }
