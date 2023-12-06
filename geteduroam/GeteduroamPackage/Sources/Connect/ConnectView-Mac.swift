@@ -76,14 +76,14 @@ public struct ConnectView_Mac: View {
                     Image(systemName: "doc.badge.gearshape.fill")
                     VStack(alignment: .leading) {
                         if #available(macOS 13.0, *) {
-                            Text("Continue in System Settings")
+                            Text("Continue in System Settings", bundle: .module)
                                 .font(theme.connectButtonFont)
                             Text("""
                                 Double-click to review the profile and then press the "Install…" button to setup the network on your computer.
                                 """, bundle: .module)
                                 .font(theme.connectedFont)
                         } else {
-                            Text("Continue in System Preferences")
+                            Text("Continue in System Preferences", bundle: .module)
                                 .font(theme.connectButtonFont)
                             Text("""
                                 Review the profile and then press the "Install…" button to setup the network on your computer.

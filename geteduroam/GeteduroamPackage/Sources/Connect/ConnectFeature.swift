@@ -14,11 +14,12 @@ public struct Connect: Reducer {
     public init() { }
     
     public struct State: Equatable {
-        public init(organization: Organization, selectedProfileId: Profile.ID? = nil, autoConnectOnAppear: Bool = false, loadingState: LoadingState = .initial, credentials: Credentials? = nil, destination: Destination.State? = nil) {
+        public init(organization: Organization, selectedProfileId: Profile.ID? = nil, autoConnectOnAppear: Bool = false, loadingState: LoadingState = .initial, providerInfo: ProviderInfo? = nil, credentials: Credentials? = nil, destination: Destination.State? = nil) {
             self.organization = organization
             self.selectedProfileId = selectedProfileId
             self.autoConnectOnAppear = autoConnectOnAppear
             self.loadingState = loadingState
+            self.providerInfo = providerInfo
             self.credentials = credentials
             self.destination = destination
         }

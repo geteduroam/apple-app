@@ -70,3 +70,31 @@ Models used throughout the app.
 ### NotificationClient
 
 Schedules reminders for when network configurations expire.
+
+## Creating screenshots
+
+To facilitate creating screenshots for the App Store, use these steps:
+
+1. In MainView.swift: comment out sending the `searchQueryChangeDebounced` action
+2. In Screenshots.swift: verify `screenshotsFolder` goes to an existing folder
+3. Select the `geteduroam/getgovroam Screenshots` target
+4. Select the desired destination
+5. Use Product > Test (cmd-U)
+
+If the tests hang, try running the app on that particular simulator first. Check that the simulator is in the desired orientation: portrait for this app.
+
+Refer to the [Screenshot specifications](https://developer.apple.com/help/app-store-connect/reference/screenshot-specifications) to pick the desired destinations.
+
+Currently we use:
+
+- iPhone 15 Pro Max
+- iPhone 8 Plus
+- iPad Pro (12.9-inch) (6th generation) 
+- iPad Pro (12.9-inch) (2nd generation) 
+- Mac with 1280 x 800 pixels
+
+Currently we don't use:
+- iPhone 15: generates screenshots with size 1178 x 2556, but App Store wants 1179 x 2556
+
+iPhone 8 Plus eduroam failed
+iPhone -> asstinanance

@@ -33,7 +33,7 @@ public struct Profile: Codable, Equatable, Identifiable {
     public let webviewEndpoint: String?
     
     public var nameOrId: String {
-        name?["any"] ?? id
+        name?.localized() ?? id
     }
 }
 
