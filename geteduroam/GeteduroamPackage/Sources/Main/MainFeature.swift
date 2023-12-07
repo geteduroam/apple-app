@@ -16,11 +16,11 @@ public struct Main: Reducer {
     @Dependency(\.date.now) var now
     
     public struct State: Equatable {
-        public init(searchQuery: String = "", organizations: IdentifiedArrayOf<Organization> = .init(uniqueElements: []), loadingState: LoadingState = .initial, destination: Destination.State? = nil) {
+        public init(searchQuery: String = "", organizations: IdentifiedArrayOf<Organization> = .init(uniqueElements: []), loadingState: LoadingState = .initial, searchResults: IdentifiedArrayOf<Organization> = .init(uniqueElements: []), destination: Destination.State? = nil) {
             self.searchQuery = searchQuery
             self.organizations = organizations
             self.loadingState = loadingState
-            self.searchResults = .init(uniqueElements: [])
+            self.searchResults = searchResults
             self.destination = destination
         }
         

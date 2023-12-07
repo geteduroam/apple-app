@@ -103,6 +103,7 @@ public struct ConnectView_iOS: View {
                     }
                     Spacer()
                 }
+                .padding(20)
             }
             .onAppear {
                 viewStore.send(.onAppear)
