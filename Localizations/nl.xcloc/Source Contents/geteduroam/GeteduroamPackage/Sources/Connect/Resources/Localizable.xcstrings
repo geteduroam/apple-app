@@ -1,0 +1,162 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Agree" : {
+
+    },
+    "Cancel" : {
+
+    },
+    "Configured" : {
+
+    },
+    "Configured, but not connected" : {
+
+    },
+    "Connect" : {
+
+    },
+    "CONNECT" : {
+
+    },
+    "Connected" : {
+
+    },
+    "Continue" : {
+
+    },
+    "Continue in System Preferences" : {
+
+    },
+    "Continue in System Settings" : {
+
+    },
+    "Continue to Website" : {
+
+    },
+    "Disagree" : {
+
+    },
+    "Double-click to review the profile and then press the \"Install…\" button to setup the network on your computer." : {
+
+    },
+    "Failed to connect" : {
+      "comment" : "Failed to connect"
+    },
+    "Helpdesk" : {
+
+    },
+    "Log In" : {
+
+    },
+    "Login Required" : {
+
+    },
+    "Missing information about profile." : {
+      "comment" : "missingProfileType"
+    },
+    "Missing information to start authentication. (auth)" : {
+      "comment" : "missingAuthorizationEndpoint (leave text in brackets out of localization)",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Missing information to start authentication."
+          }
+        }
+      }
+    },
+    "Missing information to start authentication. (info)" : {
+      "comment" : "missingOAuthInfo (leave text in brackets out of localization)",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Missing information to start authentication."
+          }
+        }
+      }
+    },
+    "Missing information to start authentication. (token)" : {
+      "comment" : "missingTokenEndpoint (leave text in brackets out of localization)",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Missing information to start authentication."
+          }
+        }
+      }
+    },
+    "Missing information to start configuration. (eap)" : {
+      "comment" : "missingEAPConfigEndpoint (leave text in brackets out of localization)",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Missing information to start configuration."
+          }
+        }
+      }
+    },
+    "Missing information to start configuration. (profile)" : {
+      "comment" : "missingMobileConfigEndpoint (leave text in brackets out of localization)",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Missing information to start configuration."
+          }
+        }
+      }
+    },
+    "No valid profile found." : {
+      "comment" : "mobileConfigFailed"
+    },
+    "No valid provider found." : {
+      "comment" : "noValidProviderFound"
+    },
+    "OK" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
+    "Password" : {
+
+    },
+    "Please enter your username and password." : {
+
+    },
+    "Profiles" : {
+      "comment" : "Profiles"
+    },
+    "Review the profile and then press the \"Install…\" button to setup the network on your computer." : {
+
+    },
+    "Terms of Use" : {
+
+    },
+    "The configuration process was cancelled." : {
+      "comment" : "userCancelled"
+    },
+    "Username" : {
+
+    },
+    "You are redirected to a website.\n\n(url)" : {
+
+    },
+    "You must agree to the terms of use before you can use this network." : {
+
+    },
+    "You must agree to the terms of use." : {
+      "comment" : "missingTermsAcceptance (leave text in brackets out of localization)"
+    }
+  },
+  "version" : "1.0"
+}

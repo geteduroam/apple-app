@@ -95,3 +95,19 @@ Currently we use:
 
 Currently we don't use:
 - iPhone 15: generates screenshots with size 1178 x 2556, but App Store wants 1179 x 2556
+
+## Localizations
+
+In Xcode use Product > Export Localizations > geteduroam… and pick a location to store the output. This creates a folder with a package for each currently supported language with the extension xcloc. This package can be opened by Xcode to edit the translations. Alternatively, in the Finder control click on the xcloc package and use Show Package Contents to find amongst others an xliff file, which is an industry standard for localizing apps.
+
+Note, temporarily add the AppStore.xcstrings files to their targets so that they get included in the xcloc package. They shouldn't ship with the app though. These are just to collect the translations for the App Store.
+
+### Adding a new language
+
+In Xcode use these steps:
+
+1. Select the project geteduroam
+2. Select the Info tab
+3. Find the Localizations section
+4. Add the language with the + button
+5. Use the menu Product > Export Localizations > geteduroam… and pick a location to store the output
