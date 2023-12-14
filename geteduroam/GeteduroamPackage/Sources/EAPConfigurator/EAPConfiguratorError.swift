@@ -55,52 +55,52 @@ extension EAPConfiguratorError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .noOIDOrSSID:
-            return NSLocalizedString("No OID or SSID in configuration", comment: "No OID or SSID in configuration")
+            return NSLocalizedString("No OID or SSID in configuration", bundle: .module, comment: "No OID or SSID in configuration")
             
         case .failedToSetTrustedServerCertificates:
-            return NSLocalizedString("Unable to set server certificate as trusted", comment: "setTrustedServerCertificates: returned false")
+            return NSLocalizedString("Unable to set server certificate as trusted", bundle: .module, comment: "setTrustedServerCertificates: returned false")
             
         case .unableToVerifyNetwork:
-            return NSLocalizedString("Unable to verify network because no server name or certificate set", comment: "No server names and no custom CAs set")
+            return NSLocalizedString("Unable to verify network because no server name or certificate set", bundle: .module, comment: "No server names and no custom CAs set")
             
         case .cannotSetIdentity:
-            return NSLocalizedString("Unable to set identity for client certificate", comment: "ClientCertificate: cannot set identity")
+            return NSLocalizedString("Unable to set identity for client certificate", bundle: .module, comment: "ClientCertificate: cannot set identity")
             
         case .emptyUsernameOrPassword:
-            return NSLocalizedString("No credentials in configuration", comment: "empty user/pass")
+            return NSLocalizedString("No credentials in configuration", bundle: .module, comment: "empty user/pass")
             
         case .noOuterEAPType:
-            return NSLocalizedString("No valid outer EAP type in configuration", comment: "noOuterEAPType")
+            return NSLocalizedString("No valid outer EAP type in configuration", bundle: .module, comment: "noOuterEAPType")
             
         case let .failedSecPKCS12Import(status):
-            return String(format: NSLocalizedString("Unable to import certificate into keychain (%d)", comment: "addClientCertificate"), status)
+            return String(format: NSLocalizedString("Unable to import certificate into keychain (%d)", bundle: .module, comment: "addClientCertificate"), status)
             
         case let .failedSecItemAdd(status, commonName):
-            return String(format: NSLocalizedString("Unable to add certificate %@ to keychain (%d)", comment: "addClientCertificate: SecItemAdd"), commonName ?? NSLocalizedString("with unknown name", comment: "with unknown name"), status)
+            return String(format: NSLocalizedString("Unable to add certificate %@ to keychain (%d)", bundle: .module, comment: "addClientCertificate: SecItemAdd"), commonName ?? NSLocalizedString("with unknown name", bundle: .module, comment: "with unknown name"), status)
             
         case let .failedSecItemCopyMatching(status):
-            return String(format: NSLocalizedString("Unable to copy from keychain (%d)", comment: "SecItemCopyMatching: retrieving identity returned"), status)
+            return String(format: NSLocalizedString("Unable to copy from keychain (%d)", bundle: .module, comment: "SecItemCopyMatching: retrieving identity returned"), status)
             
         case .failedToBase64DecodeCertificate:
-            return NSLocalizedString("Unable to decode certificate data", comment: "Unable to base64 decode certificate data")
+            return NSLocalizedString("Unable to decode certificate data", bundle: .module, comment: "Unable to base64 decode certificate data")
             
         case .failedToCreateCertificateFromData:
-            return NSLocalizedString("Unable to create certificate from data", comment: "SecCertificateCreateWithData: false")
+            return NSLocalizedString("Unable to create certificate from data", bundle: .module, comment: "SecCertificateCreateWithData: false")
             
         case .failedToCopyCommonName:
-            return NSLocalizedString("Unable to get common name from certificate", comment: "Certificate: unable to get common name")
+            return NSLocalizedString("Unable to get common name from certificate", bundle: .module, comment: "Certificate: unable to get common name")
             
         case .noConfigurations:
-            return NSLocalizedString("No valid configuration found", comment: "noConfigurations")
+            return NSLocalizedString("No valid configuration found", bundle: .module, comment: "noConfigurations")
             
         case .cannotCopySupportedInterfaces:
-            return NSLocalizedString("Unable to read supported interfaces", comment: "cannotCopySupportedInterfaces")
+            return NSLocalizedString("Unable to read supported interfaces", bundle: .module, comment: "cannotCopySupportedInterfaces")
             
         case .missingCredentials:
-            return NSLocalizedString("No credentials in configuration", comment: "empty user/pass")
+            return NSLocalizedString("No credentials in configuration", bundle: .module, comment: "empty user/pass")
             
         case let .invalidUsername(suffix):
-            return String(format: NSLocalizedString("Username must end with \"%@\"", comment: "invalid username"), suffix)
+            return String(format: NSLocalizedString("Username must end with \"%@\"", bundle: .module, comment: "invalid username"), suffix)
         }
     }
 }

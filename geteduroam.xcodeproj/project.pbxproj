@@ -63,6 +63,8 @@
 		7555FF7B242A565900829871 /* geteduroam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = geteduroam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C72D66D62A4DCE9A007FDB68 /* discovery.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = discovery.json; sourceTree = "<group>"; };
+		C72FDF122B2B51AA00AE0636 /* AppStore.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = AppStore.xcstrings; sourceTree = "<group>"; };
+		C72FDF152B2B543900AE0636 /* AppStore.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = AppStore.xcstrings; sourceTree = "<group>"; };
 		C74A11E7294C9FB600ECC19A /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		C74A11EA294CA56100ECC19A /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		C74A11EB294CA56100ECC19A /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				C74A11E9294CA56100ECC19A /* Fonts */,
 				C76B786C2A86F45B00A651EB /* Localizable.xcstrings */,
+				C72FDF122B2B51AA00AE0636 /* AppStore.xcstrings */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 			);
 			path = geteduroam;
@@ -256,6 +259,7 @@
 				C75564002AB9C64E00244B45 /* Fonts */,
 				C7F45A5B297ABD050005508D /* Assets.xcassets */,
 				C76B786E2A86F45B00A651EB /* Localizable.xcstrings */,
+				C72FDF152B2B543900AE0636 /* AppStore.xcstrings */,
 				C7F45A5C297ABD050005508D /* Preview Content */,
 			);
 			path = getgovroam;

@@ -183,24 +183,87 @@
         }
       }
     },
-    "Missing information to start authentication." : {
-      "comment" : "missingAuthorizationEndpoint\n   missingOAuthInfo\n   missingTokenEndpoint",
+    "Missing information to start authentication. (auth)" : {
+      "comment" : "missingAuthorizationEndpoint (leave text in brackets out of localization)",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Missing information to start authentication."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Informatie ontbreekt om authenticatie te kunnen starten."
+            "value" : "Informatie ontbreekt om authenticatie te starten."
           }
         }
       }
     },
-    "Missing information to start configuration." : {
-      "comment" : "missingEAPConfigEndpoint\n   missingMobileConfigEndpoint",
+    "Missing information to start authentication. (info)" : {
+      "comment" : "missingOAuthInfo (leave text in brackets out of localization)",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Missing information to start authentication."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Informatie ontbreekt om configuratie te kunnen starten."
+            "value" : "Informatie ontbreekt om authenticatie te starten."
+          }
+        }
+      }
+    },
+    "Missing information to start authentication. (token)" : {
+      "comment" : "missingTokenEndpoint (leave text in brackets out of localization)",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Missing information to start authentication."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informatie ontbreekt om authenticatie te starten."
+          }
+        }
+      }
+    },
+    "Missing information to start configuration. (eap)" : {
+      "comment" : "missingEAPConfigEndpoint (leave text in brackets out of localization)",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Missing information to start configuration."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informatie ontbreekt om configuratie te starten."
+          }
+        }
+      }
+    },
+    "Missing information to start configuration. (profile)" : {
+      "comment" : "missingMobileConfigEndpoint (leave text in brackets out of localization)",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Missing information to start configuration."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informatie ontbreekt om configuratie te starten."
           }
         }
       }
@@ -337,7 +400,7 @@
       }
     },
     "You must agree to the terms of use." : {
-      "comment" : "missingTermsAcceptance",
+      "comment" : "missingTermsAcceptance (leave text in brackets out of localization)",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

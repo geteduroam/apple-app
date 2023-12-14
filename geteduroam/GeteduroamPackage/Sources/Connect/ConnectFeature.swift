@@ -260,22 +260,22 @@ public struct Connect: Reducer {
                 return NSLocalizedString("Missing information about profile.", comment: "missingProfileType")
 
             case .missingAuthorizationEndpoint:
-                return NSLocalizedString("Missing information to start authentication.", bundle: .module, comment: "missingAuthorizationEndpoint")
+                return NSLocalizedString("Missing information to start authentication. (auth)", bundle: .module, comment: "missingAuthorizationEndpoint (leave text in brackets out of localization)")
                 
             case .missingTokenEndpoint:
-                return NSLocalizedString("Missing information to start authentication.", bundle: .module, comment: "missingTokenEndpoint")
+                return NSLocalizedString("Missing information to start authentication. (token)", bundle: .module, comment: "missingTokenEndpoint (leave text in brackets out of localization)")
                 
             case .missingOAuthInfo:
-                return NSLocalizedString("Missing information to start authentication.", bundle: .module, comment: "missingOAuthInfo")
+                return NSLocalizedString("Missing information to start authentication. (info)", bundle: .module, comment: "missingOAuthInfo (leave text in brackets out of localization)")
        
             case .missingEAPConfigEndpoint:
-                return NSLocalizedString("Missing information to start configuration.", comment: "missingEAPConfigEndpoint")
+                return NSLocalizedString("Missing information to start configuration. (eap)", comment: "missingEAPConfigEndpoint (leave text in brackets out of localization)")
 
             case .missingMobileConfigEndpoint:
-                return NSLocalizedString("Missing information to start configuration.", comment: "missingMobileConfigEndpoint")
+                return NSLocalizedString("Missing information to start configuration. (profile)", comment: "missingMobileConfigEndpoint (leave text in brackets out of localization)")
                 
             case .missingTermsAcceptance:
-                return NSLocalizedString("You must agree to the terms of use.", bundle: .module, comment: "missingTermsAcceptance")
+                return NSLocalizedString("You must agree to the terms of use.", bundle: .module, comment: "missingTermsAcceptance (leave text in brackets out of localization)")
                 
             case .noValidProviderFound:
                 return NSLocalizedString("No valid provider found.", bundle: .module, comment: "noValidProviderFound")
