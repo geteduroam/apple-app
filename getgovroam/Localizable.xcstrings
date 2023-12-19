@@ -3,6 +3,12 @@
   "strings" : {
     "getgovroam" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "getgovroam"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13,6 +19,12 @@
     },
     "getgovroam Help" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "getgovroam Help"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",

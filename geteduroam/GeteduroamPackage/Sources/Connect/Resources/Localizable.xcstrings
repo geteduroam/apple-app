@@ -3,6 +3,12 @@
   "strings" : {
     "Agree" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agree"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13,6 +19,12 @@
     },
     "Cancel" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23,6 +35,12 @@
     },
     "Configured" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configured"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -33,6 +51,12 @@
     },
     "Configured, but not connected" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configured, but not connected"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -43,6 +67,12 @@
     },
     "Connect" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connect"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -53,6 +83,12 @@
     },
     "CONNECT" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CONNECT"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -63,6 +99,12 @@
     },
     "Connected" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connected"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -73,6 +115,12 @@
     },
     "Continue" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -83,6 +131,12 @@
     },
     "Continue in System Preferences" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue in System Preferences"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -93,6 +147,12 @@
     },
     "Continue in System Settings" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue in System Settings"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -103,6 +163,12 @@
     },
     "Continue to Website" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue to Website"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -113,6 +179,12 @@
     },
     "Disagree" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disagree"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -123,6 +195,12 @@
     },
     "Double-click to review the profile and then press the \"Install…\" button to setup the network on your computer." : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Double-click to review the profile and then press the \"Install…\" button to setup the network on your computer."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -134,6 +212,12 @@
     "Failed to connect" : {
       "comment" : "Failed to connect",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to connect"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -144,6 +228,12 @@
     },
     "Helpdesk" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Helpdesk"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -154,6 +244,12 @@
     },
     "Log In" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Log In"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -164,6 +260,12 @@
     },
     "Login Required" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login Required"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -175,6 +277,12 @@
     "Missing information about profile." : {
       "comment" : "missingProfileType",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Missing information about profile."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -271,6 +379,12 @@
     "No valid profile found." : {
       "comment" : "mobileConfigFailed",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No valid profile found."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -282,6 +396,12 @@
     "No valid provider found." : {
       "comment" : "noValidProviderFound",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No valid provider found."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -309,6 +429,12 @@
     },
     "Password" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -319,6 +445,12 @@
     },
     "Please enter your username and password." : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please enter your username and password."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -330,6 +462,12 @@
     "Profiles" : {
       "comment" : "Profiles",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profiles"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -340,6 +478,12 @@
     },
     "Review the profile and then press the \"Install…\" button to setup the network on your computer." : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Review the profile and then press the \"Install…\" button to setup the network on your computer."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -350,6 +494,12 @@
     },
     "Terms of Use" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terms of Use"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -361,6 +511,12 @@
     "The configuration process was cancelled." : {
       "comment" : "userCancelled",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The configuration process was cancelled."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -371,6 +527,12 @@
     },
     "Username" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Username"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -381,6 +543,12 @@
     },
     "You are redirected to a website.\n\n(url)" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You are redirected to a website.\n\n(url)"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -391,6 +559,12 @@
     },
     "You must agree to the terms of use before you can use this network." : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You must agree to the terms of use before you can use this network."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -402,6 +576,12 @@
     "You must agree to the terms of use." : {
       "comment" : "missingTermsAcceptance (leave text in brackets out of localization)",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You must agree to the terms of use."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",

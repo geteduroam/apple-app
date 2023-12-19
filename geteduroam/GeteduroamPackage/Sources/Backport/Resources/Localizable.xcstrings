@@ -4,6 +4,12 @@
     "Search" : {
       "comment" : "Search prompt",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",

@@ -4,6 +4,12 @@
     "Failed to load organizations" : {
       "comment" : "Message when organizations can't be loaded and the fallback fails too",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to load organizations"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14,6 +20,12 @@
     },
     "No matches found" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No matches found"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -24,6 +36,12 @@
     },
     "OK" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -35,6 +53,12 @@
     "Search for your organization" : {
       "comment" : "Search prompt",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search for your organization"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -46,6 +70,12 @@
     "The organization is no longer listed." : {
       "comment" : "Message when user asked to renew but the organization could not be found",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The organization is no longer listed."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -57,6 +87,12 @@
     "Unknown organization" : {
       "comment" : "Title when user asked to renew but the organization could not be found",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown organization"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",

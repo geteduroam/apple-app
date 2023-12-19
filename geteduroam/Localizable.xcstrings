@@ -3,6 +3,12 @@
   "strings" : {
     "geteduroam" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13,6 +19,12 @@
     },
     "geteduroam Help" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam Help"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",

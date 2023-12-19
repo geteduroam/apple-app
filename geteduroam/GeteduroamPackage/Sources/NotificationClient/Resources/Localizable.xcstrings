@@ -4,6 +4,12 @@
     "Remind Me Later" : {
       "comment" : "Remind Me Later",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remind Me Later"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15,6 +21,12 @@
     "Renew Now" : {
       "comment" : "Renew Now",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renew Now"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26,6 +38,12 @@
     "Renew your connection to extend your access." : {
       "comment" : "Renew your connection to extend your access.",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renew your connection to extend your access."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -37,6 +55,12 @@
     "You had access until %@. Renew your connection to extend your access." : {
       "comment" : "You had access until <date>. Renew your connection to extend your access.",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You had access until %@. Renew your connection to extend your access."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -48,6 +72,12 @@
     "You have access until %@. Renew your connection to extend your access." : {
       "comment" : "You have access until <date>. Renew your connection to extend your access.",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have access until %@. Renew your connection to extend your access."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -59,6 +89,12 @@
     "Your network access has expired" : {
       "comment" : "Your network access has expired",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your network access has expired"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -70,6 +106,12 @@
     "Your network access is about to expire" : {
       "comment" : "Your network access is about to expire",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your network access is about to expire"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
