@@ -343,12 +343,12 @@
         }
       }
     },
-    "You are redirected to a website.\n\n(url)" : {
+    "You are redirected to a website." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You are redirected to a website.\n\n(url)"
+            "value" : "You are redirected to a website."
           }
         }
       }

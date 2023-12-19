@@ -1,4 +1,5 @@
-<?xml version="1.0" ?><xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="geteduroam/AppStore.xcstrings" source-language="en" target-language="hu" datatype="plaintext">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="15.1" build-num="15C65"/>
@@ -7,19 +8,16 @@
       <trans-unit id="Description" xml:space="preserve">
         <source>Configure your eduroam account easily and securely using geteduroam.</source>
         <target state="translated">Konfiguráld az eduroam hozzáférésed egyszerűen és biztonságosan a geteduroam segítségével</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Keywords" xml:space="preserve">
         <source>eduroam,wifi,roam,geteduroam,hotspot,wi-fi,network,education,university,connect,wireless,internet</source>
         <target state="translated">eduroam, wifi, roam, geteduroam, hotspot, wi-fi, hálózat, oktatás, egyetem, csatlakozás, vezeték nélküli, internet</target>
-        
         <note>Max 100 characters, no spaces just commas</note>
       </trans-unit>
       <trans-unit id="Name" xml:space="preserve">
         <source>geteduroam</source>
         <target state="translated">geteduroam</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Promotional Text" xml:space="preserve">
@@ -30,43 +28,36 @@
       <trans-unit id="Screenshots: Another Organization" xml:space="preserve">
         <source>Another Organization</source>
         <target state="translated">Másik Intézmény</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Screenshots: Contact our helpdesk if you need assistance." xml:space="preserve">
         <source>Contact our helpdesk if you need assistance.</source>
         <target state="translated">Lépjen kapcsolatba ügyfélszolgálatunkkal, ha segítségre van szüksége.</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Screenshots: Example Organization" xml:space="preserve">
         <source>Example Organization</source>
         <target state="translated">Példa Szervezet</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Screenshots: Profile for Staff" xml:space="preserve">
         <source>Profile for Staff</source>
         <target state="translated">Profile a dolgozók számára</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Screenshots: Profile for Students" xml:space="preserve">
         <source>Profile for Students</source>
         <target state="translated">Diákok profilja</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Subtitle" xml:space="preserve">
         <source>get connected wherever you are</source>
         <target state="translated">maradj kapsolódva bárhol is vagy</target>
-        
         <note>Max 32 characters</note>
       </trans-unit>
       <trans-unit id="What's New in This Version" xml:space="preserve">
         <source>This major update brings an entirely new designed and rewritten app.</source>
         <target state="translated">Ez a frissítés egy teljesen újratervezett és újraírt alkalmazás.</target>
-        
         <note/>
       </trans-unit>
     </body>
@@ -79,7 +70,6 @@
       <trans-unit id="No access token obtained for unknown reason" xml:space="preserve">
         <source>No access token obtained for unknown reason</source>
         <target state="translated">Nem sikerült hozzáférési token megszerzése ismeretlen okból</target>
-        
         <note>OIDAuthStateError neitherAccessTokenNorErrorAvailable</note>
       </trans-unit>
     </body>
@@ -92,7 +82,6 @@
       <trans-unit id="Search" xml:space="preserve">
         <source>Search</source>
         <target state="translated">Keresés</target>
-        
         <note>Search prompt</note>
       </trans-unit>
     </body>
@@ -105,221 +94,181 @@
       <trans-unit id="Agree" xml:space="preserve">
         <source>Agree</source>
         <target state="translated">Egyetértek</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="CONNECT" xml:space="preserve">
         <source>CONNECT</source>
         <target state="translated">CSATLAKOZÁS</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Cancel" xml:space="preserve">
         <source>Cancel</source>
         <target state="translated">Elvet</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Configured" xml:space="preserve">
         <source>Configured</source>
         <target state="translated">Konfigurált</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Configured, but not connected" xml:space="preserve">
         <source>Configured, but not connected</source>
         <target state="translated">Konfigurált, de nem csatlakoztatott</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Connect" xml:space="preserve">
         <source>Connect</source>
         <target state="translated">Csatlakozás</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Connected" xml:space="preserve">
         <source>Connected</source>
         <target state="translated">Csatlakozva</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Continue" xml:space="preserve">
         <source>Continue</source>
         <target state="translated">Folytatás</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Continue in System Preferences" xml:space="preserve">
         <source>Continue in System Preferences</source>
         <target state="translated">Folytassa a Rendszerbeállításokban</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Continue in System Settings" xml:space="preserve">
         <source>Continue in System Settings</source>
         <target state="translated">Folytatás a Rendszerbeállításokban</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Continue to Website" xml:space="preserve">
         <source>Continue to Website</source>
         <target state="translated">Folytatás a webhelyen</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Disagree" xml:space="preserve">
         <source>Disagree</source>
         <target state="translated">Nem értek egyet</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Double-click to review the profile and then press the &quot;Install…&quot; button to setup the network on your computer." xml:space="preserve">
-        <source>Double-click to review the profile and then press the &quot;Install…&quot; button to setup the network on your computer.</source>
-        <target state="translated">Kattintson duplán a profil áttekintéséhez, majd nyomja meg az &quot;Installálás...&quot; gombot a hálózat beállításához a számítógépén.</target>
-        
+        <source>Double-click to review the profile and then press the "Install…" button to setup the network on your computer.</source>
+        <target state="translated">Kattintson duplán a profil áttekintéséhez, majd nyomja meg az "Installálás..." gombot a hálózat beállításához a számítógépén.</target>
         <note/>
       </trans-unit>
       <trans-unit id="Failed to connect" xml:space="preserve">
         <source>Failed to connect</source>
         <target state="translated">Nem sikerült kapcsolódni.</target>
-        
         <note>Failed to connect</note>
       </trans-unit>
       <trans-unit id="Helpdesk" xml:space="preserve">
         <source>Helpdesk</source>
         <target state="translated">Ügyfélszolgálat</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Log In" xml:space="preserve">
         <source>Log In</source>
         <target state="translated">Bejelentkezés</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Login Required" xml:space="preserve">
         <source>Login Required</source>
         <target state="translated">Bejelentkezés szükséges</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Missing information about profile." xml:space="preserve">
         <source>Missing information about profile.</source>
         <target state="translated">Hiányzó információk a profilról.</target>
-        
         <note>missingProfileType</note>
       </trans-unit>
       <trans-unit id="Missing information to start authentication. (auth)" xml:space="preserve">
         <source>Missing information to start authentication.</source>
         <target state="translated">Hiányzó információk az azonosítás megkezdéséhez.</target>
-        
         <note>missingAuthorizationEndpoint (leave text in brackets out of localization)</note>
       </trans-unit>
       <trans-unit id="Missing information to start authentication. (info)" xml:space="preserve">
         <source>Missing information to start authentication.</source>
         <target state="translated">Hiányzó információk az azonosítás megkezdéséhez.</target>
-        
         <note>missingOAuthInfo (leave text in brackets out of localization)</note>
       </trans-unit>
       <trans-unit id="Missing information to start authentication. (token)" xml:space="preserve">
         <source>Missing information to start authentication.</source>
         <target state="translated">Hiányzó információk az azonosítás megkezdéséhez.</target>
-        
         <note>missingTokenEndpoint (leave text in brackets out of localization)</note>
       </trans-unit>
       <trans-unit id="Missing information to start configuration. (eap)" xml:space="preserve">
         <source>Missing information to start configuration.</source>
         <target state="translated">Hiányzó információk a konfiguráció elindításához.</target>
-        
         <note>missingEAPConfigEndpoint (leave text in brackets out of localization)</note>
       </trans-unit>
       <trans-unit id="Missing information to start configuration. (profile)" xml:space="preserve">
         <source>Missing information to start configuration.</source>
         <target state="translated">Hiányzó információk a konfiguráció elindításához.</target>
-        
         <note>missingMobileConfigEndpoint (leave text in brackets out of localization)</note>
       </trans-unit>
       <trans-unit id="No valid profile found." xml:space="preserve">
         <source>No valid profile found.</source>
         <target state="translated">Nem található érvényes profil.</target>
-        
         <note>mobileConfigFailed</note>
       </trans-unit>
       <trans-unit id="No valid provider found." xml:space="preserve">
         <source>No valid provider found.</source>
         <target state="translated">Nem található érvényes szolgáltató.</target>
-        
         <note>noValidProviderFound</note>
       </trans-unit>
       <trans-unit id="OK" xml:space="preserve">
         <source>OK</source>
         <target state="translated">OK</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Password" xml:space="preserve">
         <source>Password</source>
         <target state="translated">Jelszó</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Please enter your username and password." xml:space="preserve">
         <source>Please enter your username and password.</source>
         <target state="translated">Kérlek, add meg a felhasználóneved és a jelszavad.</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Profiles" xml:space="preserve">
         <source>Profiles</source>
         <target state="translated">Profilok</target>
-        
         <note>Profiles</note>
       </trans-unit>
       <trans-unit id="Review the profile and then press the &quot;Install…&quot; button to setup the network on your computer." xml:space="preserve">
-        <source>Review the profile and then press the &quot;Install…&quot; button to setup the network on your computer.</source>
-        <target state="translated">Tekintse át  a profilját, majd nyomja meg az &quot;Installálás...&quot; gombot a hálózat beállításához a számítógépén.</target>
-        
+        <source>Review the profile and then press the "Install…" button to setup the network on your computer.</source>
+        <target state="translated">Tekintse át  a profilját, majd nyomja meg az "Installálás..." gombot a hálózat beállításához a számítógépén.</target>
         <note/>
       </trans-unit>
       <trans-unit id="Terms of Use" xml:space="preserve">
         <source>Terms of Use</source>
         <target state="translated">Használati feltételek</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="The configuration process was cancelled." xml:space="preserve">
         <source>The configuration process was cancelled.</source>
         <target state="translated">A konfigurációs folyamat megszakadt.</target>
-        
         <note>userCancelled</note>
       </trans-unit>
       <trans-unit id="Username" xml:space="preserve">
         <source>Username</source>
         <target state="translated">Felhasználónév</target>
-        
         <note/>
       </trans-unit>
-      <trans-unit id="You are redirected to a website.&#10;&#10;(url)" xml:space="preserve">
-        <source>You are redirected to a website.
-
-(url)</source>
-        <target state="translated">Átirányítunk egy weboldalra.
-
-(url)</target>
-        
+      <trans-unit id="You are redirected to a website." xml:space="preserve">
+        <source>You are redirected to a website.</source>
+        <target state="translated">Átirányítunk egy weboldalra.</target>
         <note/>
       </trans-unit>
       <trans-unit id="You must agree to the terms of use before you can use this network." xml:space="preserve">
         <source>You must agree to the terms of use before you can use this network.</source>
         <target state="translated">A felhasználási feltételek elfogadása szükséges, mielőtt használhatja ezt a hálózatot.</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="You must agree to the terms of use." xml:space="preserve">
         <source>You must agree to the terms of use.</source>
         <target state="translated">El kelle fogadnia  a felhasználási feltételeket</target>
-        
         <note>missingTermsAcceptance (leave text in brackets out of localization)</note>
       </trans-unit>
     </body>
@@ -332,97 +281,81 @@
       <trans-unit id="No OID or SSID in configuration" xml:space="preserve">
         <source>No OID or SSID in configuration</source>
         <target state="translated">Nincs OID vagy SSID a konfigurációban</target>
-        
         <note>No OID or SSID in configuration</note>
       </trans-unit>
       <trans-unit id="No credentials in configuration" xml:space="preserve">
         <source>No credentials in configuration</source>
         <target state="translated">Nincsenek hitelesítő adatok a konfigurációban</target>
-        
         <note>empty user/pass</note>
       </trans-unit>
       <trans-unit id="No valid configuration found" xml:space="preserve">
         <source>No valid configuration found</source>
         <target state="translated">Nem található érvényes konfiguráció</target>
-        
         <note>noConfigurations</note>
       </trans-unit>
       <trans-unit id="No valid outer EAP type in configuration" xml:space="preserve">
         <source>No valid outer EAP type in configuration</source>
         <target state="translated">Nincs érvényes külső EAP típus a konfigurációban</target>
-        
         <note>noOuterEAPType</note>
       </trans-unit>
       <trans-unit id="Unable to add certificate %@ to keychain (%d)" xml:space="preserve">
         <source>Unable to add certificate %1$@ to keychain (%2$d)</source>
         <target state="translated">Nem sikerült hozzáadni a %1$@ tanúsítványt a kulcskarikához (%2$d)</target>
-        
         <note>addClientCertificate: SecItemAdd</note>
       </trans-unit>
       <trans-unit id="Unable to copy from keychain (%d)" xml:space="preserve">
         <source>Unable to copy from keychain (%d)</source>
         <target state="translated">Nem lehet másolni a kulcskarikából (%d)</target>
-        
         <note>SecItemCopyMatching: retrieving identity returned</note>
       </trans-unit>
       <trans-unit id="Unable to create certificate from data" xml:space="preserve">
         <source>Unable to create certificate from data</source>
         <target state="translated">Nem sikerült létrehozni a tanúsítványt az adatokból.</target>
-        
         <note>SecCertificateCreateWithData: false</note>
       </trans-unit>
       <trans-unit id="Unable to decode certificate data" xml:space="preserve">
         <source>Unable to decode certificate data</source>
         <target state="translated">Nem lehet dekódolni a tanúsítvány adatokat</target>
-        
         <note>Unable to base64 decode certificate data</note>
       </trans-unit>
       <trans-unit id="Unable to get common name from certificate" xml:space="preserve">
         <source>Unable to get common name from certificate</source>
         <target state="translated">Nem sikerült megszerezni a common name-t a tanúsítványból.</target>
-        
         <note>Certificate: unable to get common name</note>
       </trans-unit>
       <trans-unit id="Unable to import certificate into keychain (%d)" xml:space="preserve">
         <source>Unable to import certificate into keychain (%d)</source>
         <target state="translated">Nem sikerült importálni a tanúsítványt a kulcskarikára (%d)</target>
-        
         <note>addClientCertificate</note>
       </trans-unit>
       <trans-unit id="Unable to read supported interfaces" xml:space="preserve">
         <source>Unable to read supported interfaces</source>
         <target state="translated">Nem lehet olvasni a támogatott interfészeket.</target>
-        
         <note>cannotCopySupportedInterfaces</note>
       </trans-unit>
       <trans-unit id="Unable to set identity for client certificate" xml:space="preserve">
         <source>Unable to set identity for client certificate</source>
         <target state="translated">Nem sikerült beállítani az azonosítót a kliens tanúsítványhoz.</target>
-        
         <note>ClientCertificate: cannot set identity</note>
       </trans-unit>
       <trans-unit id="Unable to set server certificate as trusted" xml:space="preserve">
         <source>Unable to set server certificate as trusted</source>
         <target state="translated">Nem sikerült a szerver tanúsítványt megbízhatónak beállítani.</target>
-        
         <note>setTrustedServerCertificates: returned false</note>
       </trans-unit>
       <trans-unit id="Unable to verify network because no server name or certificate set" xml:space="preserve">
         <source>Unable to verify network because no server name or certificate set</source>
         <target state="translated">Nem lehet ellenőrizni a hálózatot, mert nincs beállítva szervernév vagy tanúsítvány.</target>
-        
         <note>No server names and no custom CAs set</note>
       </trans-unit>
       <trans-unit id="Username must end with &quot;%@&quot;" xml:space="preserve">
-        <source>Username must end with &quot;%@&quot;</source>
-        <target state="translated">A felhasználónévnek &quot;%@&quot;-al kell végződnie.</target>
-        
+        <source>Username must end with "%@"</source>
+        <target state="translated">A felhasználónévnek "%@"-al kell végződnie.</target>
         <note>invalid username</note>
       </trans-unit>
       <trans-unit id="with unknown name" xml:space="preserve">
         <source>with unknown name</source>
         <target state="translated">ismeretlen név</target>
-        
         <note>with unknown name</note>
       </trans-unit>
     </body>
@@ -435,37 +368,31 @@
       <trans-unit id="Failed to load organizations" xml:space="preserve">
         <source>Failed to load organizations</source>
         <target state="translated">Nem sikerült betölteni a szervezeteket</target>
-        
         <note>Message when organizations can't be loaded and the fallback fails too</note>
       </trans-unit>
       <trans-unit id="No matches found" xml:space="preserve">
         <source>No matches found</source>
         <target state="translated">Nincs találat</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="OK" xml:space="preserve">
         <source>OK</source>
         <target state="translated">OK</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Search for your organization" xml:space="preserve">
         <source>Search for your organization</source>
         <target state="translated">Keresse meg szervezetét</target>
-        
         <note>Search prompt</note>
       </trans-unit>
       <trans-unit id="The organization is no longer listed." xml:space="preserve">
         <source>The organization is no longer listed.</source>
         <target state="translated">A szervezet már nem szerepel a listán.</target>
-        
         <note>Message when user asked to renew but the organization could not be found</note>
       </trans-unit>
       <trans-unit id="Unknown organization" xml:space="preserve">
         <source>Unknown organization</source>
         <target state="translated">Ismeretlen szervezet</target>
-        
         <note>Title when user asked to renew but the organization could not be found</note>
       </trans-unit>
     </body>
@@ -478,43 +405,36 @@
       <trans-unit id="Remind Me Later" xml:space="preserve">
         <source>Remind Me Later</source>
         <target state="translated">Később emlékeztessen</target>
-        
         <note>Remind Me Later</note>
       </trans-unit>
       <trans-unit id="Renew Now" xml:space="preserve">
         <source>Renew Now</source>
         <target state="translated">Megújítás most.</target>
-        
         <note>Renew Now</note>
       </trans-unit>
       <trans-unit id="Renew your connection to extend your access." xml:space="preserve">
         <source>Renew your connection to extend your access.</source>
         <target state="translated">Hosszabbítsa meg a kapcsolatát, hogy meghosszabbítsa az hozzáférését.</target>
-        
         <note>Renew your connection to extend your access.</note>
       </trans-unit>
       <trans-unit id="You had access until %@. Renew your connection to extend your access." xml:space="preserve">
         <source>You had access until %@. Renew your connection to extend your access.</source>
         <target state="translated"> %@-ig volt hozzáférésed. Hosszabbítsd meg a hozzáférésedet a kapcsolat meghosszabbításával.</target>
-        
         <note>You had access until &lt;date&gt;. Renew your connection to extend your access.</note>
       </trans-unit>
       <trans-unit id="You have access until %@. Renew your connection to extend your access." xml:space="preserve">
         <source>You have access until %@. Renew your connection to extend your access.</source>
         <target state="translated"> %@-ig van hozzáférésed. Hosszabbítsd meg a hozzáférésedet a kapcsolat meghosszabbításával.</target>
-        
         <note>You have access until &lt;date&gt;. Renew your connection to extend your access.</note>
       </trans-unit>
       <trans-unit id="Your network access has expired" xml:space="preserve">
         <source>Your network access has expired</source>
         <target state="translated">Hálózati hozzáférésed lejárt.</target>
-        
         <note>Your network access has expired</note>
       </trans-unit>
       <trans-unit id="Your network access is about to expire" xml:space="preserve">
         <source>Your network access is about to expire</source>
         <target state="translated">Hálózati hozzáférésed hamarosan lejár.</target>
-        
         <note>Your network access is about to expire</note>
       </trans-unit>
     </body>
@@ -527,7 +447,6 @@
       <trans-unit id="CFBundleName" xml:space="preserve">
         <source>geteduroam</source>
         <target state="translated">geteduroam</target>
-        
         <note>Bundle name</note>
       </trans-unit>
     </body>
@@ -540,13 +459,11 @@
       <trans-unit id="geteduroam" xml:space="preserve">
         <source>geteduroam</source>
         <target state="translated">geteduroam</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="geteduroam Help" xml:space="preserve">
         <source>geteduroam Help</source>
         <target state="translated">geteduroam Segítség</target>
-        
         <note/>
       </trans-unit>
     </body>
@@ -559,19 +476,16 @@
       <trans-unit id="Description" xml:space="preserve">
         <source>Configure your govroam account easily and securely using getgovroam.</source>
         <target state="translated">Konfiguráld az govroam hozzáférésed egyszerűen és biztonságosan a getgovroam segítségével</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Keywords" xml:space="preserve">
         <source>govroam,wifi,roam,getgovroam,hotspot,eduroam,wi-fi,network,government,connect,wireless,wlan,internet</source>
         <target state="translated">govroam, wifi, roam, getgovroam, hotspot, eduroam, wi-fi, hálózat, kormányzat, csatlakozás, vezeték nélküli, wlan, internet</target>
-        
         <note>Max 100 characters, no spaces just commas</note>
       </trans-unit>
       <trans-unit id="Name" xml:space="preserve">
         <source>getgovroam</source>
         <target state="translated">getgovroam</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Promotional Text" xml:space="preserve">
@@ -582,43 +496,36 @@
       <trans-unit id="Screenshots: Another Organization" xml:space="preserve">
         <source>Another Organization</source>
         <target state="translated">Másik Intézmény</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Screenshots: Contact our helpdesk if you need assistance." xml:space="preserve">
         <source>Contact our helpdesk if you need assistance.</source>
         <target state="translated">Lépjen kapcsolatba ügyfélszolgálatunkkal, ha segítségre van szüksége.</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Screenshots: Example Organization" xml:space="preserve">
         <source>Example Organization</source>
         <target state="translated">Példa Szervezet</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Screenshots: Profile for Externals" xml:space="preserve">
         <source>Profile for Externals</source>
         <target state="translated">Profil külsősök számára</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Screenshots: Profile for Staff" xml:space="preserve">
         <source>Profile for Staff</source>
         <target state="translated">Profile a dolgozók számára</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="Subtitle" xml:space="preserve">
         <source>let's roam</source>
         <target state="translated">let's roam</target>
-        
         <note>Max 32 characters</note>
       </trans-unit>
       <trans-unit id="What's New in This Version" xml:space="preserve">
         <source>This major update brings an entirely new designed and rewritten app.</source>
         <target state="translated">Ez a frissítés egy teljesen újratervezett és újraírt alkalmazás.</target>
-        
         <note/>
       </trans-unit>
     </body>
@@ -631,7 +538,6 @@
       <trans-unit id="CFBundleName" xml:space="preserve">
         <source>getgovroam</source>
         <target state="translated">getgovroam</target>
-        
         <note>Bundle name</note>
       </trans-unit>
     </body>
@@ -644,13 +550,11 @@
       <trans-unit id="getgovroam" xml:space="preserve">
         <source>getgovroam</source>
         <target state="translated">getgovroam</target>
-        
         <note/>
       </trans-unit>
       <trans-unit id="getgovroam Help" xml:space="preserve">
         <source>getgovroam Help</source>
         <target state="translated">getgovroam Segítség</target>
-        
         <note/>
       </trans-unit>
     </body>

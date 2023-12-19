@@ -256,13 +256,9 @@
         <target state="translated">Username</target>
         <note/>
       </trans-unit>
-      <trans-unit id="You are redirected to a website.&#10;&#10;(url)" xml:space="preserve">
-        <source>You are redirected to a website.
-
-(url)</source>
-        <target state="translated">You are redirected to a website.
-
-(url)</target>
+      <trans-unit id="You are redirected to a website." xml:space="preserve">
+        <source>You are redirected to a website.</source>
+        <target state="translated">You are redirected to a website.</target>
         <note/>
       </trans-unit>
       <trans-unit id="You must agree to the terms of use before you can use this network." xml:space="preserve">
@@ -284,82 +280,82 @@
     <body>
       <trans-unit id="No OID or SSID in configuration" xml:space="preserve">
         <source>No OID or SSID in configuration</source>
-        <target state="translated">No OID or SSID in configuration</target>
+        <target state="new">No OID or SSID in configuration</target>
         <note>No OID or SSID in configuration</note>
       </trans-unit>
       <trans-unit id="No credentials in configuration" xml:space="preserve">
         <source>No credentials in configuration</source>
-        <target state="translated">No credentials in configuration</target>
+        <target state="new">No credentials in configuration</target>
         <note>empty user/pass</note>
       </trans-unit>
       <trans-unit id="No valid configuration found" xml:space="preserve">
         <source>No valid configuration found</source>
-        <target state="translated">No valid configuration found</target>
+        <target state="new">No valid configuration found</target>
         <note>noConfigurations</note>
       </trans-unit>
       <trans-unit id="No valid outer EAP type in configuration" xml:space="preserve">
         <source>No valid outer EAP type in configuration</source>
-        <target state="translated">No valid outer EAP type in configuration</target>
+        <target state="new">No valid outer EAP type in configuration</target>
         <note>noOuterEAPType</note>
       </trans-unit>
       <trans-unit id="Unable to add certificate %@ to keychain (%d)" xml:space="preserve">
         <source>Unable to add certificate %1$@ to keychain (%2$d)</source>
-        <target state="translated">Unable to add certificate %1$@ to keychain (%2$d)</target>
+        <target state="new">Unable to add certificate %1$@ to keychain (%2$d)</target>
         <note>addClientCertificate: SecItemAdd</note>
       </trans-unit>
       <trans-unit id="Unable to copy from keychain (%d)" xml:space="preserve">
         <source>Unable to copy from keychain (%d)</source>
-        <target state="translated">Unable to copy from keychain (%d)</target>
+        <target state="new">Unable to copy from keychain (%d)</target>
         <note>SecItemCopyMatching: retrieving identity returned</note>
       </trans-unit>
       <trans-unit id="Unable to create certificate from data" xml:space="preserve">
         <source>Unable to create certificate from data</source>
-        <target state="translated">Unable to create certificate from data</target>
+        <target state="new">Unable to create certificate from data</target>
         <note>SecCertificateCreateWithData: false</note>
       </trans-unit>
       <trans-unit id="Unable to decode certificate data" xml:space="preserve">
         <source>Unable to decode certificate data</source>
-        <target state="translated">Unable to decode certificate data</target>
+        <target state="new">Unable to decode certificate data</target>
         <note>Unable to base64 decode certificate data</note>
       </trans-unit>
       <trans-unit id="Unable to get common name from certificate" xml:space="preserve">
         <source>Unable to get common name from certificate</source>
-        <target state="translated">Unable to get common name from certificate</target>
+        <target state="new">Unable to get common name from certificate</target>
         <note>Certificate: unable to get common name</note>
       </trans-unit>
       <trans-unit id="Unable to import certificate into keychain (%d)" xml:space="preserve">
         <source>Unable to import certificate into keychain (%d)</source>
-        <target state="translated">Unable to import certificate into keychain (%d)</target>
+        <target state="new">Unable to import certificate into keychain (%d)</target>
         <note>addClientCertificate</note>
       </trans-unit>
       <trans-unit id="Unable to read supported interfaces" xml:space="preserve">
         <source>Unable to read supported interfaces</source>
-        <target state="translated">Unable to read supported interfaces</target>
+        <target state="new">Unable to read supported interfaces</target>
         <note>cannotCopySupportedInterfaces</note>
       </trans-unit>
       <trans-unit id="Unable to set identity for client certificate" xml:space="preserve">
         <source>Unable to set identity for client certificate</source>
-        <target state="translated">Unable to set identity for client certificate</target>
+        <target state="new">Unable to set identity for client certificate</target>
         <note>ClientCertificate: cannot set identity</note>
       </trans-unit>
       <trans-unit id="Unable to set server certificate as trusted" xml:space="preserve">
         <source>Unable to set server certificate as trusted</source>
-        <target state="translated">Unable to set server certificate as trusted</target>
+        <target state="new">Unable to set server certificate as trusted</target>
         <note>setTrustedServerCertificates: returned false</note>
       </trans-unit>
       <trans-unit id="Unable to verify network because no server name or certificate set" xml:space="preserve">
         <source>Unable to verify network because no server name or certificate set</source>
-        <target state="translated">Unable to verify network because no server name or certificate set</target>
+        <target state="new">Unable to verify network because no server name or certificate set</target>
         <note>No server names and no custom CAs set</note>
       </trans-unit>
       <trans-unit id="Username must end with &quot;%@&quot;" xml:space="preserve">
         <source>Username must end with "%@"</source>
-        <target state="translated">Username must end with "%@"</target>
+        <target state="new">Username must end with "%@"</target>
         <note>invalid username</note>
       </trans-unit>
       <trans-unit id="with unknown name" xml:space="preserve">
         <source>with unknown name</source>
-        <target state="translated">with unknown name</target>
+        <target state="new">with unknown name</target>
         <note>with unknown name</note>
       </trans-unit>
     </body>
@@ -450,7 +446,7 @@
     <body>
       <trans-unit id="CFBundleName" xml:space="preserve">
         <source>geteduroam</source>
-        <target state="translated">geteduroam</target>
+        <target state="new">geteduroam</target>
         <note>Bundle name</note>
       </trans-unit>
     </body>
@@ -541,7 +537,7 @@
     <body>
       <trans-unit id="CFBundleName" xml:space="preserve">
         <source>getgovroam</source>
-        <target state="translated">getgovroam</target>
+        <target state="new">getgovroam</target>
         <note>Bundle name</note>
       </trans-unit>
     </body>
