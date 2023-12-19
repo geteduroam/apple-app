@@ -3,13 +3,73 @@
   "strings" : {
     "geteduroam" : {
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "geteduroam"
           }
         },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
         "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "geteduroam"
@@ -19,16 +79,76 @@
     },
     "geteduroam Help" : {
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajuda de geteduroam "
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam Cymorth"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam Hilfe"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "geteduroam Help"
           }
         },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam Help"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ayuda de geteduroam"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aide pour geteduroam"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam Segítség"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aiuto geteduroam"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "geteduroam Help"
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pomoc geteduroam"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajuda geteduroam"
           }
         }
       }

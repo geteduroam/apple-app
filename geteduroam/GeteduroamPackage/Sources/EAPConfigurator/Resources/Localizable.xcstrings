@@ -4,10 +4,70 @@
     "No credentials in configuration" : {
       "comment" : "empty user/pass",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cap credencial a la configuració"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dim tystlythyrau yn y ffurfweddiad"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Zugangsdaten in der Konfiguration"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No credentials in configuration"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay credenciales en la configuración"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas d'identifiants dans la configuration"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nincsenek hitelesítő adatok a konfigurációban"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessuna credenziale nella configurazione"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geen gebruikersnaam en wachtwoord in configuratie"
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "W konfiguracji nie ma danych logowania"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sem credenciais na configuração"
           }
         }
       }
@@ -15,10 +75,70 @@
     "No OID or SSID in configuration" : {
       "comment" : "No OID or SSID in configuration",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cap OID o SSID a la configuració"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dim OID neu SSID yn y ffurfweddiad"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine OID oder SSID in der Konfiguration"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No OID or SSID in configuration"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay OID o SSID en la configuración"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun OID ou SSID dans la configuration"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nincs OID vagy SSID a konfigurációban"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessun OID o SSID nella configurazione"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geen OID of SSID in configuratie"
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "W konfiguracji nie ma OID ani SSID"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sem OID ou SSID na configuração"
           }
         }
       }
@@ -26,10 +146,70 @@
     "No valid configuration found" : {
       "comment" : "noConfigurations",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cap configuració vàlida trobada"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ni chanfuwyd cyfluniad dilys"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine gültige Konfiguration gefunden"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No valid configuration found"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se ha encontrado una configuración válida"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune configuration valide trouvée"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem található érvényes konfiguráció"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessuna configurazione valida trovata"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geen geldige configuratie gevonden"
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie znaleziono żadnej poprawnej konfiguracji"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nenhuma configuração válida encontrada"
           }
         }
       }
@@ -37,10 +217,70 @@
     "No valid outer EAP type in configuration" : {
       "comment" : "noOuterEAPType",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cap tipus extern d'EAP vàlid en la configuració."
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dim math EAP allanol dilys yn y ffurfweddiad"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kein gültiger äußerer EAP Typ in der Konfiguration "
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No valid outer EAP type in configuration"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay un tipo de EAP externo válido en la configuración"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun type EAP externe valide dans la configuration"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nincs érvényes külső EAP típus a konfigurációban"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessun tipo EAP esterno valido nella configurazione"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geen geldige outer EAP-type in configuratie"
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "W konfiguracji nie ma żadnego poprawnego zewnętrznego typu EAP"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nenhum tipo EAP externo válido na configuração"
           }
         }
       }
@@ -48,10 +288,58 @@
     "Unable to add certificate %@ to keychain (%d)" : {
       "comment" : "addClientCertificate: SecItemAdd",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No s'ha pogut afegir el certificat %1$@ al repositori de claus (%2$d)"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Methu ychwanegu tystysgrif %1$@ i'r gadwyn allweddi (%2$d)"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hinzufügen des Zertifikats %1$@ zur Keychain nicht möglich (%2$d)"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Unable to add certificate %1$@ to keychain (%2$d)"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to add certificate %1$@ to keychain (%2$d)"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se puede agregar el certificado %1$@ al llavero (%2$d)"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible d'ajouter le certificat %1$@ au trousseau (%2$d)"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem sikerült hozzáadni a %1$@ tanúsítványt a kulcskarikához (%2$d)"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile aggiungere il certificato %1$@ al portachiavi (%2$d)"
           }
         },
         "nl" : {
@@ -59,16 +347,88 @@
             "state" : "translated",
             "value" : "Kon het certificaat %1$@ niet toevoegen aan de sleutelhanger (%2$d)"
           }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie udało się dodanie certyfikatu %1$@ do magazynu (%2$d)"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível adicionar o certificado %1$@ ao chaveiro (%2$d)"
+          }
         }
       }
     },
     "Unable to copy from keychain (%d)" : {
       "comment" : "SecItemCopyMatching: retrieving identity returned",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No es pot copiar des del repositori de claus (%d)"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Methu copïo o keychain (%d)"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopieren aus Keychain nicht möglich (%d)"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to copy from keychain (%d)"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se puede copiar desde el llavero (%d)"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de copier depuis le trousseau (%d)"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem lehet másolni a kulcskarikából (%d)"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile copiare dal portachiavi (%d)"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kon niet kopiëren uit de sleutelhanger (%d)"
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie powiodło się kopiowanie z magazynu (%d)"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível copiar do chaveiro (%d)"
           }
         }
       }
@@ -76,10 +436,70 @@
     "Unable to create certificate from data" : {
       "comment" : "SecCertificateCreateWithData: false",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No es possible crear el certificat a partir de les dades."
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Methu creu tystysgrif o ddata"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zertifikat konnte nicht aus den Daten erstellt werden"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to create certificate from data"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se puede crear el certificado a partir de los datos"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de créer le certificat depuis les données"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem sikerült létrehozni a tanúsítványt az adatokból."
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile creare il certificato dai dati"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kon geen certificaat creëren van de data"
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie udało się stworzyć certyfikatu z danych"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível criar certificado a partir da informação"
           }
         }
       }
@@ -87,10 +507,70 @@
     "Unable to decode certificate data" : {
       "comment" : "Unable to base64 decode certificate data",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No es pot descodificar les dades del certificat."
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Methu dadgodio data tystysgrif"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Decodieren der Zertifikatsdaten nicht möglich"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to decode certificate data"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pueden decodificar los datos del certificado"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de décoder les données du certificat"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem lehet dekódolni a tanúsítvány adatokat"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile decodificare i dati del certificato"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kon certificaatdata niet decoderen"
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie udało się zdekodowanie danych certyfikatu"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível  descodificar os dados do certificado."
           }
         }
       }
@@ -98,10 +578,70 @@
     "Unable to get common name from certificate" : {
       "comment" : "Certificate: unable to get common name",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No es possible obtenir el nom comú des del certificat."
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Methu cael enw cyffredin o'r dystysgrif"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name im Zertifkat konnte nicht extrahiert werden"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to get common name from certificate"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se puede obtener el nombre común del certificado"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de trouver le nom d'usage dans le certificat"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem sikerült megszerezni a common name-t a tanúsítványból."
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile ottenere il common name dal certificato"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kon geen generieke naam uit certificaat halen"
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie można pobrać nazwy ogólnej z certyfikatu"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível possível obter o nome comum do certificado"
           }
         }
       }
@@ -109,10 +649,70 @@
     "Unable to import certificate into keychain (%d)" : {
       "comment" : "addClientCertificate",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No es possible importar el certificat al repositori de claus (%d)"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Methu mewnforio tystysgrif i'r gadwyn allweddi (%d)"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importieren des Zertifikats %1$@ in Keychain nicht möglich (%d)"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to import certificate into keychain (%d)"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se puede importar el certificado en el llavero (%d)"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible d'importer le certificat dans le trousseau (%d)"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem sikerült importálni a tanúsítványt a kulcskarikára (%d)"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile importare il certificato nel portachiavi (%d)"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kon certificaat niet importeren in de sleutelhanger (%d)"
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie udał się import certyfikatu do magazyny (%d)"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível importar o certificado para o chaveiro (%d)"
           }
         }
       }
@@ -120,10 +720,70 @@
     "Unable to read supported interfaces" : {
       "comment" : "cannotCopySupportedInterfaces",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No es poden llegir les interfícies compatibles."
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Methu darllen rhyngwynebau a gefnogir"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unterstützte Schnittstellen konnten nicht ausgelesen werden"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to read supported interfaces"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pueden leer las interfaces compatibles"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de lire les interfaces supportées"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem lehet olvasni a támogatott interfészeket."
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile leggere le interfacce supportate"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kon de ondersteunde interfaces niet lezen"
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie można czytać z wspieranych interfejsów"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível ler as interfaces suportadas"
           }
         }
       }
@@ -131,10 +791,70 @@
     "Unable to set identity for client certificate" : {
       "comment" : "ClientCertificate: cannot set identity",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No es possible establir la identitat per al certificat del client."
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Methu gosod hunaniaeth ar gyfer tystysgrif cleient"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name für das Nutzerzertifikat konnte nicht gesetzt werden"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to set identity for client certificate"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se puede establecer la identidad para el certificado cliente"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de configurer l'identité pour le certificat client"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem sikerült beállítani az azonosítót a kliens tanúsítványhoz."
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile impostare l'identità per il certificato client"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kon de identiteit van het client-certificaat niet instellen"
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie udało się ustawić tożsamości dla certyfikatu klienta"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível definir a identidade para o certificado do cliente"
           }
         }
       }
@@ -142,10 +862,70 @@
     "Unable to set server certificate as trusted" : {
       "comment" : "setTrustedServerCertificates: returned false",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No es possible establir el certificat del servidor com a confiable."
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Methu gosod tystysgrif gweinydd fel un y gellir ymddiried ynddo"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Serverzertifikat konnte nicht als vertrauenswürdig markiert werden"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to set server certificate as trusted"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se puede establecer el certificado del servidor como confiable"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de considérer le certificat serveur comme étant de confiance"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem sikerült a szerver tanúsítványt megbízhatónak beállítani."
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile impostare il certificato del server come attendibile"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kon het server-certificaat niet als vertrouwd instellen"
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie udało się ustawienie certyfikatu, jako zaufanego"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível definir o certificado do servidor como confiável."
           }
         }
       }
@@ -153,10 +933,70 @@
     "Unable to verify network because no server name or certificate set" : {
       "comment" : "No server names and no custom CAs set",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No es pot verificar la xarxa perquè no s'ha establert cap nom de servidor o certificat."
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Methu dilysu rhwydwaith oherwydd nid oes enw gweinydd na thystysgrif wedi'i osod"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Netzwerkidentität konnte nicht bestätigt werden wegen fehlendem Servernamen oder Zertifikat"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unable to verify network because no server name or certificate set"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se puede verificar la red porque no se ha establecido ningún nombre de servidor o certificado"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de vérifier le réseau car aucun nom de serveur ou certificat n'est indiqué"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem lehet ellenőrizni a hálózatot, mert nincs beállítva szervernév vagy tanúsítvány."
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile verificare la rete perché non è impostato alcun nome server o certificato"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kon het netwerk niet verifiëren omdat er geen servernaam of certificaat ingesteld is"
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie udało się zweryfikować sieci, ponieważ nie została ustawiona nazwa serwera i certyfikat"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível verificar a rede porque nenhum nome de servidor ou certificado foi definido."
           }
         }
       }
@@ -164,10 +1004,70 @@
     "Username must end with \"%@\"" : {
       "comment" : "invalid username",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El nom d'usuari ha de finalitzar amb \"%@\"."
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rhaid i'r enw defnyddiwr orffen gyda \"%@\""
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benutzername muss mit \"%@\" enden"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Username must end with \"%@\""
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El nombre de usuario debe terminar con \"%@\""
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le nom d'utilisateur doit se terminer par « %@ »"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A felhasználónévnek \"%@\"-al kell végződnie."
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il nome utente deve terminare con \"%@\""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gebruikersnaam moet eindigen met \"%@\""
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Identyfikator musi się kończyć ciągiem \"%@\""
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O nome de utilizador deve terminar com \"%@\"."
           }
         }
       }
@@ -175,10 +1075,70 @@
     "with unknown name" : {
       "comment" : "with unknown name",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "amb nom desconegut"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ag enw anhysbys"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "mit unbekanntem Namen"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "with unknown name"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "con nombre desconocido"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "avec un nom inconnu"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ismeretlen név"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "con nome sconosciuto"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "met onbekende naam"
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "z nieznaną nazwą"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "com nome de utilizador desconhecido"
           }
         }
       }

@@ -467,7 +467,7 @@ public struct Connect: Reducer {
                             TextState("Cancel", bundle: .module)
                         }
                     }, message: {
-                        let message = NSLocalizedString("You are redirected to a website.\n\n\(url)", bundle: .module, comment: "")
+                        let message = NSLocalizedString("You are redirected to a website.", bundle: .module, comment: "") + "\n\n" + url.absoluteString
                         return TextState(message)
                     })
                 state.destination = .websiteAlert(websiteAlert)

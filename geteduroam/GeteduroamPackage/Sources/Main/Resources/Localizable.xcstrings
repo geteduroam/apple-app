@@ -4,10 +4,58 @@
     "Failed to load organizations" : {
       "comment" : "Message when organizations can't be loaded and the fallback fails too",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error en carregar les organitzacions"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wedi methu llwytho sefydliadau"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehler beim Laden der Organisationen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Failed to load organizations"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to load organisations"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al cargar las organizaciones"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le chargement des établissements a échoué"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem sikerült betölteni a szervezeteket"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile caricare le organizzazioni"
           }
         },
         "nl" : {
@@ -15,15 +63,75 @@
             "state" : "translated",
             "value" : "Laden van organisaties mislukt"
           }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie udało się załadować instytucji"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Falha ao carregar organizações"
+          }
         }
       }
     },
     "No matches found" : {
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No s'han trobat coincidències"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heb ganfod unrhyw gyfatebiaeth"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kein Treffer"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No matches found"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No matches found"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se han encontrado coincidencias"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune correspondance trouvée"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nincs találat"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessun risultato trovato"
           }
         },
         "nl" : {
@@ -31,18 +139,90 @@
             "state" : "translated",
             "value" : "Geen resultaten gevonden"
           }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie znaleziono dopasowań"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nenhum resultado encontrado"
+          }
         }
       }
     },
     "OK" : {
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iawn"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
           }
         },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
         "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
@@ -53,10 +233,58 @@
     "Search for your organization" : {
       "comment" : "Search prompt",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerqueu la vostra organització"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chwiliwch am eich sefydliad"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suchen Sie nach Ihrer Organisation"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Search for your organization"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search for your organisation"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Busca tu organización"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chercher votre établissement"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keresse meg szervezetét"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerca la tua organizzazione"
           }
         },
         "nl" : {
@@ -64,16 +292,76 @@
             "state" : "translated",
             "value" : "Zoek jouw organisatie"
           }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wyszukaj swoją instytucję"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pesquise pela sua organização"
+          }
         }
       }
     },
     "The organization is no longer listed." : {
       "comment" : "Message when user asked to renew but the organization could not be found",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'organització ja no està llistada."
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nid yw'r sefydliad bellach wedi'i restru."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Organisation ist nicht mehr gelistet."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "The organization is no longer listed."
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The organisation is no longer listed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La organización ya no está en la lista."
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cet établissement n'est plus dans la liste."
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A szervezet már nem szerepel a listán."
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'organizzazione non è più elencata."
           }
         },
         "nl" : {
@@ -81,22 +369,94 @@
             "state" : "translated",
             "value" : "De organisatie wordt niet meer vermeld."
           }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Twojej instytucji nie ma już na liście."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A organização já não está listada."
+          }
         }
       }
     },
     "Unknown organization" : {
       "comment" : "Title when user asked to renew but the organization could not be found",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Organització desconeguda"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sefydliad anhysbys"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unbekannte Organisation"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unknown organization"
           }
         },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown organisation"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Organización desconocida"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Établissement inconnu"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ismeretlen szervezet"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Organizzazione sconosciuta"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Onbekende organisatie"
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nieznana instytucja"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Organização desconhecida"
           }
         }
       }

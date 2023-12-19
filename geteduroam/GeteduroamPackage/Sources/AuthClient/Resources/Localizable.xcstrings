@@ -4,16 +4,76 @@
     "No access token obtained for unknown reason" : {
       "comment" : "OIDAuthStateError neitherAccessTokenNorErrorAvailable",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No s'ha obtingut cap token d'accés per raons desconegudes"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ni chafwyd tocyn mynediad am reswm anhysbys"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kein Zugangsdokument erhalten, aus unbekanntem Grund"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No access token obtained for unknown reason"
           }
         },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No access token obtained for unknown reason"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se obtuvo ningún token de acceso por razón desconocida."
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun jeton d'accès n'a été obtenu, pour une raison inconnue"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem sikerült hozzáférési token megszerzése ismeretlen okból"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessun token di accesso ottenuto per motivi sconosciuti"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geen toegangstoken verkregen om onbekende reden"
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Z nieznanego powodu nie uzyskano tokenu dostępu"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nenhum token de acesso obtido por motivo desconhecido"
           }
         }
       }

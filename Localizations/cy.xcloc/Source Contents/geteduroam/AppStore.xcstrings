@@ -1,0 +1,129 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configure your eduroam account easily and securely using geteduroam."
+          }
+        }
+      }
+    },
+    "Keywords" : {
+      "comment" : "Max 100 characters, no spaces just commas",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "eduroam,wifi,roam,geteduroam,hotspot,wi-fi,network,education,university,connect,wireless,internet"
+          }
+        }
+      }
+    },
+    "Name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        }
+      }
+    },
+    "Promotional Text" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " "
+          }
+        }
+      }
+    },
+    "Screenshots: Another Organization" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Another Organization"
+          }
+        }
+      }
+    },
+    "Screenshots: Contact our helpdesk if you need assistance." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contact our helpdesk if you need assistance."
+          }
+        }
+      }
+    },
+    "Screenshots: Example Organization" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Example Organization"
+          }
+        }
+      }
+    },
+    "Screenshots: Profile for Staff" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profile for Staff"
+          }
+        }
+      }
+    },
+    "Screenshots: Profile for Students" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profile for Students"
+          }
+        }
+      }
+    },
+    "Subtitle" : {
+      "comment" : "Max 32 characters",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "get connected wherever you are"
+          }
+        }
+      }
+    },
+    "What's New in This Version" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This major update brings an entirely new designed and rewritten app."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
