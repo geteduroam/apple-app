@@ -256,13 +256,9 @@
         <target state="translated">Gebruikersnaam</target>
         <note/>
       </trans-unit>
-      <trans-unit id="You are redirected to a website.&#10;&#10;(url)" xml:space="preserve">
-        <source>You are redirected to a website.
-
-(url)</source>
-        <target state="translated">Je wordt doorverwezen naar een webpagina.
-
-(url)</target>
+      <trans-unit id="You are redirected to a website." xml:space="preserve">
+        <source>You are redirected to a website.</source>
+        <target state="translated">Je wordt doorverwezen naar een webpagina.</target>
         <note/>
       </trans-unit>
       <trans-unit id="You must agree to the terms of use before you can use this network." xml:space="preserve">

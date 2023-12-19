@@ -4,16 +4,76 @@
     "Description" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configureu el vostre compte eduroam de manera fàcil i segura utilitzant geteduroam."
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ffurfweddwch eich cyfrif eduroam yn hawdd ac yn ddiogel gan ddefnyddio geteduroam."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Richten Sie mit geteduroam Ihren eduroam Zugang leicht und sicher ein."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Configure your eduroam account easily and securely using geteduroam."
           }
         },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configure your eduroam account easily and securely using geteduroam."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configura tu cuenta de eduroam de manera fácil y segura utilizando geteduroam."
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configurez votre compte eduroam facilement et avec sécurité en utilisant geteduroam."
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konfiguráld az eduroam hozzáférésed egyszerűen és biztonságosan a geteduroam segítségével"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configura facilmente e in modo sicuro il tuo account eduroam utilizzando geteduroam."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Configureer jouw eduroam-account gemakkelijk en veilig met geteduroam."
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skonfiguruj swoje konto eduroam łatwo i bezpiecznie za pomocą geteduroam."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configure a sua conta eduroam facilmente e com segurança utilizando o geteduroam."
           }
         }
       }
@@ -22,7 +82,55 @@
       "comment" : "Max 100 characters, no spaces just commas",
       "extractionState" : "manual",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "eduroam,wifi,roam,geteduroam,hotspot,wi-fi,xarxa,educació,universitat,connectar,sense fils,internet"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "eduroam,wifi,crwydro,geteduroam,llecyn,wi-fi,rhwydwaith,addysg,prifysgol,connect,diwifr,internet"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "eduroam,WLAN,Roaming,geteduroam,Hotspot,Netzwerk,Bildung,Universität,Verbindung,kabellos,Internet"
+          }
+        },
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "eduroam,wifi,roam,geteduroam,hotspot,wi-fi,network,education,university,connect,wireless,internet"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "eduroam,wifi,roam,geteduroam,hotspot,wi-fi,network,education,university,connect,wireless,internet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "eduroam,wifi,roam,geteduroam,hotspot,wi-fi,red,educación,universidad,conectar,wireless,inalámbrica,internet"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "eduroam,wifi,roam,geteduroam,hotspot,wi-fi,network,education,university,connect,wireless,internet"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "eduroam, wifi, roam, geteduroam, hotspot, wi-fi, hálózat, oktatás, egyetem, csatlakozás, vezeték nélküli, internet"
+          }
+        },
+        "it-IT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "eduroam,wifi,roam,geteduroam,hotspot,wi-fi,network,education,university,connect,wireless,internet"
@@ -33,19 +141,91 @@
             "state" : "translated",
             "value" : "eduroam,wifi,roam,geteduroam,hotspot,wi-fi,netwerk,educatie,universiteit,verbind,draadloos,internet"
           }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "eduroam,wifi,roam,geteduroam,hotspot,wi-fi,network,education,university,connect,wireless,internet"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "eduroam, wifi, roam, geteduroam, hotspot, wi-fi, rede, educação, universidade, ligar, sem fios, internet"
+          }
         }
       }
     },
     "Name" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "geteduroam"
           }
         },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
         "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "geteduroam"
@@ -56,16 +236,76 @@
     "Promotional Text" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "a33cfd6cfef0750b66927b70babd9cf2_tr"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "a33cfd6cfef0750b66927b70babd9cf2_tr"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "a33cfd6cfef0750b66927b70babd9cf2_tr"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : " "
           }
         },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "a33cfd6cfef0750b66927b70babd9cf2_tr"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "a33cfd6cfef0750b66927b70babd9cf2_tr"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "a33cfd6cfef0750b66927b70babd9cf2_tr"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "a33cfd6cfef0750b66927b70babd9cf2_tr"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "a33cfd6cfef0750b66927b70babd9cf2_tr"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : " "
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "a33cfd6cfef0750b66927b70babd9cf2_tr"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "a33cfd6cfef0750b66927b70babd9cf2_tr"
           }
         }
       }
@@ -73,10 +313,58 @@
     "Screenshots: Another Organization" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una altra Organització"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sefydliad arall"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Andere Organisation"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Another Organization"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Another Organisation"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Otra organización"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autre établissement"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Másik Intézmény"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un altra Organizzazione"
           }
         },
         "nl" : {
@@ -84,16 +372,76 @@
             "state" : "translated",
             "value" : "Andere Organisatie"
           }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inna Instytucja"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Outra Organização"
+          }
         }
       }
     },
     "Screenshots: Contact our helpdesk if you need assistance." : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contacteu amb el nostre servei d'assistència si necessiteu ajuda."
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cysylltwch â'n desg gymorth os oes angen cymorth arnoch."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wenden Sie sich an Ihre Organisation wenn Sie Unterstützung brauchen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Contact our helpdesk if you need assistance."
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contact our helpdesk if you need assistance."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contacte con nuestro servicio de asistencia si necesita ayuda."
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contactez votre support informatique local si vous avez besoin d'aide."
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lépjen kapcsolatba ügyfélszolgálatunkkal, ha segítségre van szüksége."
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contatta il nostro servizio di assistenza se hai bisogno di aiuto."
           }
         },
         "nl" : {
@@ -101,16 +449,76 @@
             "state" : "translated",
             "value" : "Benader onze helpdesk als je hulp nodig hebt."
           }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skontaktuj się z naszą pomocą techniczną, jeżeli potrzebujesz wsparcia."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contacte o nosso serviço de apoio se precisar de assistência."
+          }
         }
       }
     },
     "Screenshots: Example Organization" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Organització de mostra"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sefydliad Enghreifftiol"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beispiel Organisation"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Example Organization"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Example Organisation"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Organización de ejemplo"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exemple d'établissement"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Példa Szervezet"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Organizzazione di Esempio"
           }
         },
         "nl" : {
@@ -118,16 +526,76 @@
             "state" : "translated",
             "value" : "Voorbeeldorganisatie"
           }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Przykładowa Instytucja"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Organização Exemplo"
+          }
         }
       }
     },
     "Screenshots: Profile for Staff" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perfil per al personal"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Proffil ar gyfer Staff"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profil für Mitarbeiter"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Profile for Staff"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profile for Staff"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perfil para el personal"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profil pour les personnels"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profile a dolgozók számára"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profilo per il Personale"
           }
         },
         "nl" : {
@@ -135,22 +603,94 @@
             "state" : "translated",
             "value" : "Profiel voor medewerkers"
           }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profil dla pracowników"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perfil para Funcionários"
+          }
         }
       }
     },
     "Screenshots: Profile for Students" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perfil per a estudiants"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Proffil ar gyfer Myfyrwyr"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profil für Studenten"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Profile for Students"
           }
         },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profile for Students"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perfil para estudiantes"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profil pour les étudiants"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diákok profilja"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profilo per gli Studenti"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Profiel voor studenten"
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profil dla studentów"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perfil para Estudantes"
           }
         }
       }
@@ -159,10 +699,58 @@
       "comment" : "Max 32 characters",
       "extractionState" : "manual",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "connecta't estiguis on estiguis"
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "cysylltu ble bynnag yr ydych"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbinden Sie sich, überall"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "get connected wherever you are"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "get connected wherever you are"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "conéctate dondequiera que estés"
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connectez-vous où que vous soyez"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "maradj kapsolódva bárhol is vagy"
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "rimani connesso ovunque tu sia"
           }
         },
         "nl" : {
@@ -170,22 +758,94 @@
             "state" : "translated",
             "value" : "verbind, waar je ook bent"
           }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "połącz się gdziekolwiek jesteś"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ligue-se onde quer que esteja"
+          }
         }
       }
     },
     "What's New in This Version" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aquesta important actualització porta una aplicació totalment renovada i reescrita."
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mae'r diweddariad mawr hwn yn dod ag ap cwbl newydd wedi'i ddylunio a'i ailysgrifennu."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diese große Aktualisierung enthält eine vollkommen neu geschriebene App in neuem Design."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "This major update brings an entirely new designed and rewritten app."
           }
         },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This major update brings an entirely new designed and rewritten app."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta importante actualización presenta una aplicación diseñada y reescrita de nuevo."
+          }
+        },
+        "fr-FR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette mise à jour majeure fournit une application entièrement reconçue et réécrite."
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ez a frissítés egy teljesen újratervezett és újraírt alkalmazás."
+          }
+        },
+        "it-IT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Questo importante aggiornamento consiste in un'app progettata e riscritta completamente ex-novo."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Deze grote update brengt een geheel nieuw ontworpen en herschreven app."
+          }
+        },
+        "pl-PL" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ta istotna aktualizacja wprowadza całkowicie przeprojektowaną aplikację."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta atualização importante traz uma aplicação completamente redesenhada e reescrita."
           }
         }
       }

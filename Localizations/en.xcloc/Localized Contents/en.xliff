@@ -81,7 +81,7 @@
     <body>
       <trans-unit id="Search" xml:space="preserve">
         <source>Search</source>
-        <target state="new">Search</target>
+        <target state="translated">Search</target>
         <note>Search prompt</note>
       </trans-unit>
     </body>
@@ -93,92 +93,92 @@
     <body>
       <trans-unit id="Agree" xml:space="preserve">
         <source>Agree</source>
-        <target state="new">Agree</target>
+        <target state="translated">Agree</target>
         <note/>
       </trans-unit>
       <trans-unit id="CONNECT" xml:space="preserve">
         <source>CONNECT</source>
-        <target state="new">CONNECT</target>
+        <target state="translated">CONNECT</target>
         <note/>
       </trans-unit>
       <trans-unit id="Cancel" xml:space="preserve">
         <source>Cancel</source>
-        <target state="new">Cancel</target>
+        <target state="translated">Cancel</target>
         <note/>
       </trans-unit>
       <trans-unit id="Configured" xml:space="preserve">
         <source>Configured</source>
-        <target state="new">Configured</target>
+        <target state="translated">Configured</target>
         <note/>
       </trans-unit>
       <trans-unit id="Configured, but not connected" xml:space="preserve">
         <source>Configured, but not connected</source>
-        <target state="new">Configured, but not connected</target>
+        <target state="translated">Configured, but not connected</target>
         <note/>
       </trans-unit>
       <trans-unit id="Connect" xml:space="preserve">
         <source>Connect</source>
-        <target state="new">Connect</target>
+        <target state="translated">Connect</target>
         <note/>
       </trans-unit>
       <trans-unit id="Connected" xml:space="preserve">
         <source>Connected</source>
-        <target state="new">Connected</target>
+        <target state="translated">Connected</target>
         <note/>
       </trans-unit>
       <trans-unit id="Continue" xml:space="preserve">
         <source>Continue</source>
-        <target state="new">Continue</target>
+        <target state="translated">Continue</target>
         <note/>
       </trans-unit>
       <trans-unit id="Continue in System Preferences" xml:space="preserve">
         <source>Continue in System Preferences</source>
-        <target state="new">Continue in System Preferences</target>
+        <target state="translated">Continue in System Preferences</target>
         <note/>
       </trans-unit>
       <trans-unit id="Continue in System Settings" xml:space="preserve">
         <source>Continue in System Settings</source>
-        <target state="new">Continue in System Settings</target>
+        <target state="translated">Continue in System Settings</target>
         <note/>
       </trans-unit>
       <trans-unit id="Continue to Website" xml:space="preserve">
         <source>Continue to Website</source>
-        <target state="new">Continue to Website</target>
+        <target state="translated">Continue to Website</target>
         <note/>
       </trans-unit>
       <trans-unit id="Disagree" xml:space="preserve">
         <source>Disagree</source>
-        <target state="new">Disagree</target>
+        <target state="translated">Disagree</target>
         <note/>
       </trans-unit>
       <trans-unit id="Double-click to review the profile and then press the &quot;Install…&quot; button to setup the network on your computer." xml:space="preserve">
         <source>Double-click to review the profile and then press the "Install…" button to setup the network on your computer.</source>
-        <target state="new">Double-click to review the profile and then press the "Install…" button to setup the network on your computer.</target>
+        <target state="translated">Double-click to review the profile and then press the "Install…" button to setup the network on your computer.</target>
         <note/>
       </trans-unit>
       <trans-unit id="Failed to connect" xml:space="preserve">
         <source>Failed to connect</source>
-        <target state="new">Failed to connect</target>
+        <target state="translated">Failed to connect</target>
         <note>Failed to connect</note>
       </trans-unit>
       <trans-unit id="Helpdesk" xml:space="preserve">
         <source>Helpdesk</source>
-        <target state="new">Helpdesk</target>
+        <target state="translated">Helpdesk</target>
         <note/>
       </trans-unit>
       <trans-unit id="Log In" xml:space="preserve">
         <source>Log In</source>
-        <target state="new">Log In</target>
+        <target state="translated">Log In</target>
         <note/>
       </trans-unit>
       <trans-unit id="Login Required" xml:space="preserve">
         <source>Login Required</source>
-        <target state="new">Login Required</target>
+        <target state="translated">Login Required</target>
         <note/>
       </trans-unit>
       <trans-unit id="Missing information about profile." xml:space="preserve">
         <source>Missing information about profile.</source>
-        <target state="new">Missing information about profile.</target>
+        <target state="translated">Missing information about profile.</target>
         <note>missingProfileType</note>
       </trans-unit>
       <trans-unit id="Missing information to start authentication. (auth)" xml:space="preserve">
@@ -208,12 +208,12 @@
       </trans-unit>
       <trans-unit id="No valid profile found." xml:space="preserve">
         <source>No valid profile found.</source>
-        <target state="new">No valid profile found.</target>
+        <target state="translated">No valid profile found.</target>
         <note>mobileConfigFailed</note>
       </trans-unit>
       <trans-unit id="No valid provider found." xml:space="preserve">
         <source>No valid provider found.</source>
-        <target state="new">No valid provider found.</target>
+        <target state="translated">No valid provider found.</target>
         <note>noValidProviderFound</note>
       </trans-unit>
       <trans-unit id="OK" xml:space="preserve">
@@ -223,56 +223,52 @@
       </trans-unit>
       <trans-unit id="Password" xml:space="preserve">
         <source>Password</source>
-        <target state="new">Password</target>
+        <target state="translated">Password</target>
         <note/>
       </trans-unit>
       <trans-unit id="Please enter your username and password." xml:space="preserve">
         <source>Please enter your username and password.</source>
-        <target state="new">Please enter your username and password.</target>
+        <target state="translated">Please enter your username and password.</target>
         <note/>
       </trans-unit>
       <trans-unit id="Profiles" xml:space="preserve">
         <source>Profiles</source>
-        <target state="new">Profiles</target>
+        <target state="translated">Profiles</target>
         <note>Profiles</note>
       </trans-unit>
       <trans-unit id="Review the profile and then press the &quot;Install…&quot; button to setup the network on your computer." xml:space="preserve">
         <source>Review the profile and then press the "Install…" button to setup the network on your computer.</source>
-        <target state="new">Review the profile and then press the "Install…" button to setup the network on your computer.</target>
+        <target state="translated">Review the profile and then press the "Install…" button to setup the network on your computer.</target>
         <note/>
       </trans-unit>
       <trans-unit id="Terms of Use" xml:space="preserve">
         <source>Terms of Use</source>
-        <target state="new">Terms of Use</target>
+        <target state="translated">Terms of Use</target>
         <note/>
       </trans-unit>
       <trans-unit id="The configuration process was cancelled." xml:space="preserve">
         <source>The configuration process was cancelled.</source>
-        <target state="new">The configuration process was cancelled.</target>
+        <target state="translated">The configuration process was cancelled.</target>
         <note>userCancelled</note>
       </trans-unit>
       <trans-unit id="Username" xml:space="preserve">
         <source>Username</source>
-        <target state="new">Username</target>
+        <target state="translated">Username</target>
         <note/>
       </trans-unit>
-      <trans-unit id="You are redirected to a website.&#10;&#10;(url)" xml:space="preserve">
-        <source>You are redirected to a website.
-
-(url)</source>
-        <target state="new">You are redirected to a website.
-
-(url)</target>
+      <trans-unit id="You are redirected to a website." xml:space="preserve">
+        <source>You are redirected to a website.</source>
+        <target state="translated">You are redirected to a website.</target>
         <note/>
       </trans-unit>
       <trans-unit id="You must agree to the terms of use before you can use this network." xml:space="preserve">
         <source>You must agree to the terms of use before you can use this network.</source>
-        <target state="new">You must agree to the terms of use before you can use this network.</target>
+        <target state="translated">You must agree to the terms of use before you can use this network.</target>
         <note/>
       </trans-unit>
       <trans-unit id="You must agree to the terms of use." xml:space="preserve">
         <source>You must agree to the terms of use.</source>
-        <target state="new">You must agree to the terms of use.</target>
+        <target state="translated">You must agree to the terms of use.</target>
         <note>missingTermsAcceptance (leave text in brackets out of localization)</note>
       </trans-unit>
     </body>
@@ -371,32 +367,32 @@
     <body>
       <trans-unit id="Failed to load organizations" xml:space="preserve">
         <source>Failed to load organizations</source>
-        <target state="new">Failed to load organizations</target>
+        <target state="translated">Failed to load organizations</target>
         <note>Message when organizations can't be loaded and the fallback fails too</note>
       </trans-unit>
       <trans-unit id="No matches found" xml:space="preserve">
         <source>No matches found</source>
-        <target state="new">No matches found</target>
+        <target state="translated">No matches found</target>
         <note/>
       </trans-unit>
       <trans-unit id="OK" xml:space="preserve">
         <source>OK</source>
-        <target state="new">OK</target>
+        <target state="translated">OK</target>
         <note/>
       </trans-unit>
       <trans-unit id="Search for your organization" xml:space="preserve">
         <source>Search for your organization</source>
-        <target state="new">Search for your organization</target>
+        <target state="translated">Search for your organization</target>
         <note>Search prompt</note>
       </trans-unit>
       <trans-unit id="The organization is no longer listed." xml:space="preserve">
         <source>The organization is no longer listed.</source>
-        <target state="new">The organization is no longer listed.</target>
+        <target state="translated">The organization is no longer listed.</target>
         <note>Message when user asked to renew but the organization could not be found</note>
       </trans-unit>
       <trans-unit id="Unknown organization" xml:space="preserve">
         <source>Unknown organization</source>
-        <target state="new">Unknown organization</target>
+        <target state="translated">Unknown organization</target>
         <note>Title when user asked to renew but the organization could not be found</note>
       </trans-unit>
     </body>
@@ -408,37 +404,37 @@
     <body>
       <trans-unit id="Remind Me Later" xml:space="preserve">
         <source>Remind Me Later</source>
-        <target state="new">Remind Me Later</target>
+        <target state="translated">Remind Me Later</target>
         <note>Remind Me Later</note>
       </trans-unit>
       <trans-unit id="Renew Now" xml:space="preserve">
         <source>Renew Now</source>
-        <target state="new">Renew Now</target>
+        <target state="translated">Renew Now</target>
         <note>Renew Now</note>
       </trans-unit>
       <trans-unit id="Renew your connection to extend your access." xml:space="preserve">
         <source>Renew your connection to extend your access.</source>
-        <target state="new">Renew your connection to extend your access.</target>
+        <target state="translated">Renew your connection to extend your access.</target>
         <note>Renew your connection to extend your access.</note>
       </trans-unit>
       <trans-unit id="You had access until %@. Renew your connection to extend your access." xml:space="preserve">
         <source>You had access until %@. Renew your connection to extend your access.</source>
-        <target state="new">You had access until %@. Renew your connection to extend your access.</target>
+        <target state="translated">You had access until %@. Renew your connection to extend your access.</target>
         <note>You had access until &lt;date&gt;. Renew your connection to extend your access.</note>
       </trans-unit>
       <trans-unit id="You have access until %@. Renew your connection to extend your access." xml:space="preserve">
         <source>You have access until %@. Renew your connection to extend your access.</source>
-        <target state="new">You have access until %@. Renew your connection to extend your access.</target>
+        <target state="translated">You have access until %@. Renew your connection to extend your access.</target>
         <note>You have access until &lt;date&gt;. Renew your connection to extend your access.</note>
       </trans-unit>
       <trans-unit id="Your network access has expired" xml:space="preserve">
         <source>Your network access has expired</source>
-        <target state="new">Your network access has expired</target>
+        <target state="translated">Your network access has expired</target>
         <note>Your network access has expired</note>
       </trans-unit>
       <trans-unit id="Your network access is about to expire" xml:space="preserve">
         <source>Your network access is about to expire</source>
-        <target state="new">Your network access is about to expire</target>
+        <target state="translated">Your network access is about to expire</target>
         <note>Your network access is about to expire</note>
       </trans-unit>
     </body>
@@ -462,12 +458,12 @@
     <body>
       <trans-unit id="geteduroam" xml:space="preserve">
         <source>geteduroam</source>
-        <target state="new">geteduroam</target>
+        <target state="translated">geteduroam</target>
         <note/>
       </trans-unit>
       <trans-unit id="geteduroam Help" xml:space="preserve">
         <source>geteduroam Help</source>
-        <target state="new">geteduroam Help</target>
+        <target state="translated">geteduroam Help</target>
         <note/>
       </trans-unit>
     </body>
@@ -553,12 +549,12 @@
     <body>
       <trans-unit id="getgovroam" xml:space="preserve">
         <source>getgovroam</source>
-        <target state="new">getgovroam</target>
+        <target state="translated">getgovroam</target>
         <note/>
       </trans-unit>
       <trans-unit id="getgovroam Help" xml:space="preserve">
         <source>getgovroam Help</source>
-        <target state="new">getgovroam Help</target>
+        <target state="translated">getgovroam Help</target>
         <note/>
       </trans-unit>
     </body>

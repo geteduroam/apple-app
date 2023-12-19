@@ -2,22 +2,68 @@
   "sourceLanguage" : "en",
   "strings" : {
     "Failed to load organizations" : {
-      "comment" : "Message when organizations can't be loaded and the fallback fails too"
+      "comment" : "Message when organizations can't be loaded and the fallback fails too",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to load organizations"
+          }
+        }
+      }
     },
     "No matches found" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No matches found"
+          }
+        }
+      }
     },
     "OK" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
     },
     "Search for your organization" : {
-      "comment" : "Search prompt"
+      "comment" : "Search prompt",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search for your organization"
+          }
+        }
+      }
     },
     "The organization is no longer listed." : {
-      "comment" : "Message when user asked to renew but the organization could not be found"
+      "comment" : "Message when user asked to renew but the organization could not be found",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The organization is no longer listed."
+          }
+        }
+      }
     },
     "Unknown organization" : {
-      "comment" : "Title when user asked to renew but the organization could not be found"
+      "comment" : "Title when user asked to renew but the organization could not be found",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown organization"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

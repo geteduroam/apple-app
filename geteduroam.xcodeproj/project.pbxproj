@@ -22,6 +22,8 @@
 		C774FA1C29E05DDD001E560C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C74A11E7294C9FB600ECC19A /* Launch Screen.storyboard */; platformFilter = ios; };
 		C78BB7722A29D210001799ED /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = C78BB7712A293D93001799ED /* LICENSE.md */; };
 		C78BB7732A29D212001799ED /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = C78BB7712A293D93001799ED /* LICENSE.md */; };
+		C7A017692B31BF4F00BD95BB /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C7A017682B31BF4F00BD95BB /* InfoPlist.xcstrings */; };
+		C7A0176B2B31BF4F00BD95BB /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C7A0176A2B31BF4F00BD95BB /* InfoPlist.xcstrings */; };
 		C7AF862A2931150A00BDEB69 /* Documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = C7AF86292931150A00BDEB69 /* Documentation.docc */; };
 		C7BE4BFA291EA9CB007AA0C2 /* Main in Frameworks */ = {isa = PBXBuildFile; productRef = C7BE4BF9291EA9CB007AA0C2 /* Main */; };
 		C7DAA9E22B212FDD00306C6C /* Screenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DAA9E12B212FDD00306C6C /* Screenshots.swift */; };
@@ -86,6 +88,8 @@
 		C77F52042913F0430056530E /* Pods_geteduroam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_geteduroam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C78BB7712A293D93001799ED /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		C79715A02A28910A00828465 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C7A017682B31BF4F00BD95BB /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
+		C7A0176A2B31BF4F00BD95BB /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		C7AF86292931150A00BDEB69 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
 		C7C91BE02913CB54008F79FF /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		C7D61037291EA763007C9D6B /* GeteduroamPackage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = GeteduroamPackage; path = geteduroam/GeteduroamPackage; sourceTree = "<group>"; };
@@ -188,6 +192,7 @@
 				C74A11E9294CA56100ECC19A /* Fonts */,
 				C76B786C2A86F45B00A651EB /* Localizable.xcstrings */,
 				C72FDF122B2B51AA00AE0636 /* AppStore.xcstrings */,
+				C7A017682B31BF4F00BD95BB /* InfoPlist.xcstrings */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 			);
 			path = geteduroam;
@@ -260,6 +265,7 @@
 				C7F45A5B297ABD050005508D /* Assets.xcassets */,
 				C76B786E2A86F45B00A651EB /* Localizable.xcstrings */,
 				C72FDF152B2B543900AE0636 /* AppStore.xcstrings */,
+				C7A0176A2B31BF4F00BD95BB /* InfoPlist.xcstrings */,
 				C7F45A5C297ABD050005508D /* Preview Content */,
 			);
 			path = getgovroam;
@@ -385,6 +391,16 @@
 				en,
 				Base,
 				nl,
+				"ca-ES",
+				de,
+				es,
+				"pl-PL",
+				"pt-PT",
+				"it-IT",
+				hu,
+				cy,
+				"en-GB",
+				"fr-FR",
 			);
 			mainGroup = 7555FF72242A565900829871;
 			packageReferences = (
@@ -406,6 +422,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7A017692B31BF4F00BD95BB /* InfoPlist.xcstrings in Resources */,
 				C74A11ED294CA56100ECC19A /* OpenSans-SemiBold.ttf in Resources */,
 				C78BB7722A29D210001799ED /* LICENSE.md in Resources */,
 				058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */,
@@ -436,6 +453,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7A0176B2B31BF4F00BD95BB /* InfoPlist.xcstrings in Resources */,
 				C755640E2AB9C69100244B45 /* Muli-SemiBold.ttf in Resources */,
 				C7F45A6A297AC8E30005508D /* Preview Assets.xcassets in Resources */,
 				C7F45A68297AC88C0005508D /* discovery.json in Resources */,
@@ -652,7 +670,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = app.eduroam.geteduroam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -687,7 +705,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = app.eduroam.geteduroam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -783,7 +801,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = app.eduroam.geteduroam.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -919,7 +937,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = app.eduroam.geteduroam.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
