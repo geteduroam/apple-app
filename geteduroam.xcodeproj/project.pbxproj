@@ -11,8 +11,6 @@
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* GeteduroamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* GeteduroamApp.swift */; };
 		C72D66D72A4DCE9A007FDB68 /* discovery.json in Resources */ = {isa = PBXBuildFile; fileRef = C72D66D62A4DCE9A007FDB68 /* discovery.json */; };
-		C74840EA2B31A88200202A20 /* AppStore.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C72FDF152B2B543900AE0636 /* AppStore.xcstrings */; };
-		C74840EB2B31A88500202A20 /* AppStore.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C72FDF122B2B51AA00AE0636 /* AppStore.xcstrings */; };
 		C74A11ED294CA56100ECC19A /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C74A11EA294CA56100ECC19A /* OpenSans-SemiBold.ttf */; };
 		C74A11EE294CA56100ECC19A /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C74A11EB294CA56100ECC19A /* OpenSans-Bold.ttf */; };
 		C74A11EF294CA56100ECC19A /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C74A11EC294CA56100ECC19A /* OpenSans-Regular.ttf */; };
@@ -434,7 +432,6 @@
 				C76B786D2A86F45B00A651EB /* Localizable.xcstrings in Resources */,
 				C74A11EF294CA56100ECC19A /* OpenSans-Regular.ttf in Resources */,
 				058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */,
-				C74840EB2B31A88500202A20 /* AppStore.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,7 +463,6 @@
 				C76B786F2A86F45B00A651EB /* Localizable.xcstrings in Resources */,
 				C755640D2AB9C69100244B45 /* Muli-Bold.ttf in Resources */,
 				C7F45A67297AC8850005508D /* Assets.xcassets in Resources */,
-				C74840EA2B31A88200202A20 /* AppStore.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
