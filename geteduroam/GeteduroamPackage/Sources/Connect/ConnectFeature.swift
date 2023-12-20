@@ -257,7 +257,7 @@ public struct Connect: Reducer {
         public var errorDescription: String? {
             switch self {
             case .missingProfileType:
-                return NSLocalizedString("Missing information about profile.", comment: "missingProfileType")
+                return NSLocalizedString("Missing information about profile.", bundle: .module, comment: "missingProfileType")
 
             case .missingAuthorizationEndpoint:
                 return NSLocalizedString("Missing information to start authentication. (auth)", bundle: .module, comment: "missingAuthorizationEndpoint (leave text in brackets out of localization)")
@@ -269,10 +269,10 @@ public struct Connect: Reducer {
                 return NSLocalizedString("Missing information to start authentication. (info)", bundle: .module, comment: "missingOAuthInfo (leave text in brackets out of localization)")
        
             case .missingEAPConfigEndpoint:
-                return NSLocalizedString("Missing information to start configuration. (eap)", comment: "missingEAPConfigEndpoint (leave text in brackets out of localization)")
+                return NSLocalizedString("Missing information to start configuration. (eap)", bundle: .module, comment: "missingEAPConfigEndpoint (leave text in brackets out of localization)")
 
             case .missingMobileConfigEndpoint:
-                return NSLocalizedString("Missing information to start configuration. (profile)", comment: "missingMobileConfigEndpoint (leave text in brackets out of localization)")
+                return NSLocalizedString("Missing information to start configuration. (profile)", bundle: .module, comment: "missingMobileConfigEndpoint (leave text in brackets out of localization)")
                 
             case .missingTermsAcceptance:
                 return NSLocalizedString("You must agree to the terms of use.", bundle: .module, comment: "missingTermsAcceptance (leave text in brackets out of localization)")
