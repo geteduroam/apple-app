@@ -22,7 +22,7 @@ public enum OIDAuthStateError: Error, LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .neitherAccessTokenNorErrorAvailable:
-            return NSLocalizedString("No access token obtained for unknown reason", comment: "OIDAuthStateError neitherAccessTokenNorErrorAvailable")
+            return NSLocalizedString("No access token obtained for unknown reason", bundle: .module, comment: "OIDAuthStateError neitherAccessTokenNorErrorAvailable")
         }
     }
 }
