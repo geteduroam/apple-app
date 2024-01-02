@@ -4,6 +4,18 @@
     "No access token obtained for unknown reason" : {
       "comment" : "OIDAuthStateError neitherAccessTokenNorErrorAvailable",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لم يتم الحصول على رمز الوصول لسبب غير معروف"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "По неизвестна причина не е получен токен за достъп"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40,7 +52,7 @@
             "value" : "No se obtuvo ningún token de acceso por razón desconocida."
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aucun jeton d'accès n'a été obtenu, pour une raison inconnue"
@@ -52,7 +64,7 @@
             "value" : "Nem sikerült hozzáférési token megszerzése ismeretlen okból"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nessun token di accesso ottenuto per motivi sconosciuti"
@@ -64,16 +76,28 @@
             "value" : "Geen toegangstoken verkregen om onbekende reden"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Z nieznanego powodu nie uzyskano tokenu dostępu"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nenhum token de acesso obtido por motivo desconhecido"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iz neznanega razloga ni bil pridobljen žeton za dostop"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Маркер доступу не отримано з невідомих причин"
           }
         }
       }

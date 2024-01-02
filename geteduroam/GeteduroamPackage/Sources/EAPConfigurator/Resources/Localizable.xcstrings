@@ -4,6 +4,18 @@
     "No credentials in configuration" : {
       "comment" : "empty user/pass",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\"لا توجد بيانات اعتماد في التكوين."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Няма креденшъли в конфигурацията"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -34,7 +46,7 @@
             "value" : "No hay credenciales en la configuración"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pas d'identifiants dans la configuration"
@@ -46,7 +58,7 @@
             "value" : "Nincsenek hitelesítő adatok a konfigurációban"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nessuna credenziale nella configurazione"
@@ -58,16 +70,28 @@
             "value" : "Geen gebruikersnaam en wachtwoord in configuratie"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "W konfiguracji nie ma danych logowania"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sem credenciais na configuração"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "V konfiguraciji ni poverilnic"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відсутність облікових даних у конфігурації"
           }
         }
       }
@@ -75,6 +99,18 @@
     "No OID or SSID in configuration" : {
       "comment" : "No OID or SSID in configuration",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لا يوجد OID أو SSID في التكوين."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Няма OID или SSID в конфигурацията"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -105,7 +141,7 @@
             "value" : "No hay OID o SSID en la configuración"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aucun OID ou SSID dans la configuration"
@@ -117,7 +153,7 @@
             "value" : "Nincs OID vagy SSID a konfigurációban"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nessun OID o SSID nella configurazione"
@@ -129,16 +165,28 @@
             "value" : "Geen OID of SSID in configuratie"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "W konfiguracji nie ma OID ani SSID"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sem OID ou SSID na configuração"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "V konfiguraciji ni elementa OID ali SSID"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Немає OID або SSID у конфігурації"
           }
         }
       }
@@ -146,6 +194,18 @@
     "No valid configuration found" : {
       "comment" : "noConfigurations",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لم يتم العثور على تكوين صالح."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не е намерена валидна конфигурация"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -176,7 +236,7 @@
             "value" : "No se ha encontrado una configuración válida"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aucune configuration valide trouvée"
@@ -188,7 +248,7 @@
             "value" : "Nem található érvényes konfiguráció"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nessuna configurazione valida trovata"
@@ -200,16 +260,28 @@
             "value" : "Geen geldige configuratie gevonden"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nie znaleziono żadnej poprawnej konfiguracji"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nenhuma configuração válida encontrada"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Najdena ni bila nobena veljavna konfiguracija"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не знайдено жодної правильної конфігурації"
           }
         }
       }
@@ -217,6 +289,18 @@
     "No valid outer EAP type in configuration" : {
       "comment" : "noOuterEAPType",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لا يوجد نوع صالح لـ EAP الخارجي في التكوين."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Няма валиден външен EAP тип в конфигурацията"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -247,7 +331,7 @@
             "value" : "No hay un tipo de EAP externo válido en la configuración"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aucun type EAP externe valide dans la configuration"
@@ -259,7 +343,7 @@
             "value" : "Nincs érvényes külső EAP típus a konfigurációban"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nessun tipo EAP esterno valido nella configurazione"
@@ -271,16 +355,28 @@
             "value" : "Geen geldige outer EAP-type in configuratie"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "W konfiguracji nie ma żadnego poprawnego zewnętrznego typu EAP"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nenhum tipo EAP externo válido na configuração"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "V konfiguraciji ni veljavne vrste za zunanji EAP"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "У конфігурації немає дійсного типу зовнішнього EAP"
           }
         }
       }
@@ -288,6 +384,18 @@
     "Unable to add certificate %@ to keychain (%d)" : {
       "comment" : "addClientCertificate: SecItemAdd",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\"غير قادر على إضافة الشهادة %1$@ إلى مستودع المفاتيح (%2$d)"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не може да се добави сертификат %1$@ към keychain (%2$d)"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -324,7 +432,7 @@
             "value" : "No se puede agregar el certificado %1$@ al llavero (%2$d)"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible d'ajouter le certificat %1$@ au trousseau (%2$d)"
@@ -336,7 +444,7 @@
             "value" : "Nem sikerült hozzáadni a %1$@ tanúsítványt a kulcskarikához (%2$d)"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossibile aggiungere il certificato %1$@ al portachiavi (%2$d)"
@@ -348,16 +456,28 @@
             "value" : "Kon het certificaat %1$@ niet toevoegen aan de sleutelhanger (%2$d)"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nie udało się dodanie certyfikatu %1$@ do magazynu (%2$d)"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Não foi possível adicionar o certificado %1$@ ao chaveiro (%2$d)"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Potrdila %1$@ ni mogoče dodati v shrambo poverilnic (%2$d)"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдається додати сертифікат %1$@ до брелока (%2$d)"
           }
         }
       }
@@ -365,6 +485,18 @@
     "Unable to copy from keychain (%d)" : {
       "comment" : "SecItemCopyMatching: retrieving identity returned",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "غير قادر على نسخ من مستودع المفاتيح (%d)"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не може да се копира  от keychain(%d)"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -395,7 +527,7 @@
             "value" : "No se puede copiar desde el llavero (%d)"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible de copier depuis le trousseau (%d)"
@@ -407,7 +539,7 @@
             "value" : "Nem lehet másolni a kulcskarikából (%d)"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossibile copiare dal portachiavi (%d)"
@@ -419,16 +551,28 @@
             "value" : "Kon niet kopiëren uit de sleutelhanger (%d)"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nie powiodło się kopiowanie z magazynu (%d)"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Não foi possível copiar do chaveiro (%d)"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ni mogoče kopirati iz shrambe poverilnic (%d)"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Неможливо скопіювати з брелока (%d)"
           }
         }
       }
@@ -436,6 +580,18 @@
     "Unable to create certificate from data" : {
       "comment" : "SecCertificateCreateWithData: false",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "غير قادر على إنشاء شهادة من البيانات"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не може да се създаде сертификат от данните"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -466,7 +622,7 @@
             "value" : "No se puede crear el certificado a partir de los datos"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible de créer le certificat depuis les données"
@@ -478,7 +634,7 @@
             "value" : "Nem sikerült létrehozni a tanúsítványt az adatokból."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossibile creare il certificato dai dati"
@@ -490,16 +646,28 @@
             "value" : "Kon geen certificaat creëren van de data"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nie udało się stworzyć certyfikatu z danych"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Não foi possível criar certificado a partir da informação"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iz podatkov ni mogoče ustvariti potrdila"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдається створити сертифікат з даних"
           }
         }
       }
@@ -507,6 +675,18 @@
     "Unable to decode certificate data" : {
       "comment" : "Unable to base64 decode certificate data",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "غير قادر على فك تشفير بيانات الشهادة"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не могат да се декодират данните от сертификата"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -537,7 +717,7 @@
             "value" : "No se pueden decodificar los datos del certificado"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible de décoder les données du certificat"
@@ -549,7 +729,7 @@
             "value" : "Nem lehet dekódolni a tanúsítvány adatokat"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossibile decodificare i dati del certificato"
@@ -561,16 +741,28 @@
             "value" : "Kon certificaatdata niet decoderen"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nie udało się zdekodowanie danych certyfikatu"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Não foi possível  descodificar os dados do certificado."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Podatkov potrdila ni mogoče dekodirati"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдається розшифрувати дані сертифіката"
           }
         }
       }
@@ -578,6 +770,18 @@
     "Unable to get common name from certificate" : {
       "comment" : "Certificate: unable to get common name",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "غير قادر على الحصول على اسم مشترك من الشهادة"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не може да се вземе common name от сертификата"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -608,7 +812,7 @@
             "value" : "No se puede obtener el nombre común del certificado"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible de trouver le nom d'usage dans le certificat"
@@ -620,7 +824,7 @@
             "value" : "Nem sikerült megszerezni a common name-t a tanúsítványból."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossibile ottenere il common name dal certificato"
@@ -632,16 +836,28 @@
             "value" : "Kon geen generieke naam uit certificaat halen"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nie można pobrać nazwy ogólnej z certyfikatu"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Não foi possível possível obter o nome comum do certificado"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iz potrdila ni mogoče pridobiti skupnega imena"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдається отримати загальне ім'я з сертифіката"
           }
         }
       }
@@ -649,6 +865,18 @@
     "Unable to import certificate into keychain (%d)" : {
       "comment" : "addClientCertificate",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "غير قادر على استيراد الشهادة إلى مستودع المفاتيح (%d)"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не може да се импортира сертификат в keychain (%d)"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -679,7 +907,7 @@
             "value" : "No se puede importar el certificado en el llavero (%d)"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible d'importer le certificat dans le trousseau (%d)"
@@ -691,7 +919,7 @@
             "value" : "Nem sikerült importálni a tanúsítványt a kulcskarikára (%d)"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossibile importare il certificato nel portachiavi (%d)"
@@ -703,16 +931,28 @@
             "value" : "Kon certificaat niet importeren in de sleutelhanger (%d)"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nie udał się import certyfikatu do magazyny (%d)"
+            "value" : "Nie udał się import certyfikatu do magazynu (%d)"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Não foi possível importar o certificado para o chaveiro (%d)"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Potrdila ni mogoče uvoziti v shrambo poverilnic (%d)"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдалося імпортувати сертифікат у брелок (%d)"
           }
         }
       }
@@ -720,6 +960,18 @@
     "Unable to read supported interfaces" : {
       "comment" : "cannotCopySupportedInterfaces",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "غير قادر على قراءة الواجهات المدعومة"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не могат да се прочетат поддържаните интерфейси"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -750,7 +1002,7 @@
             "value" : "No se pueden leer las interfaces compatibles"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible de lire les interfaces supportées"
@@ -762,7 +1014,7 @@
             "value" : "Nem lehet olvasni a támogatott interfészeket."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossibile leggere le interfacce supportate"
@@ -774,16 +1026,28 @@
             "value" : "Kon de ondersteunde interfaces niet lezen"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nie można czytać z wspieranych interfejsów"
+            "value" : "Nie można czytać ze wspieranych interfejsów"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Não foi possível ler as interfaces suportadas"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Podprtih vmesnikov ni mogoče brati"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдається прочитати підтримувані інтерфейси"
           }
         }
       }
@@ -791,6 +1055,18 @@
     "Unable to set identity for client certificate" : {
       "comment" : "ClientCertificate: cannot set identity",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "غير قادر على تعيين الهوية لشهادة العميل"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не може да се зададе идентичност за клиентския сертификат"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -821,7 +1097,7 @@
             "value" : "No se puede establecer la identidad para el certificado cliente"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible de configurer l'identité pour le certificat client"
@@ -833,7 +1109,7 @@
             "value" : "Nem sikerült beállítani az azonosítót a kliens tanúsítványhoz."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossibile impostare l'identità per il certificato client"
@@ -845,16 +1121,28 @@
             "value" : "Kon de identiteit van het client-certificaat niet instellen"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nie udało się ustawić tożsamości dla certyfikatu klienta"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Não foi possível definir a identidade para o certificado do cliente"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ni mogoče nastaviti identitete za potrdilo odjemalca"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдається встановити ідентифікатор для клієнтського сертифіката"
           }
         }
       }
@@ -862,6 +1150,18 @@
     "Unable to set server certificate as trusted" : {
       "comment" : "setTrustedServerCertificates: returned false",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "غير قادر على تعيين شهادة الخادم كموثوق بها"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не може да се зададе сертификата на сървъра като доверен"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -892,7 +1192,7 @@
             "value" : "No se puede establecer el certificado del servidor como confiable"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible de considérer le certificat serveur comme étant de confiance"
@@ -904,7 +1204,7 @@
             "value" : "Nem sikerült a szerver tanúsítványt megbízhatónak beállítani."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossibile impostare il certificato del server come attendibile"
@@ -916,16 +1216,28 @@
             "value" : "Kon het server-certificaat niet als vertrouwd instellen"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nie udało się ustawienie certyfikatu, jako zaufanego"
+            "value" : "Nie udało się ustawienie certyfikatu jako zaufanego"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Não foi possível definir o certificado do servidor como confiável."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Potrdila strežnika ni mogoče nastaviti kot zaupanja vredno"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдалося встановити сертифікат сервера як надійний"
           }
         }
       }
@@ -933,6 +1245,18 @@
     "Unable to verify network because no server name or certificate set" : {
       "comment" : "No server names and no custom CAs set",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "غير قادر على التحقق من الشبكة لعدم وجود اسم خادم أو مجموعة شهادات"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не може да се провери мрежата, защото не са зададени име на сървър и сертификат"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -963,7 +1287,7 @@
             "value" : "No se puede verificar la red porque no se ha establecido ningún nombre de servidor o certificado"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible de vérifier le réseau car aucun nom de serveur ou certificat n'est indiqué"
@@ -975,7 +1299,7 @@
             "value" : "Nem lehet ellenőrizni a hálózatot, mert nincs beállítva szervernév vagy tanúsítvány."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossibile verificare la rete perché non è impostato alcun nome server o certificato"
@@ -987,16 +1311,28 @@
             "value" : "Kon het netwerk niet verifiëren omdat er geen servernaam of certificaat ingesteld is"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nie udało się zweryfikować sieci, ponieważ nie została ustawiona nazwa serwera i certyfikat"
+            "value" : "Nie udało się zweryfikować sieci, ponieważ nie została ustalona nazwa serwera i certyfikat"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Não foi possível verificar a rede porque nenhum nome de servidor ou certificado foi definido."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Omrežja ni mogoče preveriti, ker ni nastavljeno potrdilo ali ime strežnika"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдалося перевірити мережу, оскільки не встановлено ім'я сервера або сертифікат"
           }
         }
       }
@@ -1004,6 +1340,18 @@
     "Username must end with \"%@\"" : {
       "comment" : "invalid username",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يجب أن ينتهي اسم المستخدم بـ \"%@\""
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Потребителското име трябва да завършва с \"%@\""
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1034,7 +1382,7 @@
             "value" : "El nombre de usuario debe terminar con \"%@\""
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le nom d'utilisateur doit se terminer par « %@ »"
@@ -1046,7 +1394,7 @@
             "value" : "A felhasználónévnek \"%@\"-al kell végződnie."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Il nome utente deve terminare con \"%@\""
@@ -1058,16 +1406,28 @@
             "value" : "Gebruikersnaam moet eindigen met \"%@\""
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Identyfikator musi się kończyć ciągiem \"%@\""
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "O nome de utilizador deve terminar com \"%@\"."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uporabniško ime se mora končati z »%@«"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ім'я користувача має закінчуватися на \"%@\""
           }
         }
       }
@@ -1075,6 +1435,18 @@
     "with unknown name" : {
       "comment" : "with unknown name",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مع اسم غير معروف"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "с неизвестно име"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1105,7 +1477,7 @@
             "value" : "con nombre desconocido"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "avec un nom inconnu"
@@ -1117,7 +1489,7 @@
             "value" : "ismeretlen név"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "con nome sconosciuto"
@@ -1129,16 +1501,28 @@
             "value" : "met onbekende naam"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "z nieznaną nazwą"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "com nome de utilizador desconhecido"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "z neznanim imenom"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "з невідомим ім'ям"
           }
         }
       }

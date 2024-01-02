@@ -19,7 +19,7 @@ public struct OrganizationRowView: View {
                     .font(theme.organizationCountryFont)
             }
             Spacer()
-            Image(systemName: "chevron.right")
+            Image(systemName: "chevron.forward")
         }
         .contentShape(Rectangle())
     }
