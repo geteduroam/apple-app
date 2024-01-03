@@ -4,6 +4,18 @@
     "Search" : {
       "comment" : "Search prompt",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "البحث"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Търсене"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40,7 +52,7 @@
             "value" : "Buscar"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rechercher"
@@ -52,7 +64,7 @@
             "value" : "Keresés"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cerca"
@@ -64,16 +76,28 @@
             "value" : "Zoek"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wyszukaj"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pesquisar"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iskanje"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пошук"
           }
         }
       }

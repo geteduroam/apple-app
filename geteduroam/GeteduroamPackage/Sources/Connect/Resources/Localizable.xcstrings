@@ -3,6 +3,18 @@
   "strings" : {
     "Agree" : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "موافق"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Споразумение"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -39,7 +51,7 @@
             "value" : "Aceptar"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Approuver"
@@ -51,7 +63,7 @@
             "value" : "Egyetértek"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sono d'accordo"
@@ -63,22 +75,46 @@
             "value" : "Accepteer"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zgadzam się"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Concordar"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Strinjam se"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Погоджуюсь"
           }
         }
       }
     },
     "Cancel" : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إلغاء"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отказ"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -115,7 +151,7 @@
             "value" : "Cancelar"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuler"
@@ -127,7 +163,7 @@
             "value" : "Elvet"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annulla"
@@ -139,22 +175,46 @@
             "value" : "Annuleer"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Anuluj"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prekliči"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скасувати"
           }
         }
       }
     },
     "Configured" : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تم التكوين"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Конфигурирано"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -191,7 +251,7 @@
             "value" : "Configurado"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Configuré"
@@ -203,7 +263,7 @@
             "value" : "Konfigurált"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Configurato"
@@ -215,22 +275,46 @@
             "value" : "Ingesteld"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Skonfigurowano"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Configurado"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konfigurirano"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Налаштовано"
           }
         }
       }
     },
     "Configured, but not connected" : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تم التكوين، ولكن لم يتم الاتصال"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Конфигурирано е, но не е свързано"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -267,7 +351,7 @@
             "value" : "Configurado, pero no conectado"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Configuré, mais non connecté"
@@ -279,7 +363,7 @@
             "value" : "Konfigurált, de nem csatlakoztatott"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Configurato, ma non connesso"
@@ -291,22 +375,46 @@
             "value" : "Ingesteld, maar niet verbonden"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Skonfigurowano, ale brak połaczenia"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Configurado, mas não ligado"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konfigurirano, vendar ni povezano"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Налаштовано, але не підключено"
           }
         }
       }
     },
     "Connect" : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الاتصال"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Свързване"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -343,7 +451,7 @@
             "value" : "Conectar"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Connecter"
@@ -355,7 +463,7 @@
             "value" : "Csatlakozás"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Connetti"
@@ -367,22 +475,46 @@
             "value" : "Verbind"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Połacz"
+            "value" : "Połącz"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ligar"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poveži"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Підключитися"
           }
         }
       }
     },
     "CONNECT" : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الاتصال"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Свързване"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -419,7 +551,7 @@
             "value" : "CONECTAR"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "CONNECTER"
@@ -431,7 +563,7 @@
             "value" : "CSATLAKOZÁS"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "CONNETTI"
@@ -443,22 +575,46 @@
             "value" : "VERBIND"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "POŁĄCZ"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "LIGAR"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "POVEŽI"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "З'ЄДНАННЯ"
           }
         }
       }
     },
     "Connected" : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "متصل"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Свързан"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -495,7 +651,7 @@
             "value" : "Conectado"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Connecté"
@@ -507,7 +663,7 @@
             "value" : "Csatlakozva"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Connesso"
@@ -519,22 +675,46 @@
             "value" : "Verbonden"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Połaczono"
+            "value" : "Połączono"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ligado"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Povezano"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Підключено"
           }
         }
       }
     },
     "Continue" : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "متابعة"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Продължете"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -571,7 +751,7 @@
             "value" : "Continuar"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continuer"
@@ -583,7 +763,7 @@
             "value" : "Folytatás"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continua"
@@ -595,22 +775,46 @@
             "value" : "Ga verder"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dalej"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continuar"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nadaljuj"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Продовжити"
           }
         }
       }
     },
     "Continue in System Preferences" : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "المتابعة في تفضيلات النظام"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Продължете със Системните настройки"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -647,7 +851,7 @@
             "value" : "Continuar en \"Preferencias del Sistema\""
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continuer dans les paramètres système"
@@ -659,7 +863,7 @@
             "value" : "Folytassa a Rendszerbeállításokban"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continua in Preferenze di Sistema"
@@ -671,22 +875,46 @@
             "value" : "Ga verder in Systeemvoorkeuren"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kontynuuj w ustawieniach systemowych"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continuar nas Preferências do Sistema"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nadaljuj na prednostne nastavitve sistema"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Продовжити у Системних налаштуваннях"
           }
         }
       }
     },
     "Continue in System Settings" : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "المتابعة في إعدادات النظام"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Продължете със Системните настройки"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -723,7 +951,7 @@
             "value" : "Continuar en \"Configuración del sistema\""
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continuer dans les réglages système"
@@ -735,7 +963,7 @@
             "value" : "Folytatás a Rendszerbeállításokban"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continua in Impostazioni di Sistema"
@@ -747,22 +975,46 @@
             "value" : "Ga verder in Systeeminstellingen"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kontynuuj w ustawieniach systemowych"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continuar nas Definições do Sistema"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nadaljuj na sistemske nastavitve"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Продовження в Налаштуваннях системи"
           }
         }
       }
     },
     "Continue to Website" : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "المتابعة إلى الموقع"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Продължете към уебсайта"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -799,7 +1051,7 @@
             "value" : "Continuar al sitio web"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continuer vers le site web"
@@ -811,7 +1063,7 @@
             "value" : "Folytatás a webhelyen"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continua al sito web"
@@ -823,22 +1075,46 @@
             "value" : "Ga verder naar webpagina"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Przejdź do strony internetowej"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continuar para o Website"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nadaljuj na spletno mesto"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Перейти на веб-сайт"
           }
         }
       }
     },
     "Disagree" : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "عدم الموافقة"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не съм съгласен"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -875,7 +1151,7 @@
             "value" : "Rechazar"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ne pas approuver"
@@ -887,7 +1163,7 @@
             "value" : "Nem értek egyet"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Non sono d'accordo"
@@ -899,22 +1175,46 @@
             "value" : "Weiger"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nie zgadam się"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Discordo"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ne strinjam se"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не погоджуюсь"
           }
         }
       }
     },
     "Double-click to review the profile and then press the \"Install…\" button to setup the network on your computer." : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "انقر نقرًا مزدوجًا لمراجعة الملف الشخصي، ثم اضغط على زر 'تثبيت...' لإعداد الشبكة على جهاز الكمبيوتر الخاص بك."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кликнете два пъти, за да прегледате профила, и след това натиснете бутона \"Install…\", за да инсталирате мрежата на Вашия компютър."
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -951,7 +1251,7 @@
             "value" : "Haz doble clic para revisar el perfil y luego pulsa el botón \"Instalar...\" para configurar la red en tu ordenador."
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Double-cliquez pour passer en revue le profil puis appuyez sur le bouton « Installer... » pour configurer le réseau sur votre ordinateur"
@@ -963,7 +1263,7 @@
             "value" : "Kattintson duplán a profil áttekintéséhez, majd nyomja meg az \"Installálás...\" gombot a hálózat beállításához a számítógépén."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fare doppio clic per esaminare il profilo e quindi premere il pulsante \"Installa...\" per configurare la rete sul tuo computer."
@@ -975,16 +1275,28 @@
             "value" : "Dubbelklik om het profiel te controleren en druk vervolgens op de \"Installeer\"-knop om het netwerk in te stellen op deze computer."
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kliknij dwukrotnie by przejrzeć profil, a potem naciśnij przycisk \"Instaluj...\", żeby skonfigurować sieć na Twoim komputerze."
+            "value" : "Kliknij dwukrotnie, by przejrzeć profil, a potem naciśnij przycisk \"Instaluj...\", żeby skonfigurować sieć na Twoim komputerze."
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clique duas vezes para rever o perfil e depois pressione o botão \"Instalar...\" para configurar a rede no seu computador."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dvokliknite, če želite pregledati profil, nato pa pritisnite gumb »Namesti …«, če želite nastaviti omrežje v računalniku."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Двічі клацніть, щоб переглянути профіль, а потім натисніть кнопку \"Встановити...\", щоб налаштувати мережу на вашому комп'ютері."
           }
         }
       }
@@ -992,6 +1304,18 @@
     "Failed to connect" : {
       "comment" : "Failed to connect",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فشل الاتصال"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Неуспешно свързване"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1028,7 +1352,7 @@
             "value" : "Error al conectar"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "La tentative de connexion a échoué"
@@ -1040,7 +1364,7 @@
             "value" : "Nem sikerült kapcsolódni."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Connessione fallita"
@@ -1052,22 +1376,46 @@
             "value" : "Verbinding maken mislukt"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Połączenie nieudane"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Falha ao ligar"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Povezave ni uspelo vzpostaviti"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдалося встановити зв'язок"
           }
         }
       }
     },
     "Helpdesk" : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مكتب المساعدة"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Хелпдеск"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1104,7 +1452,7 @@
             "value" : "Servicio de asistencia"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Support informatique"
@@ -1116,7 +1464,7 @@
             "value" : "Ügyfélszolgálat"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Helpdesk"
@@ -1128,22 +1476,46 @@
             "value" : "Helpdesk"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pomoc techniczna"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Helpdesk"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oddelek za pomoč"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Служба технічної підтримки"
           }
         }
       }
     },
     "Log In" : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تسجيل الدخول"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вход"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1180,7 +1552,7 @@
             "value" : "Iniciar sesión"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Identifiez-vous"
@@ -1192,7 +1564,7 @@
             "value" : "Bejelentkezés"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Accedi"
@@ -1204,22 +1576,46 @@
             "value" : "Log in"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zaloguj się"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Iniciar sessão"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prijava"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Увійдіть у систему"
           }
         }
       }
     },
     "Login Required" : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يتطلب تسجيل الدخول"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Изисква влизане в системата"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1256,7 +1652,7 @@
             "value" : "Inicio de sesión requerido"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Identifiant requis"
@@ -1268,7 +1664,7 @@
             "value" : "Bejelentkezés szükséges"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Accesso richiesto"
@@ -1280,16 +1676,28 @@
             "value" : "Inloggen vereist"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wymagane zalogowanie"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Autenticação necessária"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zahtevana je prijava"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Потрібен логін для входу"
           }
         }
       }
@@ -1297,6 +1705,18 @@
     "Missing information about profile." : {
       "comment" : "missingProfileType",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "معلومات مفقودة حول الملف الشخصي."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Липсва информация за профила."
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1333,7 +1753,7 @@
             "value" : "Falta información sobre el perfil."
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Information manquante sur le profil."
@@ -1345,7 +1765,7 @@
             "value" : "Hiányzó információk a profilról."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Informazioni mancanti sul profilo."
@@ -1357,16 +1777,28 @@
             "value" : "Informatie ontbreekt over profiel."
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Brakuje informacji na temat profilu."
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Informação em falta sobre o perfil."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manjkajo podatki o profilu."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відсутня інформація про профіль."
           }
         }
       }
@@ -1374,6 +1806,18 @@
     "Missing information to start authentication. (auth)" : {
       "comment" : "missingAuthorizationEndpoint (leave text in brackets out of localization)",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "معلومات مفقودة لبدء عملية المصادقة."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Липсва информация, за да започне автентикацията."
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1410,7 +1854,7 @@
             "value" : "Falta información para iniciar la autenticación."
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Information manquante pour démarrer l'authentification."
@@ -1422,7 +1866,7 @@
             "value" : "Hiányzó információk az azonosítás megkezdéséhez."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Informazioni mancanti per avviare l'autenticazione."
@@ -1434,16 +1878,28 @@
             "value" : "Informatie ontbreekt om authenticatie te starten."
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Brakuje informacji by rozpocząć uwierzytelnienie."
+            "value" : "Brakuje informacji potrzebnej do rozpoczęcia uwierzytelnienia."
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Informação em falta para iniciar a autenticação."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manjkajo podatki za začetek preverjanja pristnosti."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відсутня інформація для початку автентифікації."
           }
         }
       }
@@ -1451,6 +1907,18 @@
     "Missing information to start authentication. (info)" : {
       "comment" : "missingOAuthInfo (leave text in brackets out of localization)",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "معلومات مفقودة لبدء عملية المصادقة."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Липсва информация, за да започне автентикацията."
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1487,7 +1955,7 @@
             "value" : "Falta información para iniciar la autenticación."
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Information manquante pour démarrer l'authentification."
@@ -1499,7 +1967,7 @@
             "value" : "Hiányzó információk az azonosítás megkezdéséhez."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Informazioni mancanti per avviare l'autenticazione."
@@ -1511,16 +1979,28 @@
             "value" : "Informatie ontbreekt om authenticatie te starten."
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Brakuje informacji by rozpocząć uwierzytelnienie."
+            "value" : "Brakuje informacji potrzebnej do rozpoczęcia uwierzytelnienia."
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Informação em falta para iniciar a autenticação."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manjkajo podatki za začetek preverjanja pristnosti."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відсутня інформація для початку автентифікації."
           }
         }
       }
@@ -1528,6 +2008,18 @@
     "Missing information to start authentication. (token)" : {
       "comment" : "missingTokenEndpoint (leave text in brackets out of localization)",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "معلومات مفقودة لبدء عملية المصادقة."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Липсва информация, за да започне автентикацията."
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1564,7 +2056,7 @@
             "value" : "Falta información para iniciar la autenticación."
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Information manquante pour démarrer l'authentification."
@@ -1576,7 +2068,7 @@
             "value" : "Hiányzó információk az azonosítás megkezdéséhez."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Informazioni mancanti per avviare l'autenticazione."
@@ -1588,16 +2080,28 @@
             "value" : "Informatie ontbreekt om authenticatie te starten."
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Brakuje informacji by rozpocząć uwierzytelnienie."
+            "value" : "Brakuje informacji potrzebnej do rozpoczęcia uwierzytelnienia."
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Informação em falta para iniciar a autenticação."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manjkajo podatki za začetek preverjanja pristnosti."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відсутня інформація для початку автентифікації."
           }
         }
       }
@@ -1605,6 +2109,18 @@
     "Missing information to start configuration. (eap)" : {
       "comment" : "missingEAPConfigEndpoint (leave text in brackets out of localization)",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "معلومات مفقودة لبدء عملية التكوين."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Липсва информация, за да стартира конфигурацията."
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1620,7 +2136,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Einloggen nicht möglich wegen fehlender Informationen."
+            "value" : "Einrichtung nicht möglich wegen fehlender Informationen."
           }
         },
         "en" : {
@@ -1641,7 +2157,7 @@
             "value" : "Falta información para iniciar la configuración."
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Information manquante pour démarrer la configuration."
@@ -1653,7 +2169,7 @@
             "value" : "Hiányzó információk a konfiguráció elindításához."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Informazioni mancanti per avviare la configurazione."
@@ -1665,16 +2181,28 @@
             "value" : "Informatie ontbreekt om configuratie te starten."
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Brakuje informacji by rozpocząć konfigurację."
+            "value" : "Brakuje informacji potrzebnej do rozpoczęcia konfiguracji."
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Informação em falta para iniciar a configuração."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manjkajo podatki za začetek konfiguriranja."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відсутня інформація для початку налаштування."
           }
         }
       }
@@ -1682,6 +2210,18 @@
     "Missing information to start configuration. (profile)" : {
       "comment" : "missingMobileConfigEndpoint (leave text in brackets out of localization)",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "معلومات مفقودة لبدء عملية التكوين."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Липсва информация, за да стартира конфигурацията."
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1697,7 +2237,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Einloggen nicht möglich wegen fehlender Informationen."
+            "value" : "Einrichtung nicht möglich wegen fehlender Informationen."
           }
         },
         "en" : {
@@ -1718,7 +2258,7 @@
             "value" : "Falta información para iniciar la configuración."
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Information manquante pour démarrer la configuration."
@@ -1730,7 +2270,7 @@
             "value" : "Hiányzó információk a konfiguráció elindításához."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Informazioni mancanti per avviare la configurazione."
@@ -1742,16 +2282,28 @@
             "value" : "Informatie ontbreekt om configuratie te starten."
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Brakuje informacji by rozpocząć konfigurację."
+            "value" : "Brakuje informacji potrzebnej do rozpoczęcia konfiguracji."
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Informação em falta para iniciar a configuração."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manjkajo podatki za začetek konfiguriranja."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відсутня інформація для початку налаштування."
           }
         }
       }
@@ -1759,6 +2311,18 @@
     "No valid profile found." : {
       "comment" : "mobileConfigFailed",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لم يتم العثور على ملف شخصي صالح."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не е намерен валиден профил."
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1795,7 +2359,7 @@
             "value" : "No se ha encontrado ningún perfil válido."
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aucun profil valide trouvé."
@@ -1807,7 +2371,7 @@
             "value" : "Nem található érvényes profil."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nessun profilo valido trovato."
@@ -1819,16 +2383,28 @@
             "value" : "Geen geldig profiel gevonden."
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nie znaleziono żadnego poprawnego profilu."
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nenhum perfil válido encontrado"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Najti ni bilo mogoče nobenega veljavnega profila."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не знайдено жодного дійсного профілю."
           }
         }
       }
@@ -1836,6 +2412,18 @@
     "No valid provider found." : {
       "comment" : "noValidProviderFound",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لم يتم العثور على ملف شخصي صالح."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не е намерен валиден доставчик."
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1872,7 +2460,7 @@
             "value" : "No se ha encontrado ningún proveedor válido."
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aucun fournisseur valide trouvé."
@@ -1884,7 +2472,7 @@
             "value" : "Nem található érvényes szolgáltató."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nessun provider valido trovato."
@@ -1896,16 +2484,28 @@
             "value" : "Geen geldige provider gevonden."
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nie znaleziono żadnego poprawnego dostawcy."
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nenhum fornecedor válido encontrado"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Najti ni bilo mogoče nobenega veljavnega ponudnika."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не знайдено жодного дійсного профілю."
           }
         }
       }
@@ -1913,6 +2513,18 @@
     "OK" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حسناً"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ОК"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1949,7 +2561,7 @@
             "value" : "OK"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
@@ -1961,7 +2573,7 @@
             "value" : "OK"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
@@ -1973,22 +2585,46 @@
             "value" : "OK"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "V redu"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ТАК"
           }
         }
       }
     },
     "Password" : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "كلمة المرور"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Парола"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2025,7 +2661,7 @@
             "value" : "Contraseña"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mot de passe"
@@ -2037,7 +2673,7 @@
             "value" : "Jelszó"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Password"
@@ -2049,22 +2685,46 @@
             "value" : "Wachtwoord"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hasło"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Palavra-passe"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geslo"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пароль"
           }
         }
       }
     },
     "Please enter your username and password." : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الرجاء إدخال اسم المستخدم وكلمة المرور الخاصة بك."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Моля, въведете Вашето потребителско име и парола."
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2101,7 +2761,7 @@
             "value" : "Por favor, introduce tu nombre de usuario y contraseña."
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Entrez votre identifiant et mot de passe, svp."
@@ -2113,7 +2773,7 @@
             "value" : "Kérlek, add meg a felhasználóneved és a jelszavad."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Per favore, inserisci il tuo nome utente e la tua password."
@@ -2125,16 +2785,28 @@
             "value" : "Voer gebruikersnaam en wachtwoord in."
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Proszę wprowadzić identyfikator użytkownika i hasło."
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Por favor escreva o seu nome de utilizador e palavra-passe."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vnesite uporabniško ime in geslo."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Будь ласка, введіть своє ім'я користувача та пароль."
           }
         }
       }
@@ -2142,6 +2814,18 @@
     "Profiles" : {
       "comment" : "Profiles",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الملفات الشخصية"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профили"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2178,7 +2862,7 @@
             "value" : "Perfiles"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Profils"
@@ -2190,7 +2874,7 @@
             "value" : "Profilok"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Profili"
@@ -2202,22 +2886,46 @@
             "value" : "Profielen"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Profile"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Perfis"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profili"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профілі"
           }
         }
       }
     },
     "Review the profile and then press the \"Install…\" button to setup the network on your computer." : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "قم بمراجعة الملف الشخصي ثم اضغط على زر 'تثبيت...' لإعداد الشبكة على جهاز الكمبيوتر الخاص بك."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прегледайте профила и след това натиснете бутона \"Install…\", за да инсталирате мрежата на Вашия компютър."
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2254,7 +2962,7 @@
             "value" : "Revisa el perfil y luego pulsa el botón \"Instalar...\" para configurar la red en tu ordenador."
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Passez en revue le profil puis appuyez sur le bouton « Installer... » pour configurer le réseau sur votre ordinateur"
@@ -2266,7 +2974,7 @@
             "value" : "Tekintse át  a profilját, majd nyomja meg az \"Installálás...\" gombot a hálózat beállításához a számítógépén."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rivedi il profilo e quindi premi il pulsante \"Installa...\" per configurare la rete sul tuo computer."
@@ -2278,22 +2986,46 @@
             "value" : "Controleeer het profiel en druk vervolgens op de \"Installeer\"-knop om het netwerk in te stellen op deze computer."
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Przejrzyj profil, a potem naciśnij przycisk \"Instaluj...\", żeby skonfigurować sieć na Twoim komputerze."
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Valide o perfil e depois pressione o botão \"Instalar...\" para configurar a rede no seu computador."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preglejte profil in nato pritisnite gumb »Namesti …«, če želite nastaviti omrežje v računalniku."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Перегляньте профіль і натисніть кнопку \"Встановити...\", щоб налаштувати мережу на вашому комп'ютері."
           }
         }
       }
     },
     "Terms of Use" : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "شروط الاستخدام"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Условия за ползване"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2330,7 +3062,7 @@
             "value" : "Condiciones de uso"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Conditions d'utilisation"
@@ -2342,7 +3074,7 @@
             "value" : "Használati feltételek"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Termini di utilizzo"
@@ -2354,16 +3086,28 @@
             "value" : "Gebruiksvoorwaarden"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Warunki korzystania"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Termos de Utilização"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pogoji uporabe"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Умови користування"
           }
         }
       }
@@ -2371,6 +3115,18 @@
     "The configuration process was cancelled." : {
       "comment" : "userCancelled",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تم إلغاء عملية التكوين."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Процесът на конфигуриране беше отменен."
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2407,7 +3163,7 @@
             "value" : "El proceso de configuración ha sido cancelado."
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le processus de configuration a été annulé."
@@ -2419,7 +3175,7 @@
             "value" : "A konfigurációs folyamat megszakadt."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Il processo di configurazione è stato annullato."
@@ -2431,22 +3187,46 @@
             "value" : "Het configuratieproces is geannuleerd."
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Konfiguracja została przerwana."
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "O processo de configuração foi cancelado."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Postopek konfiguracije je bil preklican."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Процес налаштування було скасовано."
           }
         }
       }
     },
     "Username" : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اسم المستخدم"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Потребителско име"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2483,7 +3263,7 @@
             "value" : "Nombre de usuario"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Identifiant"
@@ -2495,7 +3275,7 @@
             "value" : "Felhasználónév"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Username"
@@ -2507,22 +3287,46 @@
             "value" : "Gebruikersnaam"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Identyfikator"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nome de utilizador"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uporabniško ime"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ім'я користувача"
           }
         }
       }
     },
     "You are redirected to a website." : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تم توجيهك إلى موقع الويب."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вие сте пренасочен към уебсайт."
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2559,7 +3363,7 @@
             "value" : "Se te está redirigiendo a un sitio web."
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vous allez être redirigé vers un site web."
@@ -2571,7 +3375,7 @@
             "value" : "Átirányítunk egy weboldalra."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sei reindirizzato a un sito web."
@@ -2583,22 +3387,46 @@
             "value" : "Je wordt doorverwezen naar een webpagina."
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zostaniesz przekierowany do strony internetowej."
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "É redirecionado para um website."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preusmerjeni ste na spletno mesto."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ви перенаправлені на веб-сайт."
           }
         }
       }
     },
     "You must agree to the terms of use before you can use this network." : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يجب أن توافق على شروط الاستخدام قبل استخدام هذا الشبكة."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "За да използвате тази мрежа, трябва да се съгласите с условията за ползване."
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2635,7 +3463,7 @@
             "value" : "Debes aceptar las condiciones de uso antes de poder utilizar esta red."
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vous devez approuver les conditions d'utilisation avant de pouvoir utiliser ce réseau."
@@ -2647,7 +3475,7 @@
             "value" : "A felhasználási feltételek elfogadása szükséges, mielőtt használhatja ezt a hálózatot."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "È necessario accettare i termini di utilizzo prima di poter utilizzare questa rete."
@@ -2659,16 +3487,28 @@
             "value" : "Je moet de gebruiksvoorwaarden accepteren voordat je gebruik kan maken van dit netwerk."
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aby skorzystać z tej sieci musisz najpierw potwierdzić zgodę na warunki korzystania."
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Deve concordar com os termos de utilização antes de poder utilizar esta rede."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preden lahko uporabljate to omrežje, se morate strinjati s pogoji uporabe."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ви повинні погодитися з умовами використання, перш ніж ви зможете користуватися цією мережею."
           }
         }
       }
@@ -2676,6 +3516,18 @@
     "You must agree to the terms of use." : {
       "comment" : "missingTermsAcceptance (leave text in brackets out of localization)",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يجب أن توافق على شروط الاستخدام."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Трябва да се съгласите с условията за ползване."
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2712,7 +3564,7 @@
             "value" : "Debes aceptar las condiciones de uso."
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vous devez approuver les conditions d'utilisation."
@@ -2724,7 +3576,7 @@
             "value" : "El kelle fogadnia  a felhasználási feltételeket"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "È necessario accettare i termini di utilizzo."
@@ -2736,16 +3588,28 @@
             "value" : "Je moet de gebruiksvoorwaarden accepteren."
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Musisz potwierdzić zgodę na warunki korzystania."
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Deve concordar com os termos de utilização."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Morate se strinjati s pogoji uporabe."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ви повинні погодитися з умовами використання."
           }
         }
       }

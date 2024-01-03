@@ -2,7 +2,13 @@
   "images" : [
     {
       "filename" : "Group 9456.pdf",
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "language-direction" : "left-to-right"
+    },
+    {
+      "filename" : "Group 9457.pdf",
+      "idiom" : "universal",
+      "language-direction" : "right-to-left"
     }
   ],
   "info" : {

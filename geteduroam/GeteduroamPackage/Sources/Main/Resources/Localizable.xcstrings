@@ -4,6 +4,18 @@
     "Failed to load organizations" : {
       "comment" : "Message when organizations can't be loaded and the fallback fails too",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فشل في تحميل المؤسسات"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Неуспешно зареждане на организациите"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40,7 +52,7 @@
             "value" : "Error al cargar las organizaciones"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le chargement des établissements a échoué"
@@ -52,7 +64,7 @@
             "value" : "Nem sikerült betölteni a szervezeteket"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossibile caricare le organizzazioni"
@@ -64,22 +76,46 @@
             "value" : "Laden van organisaties mislukt"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nie udało się załadować instytucji"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Falha ao carregar organizações"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Organizacij ni uspelo naložiti"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдалося завантажити організації"
           }
         }
       }
     },
     "No matches found" : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لم يتم العثور على تطابقات"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не са намерени съвпадения"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -116,7 +152,7 @@
             "value" : "No se han encontrado coincidencias"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aucune correspondance trouvée"
@@ -128,7 +164,7 @@
             "value" : "Nincs találat"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nessun risultato trovato"
@@ -140,22 +176,46 @@
             "value" : "Geen resultaten gevonden"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nie znaleziono dopasowań"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nenhum resultado encontrado"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ni ujemanj"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Співпадінь не знайдено"
           }
         }
       }
     },
     "OK" : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حسناً"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ОК"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -192,7 +252,7 @@
             "value" : "OK"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
@@ -204,7 +264,7 @@
             "value" : "OK"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
@@ -216,16 +276,28 @@
             "value" : "OK"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "V redu"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ТАК"
           }
         }
       }
@@ -233,6 +305,18 @@
     "Search for your organization" : {
       "comment" : "Search prompt",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "البحث عن مؤسستك"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Търсене за Вашата организация"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -269,7 +353,7 @@
             "value" : "Busca tu organización"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chercher votre établissement"
@@ -281,7 +365,7 @@
             "value" : "Keresse meg szervezetét"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cerca la tua organizzazione"
@@ -293,16 +377,28 @@
             "value" : "Zoek jouw organisatie"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wyszukaj swoją instytucję"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pesquise pela sua organização"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poiščite svojo organizacijo"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Знайдіть свою організацію"
           }
         }
       }
@@ -310,6 +406,18 @@
     "The organization is no longer listed." : {
       "comment" : "Message when user asked to renew but the organization could not be found",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لم تعد المؤسسة مدرجة."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Организацията вече не е в списъка."
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -346,7 +454,7 @@
             "value" : "La organización ya no está en la lista."
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cet établissement n'est plus dans la liste."
@@ -358,7 +466,7 @@
             "value" : "A szervezet már nem szerepel a listán."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "L'organizzazione non è più elencata."
@@ -370,16 +478,28 @@
             "value" : "De organisatie wordt niet meer vermeld."
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Twojej instytucji nie ma już na liście."
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "A organização já não está listada."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Organizacija ni več navedena na seznamu."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Організація більше не значиться в списку."
           }
         }
       }
@@ -387,6 +507,18 @@
     "Unknown organization" : {
       "comment" : "Title when user asked to renew but the organization could not be found",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مؤسسة غير معروفة"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Неизвестна организация"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -423,7 +555,7 @@
             "value" : "Organización desconocida"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Établissement inconnu"
@@ -435,7 +567,7 @@
             "value" : "Ismeretlen szervezet"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Organizzazione sconosciuta"
@@ -447,16 +579,28 @@
             "value" : "Onbekende organisatie"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nieznana instytucja"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Organização desconhecida"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neznana organizacija"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Невідома організація"
           }
         }
       }

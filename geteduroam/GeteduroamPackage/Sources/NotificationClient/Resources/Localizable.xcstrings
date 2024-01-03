@@ -4,6 +4,18 @@
     "Remind Me Later" : {
       "comment" : "Remind Me Later",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ذكرني لاحقا"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Напомнете ми по-късно"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40,7 +52,7 @@
             "value" : "Recordarme más tarde"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rappelez-le moi plus tard"
@@ -52,7 +64,7 @@
             "value" : "Később emlékeztessen"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ricordamelo più tardi"
@@ -64,16 +76,28 @@
             "value" : "Herinner me later"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Przypomnij mi później"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lembrar-me mais tarde"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opomni me pozneje"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нагадати пізніше"
           }
         }
       }
@@ -81,6 +105,18 @@
     "Renew Now" : {
       "comment" : "Renew Now",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "جدد الآن"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обновете сега"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -117,7 +153,7 @@
             "value" : "Renovar ahora"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Renouveler maintenant"
@@ -129,7 +165,7 @@
             "value" : "Megújítás most."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rinnova adesso"
@@ -141,16 +177,28 @@
             "value" : "Vernieuw nu"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Odnów teraz"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Renovar Agora"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obnovi zdaj"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Оновити зараз"
           }
         }
       }
@@ -158,6 +206,18 @@
     "Renew your connection to extend your access." : {
       "comment" : "Renew your connection to extend your access.",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "قم بتجديد اتصالك لتوسيع نطاق وصولك."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обновете Вашата свързаност, за да удължите достъпа си."
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -194,7 +254,7 @@
             "value" : "Renueva tu conexión para ampliar su validez."
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Renouvelez votre connexion pour prolonger votre accès."
@@ -206,7 +266,7 @@
             "value" : "Hosszabbítsa meg a kapcsolatát, hogy meghosszabbítsa az hozzáférését."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rinnova la tua connessione per estendere il tuo accesso."
@@ -218,16 +278,28 @@
             "value" : "Vernieuw je verbinding om je toegang te verlengen."
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Odnów połączenie, aby przedłużyć swój dostęp."
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Renove a sua ligação para prolongar o seu acesso."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obnovite povezavo, če želite podaljšati dostop."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поновіть з'єднання, щоб продовжити доступ."
           }
         }
       }
@@ -235,6 +307,18 @@
     "You had access until %@. Renew your connection to extend your access." : {
       "comment" : "You had access until <date>. Renew your connection to extend your access.",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "كان لديك الوصول حتى %@. قم بتجديد اتصالك لتمديد الوصول الخاص بك"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ще имате достъп до %@. Обновете Вашата свързаност, за да удължите достъпа си."
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -271,7 +355,7 @@
             "value" : "Tenías acceso hasta %@. Renueva tu conexión para ampliar su validez."
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vous avez accès jusqu'à %@. Renouvelez votre connexion pour prolonger votre accès."
@@ -283,7 +367,7 @@
             "value" : " %@-ig volt hozzáférésed. Hosszabbítsd meg a hozzáférésedet a kapcsolat meghosszabbításával."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Avevi accesso fino al %@. Rinnova la tua connessione per estendere il tuo accesso."
@@ -295,16 +379,28 @@
             "value" : "Je had toegang tot %@. Vernieuw je verbinding om je toegang te verlengen."
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Miałeś dostęp do %@. Odnów połączenie, aby przedłużyć swój dostęp."
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Teve acesso até %@. Renove a sua ligação para prolongar o seu acesso."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dostop je bil omogočen do %@. Obnovite povezavo, če želite podaljšati dostop."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ви мали доступ до %@. Поновіть з'єднання, щоб продовжити доступ"
           }
         }
       }
@@ -312,6 +408,18 @@
     "You have access until %@. Renew your connection to extend your access." : {
       "comment" : "You have access until <date>. Renew your connection to extend your access.",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لديك وصول حتى %@. قم بتجديد اتصالك لتمديد وصولك"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ще имате достъп до %@. Обновете Вашата свързаност, за да удължите достъпа си."
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -348,7 +456,7 @@
             "value" : "Tienes acceso hasta %@. Renueva tu conexión para ampliar su validez."
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vous avez accès jusqu'à %@. Renouvelez votre connexion pour prolonger votre accès."
@@ -360,7 +468,7 @@
             "value" : " %@-ig van hozzáférésed. Hosszabbítsd meg a hozzáférésedet a kapcsolat meghosszabbításával."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hai accesso fino al %@. Rinnova la tua connessione per estendere il tuo accesso."
@@ -372,16 +480,28 @@
             "value" : "Je hebt toegang tot %@. Vernieuw je verbinding om je toegang te verlengen."
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Miałeś dostęp do %@. Odnów połączenie, aby przedłużyć swój dostęp."
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tem acesso até %@. Renove a sua ligação para prolongar o seu acesso."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dostop je omogočen do %@. Obnovite povezavo, če želite podaljšati dostop."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ви маєте доступ до %@. Поновіть з'єднання, щоб продовжити доступ."
           }
         }
       }
@@ -389,6 +509,18 @@
     "Your network access has expired" : {
       "comment" : "Your network access has expired",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "انتهت صلاحية وصولك إلى الشبكة"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Достъпът Ви до мрежата е изтекъл"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -425,7 +557,7 @@
             "value" : "Tu acceso a la red ha caducado"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Votre accès au réseau a expiré"
@@ -437,7 +569,7 @@
             "value" : "Hálózati hozzáférésed lejárt."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Il tuo accesso alla rete è scaduto"
@@ -449,16 +581,28 @@
             "value" : "Je netwerktoegang is verlopen"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Twój dostęp do sieci wygasł"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "O seu acesso à rede expirou"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dostop do omrežja je potekel"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Термін дії вашого доступу до мережі закінчився"
           }
         }
       }
@@ -466,6 +610,18 @@
     "Your network access is about to expire" : {
       "comment" : "Your network access is about to expire",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "صلاحية وصولك إلى الشبكة على وشك الانتهاء"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Достъпът Ви до мрежата скоро ще изтече"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -502,7 +658,7 @@
             "value" : "Tu acceso a la red está a punto de caducar"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Votre accès au réseau va bientôt expirer"
@@ -514,7 +670,7 @@
             "value" : "Hálózati hozzáférésed hamarosan lejár."
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Il tuo accesso alla rete sta per scadere"
@@ -526,16 +682,28 @@
             "value" : "Je netwerktoegang verloopt binnenkort"
           }
         },
-        "pl-PL" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Twój dostęp do sieci za chwilę wygaśnie"
           }
         },
-        "pt-PT" : {
+        "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "O seu acesso à rede está prestes a expirar."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dostop do omrežja bo kmalu potekel"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Термін дії вашого доступу до мережі закінчується"
           }
         }
       }

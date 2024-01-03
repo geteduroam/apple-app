@@ -5,6 +5,18 @@
       "comment" : "Bundle name",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "getgovroam"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "getgovroam"
+          }
+        },
         "ca-ES" : {
           "stringUnit" : {
             "state" : "translated",
@@ -41,7 +53,7 @@
             "value" : "getgovroam"
           }
         },
-        "fr-FR" : {
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "getgovroam"
@@ -53,19 +65,37 @@
             "value" : "getgovroam"
           }
         },
-        "it-IT" : {
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "getgovroam"
           }
         },
-        "pl-PL" : {
+        "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "getgovroam"
           }
         },
-        "pt-PT" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "getgovroam"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "getgovroam"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "getgovroam"
+          }
+        },
+        "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "getgovroam"

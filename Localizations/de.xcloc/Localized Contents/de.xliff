@@ -198,12 +198,12 @@
       </trans-unit>
       <trans-unit id="Missing information to start configuration. (eap)" xml:space="preserve">
         <source>Missing information to start configuration.</source>
-        <target state="translated">Einloggen nicht möglich wegen fehlender Informationen.</target>
+        <target state="translated">Einrichtung nicht möglich wegen fehlender Informationen.</target>
         <note>missingEAPConfigEndpoint (leave text in brackets out of localization)</note>
       </trans-unit>
       <trans-unit id="Missing information to start configuration. (profile)" xml:space="preserve">
         <source>Missing information to start configuration.</source>
-        <target state="translated">Einloggen nicht möglich wegen fehlender Informationen.</target>
+        <target state="translated">Einrichtung nicht möglich wegen fehlender Informationen.</target>
         <note>missingMobileConfigEndpoint (leave text in brackets out of localization)</note>
       </trans-unit>
       <trans-unit id="No valid profile found." xml:space="preserve">
