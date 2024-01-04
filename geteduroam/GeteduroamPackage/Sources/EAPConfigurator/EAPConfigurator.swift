@@ -89,6 +89,7 @@ class EAPConfigurator {
         if !dryRun {
             Logger.eap.info("Applying network configurations")
             for configuration in configurations {
+                Logger.eap.debug("Applying network configuration \(configuration.debugDescription)")
                 try await NEHotspotConfigurationManager.shared.apply(configuration)
             }
         }
@@ -291,16 +292,18 @@ class EAPConfigurator {
                 throw EAPConfiguratorError.missingCredentials(clientSideCredential, requiredSuffix: requiredSuffix)
             }
 
-            let outerEapTypes = identityProvider
-                .authenticationMethods
-                .methods
-                .compactMap {
-                    Self.getOuterEapType(outerEapType: $0.EAPMethod.type)
-                }
             let outerIdentity = clientSideCredential.outerIdentity
-            let innerAuthType = Self.getInnerAuthMethod(innerAuthMethod: 0)
+            let innerAuthType = authenticationMethod
+                .innerAuthenticationMethods
+                .compactMap { method -> NEHotspotEAPSettings.TTLSInnerAuthenticationType? in
+                    guard let innerAuthMethodRaw = method.EAPMethod?.type else {
+                        return nil
+                    }
+                    return Self.getInnerAuthMethod(innerAuthMethod: innerAuthMethodRaw)
+                }
+                .first ?? .eapttlsInnerAuthenticationMSCHAPv2
             return try buildSettingsWithUsernamePassword(
-                outerEapTypes: outerEapTypes,
+                outerEapType: outerEapType,
                 outerIdentity: outerIdentity,
                 innerAuthType: innerAuthType,
                 username: username,
@@ -345,12 +348,14 @@ class EAPConfigurator {
     ///   - password: password for PEAP/TTLS authentication
     /// - Returns:  NEHotspotEAPSettings configured with the provided credentials
     private func buildSettingsWithUsernamePassword(
-        outerEapTypes: [NEHotspotEAPSettings.EAPType],
+        outerEapType: NEHotspotEAPSettings.EAPType,
         outerIdentity: String?,
-        innerAuthType: NEHotspotEAPSettings.TTLSInnerAuthenticationType?,
+        innerAuthType: NEHotspotEAPSettings.TTLSInnerAuthenticationType,
         username: String,
         password: String
     ) throws -> NEHotspotEAPSettings {
+        Logger.eap.info("buildSettingsWithUsernamePassword: outerEapType = \(outerEapType.rawValue)")
+        
         let eapSettings = NEHotspotEAPSettings()
         
         guard username != "" && password != "" else{
@@ -358,9 +363,8 @@ class EAPConfigurator {
             throw EAPConfiguratorError.emptyUsernameOrPassword
         }
         
-        eapSettings.supportedEAPTypes = outerEapTypes.map() { outerEapType in NSNumber(value: outerEapType.rawValue) }
-        // TODO: Default value is EAP, should we use that or MSCHAPv2?
-        eapSettings.ttlsInnerAuthenticationType = innerAuthType ?? NEHotspotEAPSettings.TTLSInnerAuthenticationType.eapttlsInnerAuthenticationMSCHAPv2
+        eapSettings.supportedEAPTypes = [NSNumber(value: outerEapType.rawValue)]
+        eapSettings.ttlsInnerAuthenticationType = innerAuthType
         eapSettings.username = username
         eapSettings.password = password
         Logger.eap.info("buildSettingsWithUsernamePassword: eapSettings.ttlsInnerAuthenticationType = \(eapSettings.ttlsInnerAuthenticationType.rawValue)")
