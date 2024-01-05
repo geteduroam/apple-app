@@ -296,12 +296,12 @@ class EAPConfigurator {
             let innerAuthType = authenticationMethod
                 .innerAuthenticationMethods
                 .compactMap { method -> NEHotspotEAPSettings.TTLSInnerAuthenticationType? in
-                  if let innerEAPAuthMethodRaw = method.EAPMethod?.type, let innerEAPAuthMethod = Self.getInnerAuthMethod(innerAuthMethod: innerEAPAuthMethodRaw) {
-                      return innerEAPAuthMethod
-                  } else if let innerNonEAPAuthMethodRaw = method.nonEAPAuthMethod?.type.rawValue, let innerNonEAPAuthMethod = Self.getInnerAuthMethod(innerAuthMethod: -innerNonEAPAuthMethodRaw)  {
-                      return innerNonEAPAuthMethod
-                  }
-                  return nil
+                    if let innerEAPAuthMethodRaw = method.EAPMethod?.type, let innerEAPAuthMethod = Self.getInnerAuthMethod(innerAuthMethod: innerEAPAuthMethodRaw) {
+                        return innerEAPAuthMethod
+                    } else if let innerNonEAPAuthMethodRaw = method.nonEAPAuthMethod?.type.rawValue, let innerNonEAPAuthMethod = Self.getInnerAuthMethod(innerAuthMethod: -innerNonEAPAuthMethodRaw)  {
+                        return innerNonEAPAuthMethod
+                    }
+                    return nil
                 }
                 .first ?? .eapttlsInnerAuthenticationMSCHAPv2
             return try buildSettingsWithUsernamePassword(
