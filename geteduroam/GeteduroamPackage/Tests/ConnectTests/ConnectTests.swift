@@ -25,7 +25,7 @@ final class ConnectTests: XCTestCase {
             reducer: { Connect() },
             withDependencies: {
                 var urlRequest = URLRequest(url: ConnectTests.eapConfigEndpoint)
-                urlRequest.httpMethod = "POST"
+                urlRequest.httpMethod = "GET"
                 let networkExchange = NetworkExchange(
                     urlRequest: urlRequest,
                     response: ServerResponse(
@@ -173,7 +173,7 @@ final class ConnectTests: XCTestCase {
             reducer: { Connect() },
             withDependencies: {
                 var urlRequest = URLRequest(url: ConnectTests.eapConfigEndpoint)
-                urlRequest.httpMethod = "POST"
+                urlRequest.httpMethod = "GET"
                 let networkExchange = NetworkExchange(
                     urlRequest: urlRequest,
                     response: ServerResponse(

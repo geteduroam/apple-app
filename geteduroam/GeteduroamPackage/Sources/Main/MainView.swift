@@ -148,7 +148,6 @@ public struct MainView: View {
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                 .task(id: viewStore.searchQuery) {
                     do {
-                        // TODO: Bounce belongs in reducer?
                         try await Task.sleep(nanoseconds: NSEC_PER_SEC / 5)
                         await viewStore.send(.searchQueryChangeDebounced).finish()
                     } catch {}

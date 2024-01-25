@@ -629,7 +629,7 @@ public struct Connect: Reducer {
         }
         
         var urlRequest = URLRequest(url: eapConfigURL)
-        urlRequest.httpMethod = "POST"
+        urlRequest.httpMethod = "GET"
         if let accessToken {
             urlRequest.allHTTPHeaderFields = ["Authorization": "Bearer \(accessToken)"]
         }
@@ -701,7 +701,7 @@ public struct Connect: Reducer {
             }
 
             var mobileConfigURLRequest = URLRequest(url: mobileConfigURL)
-            mobileConfigURLRequest.httpMethod = "POST"
+            mobileConfigURLRequest.httpMethod = "GET"
             if let accessToken {
                 mobileConfigURLRequest.allHTTPHeaderFields = ["Authorization": "Bearer \(accessToken)"]
             }
