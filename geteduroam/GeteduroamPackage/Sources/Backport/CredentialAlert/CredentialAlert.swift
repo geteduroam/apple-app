@@ -79,9 +79,11 @@ public extension Backport where Content: View {
                 actions: {
                     TextField(alert.usernamePrompt, text: alert.username)
                         .textContentType(.username)
+                        .flipsForRightToLeftLayoutDirection(false)
                         .onSubmit(alert.onUsernameSubmit)
                     SecureField(alert.passwordPrompt, text: alert.password)
                         .textContentType(.password)
+                        .flipsForRightToLeftLayoutDirection(false)
                     Button(alert.cancelButtonTitle, role: .cancel, action: alert.cancelAction)
                     Button(alert.doneButtonTitle, action: alert.doneAction)
                 }, message: {
