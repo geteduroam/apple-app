@@ -11,8 +11,9 @@ public class Theme: ObservableObject {
     @Published public var connectedFont: Font
     @Published public var infoHeaderFont: Font
     @Published public var infoDetailFont: Font
+    @Published public var versionFont: Font
     
-    public init(searchFont: Font, errorFont: Font, organizationNameFont: Font, organizationCountryFont: Font, profilesHeaderFont: Font, profileNameFont: Font, connectButtonFont: Font, connectedFont: Font, infoHeaderFont: Font, infoDetailFont: Font) {
+    public init(searchFont: Font, errorFont: Font, organizationNameFont: Font, organizationCountryFont: Font, profilesHeaderFont: Font, profileNameFont: Font, connectButtonFont: Font, connectedFont: Font, infoHeaderFont: Font, infoDetailFont: Font, versionFont: Font) {
         self.searchFont = searchFont
         self.errorFont = errorFont
         self.organizationNameFont = organizationNameFont
@@ -23,6 +24,7 @@ public class Theme: ObservableObject {
         self.connectedFont = connectedFont
         self.infoHeaderFont = infoHeaderFont
         self.infoDetailFont = infoDetailFont
+        self.versionFont = versionFont
     }
 }
 
@@ -37,5 +39,7 @@ extension Theme {
         connectButtonFont: .custom("OpenSans-Bold", size: 20, relativeTo: .body),
         connectedFont: .custom("OpenSans-Bold", size: 14, relativeTo: .body),
         infoHeaderFont: .custom("OpenSans-Bold", size: 14, relativeTo: .body),
-        infoDetailFont: .custom("OpenSans-Regular", size: 14, relativeTo: .body))
+        infoDetailFont: .custom("OpenSans-Regular", size: 14, relativeTo: .body),
+        versionFont: .custom("OpenSans-Regular", size: 8, relativeTo: .caption2)
+    )
 }

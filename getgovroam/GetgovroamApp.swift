@@ -16,7 +16,9 @@ extension Theme {
         connectButtonFont: .custom("Muli-Bold", size: 20, relativeTo: .body),
         connectedFont: .custom("Muli-Bold", size: 14, relativeTo: .body),
         infoHeaderFont: .custom("Muli-Bold", size: 14, relativeTo: .body),
-        infoDetailFont: .custom("Muli", size: 14, relativeTo: .body))
+        infoDetailFont: .custom("Muli", size: 14, relativeTo: .body),
+        versionFont: .custom("Muli", size: 9, relativeTo: .caption2)
+        )
 }
 #elseif os(macOS)
 extension Theme {
@@ -30,7 +32,9 @@ extension Theme {
         connectButtonFont: .system(.callout, design: .default).bold(),
         connectedFont: .system(.body, design: .default),
         infoHeaderFont: .system(.body, design: .default).bold(),
-        infoDetailFont: .system(.body, design: .default))
+        infoDetailFont: .system(.body, design: .default),
+        versionFont: .system(.body, design: .default)
+    )
 }
 #endif
 
