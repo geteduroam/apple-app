@@ -41,7 +41,8 @@ public struct Connect: Reducer {
         
         public var usernamePrompt: String {
             if let requiredUserNameSuffix {
-                return NSLocalizedString("Username", bundle: .module, comment: "") + "@" + requiredUserNameSuffix
+                // Also in right-to-left languages the @suffix bit goes on the right
+                return "\u{200E}" + NSLocalizedString("Username", bundle: .module, comment: "") + "@" + requiredUserNameSuffix
             } else {
                 return NSLocalizedString("Username", bundle: .module, comment: "")
             }
