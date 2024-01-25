@@ -34,9 +34,9 @@ extension DependencyValues.EAPClientKey: DependencyKey {
 
 extension EAPClient {
     static var live: Self = .init(
-        configure: {
+        configure: { identityProvider, credentials, dryRun in
             #if os(iOS)
-            try await EAPConfigurator().configure(identityProvider: $0, credentials: $1, dryRun: $2)
+            try await EAPConfigurator(teamID: "ZYJ4TZX4UU").configure(identityProvider: identityProvider, credentials: credentials, dryRun: dryRun)
             #else
             fatalError("EAPConfigurator not available")
             #endif
@@ -50,6 +50,14 @@ extension Logger {
 
 class EAPConfigurator {
 #if os(iOS)
+    let teamID: String
+    let appName: String
+    
+    init(teamID: String, appName: String = Bundle.main.bundleIdentifier ?? "") {
+        self.teamID = teamID
+        self.appName = appName
+    }
+    
     // MARK: - Configuring Identity Provider
     
     /// Configure the network for an Identity Provider
@@ -74,9 +82,9 @@ class EAPConfigurator {
             Logger.eap.info("Removing network(s) \(ssids)")
             removeNetwork(ssids: ssids, domains: [domain])
             
-            // TODO: only remove keychain items that match these networks
-            Logger.eap.info("Resetting keychain")
-            resetKeychain()
+            Logger.eap.info("Removing previous private keys from keychain")
+            deletePrivateKeys(named: "Identity")
+            deletePrivateKeys(named: "Identity \(appName)")
         }
         
         Logger.eap.info("Creating network configurations")
@@ -93,6 +101,10 @@ class EAPConfigurator {
                 try await NEHotspotConfigurationManager.shared.apply(configuration)
             }
         }
+        
+        Logger.eap.info("Listing private keys")
+        listPrivateKeys(named: "Identity")
+        listPrivateKeys(named: "Identity \(appName)")
         
         Logger.eap.info("Finished configuring for \(name) \(dryRun ? "with dry run" : "")")
         return ssids
@@ -381,6 +393,13 @@ class EAPConfigurator {
     }
     
     // MARK: - Managing Certificates and Keychain
+    func listKeychain() {
+        listAllKeysForSecClass(kSecClassGenericPassword)
+        listAllKeysForSecClass(kSecClassInternetPassword)
+        listAllKeysForSecClass(kSecClassCertificate)
+        listAllKeysForSecClass(kSecClassKey)
+        listAllKeysForSecClass(kSecClassIdentity)
+    }
     
     ///  Clear all items in this app's Keychain
     func resetKeychain() {
@@ -401,6 +420,46 @@ class EAPConfigurator {
         let result = SecItemDelete(dict as CFDictionary)
         assert(result == noErr || result == errSecItemNotFound, "Error deleting keychain data (\(result))")
     }
+  
+    func listAllKeysForSecClass(_ secClass: CFTypeRef) {
+        let dict: [NSString: CFTypeRef] = [
+            kSecClass: secClass,
+            kSecReturnData: kCFBooleanTrue,
+            kSecReturnAttributes: kCFBooleanTrue,
+            kSecReturnRef: kCFBooleanTrue,
+            kSecMatchLimit: kSecMatchLimitAll
+        ]
+        var items: CFTypeRef?
+        let result = SecItemCopyMatching(dict as CFDictionary, &items)
+        let securityClass = "\(secClass)"
+        Logger.eap.info("\(securityClass): \(String(describing: items))")
+        assert(result == noErr || result == errSecItemNotFound, "Error listing keychain data (\(result))")
+    }
+    
+    func deletePrivateKeys(named: String) {
+        let dict: [NSString: CFTypeRef] = [
+            kSecClass: kSecClassIdentity,
+            kSecAttrLabel: named as CFTypeRef
+        ]
+        let result = SecItemDelete(dict as CFDictionary)
+        assert(result == noErr || result == errSecItemNotFound, "Error deleting private keys (\(result))")
+    }
+    
+    func listPrivateKeys(named: String) {
+        let dict: [NSString: CFTypeRef] = [
+            kSecClass: kSecClassIdentity,
+            kSecAttrLabel: named as CFTypeRef,
+            kSecReturnData: kCFBooleanTrue,
+            kSecReturnAttributes: kCFBooleanTrue,
+            kSecReturnRef: kCFBooleanTrue,
+            kSecMatchLimit: kSecMatchLimitAll
+        ]
+        var items: CFTypeRef?
+        let result = SecItemCopyMatching(dict as CFDictionary, &items)
+        let securityClass = "Private keys named \(named)"
+        Logger.eap.info("\(securityClass): \(String(describing: items))")
+        assert(result == noErr || result == errSecItemNotFound, "Error listing keychain data (\(result))")
+    }
     
     /**
      @function importCACertificates
@@ -408,7 +467,7 @@ class EAPConfigurator {
      @param certificateStrings Array of Base64 CA certificates
      @result Array of SecCertificate certificates
      */
-    func importCACertificates(certificateStrings: [String]) -> [SecCertificate] {
+    private func importCACertificates(certificateStrings: [String]) -> [SecCertificate] {
         // supporting multiple CAs
         var certificates = [SecCertificate]()
         Logger.eap.info("Start handling CA certificate strings")
@@ -436,7 +495,7 @@ class EAPConfigurator {
      @param certificate Base64 encoded DER encoded X.509 certificate
      @result Whether importing succeeded
      */
-    func addCertificate(certificate: String) throws -> SecCertificate {
+    private func addCertificate(certificate: String) throws -> SecCertificate {
         guard let data = Data(base64Encoded: certificate) else {
             Logger.eap.error("Unable to base64 decode certificate data")
             throw EAPConfiguratorError.failedToBase64DecodeCertificate
@@ -453,15 +512,16 @@ class EAPConfigurator {
             throw EAPConfiguratorError.failedToCopyCommonName
         }
         let commonName: String = commonNameRef! as String
+        Logger.eap.info("addCertificate: adding common name \(commonName)")
         
         let addquery: [String: Any] = [
             kSecClass as String: kSecClassCertificate,
             kSecValueRef as String: certificateRef,
             kSecAttrLabel as String: commonName,
             kSecReturnRef as String: kCFBooleanTrue!,
-            kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlock
+            kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlock,
             //kSecReturnPersistentRef as String: kCFBooleanTrue!, // Persistent refs cause an error (invalid EAP config) when installing the profile
-            //kSecAttrAccessGroup as String: "ZYJ4TZX4UU.com.apple.networkextensionsharing", // Should be TEAMID.com.apple.networkextensionsharing, but works without?
+            kSecAttrAccessGroup as String: "\(teamID).com.apple.networkextensionsharing"
         ]
         var item: CFTypeRef?
         status = SecItemAdd(addquery as CFDictionary, &item)
@@ -487,7 +547,7 @@ class EAPConfigurator {
             kSecAttrLabel as String: commonName,
             kSecReturnRef as String: kCFBooleanTrue!,
             //kSecReturnPersistentRef as String: kCFBooleanTrue!, // Persistent refs cause an error (invalid EAP config) when installing the profile
-            //kSecAttrAccessGroup as String: "ZYJ4TZX4UU.com.apple.networkextensionsharing", // Should be TEAMID.com.apple.networkextensionsharing, but works without?
+            kSecAttrAccessGroup as String: "\(teamID).com.apple.networkextensionsharing"
         ]
         status = SecItemCopyMatching(getquery as CFDictionary, &item)
         guard status == errSecSuccess && item != nil else {
@@ -503,7 +563,7 @@ class EAPConfigurator {
     ///   - certificate: Base64 encoded PKCS12
     ///   - passphrase: Passphrase needed to decrypt the PKCS12, required as Apple doesn't like password-less PKCS12s
     /// - Returns: SecIdentity for added item
-    func addClientCertificate(certificate: String, passphrase: String) throws -> SecIdentity {
+    private func addClientCertificate(certificate: String, passphrase: String) throws -> SecIdentity {
         // First we call SecPKCS12Import to read the P12,
         // then we call SecItemAdd to add items to the keychain
         // https://developer.apple.com/forums/thread/31711
@@ -529,11 +589,11 @@ class EAPConfigurator {
         let addquery: [String: Any] = [
             //kSecClass as String: kSecClassIdentity, // Gives errSecInternal, according to Apple Developer Technical Support we should not specify this for client certs
             kSecValueRef as String: identity,
-            kSecAttrLabel as String: "Identity", // No dual-profile support, so this name will always be unique because we will only have one client cert
-            kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlock
+            kSecAttrLabel as String: "Identity \(appName)", // Unique per app
+            kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlock,
             //kSecReturnRef as String: kCFBooleanTrue!, // We're not retrieving the reference at this point, 2nd argument to SecItemAdd is nil
             //kSecReturnPersistentRef as String: kCFBooleanTrue!, // Persistent refs cause an error (invalid EAP config) when installing the profile
-            //kSecAttrAccessGroup as String: "ZYJ4TZX4UU.com.apple.networkextensionsharing", // Should be TEAMID.com.apple.networkextensionsharing, but works without?
+            kSecAttrAccessGroup as String: "\(teamID).com.apple.networkextensionsharing"
         ]
         var status: OSStatus = SecItemAdd(addquery as CFDictionary, nil)
         guard status == errSecSuccess || status == errSecDuplicateItem else {
@@ -555,6 +615,7 @@ class EAPConfigurator {
                 continue
             }
             let commonName: String = commonNameRef! as String
+            Logger.eap.info("addClientCertificate: adding common name \(commonName)")
             
             let addquery: [String: Any] = [
                 kSecClass as String: kSecClassCertificate,
@@ -563,7 +624,7 @@ class EAPConfigurator {
                 kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlock,
                 //kSecReturnRef as String: kCFBooleanTrue!, // We're not retrieving the reference at this point, 2nd argument to SecItemAdd is nil
                 //kSecReturnPersistentRef as String: kCFBooleanTrue!, // Persistent refs cause an error (invalid EAP config) when installing the profile
-                kSecAttrAccessGroup as String: "ZYJ4TZX4UU.com.apple.networkextensionsharing", // TEAMID.com.apple.networkextensionsharing
+                kSecAttrAccessGroup as String: "\(teamID).com.apple.networkextensionsharing"
             ]
             
             status = SecItemAdd(addquery as CFDictionary, nil)
@@ -578,10 +639,10 @@ class EAPConfigurator {
         var newIdentity: SecIdentity
         let getquery: [String: Any] = [
             kSecClass as String: kSecClassIdentity,
-            kSecAttrLabel as String: "Identity",
+            kSecAttrLabel as String: "Identity \(appName)",
             kSecReturnRef as String: kCFBooleanTrue!,
             //kSecReturnPersistentRef as String: kCFBooleanTrue!, // Persistent refs cause an error (invalid EAP config) when installing the profile
-            kSecAttrAccessGroup as String: "ZYJ4TZX4UU.com.apple.networkextensionsharing", // TEAMID.com.apple.networkextensionsharing
+            kSecAttrAccessGroup as String: "\(teamID).com.apple.networkextensionsharing",
         ]
         var ref: CFTypeRef?
         status = SecItemCopyMatching(getquery as CFDictionary, &ref)
