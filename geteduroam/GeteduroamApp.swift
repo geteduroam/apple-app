@@ -16,7 +16,9 @@ extension Theme {
         connectButtonFont: .custom("OpenSans-Bold", size: 20, relativeTo: .body),
         connectedFont: .custom("OpenSans-Bold", size: 14, relativeTo: .body),
         infoHeaderFont: .custom("OpenSans-Bold", size: 14, relativeTo: .body),
-        infoDetailFont: .custom("OpenSans-Regular", size: 14, relativeTo: .body))
+        infoDetailFont: .custom("OpenSans-Regular", size: 14, relativeTo: .body),
+        versionFont: .custom("OpenSans-Regular", size: 9, relativeTo: .caption2)
+    )
 }
 #elseif os(macOS)
 extension Theme {
@@ -30,7 +32,9 @@ extension Theme {
         connectButtonFont: .system(.callout, design: .default).bold(),
         connectedFont: .system(.body, design: .default),
         infoHeaderFont: .system(.body, design: .default).bold(),
-        infoDetailFont: .system(.body, design: .default))
+        infoDetailFont: .system(.body, design: .default),
+        versionFont: .system(.body, design: .default)
+    )
 }
 #endif
 
