@@ -13,6 +13,11 @@ import XMLCoder
 public struct Connect: Reducer {
     public init() { }
     
+    public enum CredentialPromptType {
+        case full
+        case passwordOnly
+    }
+    
     public struct State: Equatable {
         public init(organization: Organization, selectedProfileId: Profile.ID? = nil, autoConnectOnAppear: Bool = false, loadingState: LoadingState = .initial, providerInfo: ProviderInfo? = nil, credentials: Credentials? = nil, destination: Destination.State? = nil) {
             self.organization = organization
@@ -32,8 +37,15 @@ public struct Connect: Reducer {
         public var agreedToTerms: Bool = false
         public var credentials: Credentials?
         public var reusableInfo: ReusableInfo?
-        public var requiredUserNameSuffix: String? = nil
-        public var promptForCredentials: Bool = false
+        public var requiredUserNameSuffix: String?
+        public var promptForCredentials: CredentialPromptType?
+        public var promptForFullCredentials: Bool {
+            promptForCredentials == .full
+        }
+        
+        public var promptForPasswordOnlyCredentials: Bool {
+            promptForCredentials == .passwordOnly
+        }
         
         public var username: String {
             credentials?.username ?? ""
@@ -339,7 +351,7 @@ public struct Connect: Reducer {
         let organization = state.organization
         let credentials = state.credentials
         state.credentials = nil
-        state.promptForCredentials = false
+        state.promptForCredentials = nil
         let reusableInfo = state.reusableInfo
         state.reusableInfo = nil
         let agreedToTerms = state.agreedToTerms
@@ -436,14 +448,19 @@ public struct Connect: Reducer {
                 
             case let .connectResponse(.failure(OrganizationSetupError.eapConfigurationFailed(EAPConfiguratorError.invalidUsername(suffix), providerInfo))):
                 state.providerInfo = providerInfo
-                state.promptForCredentials = true
+                state.promptForCredentials = .full
                 state.requiredUserNameSuffix = suffix
                 return .none
                 
             case let .connectResponse(.failure(OrganizationSetupError.eapConfigurationFailed(EAPConfiguratorError.missingCredentials(_, requiredSuffix: suffix), providerInfo))):
                 state.providerInfo = providerInfo
-                state.promptForCredentials = true
+                state.promptForCredentials = .full
                 state.requiredUserNameSuffix = suffix
+                return .none
+                
+            case let .connectResponse(.failure(OrganizationSetupError.eapConfigurationFailed(EAPConfiguratorError.missingPassword(_), providerInfo))):
+                state.providerInfo = providerInfo
+                state.promptForCredentials = .passwordOnly
                 return .none
                 
             case let .connectResponse(.failure(OrganizationSetupError.userCancelled(providerInfo))):
@@ -533,7 +550,7 @@ public struct Connect: Reducer {
                 return .none
                 
             case .dismissPromptForCredentials:
-                state.promptForCredentials = false
+                state.promptForCredentials = nil
                 state.requiredUserNameSuffix = nil
                 state.credentials = nil
                 state.destination = nil

@@ -9,7 +9,11 @@ public class CredentialAlertViewController: UIViewController {
     /// Presents a UIAlertController (alert style) 
     init(alert: CredentialAlert) {
         self.alert = alert
-        self._username = alert.username
+        if let username = alert.username {
+            self._username = username
+        } else {
+            self._username = .constant("")
+        }
         self._password = alert.password
         super.init(nibName: nil, bundle: nil)
     }
@@ -38,14 +42,16 @@ public class CredentialAlertViewController: UIViewController {
         
         let alertController = UIAlertController(title: alert.title, message: alert.message, preferredStyle: .alert)
         
-        // add a textField and create a subscription to update the `text` binding
-        alertController.addTextField { [weak self] textField in
-            guard let self = self else { return }
-            textField.placeholder = alert.usernamePrompt
-            self.usernameSubscription = NotificationCenter.default
-                .publisher(for: UITextField.textDidChangeNotification, object: textField)
-                .map { ($0.object as? UITextField)?.text ?? "" }
-                .assign(to: \.username, on: self)
+        if let _ = alert.username {
+            // add a textField and create a subscription to update the `text` binding
+            alertController.addTextField { [weak self] textField in
+                guard let self = self else { return }
+                textField.placeholder = alert.usernamePrompt
+                self.usernameSubscription = NotificationCenter.default
+                    .publisher(for: UITextField.textDidChangeNotification, object: textField)
+                    .map { ($0.object as? UITextField)?.text ?? "" }
+                    .assign(to: \.username, on: self)
+            }
         }
         
         alertController.addTextField { [weak self] textField in

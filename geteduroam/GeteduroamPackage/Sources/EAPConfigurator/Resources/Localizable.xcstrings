@@ -191,6 +191,17 @@
         }
       }
     },
+    "No password in configuration" : {
+      "comment" : "empty pass",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geen wachtwoord in configuratie"
+          }
+        }
+      }
+    },
     "No valid configuration found" : {
       "comment" : "noConfigurations",
       "localizations" : {

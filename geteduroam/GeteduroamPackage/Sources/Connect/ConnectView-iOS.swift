@@ -133,7 +133,7 @@ public struct ConnectView_iOS: View {
                     title: NSLocalizedString("Login Required", bundle: .module, comment: ""),
                     isPresented: viewStore
                         .binding(
-                            get: \.promptForCredentials,
+                            get: \.promptForFullCredentials,
                             send: Connect.Action.dismissPromptForCredentials),
                     usernamePrompt: viewStore.usernamePrompt,
                     username: viewStore
@@ -157,6 +157,28 @@ public struct ConnectView_iOS: View {
                         viewStore.send(.logInButtonTapped)
                     },
                     message: NSLocalizedString("Please enter your username and password.", bundle: .module, comment: "")))
+            .backport
+            .credentialAlert(
+                CredentialAlert(
+                    title: NSLocalizedString("Password Required", bundle: .module, comment: ""),
+                    isPresented: viewStore
+                        .binding(
+                            get: \.promptForPasswordOnlyCredentials,
+                            send: Connect.Action.dismissPromptForCredentials),
+                    passwordPrompt: NSLocalizedString("Password", bundle: .module, comment: ""),
+                    password:  viewStore
+                        .binding(
+                            get: \.password,
+                            send: Connect.Action.updatePassword),
+                    cancelButtonTitle: NSLocalizedString("Cancel", bundle: .module, comment: ""),
+                    cancelAction: {
+                        viewStore.send(.dismissPromptForCredentials)
+                    },
+                    doneButtonTitle: NSLocalizedString("Log In", bundle: .module, comment: ""),
+                    doneAction: {
+                        viewStore.send(.logInButtonTapped)
+                    },
+                    message: NSLocalizedString("Please enter your password.", bundle: .module, comment: "")))
         }
     }
 }

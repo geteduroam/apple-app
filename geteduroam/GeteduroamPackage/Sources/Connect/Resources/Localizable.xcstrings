@@ -2711,6 +2711,26 @@
         }
       }
     },
+    "Password Required" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wachtwoord vereist"
+          }
+        }
+      }
+    },
+    "Please enter your password." : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voer wachtwoord in."
+          }
+        }
+      }
+    },
     "Please enter your username and password." : {
       "localizations" : {
         "ar" : {

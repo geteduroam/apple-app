@@ -229,13 +229,16 @@ class EAPConfigurator {
         }
         switch outerEapType {
         case .EAPTLS:
-            guard let clientSideCredential = authenticationMethod.clientSideCredential,
-                  let clientCertificate = clientSideCredential.clientCertificate,
-                  let passphrase = clientSideCredential.passphrase,
-                  clientCertificate.encoding == "base64",
-                  clientCertificate.format == "PKCS12"
-            else {
+            guard let clientSideCredential = authenticationMethod.clientSideCredential else {
                 return nil
+            }
+            guard let clientCertificate = clientSideCredential.clientCertificate,
+                  let passphrase = clientSideCredential.passphrase ?? credentials?.password,
+                  clientCertificate.encoding == "base64",
+                  clientCertificate.format == "PKCS12",
+                  passphrase.isEmpty == false
+            else {
+                throw EAPConfiguratorError.missingPassword(clientSideCredential)
             }
             
             let clientCertificateData = clientCertificate.value
