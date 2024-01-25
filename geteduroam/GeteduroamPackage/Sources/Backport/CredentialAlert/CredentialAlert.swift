@@ -18,11 +18,26 @@ public struct CredentialAlert {
         self.message = message
     }
     
+    public init(title: String, isPresented: Binding<Bool>, passwordPrompt: String, password: Binding<String>, cancelButtonTitle: String, cancelAction: @escaping () -> (), doneButtonTitle: String, doneAction: @escaping () -> (), message: String) {
+        self.title = title
+        self.isPresented = isPresented
+        self.usernamePrompt = nil
+        self.username = nil
+        self.onUsernameSubmit = nil
+        self.passwordPrompt = passwordPrompt
+        self.password = password
+        self.cancelButtonTitle = cancelButtonTitle
+        self.cancelAction = cancelAction
+        self.doneButtonTitle = doneButtonTitle
+        self.doneAction = doneAction
+        self.message = message
+    }
+    
     let title: String
     let isPresented: Binding<Bool>
-    let usernamePrompt: String
-    let username: Binding<String>
-    let onUsernameSubmit: () -> ()
+    let usernamePrompt: String?
+    let username: Binding<String>?
+    let onUsernameSubmit: (() -> ())?
     let passwordPrompt: String
     let password: Binding<String>
     let cancelButtonTitle: String
@@ -77,10 +92,12 @@ public extension Backport where Content: View {
                 alert.title,
                 isPresented: alert.isPresented,
                 actions: {
-                    TextField(alert.usernamePrompt, text: alert.username)
-                        .textContentType(.username)
-                        .flipsForRightToLeftLayoutDirection(false)
-                        .onSubmit(alert.onUsernameSubmit)
+                    if let usernamePrompt = alert.usernamePrompt, let username = alert.username, let onUsernameSubmit = alert.onUsernameSubmit {
+                        TextField(usernamePrompt, text: username)
+                            .textContentType(.username)
+                            .flipsForRightToLeftLayoutDirection(false)
+                            .onSubmit(onUsernameSubmit)
+                    }
                     SecureField(alert.passwordPrompt, text: alert.password)
                         .textContentType(.password)
                         .flipsForRightToLeftLayoutDirection(false)

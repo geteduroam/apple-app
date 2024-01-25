@@ -47,6 +47,9 @@ public enum EAPConfiguratorError: Error {
     /// No credentials in configuration
     case missingCredentials(ClientCredential, requiredSuffix: String?)
     
+    /// No password in configuration
+    case missingPassword(ClientCredential)
+    
     /// Username must end with
     case invalidUsername(suffix: String)
 }
@@ -98,6 +101,9 @@ extension EAPConfiguratorError: LocalizedError {
             
         case .missingCredentials:
             return NSLocalizedString("No credentials in configuration", bundle: .module, comment: "empty user/pass")
+            
+        case .missingPassword:
+            return NSLocalizedString("No password in configuration", bundle: .module, comment: "empty pass")
             
         case let .invalidUsername(suffix):
             return String(format: NSLocalizedString("Username must end with \"%@\"", bundle: .module, comment: "invalid username"), suffix)
