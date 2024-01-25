@@ -22,7 +22,9 @@ final class ConnectViewPhoneTests: XCTestCase {
         connectButtonFont: .system(.callout, design: .default).bold(),
         connectedFont: .system(.body, design: .default),
         infoHeaderFont: .system(.body, design: .default).bold(),
-        infoDetailFont: .system(.body, design: .default))
+        infoDetailFont: .system(.body, design: .default),
+        versionFont: .system(.body, design: .default)
+    )
     
     func testConnectScreen() throws {
         throw XCTSkip("Work in progress")
@@ -58,7 +60,9 @@ final class ConnectViewMacTests: XCTestCase {
         connectButtonFont: .system(.callout, design: .default).bold(),
         connectedFont: .system(.body, design: .default),
         infoHeaderFont: .system(.body, design: .default).bold(),
-        infoDetailFont: .system(.body, design: .default))
+        infoDetailFont: .system(.body, design: .default),
+        versionFont: .system(.body, design: .default)
+    )
     
     func testConnectScreenMac() throws {
         throw XCTSkip("Work in progress")
