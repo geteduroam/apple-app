@@ -61,7 +61,7 @@ final class MainTests: XCTestCase {
             $0.loadingState = .isLoading
         }
 
-        await store.receive(.discoveryResponse(.success(.init(content: .init(organizations: [demoInstance]))))) { [self] in
+        await store.receive(\.discoveryResponse) { [self] in
             $0.loadingState = .success
             $0.organizations = [demoInstance]
         }
@@ -75,14 +75,12 @@ final class MainTests: XCTestCase {
                 $0.notificationClient.delegate = { .finished }
             })
 
-        await store.send(.searchQueryChanged("Môreelsepark Cöllege")) {
+        await store.send(.binding(.set(\.searchQuery, "Môreelsepark Cöllege"))) {
             $0.isSearching = true
             $0.searchQuery = "Môreelsepark Cöllege"
         }
 
-        await store.send(.searchQueryChangeDebounced)
-
-        await store.receive(.searchResponse(.init(uniqueElements: [demoInstance]))) { [self] in
+        await store.receive(\.searchResponse, timeout: NSEC_PER_SEC) { [self] in
             $0.isSearching = false
             $0.searchResults = .init(uniqueElements: [demoInstance])
         }
@@ -96,14 +94,12 @@ final class MainTests: XCTestCase {
                 $0.notificationClient.delegate = { .finished }
             })
 
-        await store.send(.searchQueryChanged("mc")) {
+        await store.send(.binding(.set(\.searchQuery, "mc"))) {
             $0.isSearching = true
             $0.searchQuery = "mc"
         }
 
-        await store.send(.searchQueryChangeDebounced)
-
-        await store.receive(.searchResponse(.init(uniqueElements: [demoInstance]))) { [self] in
+        await store.receive(\.searchResponse, timeout: NSEC_PER_SEC) { [self] in
             $0.isSearching = false
             $0.searchResults = .init(uniqueElements: [demoInstance])
         }
@@ -117,14 +113,12 @@ final class MainTests: XCTestCase {
                 $0.notificationClient.delegate = { .finished }
             })
 
-        await store.send(.searchQueryChanged("MOREEL")) {
+        await store.send(.binding(.set(\.searchQuery, "MOREEL"))) {
             $0.isSearching = true
             $0.searchQuery = "MOREEL"
         }
 
-        await store.send(.searchQueryChangeDebounced)
-
-        await store.receive(.searchResponse(.init(uniqueElements: [demoInstance]))) { [self] in
+        await store.receive(\.searchResponse, timeout: NSEC_PER_SEC) { [self] in
             $0.isSearching = false
             $0.searchResults = .init(uniqueElements: [demoInstance])
         }
@@ -138,14 +132,12 @@ final class MainTests: XCTestCase {
                 $0.notificationClient.delegate = { .finished }
             })
 
-        await store.send(.searchQueryChanged("moreel")) {
+        await store.send(.binding(.set(\.searchQuery, "moreel"))) {
             $0.isSearching = true
             $0.searchQuery = "moreel"
         }
 
-        await store.send(.searchQueryChangeDebounced)
-
-        await store.receive(.searchResponse(.init(uniqueElements: [demoInstance]))) { [self] in
+        await store.receive(\.searchResponse, timeout: NSEC_PER_SEC) { [self] in
             $0.isSearching = false
             $0.searchResults = .init(uniqueElements: [demoInstance])
         }
@@ -159,14 +151,12 @@ final class MainTests: XCTestCase {
                 $0.notificationClient.delegate = { .finished }
             })
 
-        await store.send(.searchQueryChanged("oreelse")) {
+        await store.send(.binding(.set(\.searchQuery, "oreelse"))) {
             $0.isSearching = true
             $0.searchQuery = "oreelse"
         }
 
-        await store.send(.searchQueryChangeDebounced)
-
-        await store.receive(.searchResponse(.init(uniqueElements: []))) {
+        await store.receive(\.searchResponse, timeout: NSEC_PER_SEC) {
             $0.isSearching = false
         }
     }

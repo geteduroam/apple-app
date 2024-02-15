@@ -46,7 +46,7 @@ final class ConnectTests: XCTestCase {
             $0.loadingState = .isLoading
         }
         
-        await store.receive(.connectResponse(.failure(Connect.OrganizationSetupError.noValidProviderFound(nil)))) {
+        await store.receive(\.connectResponse) {
             $0.loadingState = .failure
             $0.destination = .alert(AlertState(title: TextState("Failed to connect"), message: TextState("No valid provider found.")))
         }
@@ -207,16 +207,16 @@ final class ConnectTests: XCTestCase {
         }
         
         let providerInfo = config.providers[0].providerInfo
-        await store.receive(.connectResponse(.success(.init(providerInfo: providerInfo, result: .verified(credentials: nil, reusableInfo: .init(eapConfigData: eapConfigData)))))) {
+        await store.receive(\.connectResponse) {
             $0.loadingState = .isLoading
             $0.providerInfo = providerInfo
         }
         
-        await store.receive(.connectResponse(.success(.init(providerInfo: providerInfo, result: .applied(.ssids(expectedSSIDs: ["ssid"])))))) {
+        await store.receive(\.connectResponse) {
             $0.loadingState = .success(.disconnected)
         }
         
-        await store.receive(.foundSSID("ssid")) {
+        await store.receive(\.foundSSID) {
             $0.loadingState = .success(.connected)
         }
     }

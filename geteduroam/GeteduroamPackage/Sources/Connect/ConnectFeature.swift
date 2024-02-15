@@ -18,6 +18,7 @@ public struct Connect: Reducer {
         case passwordOnly
     }
     
+    @ObservableState
     public struct State: Equatable {
         public init(organization: Organization, selectedProfileId: Profile.ID? = nil, autoConnectOnAppear: Bool = false, loadingState: LoadingState = .initial, providerInfo: ProviderInfo? = nil, credentials: Credentials? = nil, destination: Destination.State? = nil) {
             self.organization = organization
@@ -40,15 +41,47 @@ public struct Connect: Reducer {
         public var requiredUserNameSuffix: String?
         public var promptForCredentials: CredentialPromptType?
         public var promptForFullCredentials: Bool {
-            promptForCredentials == .full
+            get {
+                promptForCredentials == .full
+            }
+            set {
+                if newValue == false {
+                    promptForCredentials = nil
+                    requiredUserNameSuffix = nil
+                    credentials = nil
+                    destination = nil
+                    loadingState = .initial
+                }
+            }
         }
         
         public var promptForPasswordOnlyCredentials: Bool {
-            promptForCredentials == .passwordOnly
+            get {
+                promptForCredentials == .passwordOnly
+            }
+            set {
+                if newValue == false {
+                    promptForCredentials = nil
+                    requiredUserNameSuffix = nil
+                    credentials = nil
+                    destination = nil
+                    loadingState = .initial
+                }
+            }
         }
         
         public var username: String {
-            credentials?.username ?? ""
+            get {
+                credentials?.username ?? ""
+            }
+            set {
+                let trimmedUsername = newValue.trimmingCharacters(in: .whitespacesAndNewlines)
+                if let _ = credentials {
+                    credentials?.username = trimmedUsername
+                } else {
+                    credentials = Credentials(username: trimmedUsername)
+                }
+            }
         }
         
         public var usernamePrompt: String {
@@ -68,7 +101,18 @@ public struct Connect: Reducer {
         }
         
         public var password: String {
-            credentials?.password ?? ""
+            get {
+                credentials?.password ?? ""
+            }
+            set {
+                appendRequiredUserNameSuffix()
+                let trimmedPassword = newValue.trimmingCharacters(in: .whitespacesAndNewlines)
+                if let _ = credentials {
+                    credentials?.password = trimmedPassword
+                } else {
+                    credentials = Credentials(password: trimmedPassword)
+                }
+            }
         }
         
         public var promptForCredentialsLoginDisabled: Bool {
@@ -156,7 +200,7 @@ public struct Connect: Reducer {
         
         var loadingState: LoadingState
 
-        @PresentationState public var destination: Destination.State?
+        @Presents public var destination: Destination.State?
     }
     
     public enum ConnectResult: Equatable {
@@ -191,11 +235,11 @@ public struct Connect: Reducer {
         case connected
     }
 
-    public indirect enum Action: Equatable {
+    public enum Action: BindableAction {
+        case binding(BindingAction<State>)
         case connect
         case connectResponse(TaskResult<ConnectResponse>)
         case destination(PresentationAction<Destination.Action>)
-        case dismissPromptForCredentials
         case dismissTapped
         case foundSSID(String)
         case logInButtonTapped
@@ -203,42 +247,26 @@ public struct Connect: Reducer {
         case onUsernameSubmit
         case select(Profile.ID)
         case startAgainTapped
-        case updatePassword(String)
-        case updateUsername(String)
-        
-        public enum Alert: Equatable { }
     }
     
-    @Reducer
-    public struct Destination: Reducer {
-        public enum State: Equatable {
-            case alert(AlertState<AlertAction>)
-            case termsAlert(AlertState<TermsAlertAction>)
-            case websiteAlert(AlertState<WebsiteAlertAction>)
-        }
-        
-        public enum Action: Equatable {
-            case alert(AlertAction)
-            case termsAlert(TermsAlertAction)
-            case websiteAlert(WebsiteAlertAction)
-        }
-        
-        public enum AlertAction: Equatable { }
-        
-        public enum TermsAlertAction: Equatable {
-            case agreeButtonTapped
-            case disagreeButtonTapped
-        }
-        
-        public enum WebsiteAlertAction: Equatable {
-            case continueButtonTapped(URL)
-        }
-        
-        public var body: some Reducer<State, Action> {
-            EmptyReducer()
-        }
+    @Reducer(state: .equatable, action: .equatable)
+    public enum Destination {
+        case alert(AlertState<AlertAction>)
+        case termsAlert(AlertState<TermsAlertAction>)
+        case websiteAlert(AlertState<WebsiteAlertAction>)
     }
     
+    public enum AlertAction: Equatable { }
+    
+    public enum TermsAlertAction: Equatable {
+        case agreeButtonTapped
+        case disagreeButtonTapped
+    }
+    
+    public enum WebsiteAlertAction: Equatable {
+        case continueButtonTapped(URL)
+    }
+
     public enum OrganizationSetupError: Error, LocalizedError, Equatable {
         public static func == (lhs: Connect.OrganizationSetupError, rhs: Connect.OrganizationSetupError) -> Bool {
             (lhs as NSError) == (rhs as NSError)
@@ -326,7 +354,7 @@ public struct Connect: Reducer {
         }
         
         guard state.agreedToTerms || state.providerInfo?.termsOfUse?.localized() == nil else {
-            let termsAlert = AlertState<Destination.TermsAlertAction>(
+            let termsAlert = AlertState<TermsAlertAction>(
                 title: {
                     TextState("Terms of Use", bundle: .module)
                 }, actions: {
@@ -370,8 +398,12 @@ public struct Connect: Reducer {
     }
     
     public var body: some Reducer<State, Action> {
+        BindingReducer()
         Reduce { state, action in
             switch action {
+            case .binding:
+                return .none
+                
             case .onAppear:
                 defer {
                     state.autoConnectOnAppear = false
@@ -474,7 +506,7 @@ public struct Connect: Reducer {
                     // TODO: Tell user there is no URL?
                     return .none
                 }
-                let websiteAlert = AlertState<Destination.WebsiteAlertAction>(
+                let websiteAlert = AlertState<WebsiteAlertAction>(
                     title: {
                         TextState("Continue to Website", bundle: .module)
                     }, actions: {
@@ -502,7 +534,7 @@ public struct Connect: Reducer {
                 if nserror.domain == OIDGeneralErrorDomain && nserror.code == -3 {
                     return .none
                 }
-                let alert = AlertState<Destination.AlertAction>(
+                let alert = AlertState<AlertAction>(
                     title: {
                         TextState("Failed to connect", bundle: .module)
                     }, actions: {
@@ -526,42 +558,12 @@ public struct Connect: Reducer {
             case .startAgainTapped:
                 return .none
                 
-            case let .updateUsername(username):
-                let trimmedUsername = username.trimmingCharacters(in: .whitespacesAndNewlines)
-                if let _ = state.credentials {
-                    state.credentials?.username = trimmedUsername
-                } else {
-                    state.credentials = Credentials(username: trimmedUsername)
-                }
-                return .none
-                
             case .onUsernameSubmit:
                 state.appendRequiredUserNameSuffix()
                 return .none
-                
-            case let .updatePassword(password):
-                state.appendRequiredUserNameSuffix()
-                let trimmedPassword = password.trimmingCharacters(in: .whitespacesAndNewlines)
-                if let _ = state.credentials {
-                    state.credentials?.password = trimmedPassword
-                } else {
-                    state.credentials = Credentials(password: trimmedPassword)
-                }
-                return .none
-                
-            case .dismissPromptForCredentials:
-                state.promptForCredentials = nil
-                state.requiredUserNameSuffix = nil
-                state.credentials = nil
-                state.destination = nil
-                state.loadingState = .initial
-                return .none
-                
             }
         }
-        .ifLet(\.$destination, action: \.destination) {
-          Destination()
-        }
+        .ifLet(\.$destination, action: \.destination)
     }
     
     var xmlDecoder: XMLDecoder = {

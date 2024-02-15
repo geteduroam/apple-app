@@ -15,6 +15,7 @@ public struct Main: Reducer {
     @Dependency(\.notificationClient) var notificationClient
     @Dependency(\.date.now) var now
     
+    @ObservableState
     public struct State: Equatable {
         public init(searchQuery: String = "", organizations: IdentifiedArrayOf<Organization> = .init(uniqueElements: []), loadingState: LoadingState = .initial, searchResults: IdentifiedArrayOf<Organization> = .init(uniqueElements: []), destination: Destination.State? = nil) {
             self.searchQuery = searchQuery
@@ -37,44 +38,50 @@ public struct Main: Reducer {
         var searchQuery: String
         var searchResults: IdentifiedArrayOf<Organization>
         
-        @PresentationState public var destination: Destination.State?
+        var isConnecting: Bool {
+            get {
+                switch destination {
+                case .connect:
+                    return true
+                default:
+                    return false
+                }
+            }
+            set {
+                if newValue == false {
+                    destination = nil
+                }
+            }
+        }
+        
+        @Presents public var destination: Destination.State?
     }
     
-    public enum Action: Equatable {
+    public enum Action: BindableAction {
+        case binding(BindingAction<State>)
         case destination(PresentationAction<Destination.Action>)
         case discoveryResponse(TaskResult<DiscoveryResponse>)
         case onAppear
         case renewActionInReminderTapped(organizationId: String, profileId: String)
-        case searchQueryChangeDebounced
-        case searchQueryChanged(String)
-        case searchResponse(IdentifiedArrayOf<Organization>)
+        case searchResponse(TaskResult<IdentifiedArrayOf<Organization>>)
         case select(Organization)
         case tryAgainTapped
     }
     
-    @Reducer
-    public struct Destination: Reducer {
-        public enum State: Equatable {
-            case connect(Connect.State)
-            case alert(AlertState<AlertAction>)
-        }
-        
-        public enum Action: Equatable {
-            case connect(Connect.Action)
-            case alert(AlertAction)
-        }
-        
-        public enum AlertAction {
-            case okButtonTapped
-        }
-        
-        public var body: some Reducer<State, Action>{
-            Scope(state: \.connect, action: \.connect) {
-                Connect()
-            }
-        }
+    @Reducer(state: .equatable)
+    public enum Destination {
+        case connect(Connect)
+        case alert(AlertState<AlertAction>)
+    }
+    
+    public enum AlertAction {
+        case okButtonTapped
     }
 
+    public enum MainFeatureError: Error, Equatable {
+        case searchCancelled
+    }
+    
     private enum CancelID { case search }
 
     func search(query: String, organizations: IdentifiedArrayOf<Organization>) async -> IdentifiedArrayOf<Organization> {
@@ -91,6 +98,7 @@ public struct Main: Reducer {
     }
 
     public var body: some Reducer<State, Action> {
+        BindingReducer()
         Reduce { state, action in
             switch action {
             case .onAppear, .tryAgainTapped:
@@ -130,7 +138,7 @@ public struct Main: Reducer {
                 
             case let .discoveryResponse(.failure(error)):
                 state.loadingState = .failure
-                let alert = AlertState<Destination.AlertAction>(title: {
+                let alert = AlertState<AlertAction>(title: {
                     TextState(NSLocalizedString("Failed to load organizations", bundle: .module, comment: "Message when organizations can't be loaded and the fallback fails too"))
                 }, actions: {
                     ButtonState(role: .cancel, action: .send(.okButtonTapped)) {
@@ -146,7 +154,7 @@ public struct Main: Reducer {
                 if let organization = state.organizations[id: organizationId] {
                     state.destination = .connect(.init(organization: organization, selectedProfileId: profile, autoConnectOnAppear: true))
                 } else {
-                    let alert = AlertState<Destination.AlertAction>(title: {
+                    let alert = AlertState<AlertAction>(title: {
                         TextState(NSLocalizedString("Unknown organization", bundle: .module, comment: "Title when user asked to renew but the organization could not be found"))
                     }, actions: {
                         ButtonState(role: .cancel, action: .send(.okButtonTapped)) {
@@ -159,31 +167,40 @@ public struct Main: Reducer {
                 }
                 return .none
                 
-            case let .searchQueryChanged(query):
-                state.searchQuery = query
-                state.isSearching = true
-                
-                // When the query is cleared we can clear the search results, but we have to make sure to cancel
-                // any in-flight search requests too, otherwise we may get data coming in later.
-                guard !query.isEmpty else {
+            case .binding(\.searchQuery):
+                // Clear search without debounce
+                guard !state.searchQuery.isEmpty else {
                     state.searchResults = []
                     state.isSearching = false
                     return .cancel(id: CancelID.search)
                 }
+                state.isSearching = true
+                return .run { [query = state.searchQuery, organizations = state.organizations] send in
+                    await send(.searchResponse(
+                        TaskResult {
+                            // Debounce so user has uninterrupted typing experience
+                            try await Task.sleep(nanoseconds: NSEC_PER_SEC / 3)
+                            if Task.isCancelled {
+                                throw MainFeatureError.searchCancelled
+                            }
+                            let searchResults = await self.search(query: query, organizations: organizations)
+                            if Task.isCancelled {
+                                throw MainFeatureError.searchCancelled
+                            }
+                            return searchResults
+                        }
+                    ))
+                }.cancellable(id: CancelID.search, cancelInFlight: true)
+                
+            case .binding:
                 return .none
                 
-            case .searchQueryChangeDebounced:
-                guard !state.searchQuery.isEmpty else {
-                    return .none
-                }
-                return .run { [query = state.searchQuery, organizations = state.organizations] send in
-                    let searchResults = await self.search(query: query, organizations: organizations)
-                    await send(.searchResponse(searchResults))
-                }
-                .cancellable(id: CancelID.search)
-                
-            case let .searchResponse(searchResults):
+            case let .searchResponse(.success(searchResults)):
                 state.searchResults = searchResults
+                state.isSearching = false
+                return .none
+                
+            case .searchResponse(.failure):
                 state.isSearching = false
                 return .none
                 
@@ -195,8 +212,6 @@ public struct Main: Reducer {
                 return .none
             }
         }
-        .ifLet(\.$destination, action: \.destination) {
-            Destination()
-        }
+        .ifLet(\.$destination, action: \.destination)
     }
 }

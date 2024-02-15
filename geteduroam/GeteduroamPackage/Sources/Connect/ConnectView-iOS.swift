@@ -3,6 +3,7 @@ import AuthClient
 import Backport
 import ComposableArchitecture
 import Models
+import Perception
 import SwiftUI
 
 public struct ConnectView_iOS: View {
@@ -10,25 +11,23 @@ public struct ConnectView_iOS: View {
         self.store = store
     }
     
-    let store: StoreOf<Connect>
+    @Perception.Bindable var store: StoreOf<Connect>
     
     @EnvironmentObject var theme: Theme
     
-    // TODO: Define ViewState
-    
     public var body: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
+        WithPerceptionTracking {
             VStack(alignment: .leading) {
                 HStack(alignment: .firstTextBaseline) {
                     VStack(alignment: .leading) {
-                        Text(viewStore.organization.nameOrId)
+                        Text(store.organization.nameOrId)
                             .font(theme.organizationNameFont)
-                        Text(viewStore.organization.country)
+                        Text(store.organization.country)
                             .font(theme.organizationCountryFont)
                     }
                     Spacer()
                     Button(action: {
-                        viewStore.send(.dismissTapped)
+                        store.send(.dismissTapped)
                     }, label: {
                         Image(systemName: "xmark")
                     })
@@ -36,13 +35,13 @@ public struct ConnectView_iOS: View {
                 }
                 .padding(20)
                 
-                if viewStore.isConfigured == false {
+                if store.isConfigured == false {
                     List {
                         Section {
-                            let selectedProfile = viewStore.selectedProfile
-                            ForEach(viewStore.organization.profiles) { profile in
+                            let selectedProfile = store.selectedProfile
+                            ForEach(store.organization.profiles) { profile in
                                 Button {
-                                    viewStore.send(.select(profile.id))
+                                    store.send(.select(profile.id))
                                 } label: {
                                     ProfileRowView(profile: profile, isSelected: selectedProfile == profile)
                                 }
@@ -57,11 +56,11 @@ public struct ConnectView_iOS: View {
                         }
                     }
                     .listStyle(.plain)
-                    .disabled(viewStore.canSelectProfile == false)
+                    .disabled(store.canSelectProfile == false)
                 }
                
                 Spacer()
-                if let providerInfo = viewStore.providerInfo {
+                if let providerInfo = store.providerInfo {
                     HelpdeskView(providerInfo: providerInfo)
                         .padding(20)
                 }
@@ -69,21 +68,21 @@ public struct ConnectView_iOS: View {
                 HStack {
                     Spacer()
                     VStack(alignment: .center) {
-                        if viewStore.isConfiguredAndConnected {
+                        if store.isConfiguredAndConnected {
                             Label(title: {
                                 Text("Connected", bundle: .module)
                             }, icon: {
                                 Image(systemName: "checkmark.circle")
                             })
                             .font(theme.connectedFont)
-                        } else if viewStore.isConfiguredButDisconnected {
+                        } else if store.isConfiguredButDisconnected {
                             Label(title: {
                                 Text("Configured, but not connected", bundle: .module)
                             }, icon: {
                                 Image(systemName: "checkmark.circle.trianglebadge.exclamationmark")
                             })
                             .font(theme.connectedFont)
-                        } else if viewStore.isConfiguredButConnectionUnknown {
+                        } else if store.isConfiguredButConnectionUnknown {
                             Label(title: {
                                 Text("Configured", bundle: .module)
                             }, icon: {
@@ -92,12 +91,12 @@ public struct ConnectView_iOS: View {
                             .font(theme.connectedFont)
                         } else {
                             Button {
-                                viewStore.send(.connect)
+                                store.send(.connect)
                             } label: {
                                 Text("CONNECT", bundle: .module)
                                     .multilineTextAlignment(.center)
                             }
-                            .disabled(viewStore.isLoading)
+                            .disabled(store.isLoading)
                             .buttonStyle(ConnectButtonStyle())
                         }
                     }
@@ -106,77 +105,50 @@ public struct ConnectView_iOS: View {
                 .padding(20)
             }
             .onAppear {
-                viewStore.send(.onAppear)
+                store.send(.onAppear)
             }
             .background {
                 BackgroundView(showLogo: false)
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-            .alert(
-                store: store.scope(state: \.$destination, action: Connect.Action.destination),
-                state: /Connect.Destination.State.termsAlert,
-                action: Connect.Destination.Action.termsAlert
-            )
-            .alert(
-                store: store.scope(state: \.$destination, action: Connect.Action.destination),
-                state: /Connect.Destination.State.alert,
-                action: Connect.Destination.Action.alert
-            )
-            .alert(
-                store: store.scope(state: \.$destination, action: Connect.Action.destination),
-                state: /Connect.Destination.State.websiteAlert,
-                action: Connect.Destination.Action.websiteAlert
-            )
+            .alert($store.scope(state: \.destination?.termsAlert, action: \.destination.termsAlert))
+            .alert($store.scope(state: \.destination?.alert, action: \.destination.alert))
+            .alert($store.scope(state: \.destination?.websiteAlert, action: \.destination.websiteAlert))
             .backport
             .credentialAlert(
                 CredentialAlert(
                     title: NSLocalizedString("Login Required", bundle: .module, comment: ""),
-                    isPresented: viewStore
-                        .binding(
-                            get: \.promptForFullCredentials,
-                            send: Connect.Action.dismissPromptForCredentials),
-                    usernamePrompt: viewStore.usernamePrompt,
-                    username: viewStore
-                        .binding(
-                            get: \.username,
-                            send: Connect.Action.updateUsername),
+                    isPresented: $store.promptForFullCredentials,
+                    usernamePrompt: store.usernamePrompt,
+                    username: $store.username,
                     onUsernameSubmit: {
-                        viewStore.send(.onUsernameSubmit)
+                        store.send(.onUsernameSubmit)
                     },
                     passwordPrompt: NSLocalizedString("Password", bundle: .module, comment: ""),
-                    password:  viewStore
-                        .binding(
-                            get: \.password,
-                            send: Connect.Action.updatePassword),
+                    password: $store.password,
                     cancelButtonTitle: NSLocalizedString("Cancel", bundle: .module, comment: ""),
                     cancelAction: {
-                        viewStore.send(.dismissPromptForCredentials)
+                        store.promptForFullCredentials = false
                     },
                     doneButtonTitle: NSLocalizedString("Log In", bundle: .module, comment: ""),
                     doneAction: {
-                        viewStore.send(.logInButtonTapped)
+                        store.send(.logInButtonTapped)
                     },
                     message: NSLocalizedString("Please enter your username and password.", bundle: .module, comment: "")))
             .backport
             .credentialAlert(
                 CredentialAlert(
                     title: NSLocalizedString("Password Required", bundle: .module, comment: ""),
-                    isPresented: viewStore
-                        .binding(
-                            get: \.promptForPasswordOnlyCredentials,
-                            send: Connect.Action.dismissPromptForCredentials),
+                    isPresented: $store.promptForPasswordOnlyCredentials,
                     passwordPrompt: NSLocalizedString("Password", bundle: .module, comment: ""),
-                    password:  viewStore
-                        .binding(
-                            get: \.password,
-                            send: Connect.Action.updatePassword),
+                    password: $store.password,
                     cancelButtonTitle: NSLocalizedString("Cancel", bundle: .module, comment: ""),
                     cancelAction: {
-                        viewStore.send(.dismissPromptForCredentials)
+                        store.promptForPasswordOnlyCredentials = false
                     },
                     doneButtonTitle: NSLocalizedString("Log In", bundle: .module, comment: ""),
                     doneAction: {
-                        viewStore.send(.logInButtonTapped)
+                        store.send(.logInButtonTapped)
                     },
                     message: NSLocalizedString("Please enter your password.", bundle: .module, comment: "")))
         }

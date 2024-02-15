@@ -44,7 +44,7 @@ let package = Package(
         .package(url: "https://github.com/CoreOffice/XMLCoder.git", .upToNextMajor(from: "0.16.0")),
         .package(url: "https://github.com/egeniq/network-ios.git", branch: "main"),
         .package(url: "https://github.com/openid/AppAuth-iOS.git", from: "1.0.0"),
-        .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.0.0"),
+        .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.8.0"),
         .package(url: "https://github.com/pointfreeco/swift-custom-dump", from: "1.0.0"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.0.0"),
         .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.12.0"),
