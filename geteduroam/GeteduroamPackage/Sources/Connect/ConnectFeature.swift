@@ -649,9 +649,11 @@ public struct Connect: Reducer {
         }
         
         var urlRequest = URLRequest(url: eapConfigURL)
-        urlRequest.httpMethod = "GET"
         if let accessToken {
+            urlRequest.httpMethod = "POST"
             urlRequest.allHTTPHeaderFields = ["Authorization": "Bearer \(accessToken)"]
+        } else {
+            urlRequest.httpMethod = "GET"
         }
 
         let eapConfigData: Data
