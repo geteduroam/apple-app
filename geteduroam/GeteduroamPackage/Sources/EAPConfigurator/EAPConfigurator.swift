@@ -459,6 +459,7 @@ class EAPConfigurator {
             kSecValueRef as String: certificateRef,
             kSecAttrLabel as String: commonName,
             kSecReturnRef as String: kCFBooleanTrue!,
+            kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlock
             //kSecReturnPersistentRef as String: kCFBooleanTrue!, // Persistent refs cause an error (invalid EAP config) when installing the profile
             //kSecAttrAccessGroup as String: "ZYJ4TZX4UU.com.apple.networkextensionsharing", // Should be TEAMID.com.apple.networkextensionsharing, but works without?
         ]
@@ -529,6 +530,7 @@ class EAPConfigurator {
             //kSecClass as String: kSecClassIdentity, // Gives errSecInternal, according to Apple Developer Technical Support we should not specify this for client certs
             kSecValueRef as String: identity,
             kSecAttrLabel as String: "Identity", // No dual-profile support, so this name will always be unique because we will only have one client cert
+            kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlock
             //kSecReturnRef as String: kCFBooleanTrue!, // We're not retrieving the reference at this point, 2nd argument to SecItemAdd is nil
             //kSecReturnPersistentRef as String: kCFBooleanTrue!, // Persistent refs cause an error (invalid EAP config) when installing the profile
             //kSecAttrAccessGroup as String: "ZYJ4TZX4UU.com.apple.networkextensionsharing", // Should be TEAMID.com.apple.networkextensionsharing, but works without?
@@ -558,6 +560,7 @@ class EAPConfigurator {
                 kSecClass as String: kSecClassCertificate,
                 kSecValueRef as String: certificate,
                 kSecAttrLabel as String: commonName,
+                kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlock,
                 //kSecReturnRef as String: kCFBooleanTrue!, // We're not retrieving the reference at this point, 2nd argument to SecItemAdd is nil
                 //kSecReturnPersistentRef as String: kCFBooleanTrue!, // Persistent refs cause an error (invalid EAP config) when installing the profile
                 kSecAttrAccessGroup as String: "ZYJ4TZX4UU.com.apple.networkextensionsharing", // TEAMID.com.apple.networkextensionsharing
