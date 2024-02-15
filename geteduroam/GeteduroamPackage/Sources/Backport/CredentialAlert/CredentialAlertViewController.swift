@@ -47,6 +47,8 @@ public class CredentialAlertViewController: UIViewController {
             alertController.addTextField { [weak self] textField in
                 guard let self = self else { return }
                 textField.placeholder = alert.usernamePrompt
+                textField.autocapitalizationType = .none
+                textField.autocorrectionType = .no
                 self.usernameSubscription = NotificationCenter.default
                     .publisher(for: UITextField.textDidChangeNotification, object: textField)
                     .map { ($0.object as? UITextField)?.text ?? "" }
@@ -58,6 +60,8 @@ public class CredentialAlertViewController: UIViewController {
             guard let self = self else { return }
             textField.placeholder = alert.passwordPrompt
             textField.isSecureTextEntry = true
+            textField.autocapitalizationType = .none
+            textField.autocorrectionType = .no
             self.passwordSubscription = NotificationCenter.default
                 .publisher(for: UITextField.textDidChangeNotification, object: textField)
                 .map { ($0.object as? UITextField)?.text ?? "" }
