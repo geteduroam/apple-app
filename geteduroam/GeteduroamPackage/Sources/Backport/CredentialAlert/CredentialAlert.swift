@@ -95,11 +95,15 @@ public extension Backport where Content: View {
                     if let usernamePrompt = alert.usernamePrompt, let username = alert.username, let onUsernameSubmit = alert.onUsernameSubmit {
                         TextField(usernamePrompt, text: username)
                             .textContentType(.username)
+                            .autocorrectionDisabled(true)
+                            .textInputAutocapitalization(.never)
                             .flipsForRightToLeftLayoutDirection(false)
                             .onSubmit(onUsernameSubmit)
                     }
                     SecureField(alert.passwordPrompt, text: alert.password)
                         .textContentType(.password)
+                        .autocorrectionDisabled(true)
+                        .textInputAutocapitalization(.never)
                         .flipsForRightToLeftLayoutDirection(false)
                     Button(alert.cancelButtonTitle, role: .cancel, action: alert.cancelAction)
                     Button(alert.doneButtonTitle, action: alert.doneAction)
