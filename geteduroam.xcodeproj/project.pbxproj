@@ -98,6 +98,8 @@
 		C7DAA9EC2B21A8C000306C6C /* ScreenshotScenarios.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotScenarios.swift; sourceTree = "<group>"; };
 		C7DAA9EE2B21C64F00306C6C /* ScreenshotScenarios.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotScenarios.swift; sourceTree = "<group>"; };
 		C7DAA9FC2B21C99E00306C6C /* getgovroam Screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "getgovroam Screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7F1E7D42B7E0AED00255A9A /* geteduroam.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = geteduroam.xctestplan; sourceTree = "<group>"; };
+		C7F1E7D62B7E0BBE00255A9A /* getgovroam.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = getgovroam.xctestplan; sourceTree = "<group>"; };
 		C7F45A57297ABC5C0005508D /* getgovroam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = getgovroam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F45A5A297ABD050005508D /* GetgovroamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetgovroamApp.swift; sourceTree = "<group>"; };
 		C7F45A5B297ABD050005508D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				7555FF7D242A565900829871 /* geteduroam */,
 				C7F45A59297ABD050005508D /* getgovroam */,
 				C7DAA9E02B212FDD00306C6C /* Screenshots */,
+				C7F1E7D52B7E0B7500255A9A /* Tests */,
 				9FEB36B1E327EFCA245843CD /* Frameworks */,
 				7555FF7C242A565900829871 /* Products */,
 			);
@@ -250,6 +253,15 @@
 				C7DAA9E12B212FDD00306C6C /* Screenshots.swift */,
 			);
 			path = Screenshots;
+			sourceTree = "<group>";
+		};
+		C7F1E7D52B7E0B7500255A9A /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				C7F1E7D42B7E0AED00255A9A /* geteduroam.xctestplan */,
+				C7F1E7D62B7E0BBE00255A9A /* getgovroam.xctestplan */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		C7F45A59297ABD050005508D /* getgovroam */ = {
@@ -368,7 +380,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1520;
 				ORGANIZATIONNAME = orgName;
 				TargetAttributes = {
 					7555FF7A242A565900829871 = {

@@ -1,0 +1,45 @@
+{
+  "configurations" : [
+    {
+      "id" : "0772600D-752B-4F51-ACEC-94F0676D07D4",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "language" : "en",
+    "region" : "NL",
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:geteduroam.xcodeproj",
+      "identifier" : "C7F45A43297ABC5C0005508D",
+      "name" : "getgovroam"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:geteduroam\/GeteduroamPackage",
+        "identifier" : "ConnectTests",
+        "name" : "ConnectTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:geteduroam\/GeteduroamPackage",
+        "identifier" : "MainTests",
+        "name" : "MainTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:geteduroam\/GeteduroamPackage",
+        "identifier" : "ModelsTests",
+        "name" : "ModelsTests"
+      }
+    }
+  ],
+  "version" : 1
+}

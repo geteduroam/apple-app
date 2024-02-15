@@ -2,6 +2,7 @@ import AuthClient
 import Backport
 import ComposableArchitecture
 import Models
+import Perception
 import SwiftUI
 
 #if os(macOS)
@@ -10,28 +11,26 @@ public struct ConnectView_Mac: View {
         self.store = store
     }
     
-    let store: StoreOf<Connect>
+    @Perception.Bindable var store: StoreOf<Connect>
     
     @EnvironmentObject var theme: Theme
     
-    // TODO: Define ViewState
-    
     public var body: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
+        WithPerceptionTracking {
             VStack(alignment: .leading) {
                 if #available(macOS 13.0, *) {
                     // On macOS 13 we push instead of present a sheet and therefore these controls aren't needed
                 } else {
                     HStack(alignment: .firstTextBaseline) {
                         VStack(alignment: .leading) {
-                            Text(viewStore.organization.nameOrId)
+                            Text(store.organization.nameOrId)
                                 .font(theme.organizationNameFont)
-                            Text(viewStore.organization.country)
+                            Text(store.organization.country)
                                 .font(theme.organizationCountryFont)
                         }
                         Spacer()
                         Button(action: {
-                            viewStore.send(.dismissTapped)
+                            store.send(.dismissTapped)
                         }, label: {
                             Image(systemName: "xmark")
                         })
@@ -40,18 +39,18 @@ public struct ConnectView_Mac: View {
                     Spacer()
                 }
 
-                if let providerInfo = viewStore.providerInfo {
+                if let providerInfo = store.providerInfo {
                     HelpdeskView(providerInfo: providerInfo)
                     Spacer()
                 }
                 
-                if viewStore.isConfigured == false {
+                if store.isConfigured == false {
                     List {
                         Section {
-                            let selectedProfile = viewStore.selectedProfile
-                            ForEach(viewStore.organization.profiles) { profile in
+                            let selectedProfile = store.selectedProfile
+                            ForEach(store.organization.profiles) { profile in
                                 Button {
-                                    viewStore.send(.select(profile.id))
+                                    store.send(.select(profile.id))
                                 } label: {
                                     ProfileRowView(profile: profile, isSelected: selectedProfile == profile)
                                 }
@@ -66,12 +65,12 @@ public struct ConnectView_Mac: View {
                         }
                     }
                     .listStyle(.plain)
-                    .disabled(viewStore.canSelectProfile == false)
+                    .disabled(store.canSelectProfile == false)
                 }
                 
                 Spacer()
                 
-                if viewStore.isConfigured {
+                if store.isConfigured {
                   HStack(alignment: .top) {
                     Image(systemName: "doc.badge.gearshape.fill")
                     VStack(alignment: .leading) {
@@ -100,12 +99,12 @@ public struct ConnectView_Mac: View {
                     HStack {
                         Spacer()
                         Button {
-                            viewStore.send(.connect)
+                            store.send(.connect)
                         } label: {
                             Text("Connect", bundle: .module)
                                 .multilineTextAlignment(.center)
                         }
-                        .disabled(viewStore.isLoading)
+                        .disabled(store.isLoading)
                         .buttonStyle(.bordered)
                         .controlSize(.large)
                         Spacer()
@@ -113,26 +112,14 @@ public struct ConnectView_Mac: View {
                 }
             }
             .padding()
-            .navigationTitle(viewStore.organization.nameOrId)
+            .navigationTitle(store.organization.nameOrId)
             .onAppear {
-                viewStore.send(.onAppear)
+                store.send(.onAppear)
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-            .alert(
-                store: store.scope(state: \.$destination, action: Connect.Action.destination),
-                state: /Connect.Destination.State.termsAlert,
-                action: Connect.Destination.Action.termsAlert
-            )
-            .alert(
-                store: store.scope(state: \.$destination, action: Connect.Action.destination),
-                state: /Connect.Destination.State.alert,
-                action: Connect.Destination.Action.alert
-            )
-            .alert(
-                store: store.scope(state: \.$destination, action: Connect.Action.destination),
-                state: /Connect.Destination.State.websiteAlert,
-                action: Connect.Destination.Action.websiteAlert
-            )
+            .alert($store.scope(state: \.destination?.termsAlert, action: \.destination.termsAlert))
+            .alert($store.scope(state: \.destination?.alert, action: \.destination.alert))
+            .alert($store.scope(state: \.destination?.websiteAlert, action: \.destination.websiteAlert))
         }
     }
 }
