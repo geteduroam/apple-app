@@ -4,7 +4,7 @@ import Models
 
 #if DEBUG
 extension Organization {
-    static var example = Organization(
+    static let example = Organization(
         id: "id",
         name: [
             "any": "Example Organization (demo)",
@@ -34,7 +34,7 @@ extension Organization {
         geo: []
     )
     
-    static var example2 = Organization(
+    static let example2 = Organization(
         id: "id2",
         name: [
             "any": "govroam (demo)",
@@ -45,7 +45,7 @@ extension Organization {
         geo: []
     )
     
-    static var example3 = Organization(
+    static let example3 = Organization(
         id: "id3",
         name: [
             "any": "Another Organization (demo)",
@@ -58,7 +58,7 @@ extension Organization {
 }
 
 extension ProviderInfo {
-    static var example = ProviderInfo(
+    static let example = ProviderInfo(
         displayName: [
             .init(language: "any", value: "Example Organization"),
             .init(language: "nl", value: "Voorbeeldorganisatie")

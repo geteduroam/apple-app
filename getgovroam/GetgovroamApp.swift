@@ -6,6 +6,8 @@ import SwiftUI
 
 #if os(iOS)
 extension Theme {
+    
+    @MainActor
     static var theme = Theme(
         searchFont: .custom("Muli", size: 20, relativeTo: .body),
         errorFont: .custom("Muli", size: 16, relativeTo: .body),
@@ -22,6 +24,8 @@ extension Theme {
 }
 #elseif os(macOS)
 extension Theme {
+    
+    @MainActor
     static var theme =  Theme(
         searchFont: .system(.body, design: .default),
         errorFont: .system(.body, design: .default),

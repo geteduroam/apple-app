@@ -648,20 +648,30 @@ public struct Connect: Reducer {
             throw OrganizationSetupError.missingEAPConfigEndpoint
         }
         
-        var urlRequest = URLRequest(url: eapConfigURL)
-        if let accessToken {
-            urlRequest.httpMethod = "POST"
-            urlRequest.allHTTPHeaderFields = ["Authorization": "Bearer \(accessToken)"]
-        } else {
-            urlRequest.httpMethod = "GET"
-        }
-
         let eapConfigData: Data
-        if let previousEapConfigData = previousReusableInfo?.eapConfigData {
-            eapConfigData = previousEapConfigData
+        if eapConfigURL.isFileURL {
+            let gotAccess = eapConfigURL.startAccessingSecurityScopedResource()
+            guard gotAccess else {
+                throw OrganizationSetupError.missingEAPConfigEndpoint
+            }
+            eapConfigData = try Data(contentsOf: eapConfigURL)
+            eapConfigURL.stopAccessingSecurityScopedResource()
+            
         } else {
-            (eapConfigData, _) = try await urlSession.data(for: urlRequest)
-            reusableInfo.eapConfigData = eapConfigData
+            var urlRequest = URLRequest(url: eapConfigURL)
+            if let accessToken {
+                urlRequest.httpMethod = "POST"
+                urlRequest.allHTTPHeaderFields = ["Authorization": "Bearer \(accessToken)"]
+            } else {
+                urlRequest.httpMethod = "GET"
+            }
+            
+            if let previousEapConfigData = previousReusableInfo?.eapConfigData {
+                eapConfigData = previousEapConfigData
+            } else {
+                (eapConfigData, _) = try await urlSession.data(for: urlRequest)
+                reusableInfo.eapConfigData = eapConfigData
+            }
         }
         
         let providerList = try xmlDecoder.decode(EAPIdentityProviderList.self, from: eapConfigData)

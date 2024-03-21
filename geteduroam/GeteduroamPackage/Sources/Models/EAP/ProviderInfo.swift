@@ -1,7 +1,7 @@
 import Foundation
 import XMLCoder
 
-public struct ProviderInfo: Codable, Equatable {
+public struct ProviderInfo: Codable, Equatable, Sendable {
     public init(displayName: LocalizedString? = nil, description: LocalizedString? = nil, providerLocations: [Location], providerLogo: LogoData? = nil, termsOfUse: LocalizedString? = nil, helpdesk: HelpdeskDetails? = nil) {
         self.displayName = displayName
         self.description = description

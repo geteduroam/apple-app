@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Profile: Codable, Equatable, Identifiable {
+public struct Profile: Codable, Equatable, Identifiable, Sendable {
     public init(id: String, name: [String : String]? = nil, `default`: Bool? = nil, eapConfigEndpoint: URL? = nil, mobileConfigEndpoint: URL? = nil, letsWiFiEndpoint: URL? = nil, webviewEndpoint: String? = nil, type: ProfileType? = nil) {
         self.id = id
         self.name = name
@@ -37,7 +37,7 @@ public struct Profile: Codable, Equatable, Identifiable {
     }
 }
 
-public enum ProfileType: String, Codable {
+public enum ProfileType: String, Codable, Sendable {
     case eapConfig = "eap-config"
     case letswifi
     case webview

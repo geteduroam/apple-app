@@ -1,6 +1,6 @@
 import SwiftUI
 
-public class Theme: ObservableObject {
+public final class Theme: ObservableObject {
     @Published public var searchFont: Font
     @Published public var errorFont: Font
     @Published public var organizationNameFont: Font

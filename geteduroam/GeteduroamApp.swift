@@ -6,7 +6,9 @@ import SwiftUI
 
 #if os(iOS)
 extension Theme {
-    static var theme = Theme(
+    
+    @MainActor
+    static let theme = Theme(
         searchFont: .custom("OpenSans-Regular", size: 20, relativeTo: .body),
         errorFont: .custom("OpenSans-Regular", size: 16, relativeTo: .body),
         organizationNameFont: .custom("OpenSans-Bold", size: 16, relativeTo: .body),
@@ -22,7 +24,9 @@ extension Theme {
 }
 #elseif os(macOS)
 extension Theme {
-    static var theme = Theme(
+    
+    @MainActor
+    static let theme = Theme(
         searchFont: .system(.body, design: .default),
         errorFont: .system(.body, design: .default),
         organizationNameFont: .system(.body, design: .default).bold(),
