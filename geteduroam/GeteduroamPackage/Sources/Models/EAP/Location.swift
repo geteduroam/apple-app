@@ -1,7 +1,7 @@
 import Foundation
 import XMLCoder
 
-public struct Location: Codable, Equatable {
+public struct Location: Codable, Equatable, Sendable {
     public init(latitude: Double, longitude: Double) {
         self.latitude = latitude
         self.longitude = longitude

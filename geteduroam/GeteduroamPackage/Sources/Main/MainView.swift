@@ -62,6 +62,7 @@ struct MainContentView: View {
     
     @FocusState private var focusedField: Field?
     @EnvironmentObject var theme: Theme
+    @State var showsFileImporter = false
     
     public var body: some View {
         WithPerceptionTracking {
@@ -70,7 +71,22 @@ struct MainContentView: View {
                 if store.loadingState == .success {
                     VStack(spacing: 8) {
                         HStack {
-                            Image(systemName: "magnifyingglass")
+                            Menu {
+                                Button {
+                                    showsFileImporter.toggle()
+                                } label: {
+                                    Label {
+                                        Text("Open File…", bundle: .module)
+                                    } icon: {
+                                        Image(systemName: "doc")
+                                    }
+                                }
+                            } label: {
+                                Image(systemName: "magnifyingglass")
+                            } primaryAction: {
+                                focusedField = .search
+                            }
+                            .buttonStyle(.plain)
                             TextField(
                                 NSLocalizedString("Search for your organization", bundle: .module, comment: "Search prompt"),
                                 text: $store.searchQuery)
@@ -177,6 +193,14 @@ struct MainContentView: View {
                 store.send(.onAppear)
             }
             .alert($store.scope(state: \.destination?.alert, action: \.destination.alert))
+            .fileImporter(isPresented: $showsFileImporter, allowedContentTypes: [.eapConfig, .xml]) { result in
+                switch result {
+                case let .success(scopedURL):
+                    store.send(.useLocalFile(scopedURL))
+                case .failure:
+                    break
+                }
+            }
         }
     }
 }

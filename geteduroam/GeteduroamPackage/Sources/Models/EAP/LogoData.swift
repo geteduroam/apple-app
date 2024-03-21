@@ -1,7 +1,7 @@
 import Foundation
 import XMLCoder
 
-public struct LogoData: Codable, Equatable {
+public struct LogoData: Codable, Equatable, Sendable {
     public init(value: String, mime: String, encoding: String) {
         self.value = value
         self.mime = mime

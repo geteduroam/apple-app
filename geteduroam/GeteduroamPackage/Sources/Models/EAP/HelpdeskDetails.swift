@@ -1,7 +1,7 @@
 import Foundation
 import XMLCoder
 
-public struct HelpdeskDetails: Codable, Equatable {
+public struct HelpdeskDetails: Codable, Equatable, Sendable {
     public init(emailAdress: LocalizedString? = nil, webAddress: LocalizedString? = nil, phone: LocalizedString? = nil) {
         self.emailAdress = emailAdress
         self.webAddress = webAddress

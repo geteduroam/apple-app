@@ -66,6 +66,7 @@ public struct Main: Reducer {
         case searchResponse(TaskResult<IdentifiedArrayOf<Organization>>)
         case select(Organization)
         case tryAgainTapped
+        case useLocalFile(URL)
     }
     
     @Reducer(state: .equatable)
@@ -99,9 +100,12 @@ public struct Main: Reducer {
 
     public var body: some Reducer<State, Action> {
         BindingReducer()
-        Reduce { state, action in
+        Reduce {
+            state,
+            action in
             switch action {
-            case .onAppear, .tryAgainTapped:
+            case .onAppear,
+                    .tryAgainTapped:
                 state.loadingState = .isLoading
                 return .merge(
                     .run { send in
@@ -130,7 +134,7 @@ public struct Main: Reducer {
                             }
                         }))
                     })
-
+                
             case let .discoveryResponse(.success(response)):
                 state.loadingState = .success
                 state.organizations = .init(uniqueElements: response.content.organizations)
@@ -209,6 +213,18 @@ public struct Main: Reducer {
                 return .none
                 
             case .destination:
+                return .none
+                
+            case let .useLocalFile(url):
+                let displayName = FileManager().displayName(atPath: url.path)
+                let organization = Organization(
+                    id: "local",
+                    name: ["any": displayName],
+                    country: "",
+                    profiles: [Profile(id: "local", name: ["any": displayName], default: true, eapConfigEndpoint: url, mobileConfigEndpoint: nil, letsWiFiEndpoint: nil, webviewEndpoint: nil, type: .eapConfig)],
+                    geo: []
+                )
+                state.destination = .connect(.init(organization: organization))
                 return .none
             }
         }
