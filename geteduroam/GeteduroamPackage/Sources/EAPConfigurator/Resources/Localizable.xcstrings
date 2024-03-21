@@ -194,6 +194,12 @@
     "No password in configuration" : {
       "comment" : "empty pass",
       "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No password in configuration"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -779,7 +785,7 @@
       }
     },
     "Unable to get common name from certificate" : {
-      "comment" : "Certificate: unable to get common name",
+      "comment" : "Certificate: unable to get common name or subject sequence ",
       "localizations" : {
         "ar" : {
           "stringUnit" : {

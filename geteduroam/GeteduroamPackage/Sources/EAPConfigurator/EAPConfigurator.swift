@@ -489,6 +489,22 @@ class EAPConfigurator {
         return certificates
     }
     
+    
+    private func label(for certificateRef: SecCertificate) throws -> String {
+        var commonNameRef: CFString?
+        let status: OSStatus = SecCertificateCopyCommonName(certificateRef, &commonNameRef)
+        if status == errSecSuccess {
+            return commonNameRef! as String
+        }
+        
+        guard let rawSubject = SecCertificateCopyNormalizedSubjectSequence(certificateRef) as? Data else {
+            Logger.eap.error("addCertificate: unable to get common name or subject sequence from certificate")
+            throw EAPConfiguratorError.failedToCopyCommonNameOrSubjectSequence
+        }
+        
+        return rawSubject.base64EncodedString(options: [])
+    }
+    
     /**
      @function addCertificate
      @abstract Import Base64 encoded DER to keychain.
@@ -505,26 +521,20 @@ class EAPConfigurator {
             throw EAPConfiguratorError.failedToCreateCertificateFromData
         }
         
-        var commonNameRef: CFString?
-        var status: OSStatus = SecCertificateCopyCommonName(certificateRef, &commonNameRef)
-        guard status == errSecSuccess else {
-            Logger.eap.error("addCertificate: unable to get common name")
-            throw EAPConfiguratorError.failedToCopyCommonName
-        }
-        let commonName: String = commonNameRef! as String
-        Logger.eap.info("addCertificate: adding common name \(commonName)")
-        
+        let label = try label(for: certificateRef)
+        Logger.eap.info("addCertificate: adding \(label)")
+    
         let addquery: [String: Any] = [
             kSecClass as String: kSecClassCertificate,
             kSecValueRef as String: certificateRef,
-            kSecAttrLabel as String: commonName,
+            kSecAttrLabel as String: label,
             kSecReturnRef as String: kCFBooleanTrue!,
             kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlock,
             //kSecReturnPersistentRef as String: kCFBooleanTrue!, // Persistent refs cause an error (invalid EAP config) when installing the profile
             kSecAttrAccessGroup as String: "\(teamID).com.apple.networkextensionsharing"
         ]
         var item: CFTypeRef?
-        status = SecItemAdd(addquery as CFDictionary, &item)
+        var status = SecItemAdd(addquery as CFDictionary, &item)
         
         // TODO: remove this, and always use the "failsafe"?
         if status == errSecSuccess && item != nil {
@@ -544,7 +554,7 @@ class EAPConfigurator {
         
         let getquery: [String: Any] = [
             kSecClass as String: kSecClassCertificate,
-            kSecAttrLabel as String: commonName,
+            kSecAttrLabel as String: label,
             kSecReturnRef as String: kCFBooleanTrue!,
             //kSecReturnPersistentRef as String: kCFBooleanTrue!, // Persistent refs cause an error (invalid EAP config) when installing the profile
             kSecAttrAccessGroup as String: "\(teamID).com.apple.networkextensionsharing"
@@ -608,30 +618,25 @@ class EAPConfigurator {
         // If we don't do this, we get "failed to find the trust chain for the client certificate" when connecting
         for certificate in chain {
             let certificateRef: SecCertificate = certificate as SecCertificate
-            var commonNameRef: CFString?
-            var status: OSStatus = SecCertificateCopyCommonName(certificateRef, &commonNameRef)
-            guard status == errSecSuccess else {
-                Logger.eap.error("addClientCertificate: unable to get common name")
-                continue
-            }
-            let commonName: String = commonNameRef! as String
-            Logger.eap.info("addClientCertificate: adding common name \(commonName)")
+            
+            let label = try label(for: certificateRef)
+            Logger.eap.info("addClientCertificate: adding \(label)")
             
             let addquery: [String: Any] = [
                 kSecClass as String: kSecClassCertificate,
                 kSecValueRef as String: certificate,
-                kSecAttrLabel as String: commonName,
+                kSecAttrLabel as String: label,
                 kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlock,
                 //kSecReturnRef as String: kCFBooleanTrue!, // We're not retrieving the reference at this point, 2nd argument to SecItemAdd is nil
                 //kSecReturnPersistentRef as String: kCFBooleanTrue!, // Persistent refs cause an error (invalid EAP config) when installing the profile
                 kSecAttrAccessGroup as String: "\(teamID).com.apple.networkextensionsharing"
             ]
             
-            status = SecItemAdd(addquery as CFDictionary, nil)
+            let status = SecItemAdd(addquery as CFDictionary, nil)
             
             guard status == errSecSuccess || status == errSecDuplicateItem else {
-                Logger.eap.error("addClientCertificate: SecItemAdd: \(commonName, privacy: .public) \(String(status), privacy: .public)")
-                throw EAPConfiguratorError.failedSecItemAdd(status, commonName: commonName)
+                Logger.eap.error("addClientCertificate: SecItemAdd: \(label, privacy: .public) \(String(status), privacy: .public)")
+                throw EAPConfiguratorError.failedSecItemAdd(status, label: label)
             }
         }
         
