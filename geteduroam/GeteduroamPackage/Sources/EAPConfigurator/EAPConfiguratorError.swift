@@ -24,7 +24,7 @@ public enum EAPConfiguratorError: Error {
     case failedSecPKCS12Import(OSStatus)
     
     /// Unable to add certificate to keychain
-    case failedSecItemAdd(OSStatus, commonName: String? = nil)
+    case failedSecItemAdd(OSStatus, label: String? = nil)
     
     /// Unable to copy from keychain
     case failedSecItemCopyMatching(OSStatus)
@@ -35,8 +35,8 @@ public enum EAPConfiguratorError: Error {
     /// Unable to create certificate from data
     case failedToCreateCertificateFromData
     
-    /// Unable to get common name from certificate
-    case failedToCopyCommonName
+    /// Unable to get common name or subject sequence f from certificate
+    case failedToCopyCommonNameOrSubjectSequence
     
     /// No valid configuration found
     case noConfigurations
@@ -78,8 +78,8 @@ extension EAPConfiguratorError: LocalizedError {
         case let .failedSecPKCS12Import(status):
             return String(format: NSLocalizedString("Unable to import certificate into keychain (%d)", bundle: .module, comment: "addClientCertificate"), status)
             
-        case let .failedSecItemAdd(status, commonName):
-            return String(format: NSLocalizedString("Unable to add certificate %@ to keychain (%d)", bundle: .module, comment: "addClientCertificate: SecItemAdd"), commonName ?? NSLocalizedString("with unknown name", bundle: .module, comment: "with unknown name"), status)
+        case let .failedSecItemAdd(status, label):
+            return String(format: NSLocalizedString("Unable to add certificate %@ to keychain (%d)", bundle: .module, comment: "addClientCertificate: SecItemAdd"), label ?? NSLocalizedString("with unknown name", bundle: .module, comment: "with unknown name"), status)
             
         case let .failedSecItemCopyMatching(status):
             return String(format: NSLocalizedString("Unable to copy from keychain (%d)", bundle: .module, comment: "SecItemCopyMatching: retrieving identity returned"), status)
@@ -90,8 +90,8 @@ extension EAPConfiguratorError: LocalizedError {
         case .failedToCreateCertificateFromData:
             return NSLocalizedString("Unable to create certificate from data", bundle: .module, comment: "SecCertificateCreateWithData: false")
             
-        case .failedToCopyCommonName:
-            return NSLocalizedString("Unable to get common name from certificate", bundle: .module, comment: "Certificate: unable to get common name")
+        case .failedToCopyCommonNameOrSubjectSequence:
+            return NSLocalizedString("Unable to get common name from certificate", bundle: .module, comment: "Certificate: unable to get common name or subject sequence ")
             
         case .noConfigurations:
             return NSLocalizedString("No valid configuration found", bundle: .module, comment: "noConfigurations")
