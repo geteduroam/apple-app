@@ -20,8 +20,6 @@
 	<string>1</string>
 	<key>DiscoveryURL</key>
 	<string>https://discovery.eduroam.app/v2/</string>
-	<key>OAuthRedirectURL</key>
-	<string>app.eduroam.geteduroam:/</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>
@@ -30,6 +28,8 @@
 	<true/>
 	<key>NSUserNotificationsUsageDescription</key>
 	<string>Reminding you when you need to renew your network access.</string>
+	<key>OAuthRedirectURL</key>
+	<string>app.eduroam.geteduroam:/</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>OpenSans-Regular.ttf</string>
@@ -61,6 +61,31 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+	</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.xml</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>EAP Config</string>
+			<key>UTTypeIconFiles</key>
+			<array/>
+			<key>UTTypeIdentifier</key>
+			<string>app.geteduroam.eapconfig</string>
+			<key>UTTypeReferenceURL</key>
+			<string>https://wiki.geant.org/display/GWP5/EAP+metadata</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>eap-config</string>
+					<string>xml</string>
+				</array>
+			</dict>
+		</dict>
 	</array>
 </dict>
 </plist>

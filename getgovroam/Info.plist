@@ -62,5 +62,30 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.xml</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>EAP Config</string>
+			<key>UTTypeIconFiles</key>
+			<array/>
+			<key>UTTypeIdentifier</key>
+			<string>app.geteduroam.eapconfig</string>
+			<key>UTTypeReferenceURL</key>
+			<string>https://wiki.geant.org/display/GWP5/EAP+metadata</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>eap-config</string>
+					<string>xml</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>

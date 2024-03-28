@@ -302,6 +302,22 @@
         }
       }
     },
+    "Open File…" : {
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open File…"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open bestand…"
+          }
+        }
+      }
+    },
     "Search for your organization" : {
       "comment" : "Search prompt",
       "localizations" : {
