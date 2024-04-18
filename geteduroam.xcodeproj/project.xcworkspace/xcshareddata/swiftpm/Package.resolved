@@ -1,6 +1,24 @@
 {
   "pins" : [
     {
+      "identity" : "app-remote-config",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/egeniq/app-remote-config",
+      "state" : {
+        "revision" : "f5220e4ad1ab5b31981beec6ed361eaf7405c5e9",
+        "version" : "0.0.4"
+      }
+    },
+    {
+      "identity" : "app-remote-config-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/egeniq/app-remote-config-ios.git",
+      "state" : {
+        "revision" : "fe1d4e891b9500121ade2283d2ab7fb0a04374b4",
+        "version" : "0.0.2"
+      }
+    },
+    {
       "identity" : "appauth-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/openid/AppAuth-iOS.git",
@@ -91,6 +109,15 @@
       }
     },
     {
+      "identity" : "swift-dependencies-additions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tgrapperon/swift-dependencies-additions",
+      "state" : {
+        "revision" : "02e7b1801a96828049fe4d3e8bdc5e608ef5ffbc",
+        "version" : "1.0.1"
+      }
+    },
+    {
       "identity" : "swift-identified-collections",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-identified-collections",
@@ -131,8 +158,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-syntax",
       "state" : {
-        "revision" : "fa8f95c2d536d6620cc2f504ebe8a6167c9fc2dd",
-        "version" : "510.0.1"
+        "revision" : "64889f0c732f210a935a0ad7cda38f77f876262d",
+        "version" : "509.1.1"
       }
     },
     {

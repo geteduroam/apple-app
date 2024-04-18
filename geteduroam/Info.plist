@@ -20,6 +20,8 @@
 	<string>1</string>
 	<key>DiscoveryURL</key>
 	<string>https://discovery.eduroam.app/v2/</string>
+	<key>RemoteConfigurationURL</key>
+	<string>https://discovery.eduroam.app/v2/appconfig.json</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>

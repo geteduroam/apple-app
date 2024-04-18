@@ -1,9 +1,16 @@
+import AppRemoteConfigClient
 import Backport
 import ComposableArchitecture
 import Connect
+import Dependencies
 import Models
 import Perception
 import SwiftUI
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
 
 public struct MainView: View {
     public init(store: StoreOf<Main>) {
@@ -63,6 +70,8 @@ struct MainContentView: View {
     @FocusState private var focusedField: Field?
     @EnvironmentObject var theme: Theme
     @State var showsFileImporter = false
+    @State var showsConfigEditor = false
+    @Dependency(\.configClient) var configClient
     
     public var body: some View {
         WithPerceptionTracking {
@@ -79,6 +88,17 @@ struct MainContentView: View {
                                         Text("Open File…", bundle: .module)
                                     } icon: {
                                         Image(systemName: "doc")
+                                    }
+                                }
+                                if configClient.localValues().showHiddenSettings {
+                                    Button {
+                                        showsConfigEditor.toggle()
+                                    } label: {
+                                        Label {
+                                            Text("App Configuration…", bundle: .module)
+                                        } icon: {
+                                            Image(systemName: "questionmark.key.filled")
+                                        }
                                     }
                                 }
                             } label: {
@@ -133,6 +153,8 @@ struct MainContentView: View {
                         .padding(.top, 20)
                     }
                 }
+                
+                AppStateView()
                 
                 if store.loadingState == .failure {
                     HStack {
@@ -201,6 +223,23 @@ struct MainContentView: View {
                     break
                 }
             }
+            .onTapGesture(count: 10) {
+                #if canImport(UIKit)
+                let content = UIPasteboard.general.string
+                #elseif canImport(AppKit)
+                let content = NSPasteboard.general.string(forType: .string)
+                #endif
+                if content == "geheim" {
+                    configClient.localValues().showHiddenSettings = true
+                }
+            }
+            .sheet(isPresented: $showsConfigEditor) {
+                NavigationView {
+                    ValuesEditor()
+                        .navigationTitle(Text("App Configuration", bundle: .module))
+                }
+            }
+            .disabled(configClient.values().appDisabled)
         }
     }
 }

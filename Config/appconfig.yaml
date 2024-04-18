@@ -1,0 +1,24 @@
+# Settings for the current app.
+settings:
+  # Application state for app life management
+  appState: active # active, updateRecommended, updateRequired, updateOSRecommended, updateOSRequired, obsolete, disabled
+
+  # Enable when the API is undergoing maintenance
+  maintenance: false
+
+# Keep track of keys that are no longer in use.
+deprecatedKeys: []
+
+# Override settings
+#overrides:
+#- matching:
+#  - platform: iOS
+#    platformVersion: 17.0.0-<17.2.0
+#  settings:
+#      appState: updateOSRecommended
+
+#- schedule:
+#    from: "2024-02-14T12:34:56Z"
+#    until: "2024-02-14T23:34:56Z"
+#  settings:
+#    maintenance: true

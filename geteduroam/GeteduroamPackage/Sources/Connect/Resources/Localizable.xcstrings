@@ -2713,6 +2713,12 @@
     },
     "Password Required" : {
       "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password Required"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2723,6 +2729,12 @@
     },
     "Please enter your password." : {
       "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please enter your password."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",

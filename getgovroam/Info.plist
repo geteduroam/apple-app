@@ -20,6 +20,8 @@
 	<string>1</string>
 	<key>DiscoveryURL</key>
 	<string>https://getgovroam.nl/v2/</string>
+	<key>RemoteConfigurationURL</key>
+	<string>https://getgovroam.nl/v2/appconfig.json</string>
 	<key>OAuthRedirectURL</key>
 	<string>app.govroam.getgovroam:/</string>
 	<key>ITSAppUsesNonExemptEncryption</key>

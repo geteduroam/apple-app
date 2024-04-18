@@ -41,15 +41,18 @@ let package = Package(
             targets: ["NotificationClient"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/CoreOffice/XMLCoder.git", .upToNextMajor(from: "0.16.0")),
-        .package(url: "https://github.com/egeniq/network-ios.git", branch: "main"),
-        .package(url: "https://github.com/openid/AppAuth-iOS.git", from: "1.0.0"),
+        .package(url: "https://github.com/CoreOffice/XMLCoder", .upToNextMajor(from: "0.16.0")),
+        .package(url: "https://github.com/egeniq/app-remote-config-ios", from: "0.0.2"),
+        .package(url: "https://github.com/egeniq/network-ios", branch: "main"),
+        .package(url: "https://github.com/openid/AppAuth-iOS", from: "1.0.0"),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.8.0"),
         .package(url: "https://github.com/pointfreeco/swift-custom-dump", from: "1.0.0"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.0.0"),
+        .package(url: "https://github.com/pointfreeco/swift-perception", from: "1.0.0"),
         .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.12.0"),
         .package(url: "https://github.com/pointfreeco/swift-url-routing", from: "0.6.0"),
         .package(url: "https://github.com/pointfreeco/xctest-dynamic-overlay", from: "1.0.0"),
+        .package(url: "https://github.com/tgrapperon/swift-dependencies-additions", from: "1.0.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -57,6 +60,7 @@ let package = Package(
         .target(
             name: "Main",
             dependencies: [
+                "AppRemoteConfigClient",
                 "AuthClient",
                 "Backport",
                 "CacheClient",
@@ -69,6 +73,17 @@ let package = Package(
         .testTarget(
             name: "MainTests",
             dependencies: ["Main"]),
+        .target(
+            name: "AppRemoteConfigClient",
+            dependencies: [
+                .product(name: "AppRemoteConfigService", package: "app-remote-config-ios"),
+                .product(name: "AppRemoteConfigServiceMacros", package: "app-remote-config-ios"),
+                .product(name: "Dependencies", package: "swift-dependencies"),
+                .product(name: "DependenciesAdditions", package: "swift-dependencies-additions"),
+                .product(name: "DependenciesMacros", package: "swift-dependencies"),
+                .product(name: "Perception", package: "swift-perception")
+            ]
+        ),
         .target(
             name: "AuthClient",
             dependencies: [
