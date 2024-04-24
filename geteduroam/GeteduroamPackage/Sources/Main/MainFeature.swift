@@ -91,10 +91,11 @@ public struct Main: Reducer {
         }
         let locale = Locale.current
         let languageCode = locale.languageCode
+        let options: String.CompareOptions = query.contains(" ") ? [.caseInsensitive, .diacriticInsensitive] : [.caseInsensitive, .diacriticInsensitive, .anchored]
         return .init(uniqueElements: organizations
             // Apple recommends this, but that seems to be diacritic sensitive
             // .filter({ $0.name.localizedCaseInsensitiveContains(query) })
-            .filter({ $0.matchWords(for: languageCode).contains(where: { $0.range(of: query, options: [.caseInsensitive, .diacriticInsensitive, .anchored], locale: locale) != nil } )})
+            .filter({ $0.matchWords(for: languageCode).contains(where: { $0.range(of: query, options: options, locale: locale) != nil } )})
             .sorted(by: { $0.nameOrId.lowercased() < $1.nameOrId.lowercased() }))
     }
 
