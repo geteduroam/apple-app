@@ -1,6 +1,54 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "App Configuration" : {
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App Configuration"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App-configuratie"
+          }
+        }
+      }
+    },
+    "App Configuration…" : {
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App Configuration…"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App-configuratie…"
+          }
+        }
+      }
+    },
+    "Close" : {
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sluit"
+          }
+        }
+      }
+    },
     "Failed to load organizations" : {
       "comment" : "Message when organizations can't be loaded and the fallback fails too",
       "localizations" : {
@@ -98,6 +146,70 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Не вдалося завантажити організації"
+          }
+        }
+      }
+    },
+    "It is recommended to update %@ to a newer version." : {
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It is recommended to update %@ to a newer version."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Het is aanbevolen om %@ bij te werken naar een nieuwere versie."
+          }
+        }
+      }
+    },
+    "It is recommended to update this app to the latest version." : {
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It is recommended to update this app to the latest version."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Het is aanbevolen om deze app bij te werken naar de laatste versie."
+          }
+        }
+      }
+    },
+    "It is required to update %@ to a newer version." : {
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It is required to update %@ to a newer version."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Het is vereist om %@ bij te werken naar een nieuwere versie."
+          }
+        }
+      }
+    },
+    "It is required to update this app to the latest version." : {
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It is required to update this app to the latest version."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Het is vereist om deze app bij te werken naar de laatste versie."
           }
         }
       }
@@ -516,6 +628,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Організація більше не значиться в списку."
+          }
+        }
+      }
+    },
+    "This app is disabled." : {
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This app is disabled."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deze app is uitgeschakeld."
+          }
+        }
+      }
+    },
+    "This app is obsolete." : {
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This app is obsolete."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deze app wordt niet meer ondersteund."
+          }
+        }
+      }
+    },
+    "This app is under maintenance." : {
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This app is under maintenance."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deze app is in onderhoud."
           }
         }
       }
