@@ -101,7 +101,7 @@ Currently we don't use:
 In Xcode use Product > Export Localizations > geteduroam… and pick a location to store the output. This creates a folder with a package for each currently supported language with the extension xcloc. This package can be opened by Xcode to edit the translations. Alternatively, in the Finder control click on the xcloc package and use Show Package Contents to find amongst others an xliff file, which is an industry standard for localizing apps.
 
 > [!Important]
-> In the xliff file you must replace all occurences of `state="new"` with `state="translated"` or Xcode won't actually import them.
+> In the xliff file you must replace all occurrences of `state="new"` with `state="translated"` or Xcode won't actually import them.
 
 Note, temporarily add the AppStore.xcstrings files to their targets so that they get included in the xcloc package. They shouldn't ship with the app though. These are just to collect the translations for the App Store.
 
