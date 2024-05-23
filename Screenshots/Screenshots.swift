@@ -78,7 +78,7 @@ final class Screenshots: XCTestCase {
                 attachment.lifetime = .keepAlways
                 add(attachment)
                 
-                // Due to sandbox restrictions writing to disk doens't work on macOS, navigate to the test results and find the attachments there
+                // Due to sandbox restrictions writing to disk doesn't work on macOS, navigate to the test results and find the attachments there
             }
         }
     }
