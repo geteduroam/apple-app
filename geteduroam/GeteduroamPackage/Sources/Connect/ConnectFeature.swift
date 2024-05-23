@@ -733,7 +733,7 @@ public struct Connect: Reducer {
             }
 
             var mobileConfigURLRequest = URLRequest(url: mobileConfigURL)
-            mobileConfigURLRequest.httpMethod = "GET"
+            mobileConfigURLRequest.httpMethod = "POST"
             if let accessToken {
                 mobileConfigURLRequest.allHTTPHeaderFields = ["Authorization": "Bearer \(accessToken)"]
             }
