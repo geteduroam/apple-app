@@ -651,11 +651,19 @@ public struct Connect: Reducer {
         let eapConfigData: Data
         if eapConfigURL.isFileURL {
             let gotAccess = eapConfigURL.startAccessingSecurityScopedResource()
-            guard gotAccess else {
-                throw OrganizationSetupError.missingEAPConfigEndpoint
+            defer {
+                eapConfigURL.stopAccessingSecurityScopedResource()
             }
-            eapConfigData = try Data(contentsOf: eapConfigURL)
-            eapConfigURL.stopAccessingSecurityScopedResource()
+            if gotAccess {
+                eapConfigData = try Data(contentsOf: eapConfigURL)
+            } else {
+                // We didn't got access, but we may not even need it, so try anyway
+                do {
+                    eapConfigData = try Data(contentsOf: eapConfigURL)
+                } catch {
+                    throw OrganizationSetupError.missingEAPConfigEndpoint
+                }
+            }
             
         } else {
             var urlRequest = URLRequest(url: eapConfigURL)
