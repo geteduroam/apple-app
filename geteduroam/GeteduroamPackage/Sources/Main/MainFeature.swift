@@ -217,6 +217,7 @@ public struct Main: Reducer {
                 return .none
                 
             case let .useLocalFile(url):
+#if os(iOS)
                 let displayName = FileManager().displayName(atPath: url.path)
                 let organization = Organization(
                     id: "local",
@@ -226,6 +227,9 @@ public struct Main: Reducer {
                     geo: []
                 )
                 state.destination = .connect(.init(organization: organization))
+#else
+                NSLog("Opening EAP Config files not supported on macOS/this OS.")
+#endif
                 return .none
             }
         }

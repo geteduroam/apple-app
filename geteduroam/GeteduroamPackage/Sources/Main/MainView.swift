@@ -223,6 +223,9 @@ struct MainContentView: View {
                     break
                 }
             }
+            .onOpenURL { url in
+                store.send(.useLocalFile(url))
+            }
             .onTapGesture(count: 10) {
                 #if canImport(UIKit)
                 let content = UIPasteboard.general.string

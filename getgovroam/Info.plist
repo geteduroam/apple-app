@@ -4,6 +4,19 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>EAP Config</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>app.geteduroam.eapconfig</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -20,18 +33,20 @@
 	<string>1</string>
 	<key>DiscoveryURL</key>
 	<string>https://getgovroam.nl/v2/</string>
-	<key>RemoteConfigurationURL</key>
-	<string>https://getgovroam.nl/v2/appconfig.json</string>
-	<key>OAuthRedirectURL</key>
-	<string>app.govroam.getgovroam:/</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
 	<key>NSUserNotificationsUsageDescription</key>
 	<string>Reminding you when you need to renew your network access.</string>
+	<key>OAuthRedirectURL</key>
+	<string>app.govroam.getgovroam:/</string>
+	<key>RemoteConfigurationURL</key>
+	<string>https://getgovroam.nl/v2/appconfig.json</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Muli.ttf</string>
@@ -85,6 +100,11 @@
 				<array>
 					<string>eap-config</string>
 					<string>xml</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>text/xml</string>
+					<string>application/xml</string>
 				</array>
 			</dict>
 		</dict>
