@@ -45,7 +45,7 @@ extension NotificationClient {
 }
 
 extension Logger {
-    static var notifications = Logger(subsystem: Bundle.main.bundleIdentifier ?? "NotificationClient", category: "notifications")
+    public static var notifications = Logger(subsystem: Bundle.main.bundleIdentifier ?? "NotificationClient", category: "notifications")
 }
 
 extension NotificationClient {
@@ -63,7 +63,7 @@ extension NotificationClient {
             guard granted else { return }
             
             // Declare custom actions: Renew Now | Remind Me Later
-            let renewNowAction = UNNotificationAction(identifier: .renewNowActionId, title: NSLocalizedString("Renew Now", bundle: .module, comment: "Renew Now"), options: [.authenticationRequired], icon: UNNotificationActionIcon(systemImageName: "arrow.triangle.2.circlepath"))
+            let renewNowAction = UNNotificationAction(identifier: .renewNowActionId, title: NSLocalizedString("Renew Now", bundle: .module, comment: "Renew Now"), options: [.authenticationRequired, .foreground], icon: UNNotificationActionIcon(systemImageName: "arrow.triangle.2.circlepath"))
             let remindMeAction = UNNotificationAction(identifier: .remindMeActionId, title: NSLocalizedString("Remind Me Later", bundle: .module, comment: "Remind Me Later"), options: [], icon: UNNotificationActionIcon(systemImageName: "alarm"))
             
             let willExpireCategory = UNNotificationCategory(identifier: .willExpireCategoryId, actions: [renewNowAction, remindMeAction], intentIdentifiers: [], hiddenPreviewsBodyPlaceholder: NSLocalizedString("Renew your connection to extend your access.", bundle: .module, comment: "Renew your connection to extend your access."), categorySummaryFormat: nil, options: [.hiddenPreviewsShowTitle])
