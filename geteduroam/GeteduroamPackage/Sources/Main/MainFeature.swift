@@ -188,9 +188,23 @@ public struct Main: Reducer {
                             if Task.isCancelled {
                                 throw MainFeatureError.searchCancelled
                             }
-                            let searchResults = await self.search(query: query, organizations: organizations)
+                            var searchResults = await self.search(query: query, organizations: organizations)
                             if Task.isCancelled {
                                 throw MainFeatureError.searchCancelled
+                            }
+                            
+                            // If the query could be an URL, treat it as if it's a Let's Wifi URL
+                            let prefixedQuery: String
+                            if !query.lowercased().hasPrefix("https") {
+                                prefixedQuery = "https://" + query
+                            } else {
+                                prefixedQuery = query
+                            }
+                            let urlComponents = URLComponents(string: prefixedQuery)
+                            if let url = urlComponents?.url, let host = urlComponents?.host, let scheme = urlComponents?.scheme, host.contains("."), scheme == "https" {
+                                let name = host
+                                let urlOrganization = Organization(id: "url", name: ["any" : name], country: "URL", profiles: [Profile(id: "url", name: ["any" : name], default: true, letsWiFiEndpoint: url, type: .letswifi)])
+                                searchResults.append(urlOrganization)
                             }
                             return searchResults
                         }

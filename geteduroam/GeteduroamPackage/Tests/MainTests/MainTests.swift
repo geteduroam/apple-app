@@ -160,4 +160,36 @@ final class MainTests: XCTestCase {
             $0.isSearching = false
         }
     }
+    
+    func testSearchWithURL() async throws {
+        let store = TestStore(
+            initialState: Main.State(organizations: [demoInstance], loadingState: .success),
+            reducer: { Main() },
+            withDependencies: {
+                $0.notificationClient.delegate = { .finished }
+            })
+
+        await store.send(.binding(.set(\.searchQuery, "geteduroam.nl"))) {
+            $0.isSearching = true
+            $0.searchQuery = "geteduroam.nl"
+        }
+
+        await store.receive(\.searchResponse, timeout: NSEC_PER_SEC) {
+            $0.isSearching = false
+            $0.searchResults = .init(
+                uniqueElements: [Organization(
+                    id: "url",
+                    name: ["any" : "geteduroam.nl"],
+                    country: "URL",
+                    profiles: [Profile(
+                        id: "url",
+                        name: ["any" : "geteduroam.nl"],
+                        default: true,
+                        letsWiFiEndpoint: URL(string: "https://geteduroam.nl")!,
+                        type: .letswifi
+                    )]
+                )]
+            )
+        }
+    }
 }
