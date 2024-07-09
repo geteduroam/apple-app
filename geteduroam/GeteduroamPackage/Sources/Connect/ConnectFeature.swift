@@ -644,6 +644,7 @@ public struct Connect: Reducer {
             throw OrganizationSetupError.redirectToWebsite(URL(string: profile.webviewEndpoint ?? ""))
         }
         
+#if os(iOS)
         guard let eapConfigURL else {
             throw OrganizationSetupError.missingEAPConfigEndpoint
         }
@@ -695,7 +696,6 @@ public struct Connect: Reducer {
             throw OrganizationSetupError.missingTermsAcceptance(firstValidProvider.providerInfo)
         }
 
-#if os(iOS)
         do {
             let expectedSSIDs = try await eapClient.configure(firstValidProvider, credentials, dryRun)
             
@@ -721,12 +721,14 @@ public struct Connect: Reducer {
                 throw OrganizationSetupError.unknownError(error, firstValidProvider.providerInfo)
             }
         }
+        
 #elseif os(macOS)
-
         guard let mobileConfigURL else {
             throw OrganizationSetupError.missingMobileConfigEndpoint
         }
 
+        let firstValidProviderInfo: ProviderInfo? = nil
+        
         do {
             let temporaryDataURL = NSTemporaryDirectory() + "geteduroam.mobileconfig"
            
@@ -750,7 +752,7 @@ public struct Connect: Reducer {
             
             let (data, response) = try await urlSession.data(for: mobileConfigURLRequest)
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, (200..<300).contains(statusCode) else {
-                throw OrganizationSetupError.mobileConfigFailed(firstValidProvider.providerInfo)
+                throw OrganizationSetupError.mobileConfigFailed(firstValidProviderInfo)
             }
             try data.write(to: URL(fileURLWithPath: temporaryDataURL))
             
@@ -763,9 +765,9 @@ public struct Connect: Reducer {
 //            let profileId = profile.id
 //            try await notificationClient.scheduleRenewReminder(validUntil, organizationId, profileId)
 
-            return (firstValidProvider.providerInfo, [], reusableInfo)
+            return (firstValidProviderInfo, [], reusableInfo)
         } catch {
-            throw OrganizationSetupError.unknownError(error, firstValidProvider.providerInfo)
+            throw OrganizationSetupError.unknownError(error, firstValidProviderInfo)
         }
 #endif
     }
