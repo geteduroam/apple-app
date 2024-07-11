@@ -1,4 +1,6 @@
 import AppAuth
+import AuthClient
+import ComposableArchitecture
 import Foundation
 
 public enum StartAuthError: Error {
@@ -9,9 +11,30 @@ public enum StartAuthError: Error {
 
 #if os(iOS)
 public class GeteduroamAppDelegate: NSObject, UIApplicationDelegate, ObservableObject, AuthClient {
+    
+    public func createStore(initialState: Main.State) {
+        assert(store == nil, "Call this method only once")
+        store = .init(
+            initialState: initialState,
+            reducer: {
+                Main()
+            },
+            withDependencies: {
+                $0.authClient = self
+            }
+        )
+    }
+    
+    public private(set) var store: StoreOf<Main>!
+    
     private var currentAuthorizationFlow: OIDExternalUserAgentSession?
   
     public func startAuth(request: OIDAuthorizationRequest) async throws -> OIDAuthState {
+        if UIApplication.shared.keyWindow == nil {
+            // Sleep a bit to wait for a window to be created, as we might get called right at startup
+            let duration = UInt64(2 * 1_000_000_000)
+            try await Task.sleep(nanoseconds: duration)
+        }
         guard let window = UIApplication.shared.keyWindow else {
             throw StartAuthError.noWindow
         }
@@ -31,6 +54,13 @@ public class GeteduroamAppDelegate: NSObject, UIApplicationDelegate, ObservableO
         }
     }
 
+    public func application(_ application: UIApplication,
+                            didFinishLaunchingWithOptions launchOptions:
+                            [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        store.send(.applicationDidFinishLaunching)
+        return true
+    }
+        
     public func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         // Sends the URL to the current authorization flow (if any) which will process it if it relates to an authorization response.
         if let currentAuthorizationFlow, currentAuthorizationFlow.resumeExternalUserAgentFlow(with: url) {
@@ -60,6 +90,22 @@ extension UIApplication {
 }
 #elseif os(macOS)
 public class GeteduroamAppDelegate: NSObject, NSApplicationDelegate, ObservableObject, AuthClient {
+    
+    public func createStore(initialState: Main.State) {
+        assert(store == nil, "Call this method only once")
+        store = .init(
+            initialState: initialState,
+            reducer: {
+                Main()
+            },
+            withDependencies: {
+                $0.authClient = self
+            }
+        )
+    }
+    
+    public private(set) var store: StoreOf<Main>!
+    
     private var currentAuthorizationFlow: OIDExternalUserAgentSession?
   
     public func startAuth(request: OIDAuthorizationRequest) async throws -> OIDAuthState {

@@ -5,6 +5,7 @@ import DiscoveryClient
 import Foundation
 import Models
 import NotificationClient
+import OSLog
 
 @Reducer
 public struct Main: Reducer {
@@ -14,6 +15,11 @@ public struct Main: Reducer {
     @Dependency(\.discoveryClient) var discoveryClient
     @Dependency(\.notificationClient) var notificationClient
     @Dependency(\.date.now) var now
+    
+    public struct PendingRenewAction: Equatable {
+        let organizationId: String
+        let profileId: String
+    }
     
     @ObservableState
     public struct State: Equatable {
@@ -37,6 +43,7 @@ public struct Main: Reducer {
         var isSearching: Bool = false
         var searchQuery: String
         var searchResults: IdentifiedArrayOf<Organization>
+        fileprivate var pendingRenewAction: PendingRenewAction?
         
         var isConnecting: Bool {
             get {
@@ -58,6 +65,7 @@ public struct Main: Reducer {
     }
     
     public enum Action: BindableAction {
+        case applicationDidFinishLaunching
         case binding(BindingAction<State>)
         case destination(PresentationAction<Destination.Action>)
         case discoveryResponse(TaskResult<DiscoveryResponse>)
@@ -101,44 +109,51 @@ public struct Main: Reducer {
 
     public var body: some Reducer<State, Action> {
         BindingReducer()
-        Reduce {
-            state,
-            action in
+        Reduce { state, action in
             switch action {
-            case .onAppear,
-                    .tryAgainTapped:
-                state.loadingState = .isLoading
-                return .merge(
-                    .run { send in
-                        for await event in notificationClient.delegate() {
-                            switch event {
-                            case .renewActionTriggered(organizationId: let organizationId, profileId: let profileId):
-                                await send(.renewActionInReminderTapped(organizationId: organizationId, profileId: profileId))
-                                
-                            case let .remindMeLaterActionTriggered(validUntil, organizationId, profileId):
-                                guard validUntil.timeIntervalSince(now) > 0 else {
-                                    return
+            case .applicationDidFinishLaunching:
+                Logger.notifications.debug("Application did finish launching")
+                let delegate = notificationClient.delegate()
+                return .run { send in
+                    await withThrowingTaskGroup(of: Void.self) { @MainActor group in
+                        group.addTask {
+                            for await event in delegate {
+                                switch event {
+                                case .renewActionTriggered(organizationId: let organizationId, profileId: let profileId):
+                                    await send(.renewActionInReminderTapped(organizationId: organizationId, profileId: profileId))
+                                    
+                                case let .remindMeLaterActionTriggered(validUntil, organizationId, profileId):
+                                    guard validUntil.timeIntervalSince(now) > 0 else {
+                                        return
+                                    }
+                                    try await notificationClient.scheduleRenewReminder(validUntil, organizationId, profileId)
                                 }
-                                try await notificationClient.scheduleRenewReminder(validUntil, organizationId, profileId)
                             }
                         }
-                    },
-                    .run { send in
-                        await send(.discoveryResponse(TaskResult {
-                            do {
-                                let (value, _) = try await discoveryClient.decodedResponse(for: .discover, as: DiscoveryResponse.self)
-                                cacheClient.cacheDiscovery(value)
-                                return value
-                            } catch {
-                                let restoredValue = try cacheClient.restoreDiscovery()
-                                return restoredValue
-                            }
-                        }))
-                    })
+                    }
+                }
+                
+            case .onAppear, .tryAgainTapped:
+                state.loadingState = .isLoading
+                return .run { send in
+                    await send(.discoveryResponse(TaskResult {
+                        do {
+                            let (value, _) = try await discoveryClient.decodedResponse(for: .discover, as: DiscoveryResponse.self)
+                            cacheClient.cacheDiscovery(value)
+                            return value
+                        } catch {
+                            let restoredValue = try cacheClient.restoreDiscovery()
+                            return restoredValue
+                        }
+                    }))
+                }
                 
             case let .discoveryResponse(.success(response)):
                 state.loadingState = .success
                 state.organizations = .init(uniqueElements: response.content.organizations)
+                if let pendingRenewAction = state.pendingRenewAction {
+                    return .send(.renewActionInReminderTapped(organizationId: pendingRenewAction.organizationId, profileId: pendingRenewAction.profileId))
+                }
                 return .none
                 
             case let .discoveryResponse(.failure(error)):
@@ -155,20 +170,29 @@ public struct Main: Reducer {
                 state.destination = .alert(alert)
                 return .none
                 
-            case let .renewActionInReminderTapped(organizationId, profile):
-                if let organization = state.organizations[id: organizationId] {
-                    state.destination = .connect(.init(organization: organization, selectedProfileId: profile, autoConnectOnAppear: true))
-                } else {
-                    let alert = AlertState<AlertAction>(title: {
-                        TextState(NSLocalizedString("Unknown organization", bundle: .module, comment: "Title when user asked to renew but the organization could not be found"))
-                    }, actions: {
-                        ButtonState(role: .cancel, action: .send(.okButtonTapped)) {
-                            TextState(NSLocalizedString("OK", bundle: .module, comment: ""))
-                        }
-                    }, message: {
-                        TextState(NSLocalizedString("The organization is no longer listed.", bundle: .module, comment: "Message when user asked to renew but the organization could not be found"))
-                    })
-                    state.destination = .alert(alert)
+            case let .renewActionInReminderTapped(organizationId, profileId):
+                switch state.loadingState {
+                case .initial, .isLoading:
+                    // Perform action when organizations are known
+                    state.pendingRenewAction = PendingRenewAction(organizationId: organizationId, profileId: profileId)
+                    
+                case .success, .failure:
+                    state.pendingRenewAction = nil
+                    
+                    if let organization = state.organizations[id: organizationId] {
+                        state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, autoConnectOnAppear: true))
+                    } else {
+                        let alert = AlertState<AlertAction>(title: {
+                            TextState(NSLocalizedString("Unknown organization", bundle: .module, comment: "Title when user asked to renew but the organization could not be found"))
+                        }, actions: {
+                            ButtonState(role: .cancel, action: .send(.okButtonTapped)) {
+                                TextState(NSLocalizedString("OK", bundle: .module, comment: ""))
+                            }
+                        }, message: {
+                            TextState(NSLocalizedString("The organization is no longer listed.", bundle: .module, comment: "Message when user asked to renew but the organization could not be found"))
+                        })
+                        state.destination = .alert(alert)
+                    }
                 }
                 return .none
                 
