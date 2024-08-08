@@ -25,11 +25,13 @@ public struct BackgroundView: View {
                         .frame(width: 160, height: 74)
                         .overlay(alignment: .bottomTrailing) {
 #if os(iOS)
-                            Text(verbatim: AppVersionProvider.appVersion())
-                                .font(theme.versionFont)
-                                .opacity(0.35)
-                                .padding(.trailing, 20)
-                                .alignmentGuide(.bottom) { _ in -8 }
+                            if showVersion {
+                                Text(verbatim: AppVersionProvider.appVersion())
+                                    .font(theme.versionFont)
+                                    .opacity(0.35)
+                                    .padding(.trailing, 20)
+                                    .alignmentGuide(.bottom) { _ in -8 }
+                            }
 #endif
                         }
                         .padding(.bottom, 80)

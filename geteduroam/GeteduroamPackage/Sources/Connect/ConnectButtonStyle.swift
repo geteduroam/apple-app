@@ -1,7 +1,8 @@
 import Models
 import SwiftUI
 
-struct ConnectButtonStyle: ButtonStyle {
+public struct ConnectButtonStyle: ButtonStyle {
+    public init() { }
     
     @EnvironmentObject var theme: Theme
     
@@ -15,7 +16,7 @@ struct ConnectButtonStyle: ButtonStyle {
         }
     }
     
-    func makeBody(configuration: Configuration) -> some View {
+    public func makeBody(configuration: Configuration) -> some View {
         EnvironmentReaderView { isEnabled in
             configuration.label
                 .padding()
