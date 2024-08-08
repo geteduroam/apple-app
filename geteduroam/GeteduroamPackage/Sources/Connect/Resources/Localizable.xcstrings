@@ -3662,6 +3662,22 @@
         }
       }
     },
+    "You need to provide a username and password." : {
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You need to provide a username and password."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je moet een gebruikersnaam en wachtwoord invoeren."
+          }
+        }
+      }
+    },
     "You need to provide a valid username." : {
       "localizations" : {
         "en-GB" : {
@@ -3678,34 +3694,18 @@
         }
       }
     },
-    "You need to provide an username and password." : {
+    "Your username should end with '@%@'." : {
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You need to provide an username and password."
+            "value" : "Your username should end with '@%@'."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Je moet een gebruikersnaam en wachtwoord invoeren."
-          }
-        }
-      }
-    },
-    "Your username should end with '%@'." : {
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your username should end with '%@'."
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Jouw gebruikersnaam moet eindigen op '%@'."
+            "value" : "Jouw gebruikersnaam moet eindigen op '@%@'."
           }
         }
       }
