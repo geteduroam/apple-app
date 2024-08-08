@@ -6,6 +6,7 @@ import Foundation
 import Models
 import NotificationClient
 import OSLog
+import Status
 
 @Reducer
 public struct Main: Reducer {
@@ -75,11 +76,13 @@ public struct Main: Reducer {
         case select(Organization)
         case tryAgainTapped
         case useLocalFile(URL)
+        case currentConnectionFound(validUntil: Date, organizationId: String, profileId: String)
     }
     
     @Reducer(state: .equatable)
     public enum Destination {
         case connect(Connect)
+        case status(Status)
         case alert(AlertState<AlertAction>)
     }
     
@@ -119,7 +122,7 @@ public struct Main: Reducer {
                         group.addTask {
                             for await event in delegate {
                                 switch event {
-                                case .renewActionTriggered(organizationId: let organizationId, profileId: let profileId):
+                                case let .renewActionTriggered(organizationId, profileId):
                                     await send(.renewActionInReminderTapped(organizationId: organizationId, profileId: profileId))
                                     
                                 case let .remindMeLaterActionTriggered(validUntil, organizationId, profileId):
@@ -135,18 +138,24 @@ public struct Main: Reducer {
                 
             case .onAppear, .tryAgainTapped:
                 state.loadingState = .isLoading
-                return .run { send in
-                    await send(.discoveryResponse(TaskResult {
-                        do {
-                            let (value, _) = try await discoveryClient.decodedResponse(for: .discover, as: DiscoveryResponse.self)
-                            cacheClient.cacheDiscovery(value)
-                            return value
-                        } catch {
-                            let restoredValue = try cacheClient.restoreDiscovery()
-                            return restoredValue
+                return .merge(
+                    .run { send in
+                        if let (validUntil, organizationId, profileId) = await notificationClient.scheduledRenewReminder() {
+                            await send(.currentConnectionFound(validUntil: validUntil, organizationId: organizationId, profileId: profileId))
                         }
-                    }))
-                }
+                    },
+                    .run { send in
+                        await send(.discoveryResponse(TaskResult {
+                            do {
+                                let (value, _) = try await discoveryClient.decodedResponse(for: .discover, as: DiscoveryResponse.self)
+                                cacheClient.cacheDiscovery(value)
+                                return value
+                            } catch {
+                                let restoredValue = try cacheClient.restoreDiscovery()
+                                return restoredValue
+                            }
+                        }))
+                    })
                 
             case let .discoveryResponse(.success(response)):
                 state.loadingState = .success
@@ -251,6 +260,12 @@ public struct Main: Reducer {
                 state.destination = .connect(.init(organization: organization))
                 return .none
                 
+            case let .destination(.presented(.status(.delegate(action)))):
+                switch action {
+                case let .renew(organizationId, profileId):
+                    return .send(.renewActionInReminderTapped(organizationId: organizationId, profileId: profileId))
+                }
+                
             case .destination:
                 return .none
                 
@@ -268,6 +283,10 @@ public struct Main: Reducer {
 #else
                 NSLog("Opening EAP Config files not supported on macOS/this OS.")
 #endif
+                return .none
+                
+            case let .currentConnectionFound(validUntil, organizationId, profileId):
+                state.destination = .status(.init(validUntil: validUntil, organizationId: organizationId, profileId: profileId))
                 return .none
             }
         }

@@ -71,6 +71,10 @@ Models used throughout the app.
 
 Schedules reminders for when network configurations expire.
 
+### Status
+
+The status screen with the renewal functionality.
+
 ## Creating screenshots
 
 To facilitate creating screenshots for the App Store, use these steps:

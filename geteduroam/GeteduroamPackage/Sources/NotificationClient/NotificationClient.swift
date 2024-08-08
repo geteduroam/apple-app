@@ -30,6 +30,7 @@ extension DependencyValues.NotificationClientKey: DependencyKey {
 
 public struct NotificationClient {
     public var scheduleRenewReminder: (/* validUntil: */ Date, /* organizationId: */ String, /* profileId: */ String) async throws -> Void
+    public var scheduledRenewReminder: () async -> ((/* validUntil: */ Date, /* organizationId: */ String, /* profileId: */ String)?)
     public var delegate: @Sendable () -> AsyncStream<DelegateEvent>
     
     public enum DelegateEvent: Equatable {
@@ -41,6 +42,7 @@ public struct NotificationClient {
 extension NotificationClient {
     static var mock: Self = .init(
         scheduleRenewReminder: unimplemented("\(Self.self).scheduleRenewReminder"),
+        scheduledRenewReminder: unimplemented("\(Self.self).scheduledRenewReminder"),
         delegate: unimplemented("\(Self.self).delegate"))
 }
 
@@ -150,6 +152,21 @@ extension NotificationClient {
             let hasExpiredRequest = UNNotificationRequest(identifier: .hasExpiredCategoryId, content: hasExpiredContent, trigger: hasExpiredTrigger)
             try await center.add(hasExpiredRequest)
             Logger.notifications.info("Scheduled expiration notification for organization \(organizationId) profile \(profileId) on \(validUntil)")
+        },
+        scheduledRenewReminder: {
+            Logger.notifications.info("Try to see if a renew reminder was scheduled")
+
+            guard
+                let userInfo = await  UNUserNotificationCenter.current()
+                    .pendingNotificationRequests()
+                    .first(where: { [.willExpireCategoryId, .hasExpiredCategoryId].contains($0.identifier) })?
+                    .content.userInfo as? [String: Any],
+                let validUntil = userInfo[.validUntilKey] as? Date,
+                let organizationId = userInfo[.organizationIdKey] as? String,
+                let profileId = userInfo[.profileIdKey] as? String else {
+               return nil
+            }
+            return (validUntil, organizationId, profileId)
         },
         delegate: {
             AsyncStream { continuation in
