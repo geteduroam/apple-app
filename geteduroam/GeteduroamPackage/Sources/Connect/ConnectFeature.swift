@@ -482,17 +482,52 @@ public struct Connect: Reducer {
                 state.providerInfo = providerInfo
                 state.promptForCredentials = .full
                 state.requiredUserNameSuffix = suffix
+                if suffix.isEmpty {
+                    let alert = AlertState<AlertAction>(
+                        title: {
+                            TextState("Failed to connect", bundle: .module)
+                        }, actions: {
+                        }, message: {
+                            TextState("You need to provide a valid username.", bundle: .module)
+                        })
+                    state.destination = .alert(alert)
+                } else {
+                    let alert = AlertState<AlertAction>(
+                        title: {
+                            TextState("Failed to connect", bundle: .module)
+                        }, actions: {
+                        }, message: {
+                            TextState("Your username should end with '\(suffix)'.", bundle: .module)
+                        })
+                    state.destination = .alert(alert)
+                }
                 return .none
                 
             case let .connectResponse(.failure(OrganizationSetupError.eapConfigurationFailed(EAPConfiguratorError.missingCredentials(_, requiredSuffix: suffix), providerInfo))):
                 state.providerInfo = providerInfo
                 state.promptForCredentials = .full
                 state.requiredUserNameSuffix = suffix
+                let alert = AlertState<AlertAction>(
+                    title: {
+                        TextState("Failed to connect", bundle: .module)
+                    }, actions: {
+                    }, message: {
+                        TextState("You need to provide an username and password.", bundle: .module)
+                    })
+                state.destination = .alert(alert)
                 return .none
                 
             case let .connectResponse(.failure(OrganizationSetupError.eapConfigurationFailed(EAPConfiguratorError.missingPassword(_), providerInfo))):
                 state.providerInfo = providerInfo
                 state.promptForCredentials = .passwordOnly
+                let alert = AlertState<AlertAction>(
+                    title: {
+                        TextState("Failed to connect", bundle: .module)
+                    }, actions: {
+                    }, message: {
+                        TextState("You need to provide a password.", bundle: .module)
+                    })
+                state.destination = .alert(alert)
                 return .none
                 
             case let .connectResponse(.failure(OrganizationSetupError.userCancelled(providerInfo))):
