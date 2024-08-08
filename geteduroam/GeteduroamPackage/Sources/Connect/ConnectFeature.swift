@@ -39,6 +39,7 @@ public struct Connect: Reducer {
         public var credentials: Credentials?
         public var reusableInfo: ReusableInfo?
         public var requiredUserNameSuffix: String?
+        public var userTappedLogIn: Bool = false
         public var promptForCredentials: CredentialPromptType?
         public var promptForFullCredentials: Bool {
             get {
@@ -482,17 +483,62 @@ public struct Connect: Reducer {
                 state.providerInfo = providerInfo
                 state.promptForCredentials = .full
                 state.requiredUserNameSuffix = suffix
+                if state.userTappedLogIn {
+                    if suffix.isEmpty {
+                        let alert = AlertState<AlertAction>(
+                            title: {
+                                TextState("Failed to connect", bundle: .module)
+                            }, actions: {
+                            }, message: {
+                                TextState("You need to provide a valid username.", bundle: .module)
+                            })
+                        state.destination = .alert(alert)
+                        state.userTappedLogIn = false
+                    } else {
+                        let alert = AlertState<AlertAction>(
+                            title: {
+                                TextState("Failed to connect", bundle: .module)
+                            }, actions: {
+                            }, message: {
+                                TextState("Your username should end with '@\(suffix)'.", bundle: .module)
+                            })
+                        state.destination = .alert(alert)
+                        state.userTappedLogIn = false
+                    }
+                }
                 return .none
                 
             case let .connectResponse(.failure(OrganizationSetupError.eapConfigurationFailed(EAPConfiguratorError.missingCredentials(_, requiredSuffix: suffix), providerInfo))):
                 state.providerInfo = providerInfo
                 state.promptForCredentials = .full
                 state.requiredUserNameSuffix = suffix
+                if state.userTappedLogIn {
+                    let alert = AlertState<AlertAction>(
+                        title: {
+                            TextState("Failed to connect", bundle: .module)
+                        }, actions: {
+                        }, message: {
+                            TextState("You need to provide a username and password.", bundle: .module)
+                        })
+                    state.destination = .alert(alert)
+                    state.userTappedLogIn = false
+                }
                 return .none
                 
             case let .connectResponse(.failure(OrganizationSetupError.eapConfigurationFailed(EAPConfiguratorError.missingPassword(_), providerInfo))):
                 state.providerInfo = providerInfo
                 state.promptForCredentials = .passwordOnly
+                if state.userTappedLogIn {
+                    let alert = AlertState<AlertAction>(
+                        title: {
+                            TextState("Failed to connect", bundle: .module)
+                        }, actions: {
+                        }, message: {
+                            TextState("You need to provide a password.", bundle: .module)
+                        })
+                    state.destination = .alert(alert)
+                    state.userTappedLogIn = false
+                }
                 return .none
                 
             case let .connectResponse(.failure(OrganizationSetupError.userCancelled(providerInfo))):
@@ -546,6 +592,7 @@ public struct Connect: Reducer {
                 
             case .logInButtonTapped:
                 // TODO: Check sanity of credentials
+                state.userTappedLogIn = true
                 return connect(state: &state, dryRun: true)
                 
             case .foundSSID:
