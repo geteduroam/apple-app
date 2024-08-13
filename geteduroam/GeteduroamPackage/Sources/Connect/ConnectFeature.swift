@@ -248,6 +248,9 @@ public struct Connect: Reducer {
         case onUsernameSubmit
         case select(Profile.ID)
         case startAgainTapped
+        #if os(macOS)
+        case checkStatusButtonTapped
+        #endif
     }
     
     @Reducer(state: .equatable, action: .equatable)
@@ -608,6 +611,34 @@ public struct Connect: Reducer {
             case .onUsernameSubmit:
                 state.appendRequiredUserNameSuffix()
                 return .none
+                
+                #if os(macOS)
+            case .checkStatusButtonTapped:
+                return .run { _ in
+                    
+                    // This works only if the app is not sandboxed!
+                    let process = Process()
+                    let profilesURL = URL(fileURLWithPath: "/usr/bin/profiles")
+                    process.executableURL = profilesURL
+                    process.arguments = ["list", "-type", "configuration", "-output", "stdout-xml"]
+                    
+                    let outputPipe = Pipe()
+                    let errorPipe = Pipe()
+                    process.standardOutput = outputPipe
+                    process.standardError = errorPipe
+                    
+                    try! process.run()
+                    
+                    let outputData = outputPipe.fileHandleForReading.readDataToEndOfFile()
+                    let errorData = errorPipe.fileHandleForReading.readDataToEndOfFile()
+                    
+                    let output = String(decoding: outputData, as: UTF8.self)
+                    let error = String(decoding: errorData, as: UTF8.self)
+                    
+                    print("output \(output)")
+                    print("error \(error)")
+                }
+                #endif
             }
         }
         .ifLet(\.$destination, action: \.destination)

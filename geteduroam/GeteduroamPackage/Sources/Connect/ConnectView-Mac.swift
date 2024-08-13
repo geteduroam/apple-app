@@ -95,6 +95,12 @@ public struct ConnectView_Mac: View {
                   .padding()
                   .background(Color.accentColor)
                   .cornerRadius(6)
+                    
+                    Button {
+                        store.send(.checkStatusButtonTapped)
+                    } label: {
+                        Text("Check", bundle: .module)
+                    }
                 } else {
                     HStack {
                         Spacer()

@@ -6,10 +6,6 @@
 	<true/>
 	<key>com.apple.developer.networking.wifi-info</key>
 	<true/>
-	<key>com.apple.security.app-sandbox</key>
-	<true/>
-	<key>com.apple.security.network.client</key>
-	<true/>
 	<key>keychain-access-groups</key>
 	<array>
 		<string>$(AppIdentifierPrefix)com.apple.networkextensionsharing</string>
