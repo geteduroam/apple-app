@@ -1,12 +1,16 @@
 import SwiftUI
 import Models
 
-struct HelpdeskView: View {
-    let providerInfo: ProviderInfo
+public struct HelpdeskView: View {
+    public init(providerInfo: ProviderInfo) {
+        self.providerInfo = providerInfo
+    }
+    
+    public let providerInfo: ProviderInfo
     
     @EnvironmentObject var theme: Theme
     
-    var body: some View {
+    public var body: some View {
         HStack(alignment: .top, spacing: 12) {
             if let image = providerInfo.providerLogo?.image {
                 ZStack {

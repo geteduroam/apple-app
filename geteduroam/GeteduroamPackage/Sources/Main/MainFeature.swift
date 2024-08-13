@@ -138,12 +138,7 @@ public struct Main: Reducer {
                 
             case .onAppear, .tryAgainTapped:
                 state.loadingState = .isLoading
-                return .merge(
-                    .run { send in
-                        if let (validUntil, organizationId, profileId) = await notificationClient.scheduledRenewReminder() {
-                            await send(.currentConnectionFound(validUntil: validUntil, organizationId: organizationId, profileId: profileId))
-                        }
-                    },
+                return .concatenate(
                     .run { send in
                         await send(.discoveryResponse(TaskResult {
                             do {
@@ -155,6 +150,11 @@ public struct Main: Reducer {
                                 return restoredValue
                             }
                         }))
+                    },
+                    .run { send in
+                        if let (validUntil, organizationId, profileId) = await notificationClient.scheduledRenewReminder() {
+                            await send(.currentConnectionFound(validUntil: validUntil, organizationId: organizationId, profileId: profileId))
+                        }
                     })
                 
             case let .discoveryResponse(.success(response)):
@@ -286,7 +286,8 @@ public struct Main: Reducer {
                 return .none
                 
             case let .currentConnectionFound(validUntil, organizationId, profileId):
-                state.destination = .status(.init(validUntil: validUntil, organizationId: organizationId, profileId: profileId))
+               
+                state.destination = .status(.init(validUntil: validUntil, organization:  state.organizations[id: organizationId]!, organizationId: organizationId, profileId: profileId, providerInfo: ProviderInfo(displayName: .init(string: "test"), description:  .init(string: "test"), providerLocations: [], providerLogo: nil, termsOfUse: nil, helpdesk: .init(emailAdress: nil, webAddress: .init(string: "https://www.example.com"), phone: nil))))
                 return .none
             }
         }

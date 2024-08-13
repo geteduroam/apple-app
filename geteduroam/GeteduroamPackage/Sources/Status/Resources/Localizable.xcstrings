@@ -58,6 +58,15 @@
         }
       }
     },
+    "Configured" : {
+
+    },
+    "Configured, but not connected" : {
+
+    },
+    "Connected" : {
+
+    },
     "Failed to load organizations" : {
       "comment" : "Message when organizations can't be loaded and the fallback fails too",
       "extractionState" : "stale",
@@ -810,14 +819,8 @@
         }
       }
     },
-    "You had access until %@. Renew your connection to extend your access." : {
-      "comment" : "You had access until <date>. Renew your connection to extend your access."
-    },
     "You have access until %@ " : {
 
-    },
-    "You have access until %@." : {
-      "comment" : "You have access until <date>."
     }
   },
   "version" : "1.0"
