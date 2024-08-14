@@ -1,7 +1,7 @@
 import Foundation
 
 public struct Profile: Codable, Equatable, Identifiable, Sendable {
-    public init(id: String, name: [String : String]? = nil, `default`: Bool? = nil, eapConfigEndpoint: URL? = nil, mobileConfigEndpoint: URL? = nil, letsWiFiEndpoint: URL? = nil, webviewEndpoint: String? = nil, type: ProfileType? = nil) {
+    public init(id: String, name: [LocalizedEntry]? = nil, `default`: Bool? = nil, eapConfigEndpoint: URL? = nil, mobileConfigEndpoint: URL? = nil, letsWiFiEndpoint: URL? = nil, webviewEndpoint: String? = nil, type: ProfileType? = nil) {
         self.id = id
         self.name = name
         self.`default` = `default`
@@ -24,7 +24,7 @@ public struct Profile: Codable, Equatable, Identifiable, Sendable {
     }
     
     public let id: String
-    public let name: [String: String]?
+    public let name: [LocalizedEntry]?
     public let `default`: Bool?
     public let type: ProfileType?
     public let eapConfigEndpoint: URL?

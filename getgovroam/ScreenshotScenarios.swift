@@ -7,16 +7,16 @@ extension Organization {
     static let example = Organization(
         id: "id",
         name: [
-            "any": "Example Organization (demo)",
-            "nl": "Voorbeeldorganisatie (demo)",
+            .init(language: "any", value: "Example Organization (demo)"),
+            .init(language: "nl", value: "Voorbeeldorganisatie (demo)")
         ],
         country: "NL",
         profiles: [
             .init(
                 id: "profile1",
                 name: [
-                    "any": "Profile for Staff",
-                    "nl": "Profiel voor medewerkers"
+                    .init(language: "any", value: "Profile for Staff"),
+                    .init(language: "nl", value: "Profiel voor medewerkers")
                 ],
                 default: true,
                 type: .eapConfig
@@ -24,8 +24,8 @@ extension Organization {
             .init(
                 id: "profile2",
                 name: [
-                    "any": "Profile for Externals",
-                    "nl": "Profiel voor externen"
+                    .init(language: "any", value: "Profile for Externals"),
+                    .init(language: "nl", value: "Profiel voor externen")
                 ],
                 default: true,
                 type: .eapConfig
@@ -37,8 +37,8 @@ extension Organization {
     static let example2 = Organization(
         id: "id2",
         name: [
-            "any": "govroam (demo)",
-            "nl": "govroam (demo)",
+            .init(language: "any", value: "govroam (demo)"),
+            .init(language: "nl", value: "govroam (demo)")
         ],
         country: "NL",
         profiles: [],
@@ -48,8 +48,8 @@ extension Organization {
     static let example3 = Organization(
         id: "id3",
         name: [
-            "any": "Another Organization (demo)",
-            "nl": "Andere Organisatie (demo)",
+            .init(language: "any", value: "Another Organization (demo)"),
+            .init(language: "nl", value: "Andere Organisatie (demo)")
         ],
         country: "NL",
         profiles: [],

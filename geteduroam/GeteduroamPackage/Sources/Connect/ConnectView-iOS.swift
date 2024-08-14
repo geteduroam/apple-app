@@ -160,17 +160,17 @@ public struct ConnectView_iOS: View {
         initialState: .init(
             organization: .init(
                 id: "1",
-                name: ["any": "My Organization"],
+                name: [LocalizedEntry(value: "My Organization")],
                 country: "NL",
                 profiles: [
                     Profile(
                         id: "2",
-                        name: ["any": "My Profile"],
+                        name: [LocalizedEntry(value: "My Profile")],
                         default: true,
                         type: .letswifi),
                     Profile(
                         id: "3",
-                        name: ["any": "Other Profile"],
+                        name: [LocalizedEntry(value: "Other Profile")],
                         default: false,
                         type: .eapConfig)
                 ],
