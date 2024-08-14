@@ -28,8 +28,8 @@ final class ConnectViewPhoneTests: XCTestCase {
     
     func testConnectScreen() throws {
         throw XCTSkip("Work in progress")
-        let profile = Profile(id: "1", name: ["any": "My Profile"], default: true, type: .eapConfig)
-        let organization = Organization(id: "test", name: ["any": "My Test Organization"], country: "AB", profiles: [profile], geo: [])
+        let profile = Profile(id: "1", name: [LocalizedEntry(value: "My Profile")], default: true, type: .eapConfig)
+        let organization = Organization(id: "test", name: [LocalizedEntry(value: "My Test Organization")], country: "AB", profiles: [profile], geo: [])
         let store = StoreOf<Connect>(initialState: .init(organization: organization), reducer: { })
         
         let connectView = ConnectView(store: store)
@@ -66,8 +66,8 @@ final class ConnectViewMacTests: XCTestCase {
     
     func testConnectScreenMac() throws {
         throw XCTSkip("Work in progress")
-        let profile = Profile(id: "1", name: ["any": "My Profile"], default: true, type: .eapConfig)
-        let organization = Organization(id: "test", name: ["any": "My Test Organization"], country: "AB", profiles: [profile], geo: [])
+        let profile = Profile(id: "1", name: [LocalizedEntry(value: "My Profile")], default: true, type: .eapConfig)
+        let organization = Organization(id: "test", name: [LocalizedEntry(value: "My Test Organization")], country: "AB", profiles: [profile], geo: [])
         let store = StoreOf<Connect>(initialState: .init(organization: organization), reducer: { })
         
         let connectView = ConnectView(store: store)

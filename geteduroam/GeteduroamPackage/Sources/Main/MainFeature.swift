@@ -227,7 +227,7 @@ public struct Main: Reducer {
                             let urlComponents = URLComponents(string: prefixedQuery)
                             if let url = urlComponents?.url, let host = urlComponents?.host, let scheme = urlComponents?.scheme, host.contains("."), scheme == "https" {
                                 let name = host
-                                let urlOrganization = Organization(id: "url", name: ["any" : name], country: "URL", profiles: [Profile(id: "url", name: ["any" : name], default: true, letsWiFiEndpoint: url, type: .letswifi)])
+                                let urlOrganization = Organization(id: "url", name: [LocalizedEntry(value: name)], country: "URL", profiles: [Profile(id: "url", name: [LocalizedEntry(value: name)], default: true, letsWiFiEndpoint: url, type: .letswifi)])
                                 searchResults.append(urlOrganization)
                             }
                             return searchResults
@@ -259,9 +259,9 @@ public struct Main: Reducer {
                 let displayName = FileManager().displayName(atPath: url.path)
                 let organization = Organization(
                     id: "local",
-                    name: ["any": displayName],
+                    name: [LocalizedEntry(value: displayName)],
                     country: "",
-                    profiles: [Profile(id: "local", name: ["any": displayName], default: true, eapConfigEndpoint: url, mobileConfigEndpoint: nil, letsWiFiEndpoint: nil, webviewEndpoint: nil, type: .eapConfig)],
+                    profiles: [Profile(id: "local", name: [LocalizedEntry(value: displayName)], default: true, eapConfigEndpoint: url, mobileConfigEndpoint: nil, letsWiFiEndpoint: nil, webviewEndpoint: nil, type: .eapConfig)],
                     geo: []
                 )
                 state.destination = .connect(.init(organization: organization))
