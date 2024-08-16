@@ -53,8 +53,6 @@ struct GeteduroamApp: App {
     
     @StateObject var theme = Theme.theme
     
-    var store: StoreOf<Main>!
-    
     @Environment(\.openURL) var openURL
     
     init() {
@@ -73,15 +71,13 @@ struct GeteduroamApp: App {
         let initialState = Main.State()
 #endif
         
-        store = .init(initialState: initialState, reducer: { Main() }, withDependencies: { [appDelegate] in
-            $0.authClient = appDelegate
-        })
+        appDelegate.createStore(initialState: initialState)
     }
     
 #if os(iOS)
     var body: some Scene {
         WindowGroup {
-            MainView(store: store)
+            MainView(store: appDelegate.store)
                 .environmentObject(theme)
         }
     }
@@ -89,7 +85,7 @@ struct GeteduroamApp: App {
     // On macOS 13 and up using Window and .defaultPosition and .defaultSize would be better, but can't use control flow statement with 'SceneBuilder'
     var body: some Scene {
         WindowGroup("getgovroam", id: "mainWindow") {
-            MainView(store: store)
+            MainView(store: appDelegate.store)
                 .environmentObject(theme)
                 .frame(minWidth: 300, idealWidth: 540, maxWidth: .infinity, minHeight: 460, idealHeight: 640, maxHeight: .infinity, alignment: .center)
                 .onDisappear {
