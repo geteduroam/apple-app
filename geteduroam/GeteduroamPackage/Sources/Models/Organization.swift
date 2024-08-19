@@ -1,7 +1,7 @@
 import Foundation
 
 public struct Organization: Codable, Identifiable, Equatable, Sendable {
-    public init(id: String, name: [String: String]?, country: String, profiles: [Profile], geo: [Coordinate] = []) {
+    public init(id: String, name: [LocalizedEntry]?, country: String, profiles: [Profile], geo: [Coordinate] = []) {
         self.id = id
         self.name = name
         self.country = country
@@ -13,7 +13,7 @@ public struct Organization: Codable, Identifiable, Equatable, Sendable {
     }
     
     public let id: String
-    public let name: [String: String]?
+    public let name: [LocalizedEntry]?
     public let country: String
     public let profiles: [Profile]
     public let geo: [Coordinate]
@@ -37,7 +37,7 @@ public struct Organization: Codable, Identifiable, Equatable, Sendable {
         return matchWords
     }
     
-    private static func determineMatchWords(for languageCode: String?, id: String, name: [String: String]?) -> [String] {
+    private static func determineMatchWords(for languageCode: String?, id: String, name: [LocalizedEntry]?) -> [String] {
         let nameOrId = name?.localized(for: languageCode) ?? id
         var words = nameOrId.components(separatedBy: .alphanumerics.inverted).filter({ $0.isEmpty == false })
         let abbreviation = words.map({ $0.prefix(1) }).joined()
@@ -49,7 +49,7 @@ public struct Organization: Codable, Identifiable, Equatable, Sendable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(String.self, forKey: .id)
-        self.name = try container.decodeIfPresent([String : String].self, forKey: .name)
+        self.name = try container.decodeIfPresent([LocalizedEntry].self, forKey: .name)
         self.country = try container.decode(String.self, forKey: .country)
         self.profiles = try container.decode([Profile].self, forKey: .profiles)
         self.geo = try container.decode([Coordinate].self, forKey: .geo)
@@ -64,17 +64,5 @@ public struct Organization: Codable, Identifiable, Equatable, Sendable {
         case country
         case profiles
         case geo
-    }
-}
-
-public extension [String: String] {
-    func localized(for languageCode: String? = Locale.current.languageCode) -> String? {
-        func fallback() -> String? {
-            first(where: { $0.key == "any" })?.value
-        }
-        guard let language = languageCode else {
-            return fallback()
-        }
-        return first(where: { $0.key == language })?.value ?? fallback()
     }
 }
