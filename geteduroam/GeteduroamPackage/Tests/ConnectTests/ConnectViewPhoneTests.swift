@@ -23,7 +23,8 @@ final class ConnectViewPhoneTests: XCTestCase {
         connectedFont: .system(.body, design: .default),
         infoHeaderFont: .system(.body, design: .default).bold(),
         infoDetailFont: .system(.body, design: .default),
-        versionFont: .system(.body, design: .default)
+        versionFont: .system(.body, design: .default),
+        statusFont: .system(.body, design: .default)
     )
     
     func testConnectScreen() throws {

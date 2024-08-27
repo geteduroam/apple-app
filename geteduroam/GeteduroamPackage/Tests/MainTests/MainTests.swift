@@ -59,6 +59,7 @@ final class MainTests: XCTestCase {
                 }
                 $0.cacheClient.restoreDiscovery = { .init(content: .init(organizations: []))}
                 $0.notificationClient.delegate = { .finished }
+                $0.notificationClient.scheduledRenewReminder = { nil }
             })
 
         await store.send(.onAppear) {
