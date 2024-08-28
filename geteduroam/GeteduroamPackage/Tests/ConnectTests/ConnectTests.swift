@@ -183,7 +183,7 @@ final class ConnectTests: XCTestCase {
                 class Mock: MockURLProtocol { }
                 $0.urlSession = Mock.session(exchange: networkExchange)
                 $0.date.now = Date(timeIntervalSince1970: 0)
-                $0.eapClient.configure = { provider, credentials, dryRun in
+                $0.eapClient.configure = { provider, credentials, dryRun, _, _ in
                     return ["ssid"]
                 }
                 $0.notificationClient.scheduleRenewReminder = { validUntil, organizationId, profileId in
