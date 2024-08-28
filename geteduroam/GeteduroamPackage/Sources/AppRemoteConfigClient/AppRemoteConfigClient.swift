@@ -9,6 +9,14 @@ public enum AppState: String, CaseIterable {
     case active, updateRecommended, updateRequired, updateOSRecommended, updateOSRequired, obsolete, disabled
 }
 
+public struct IgnoreServerCertificateImportFailureEnabled {
+    fileprivate init() { }
+}
+
+public struct IgnoreMissingServerCertificateNameEnabled {
+    fileprivate init() { }
+}
+
 /// Remotely configurable values
 @AppRemoteConfigValues @Perceptible
 public class Values {
@@ -29,6 +37,14 @@ public class Values {
     
     /// Enabled when the API is undergoing maintenance
     public fileprivate(set) var maintenance: Bool = false
+    
+    /// A feature flag to ignore failed server certificate import
+    fileprivate var ignoreServerCertificateImportFailure: Bool = false
+    public var ignoreServerCertificateImportFailureEnabled: IgnoreServerCertificateImportFailureEnabled? { ignoreServerCertificateImportFailure ? IgnoreServerCertificateImportFailureEnabled() : nil }
+    
+    /// A feature flag to ignore missing server certificate name
+    fileprivate var ignoreMissingServerCertificateName: Bool = false
+    public var ignoreMissingServerCertificateNameEnabled: IgnoreMissingServerCertificateNameEnabled? { ignoreMissingServerCertificateName ? IgnoreMissingServerCertificateNameEnabled() : nil }
 }
 
 @Perceptible
@@ -100,6 +116,20 @@ public struct ValuesEditor: View {
                         Text("maintenance".camelCaseToWords())
                     }
                 }
+                
+                Section(
+                    content: {
+                        Toggle(isOn: $values.ignoreServerCertificateImportFailure) {
+                            Text("ignoreServerCertificateImportFailure".camelCaseToWords())
+                        }
+                        Toggle(isOn: $values.ignoreMissingServerCertificateName) {
+                            Text("ignoreMissingServerCertificateName".camelCaseToWords())
+                        }
+                    },
+                    header: {
+                        Text("Connecting")
+                    }
+                )
             }
         }
     }
