@@ -1,4 +1,5 @@
 import AppAuth
+import AppRemoteConfigClient
 import AuthClient
 import ComposableArchitecture
 import EAPConfigurator
@@ -341,6 +342,7 @@ public struct Connect: Reducer {
     }
     
     @Dependency(\.authClient) var authClient
+    @Dependency(\.configClient) var configClient
     @Dependency(\.date) var date
     @Dependency(\.dismiss) var dismiss
     @Dependency(\.eapClient) var eapClient
@@ -384,17 +386,31 @@ public struct Connect: Reducer {
         let reusableInfo = state.reusableInfo
         state.reusableInfo = nil
         let agreedToTerms = state.agreedToTerms
+        let ignoreServerCertificateImportFailureEnabled = configClient.values().ignoreServerCertificateImportFailureEnabled
+        let ignoreMissingServerCertificateNameEnabled = configClient.values().ignoreMissingServerCertificateNameEnabled
         return .run { send in
-            await send(.connectResponse(TaskResult<ConnectResponse> {
-                let (providerInfo, expectedSSIDs, reusableInfo) = try await connect(organization: organization, profile: profile, authClient: authClient, credentials: credentials, previousReusableInfo: reusableInfo, agreedToTerms: agreedToTerms, dryRun: dryRun)
-                let connection: ConnectionType
-                if expectedSSIDs.isEmpty {
-                    connection = .hotspot20
-                } else {
-                    connection = .ssids(expectedSSIDs: expectedSSIDs)
-                }
-                return .init(providerInfo: providerInfo, result: dryRun ? .verified(credentials: credentials, reusableInfo: reusableInfo) : .applied(connection))
-            }))
+            await send(
+                .connectResponse(TaskResult<ConnectResponse> {
+                    let (providerInfo, expectedSSIDs, reusableInfo) = try await connect(
+                        organization: organization,
+                        profile: profile,
+                        authClient: authClient,
+                        credentials: credentials,
+                        previousReusableInfo: reusableInfo,
+                        agreedToTerms: agreedToTerms,
+                        dryRun: dryRun,
+                        ignoreServerCertificateImportFailureEnabled: ignoreServerCertificateImportFailureEnabled,
+                        ignoreMissingServerCertificateNameEnabled: ignoreMissingServerCertificateNameEnabled
+                    )
+                    let connection: ConnectionType
+                    if expectedSSIDs.isEmpty {
+                        connection = .hotspot20
+                    } else {
+                        connection = .ssids(expectedSSIDs: expectedSSIDs)
+                    }
+                    return .init(providerInfo: providerInfo, result: dryRun ? .verified(credentials: credentials, reusableInfo: reusableInfo) : .applied(connection))
+                })
+            )
         }
     }
     
@@ -626,7 +642,17 @@ public struct Connect: Reducer {
         return decoder
     }()
     
-    func connect(organization: Organization, profile: Profile, authClient: AuthClient, credentials: Credentials?, previousReusableInfo: ReusableInfo?, agreedToTerms: Bool, dryRun: Bool) async throws -> (ProviderInfo?, [String], ReusableInfo?) {
+    func connect(
+        organization: Organization,
+        profile: Profile,
+        authClient: AuthClient,
+        credentials: Credentials?,
+        previousReusableInfo: ReusableInfo?,
+        agreedToTerms: Bool,
+        dryRun: Bool,
+        ignoreServerCertificateImportFailureEnabled: IgnoreServerCertificateImportFailureEnabled?,
+        ignoreMissingServerCertificateNameEnabled: IgnoreMissingServerCertificateNameEnabled?
+    ) async throws -> (ProviderInfo?, [String], ReusableInfo?) {
         let accessToken: String?
         let eapConfigURL: URL?
         let mobileConfigURL: URL?
@@ -744,7 +770,7 @@ public struct Connect: Reducer {
         }
 
         do {
-            let expectedSSIDs = try await eapClient.configure(firstValidProvider, credentials, dryRun)
+            let expectedSSIDs = try await eapClient.configure(firstValidProvider, credentials, dryRun, ignoreServerCertificateImportFailureEnabled, ignoreMissingServerCertificateNameEnabled)
             
             if !dryRun {
                 // Schedule reminder for user to renew network access

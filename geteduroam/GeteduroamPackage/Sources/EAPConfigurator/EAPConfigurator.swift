@@ -1,3 +1,4 @@
+import AppRemoteConfigClient
 import CoreLocation
 import Dependencies
 import Foundation
@@ -8,7 +9,7 @@ import SystemConfiguration.CaptiveNetwork
 import XCTestDynamicOverlay
 
 public struct EAPClient {
-    public var configure: (EAPIdentityProvider, Credentials?, Bool) async throws -> [String]
+    public var configure: (EAPIdentityProvider, Credentials?, Bool, IgnoreServerCertificateImportFailureEnabled?, IgnoreMissingServerCertificateNameEnabled?) async throws -> [String]
 }
 
 extension DependencyValues {
@@ -34,9 +35,20 @@ extension DependencyValues.EAPClientKey: DependencyKey {
 
 extension EAPClient {
     static var live: Self = .init(
-        configure: { identityProvider, credentials, dryRun in
-            #if os(iOS)
-            try await EAPConfigurator(teamID: "ZYJ4TZX4UU").configure(identityProvider: identityProvider, credentials: credentials, dryRun: dryRun)
+        configure: {
+            identityProvider,
+            credentials,
+            dryRun,
+            ignoreServerCertificateImportFailureEnabled,
+            ignoreMissingServerCertificateNameEnabled in
+#if os(iOS)
+            try await EAPConfigurator(teamID: "ZYJ4TZX4UU").configure(
+                identityProvider: identityProvider,
+                credentials: credentials,
+                dryRun: dryRun,
+                ignoreServerCertificateImportFailureEnabled: ignoreServerCertificateImportFailureEnabled,
+                ignoreMissingServerCertificateNameEnabled: ignoreMissingServerCertificateNameEnabled
+            )
             #else
             fatalError("EAPConfigurator not available")
             #endif
@@ -66,7 +78,13 @@ class EAPConfigurator {
     ///   - credentials: Credentials entered by user
     ///   - dryRun: If true only checks if information is complete without actually applying the network settings
     /// - Returns: Expected SSIDs for connection
-    func configure(identityProvider: EAPIdentityProvider, credentials: Credentials? = nil, dryRun: Bool) async throws -> [String] {
+    func configure(
+        identityProvider: EAPIdentityProvider,
+        credentials: Credentials? = nil,
+        dryRun: Bool,
+        ignoreServerCertificateImportFailureEnabled: IgnoreServerCertificateImportFailureEnabled?,
+        ignoreMissingServerCertificateNameEnabled: IgnoreMissingServerCertificateNameEnabled?
+    ) async throws -> [String] {
         // At this point, we're not certain this configuration can work,
         // but we can't do this any step later, because createNetworkConfigurations will import things to the keychain.
         let name = identityProvider.providerInfo?.displayName?.localized() ?? "unnamed identity provider"
@@ -88,7 +106,12 @@ class EAPConfigurator {
         }
         
         Logger.eap.info("Creating network configurations")
-        let configurations = try createNetworkConfigurations(identityProvider: identityProvider, credentials: credentials)
+        let configurations = try createNetworkConfigurations(
+            identityProvider: identityProvider,
+            credentials: credentials,
+            ignoreServerCertificateImportFailure: ignoreServerCertificateImportFailureEnabled != nil,
+            ignoreMissingServerCertificateName: ignoreMissingServerCertificateNameEnabled != nil
+        )
         
         guard configurations.isEmpty == false else {
             throw EAPConfiguratorError.noConfigurations
@@ -113,7 +136,12 @@ class EAPConfigurator {
     /// Create network configuration object
     /// - Parameter identityProvider: The Identity Provider
     /// - Returns: Network configurations to apply
-    private func createNetworkConfigurations(identityProvider: EAPIdentityProvider, credentials: Credentials?) throws -> [NEHotspotConfiguration] {
+    private func createNetworkConfigurations(
+        identityProvider: EAPIdentityProvider,
+        credentials: Credentials?,
+        ignoreServerCertificateImportFailure: Bool,
+        ignoreMissingServerCertificateName: Bool
+    ) throws -> [NEHotspotConfiguration] {
         let oids = identityProvider
             .credentialApplicability
             .IEEE80211
@@ -133,7 +161,12 @@ class EAPConfigurator {
             throw EAPConfiguratorError.noOIDOrSSID
         }
         
-        let eapSettings = try buildSettings(identityProvider: identityProvider, credentials: credentials)
+        let eapSettings = try buildSettings(
+            identityProvider: identityProvider,
+            credentials: credentials,
+            ignoreServerCertificateImportFailure: ignoreServerCertificateImportFailure,
+            ignoreMissingServerCertificateName: ignoreMissingServerCertificateName
+        )
         
         var configurations: [NEHotspotConfiguration] = []
         
@@ -161,7 +194,12 @@ class EAPConfigurator {
     ///  Create a Hotspot EAP settings object
     /// - Parameter identityProvider: The Identity Provider
     /// - Returns: Hotspot EAP settings object
-    private func buildSettings(identityProvider: EAPIdentityProvider, credentials: Credentials?) throws -> NEHotspotEAPSettings {
+    private func buildSettings(
+        identityProvider: EAPIdentityProvider,
+        credentials: Credentials?,
+        ignoreServerCertificateImportFailure: Bool,
+        ignoreMissingServerCertificateName: Bool
+    ) throws -> NEHotspotEAPSettings {
         let settings = try identityProvider
             .authenticationMethods
             .methods
@@ -200,7 +238,7 @@ class EAPConfigurator {
                         // The bug was not yet present prior to iOS 15, so business as usual:
                         caImportStatus = eapSettings.setTrustedServerCertificates(importCACertificates(certificateStrings: caCertificates))
                     }
-                    guard caImportStatus else {
+                    guard caImportStatus || ignoreServerCertificateImportFailure else {
                         // This code used to throw at this point, but now we choose to continue instead to see if another method works.
                         Logger.eap.warning("createNetworkConfigurations: setTrustedServerCertificates: returned false")
                         // throw EAPConfiguratorError.failedToSetTrustedServerCertificates
@@ -208,11 +246,13 @@ class EAPConfigurator {
                     }
                 }
                 
-                guard let trustedServerNames, let caCertificates, !trustedServerNames.isEmpty || !caCertificates.isEmpty else {
-                    // This code used to throw at this point, but now we choose to continue instead to see if another method works.
-                    Logger.eap.warning("createNetworkConfigurations: No server names and no custom CAs set; there is no way to verify this network")
-                    // throw EAPConfiguratorError.unableToVerifyNetwork
-                    return nil
+                if !ignoreMissingServerCertificateName {
+                    guard let trustedServerNames, let caCertificates, !trustedServerNames.isEmpty || !caCertificates.isEmpty else {
+                        // This code used to throw at this point, but now we choose to continue instead to see if another method works.
+                        Logger.eap.warning("createNetworkConfigurations: No server names and no custom CAs set; there is no way to verify this network")
+                        // throw EAPConfiguratorError.unableToVerifyNetwork
+                        return nil
+                    }
                 }
                 
                 if let eapSettings {
