@@ -107,6 +107,12 @@
         }
       }
     },
+    "Already configured" : {
+
+    },
+    "Already connected" : {
+
+    },
     "Cancel" : {
       "localizations" : {
         "ar" : {
@@ -1407,6 +1413,9 @@
           }
         }
       }
+    },
+    "Find Network" : {
+
     },
     "Helpdesk" : {
       "localizations" : {
@@ -2950,6 +2959,12 @@
         }
       }
     },
+    "Reconfigure" : {
+
+    },
+    "Reconnect" : {
+
+    },
     "Review the profile and then press the \"Install…\" button to setup the network on your computer." : {
       "localizations" : {
         "ar" : {
@@ -3350,6 +3365,15 @@
           }
         }
       }
+    },
+    "You appear to already be configured and connected.\n\nContinue to renew your network access or if you are experiencing network issues." : {
+
+    },
+    "You appear to already be configured but disconnected from the network.\n\nDo you want to find and connect to the network, or to reconfigure your device?" : {
+
+    },
+    "You appear to already be configured.\n\nDo you want to find and connect to the network, or to reconfigure your device?" : {
+
     },
     "You are redirected to a website." : {
       "localizations" : {

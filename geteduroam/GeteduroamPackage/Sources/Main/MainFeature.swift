@@ -288,7 +288,7 @@ public struct Main: Reducer {
             case let .currentConnectionFound(validUntil, organizationId, profileId):
                 let organization = state.organizations[id: organizationId]!
                 let providerInfo = ProviderInfo(displayName: .init(string: "test"), description:  .init(string: "test"), providerLocations: [], providerLogo: nil, termsOfUse: nil, helpdesk: .init(emailAdress: nil, webAddress: .init(string: "https://www.example.com"), phone: nil))
-                state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, loadingState: .success(.unknown), providerInfo: providerInfo, validUntil: validUntil))
+                state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, loadingState: .success(.unknown, .ssids(expectedSSIDs: ["eduroam"]), validUntil: validUntil), providerInfo: providerInfo))
                 
 //                state.destination = .status(.init(validUntil: validUntil, organization:  state.organizations[id: organizationId]!, organizationId: organizationId, profileId: profileId, providerInfo: ProviderInfo(displayName: .init(string: "test"), description:  .init(string: "test"), providerLocations: [], providerLogo: nil, termsOfUse: nil, helpdesk: .init(emailAdress: nil, webAddress: .init(string: "https://www.example.com"), phone: nil))))
                 return .none

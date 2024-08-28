@@ -142,7 +142,7 @@ public struct Connect: Reducer {
             }
         }
         
-        public var ore: Bool {
+        public var canSelectProfile: Bool {
             switch loadingState {
             case .initial, .failure:
                 return true
@@ -173,7 +173,7 @@ public struct Connect: Reducer {
             switch loadingState {
             case .initial, .failure, .isLoading:
                 return false
-            case let .success(connected):
+            case let .success(connected, _, _):
                 return connected == .connected
             }
         }
@@ -182,7 +182,7 @@ public struct Connect: Reducer {
             switch loadingState {
             case .initial, .failure, .isLoading:
                 return false
-            case let .success(connected):
+            case let .success(connected, _, _):
                 return connected == .unknown
             }
         }
@@ -191,15 +191,33 @@ public struct Connect: Reducer {
             switch loadingState {
             case .initial, .failure, .isLoading:
                 return false
-            case let .success(connected):
+            case let .success(connected, _, _):
                 return connected == .disconnected
+            }
+        }
+        
+        public var canConnect: Bool {
+            switch loadingState {
+            case .initial, .failure, .success:
+                return true
+            case .isLoading:
+                return false
+            }
+        }
+        
+        public var canReconnect: Bool {
+            switch loadingState {
+            case .initial, .failure, .isLoading:
+                return false
+            case .success:
+                return true
             }
         }
         
         public enum LoadingState: Equatable {
             case initial
             case isLoading
-            case success(ConnectionState)
+            case success(ConnectionState, ConnectionType, validUntil: Date?)
             case failure
         }
         
@@ -210,7 +228,7 @@ public struct Connect: Reducer {
     
     public enum ConnectResult: Equatable {
         case verified(credentials: Credentials?, reusableInfo: ReusableInfo?)
-        case applied(ConnectionType)
+        case applied(ConnectionType, validUntil: Date?)
     }
     
     public struct ReusableInfo: Equatable {
@@ -251,7 +269,7 @@ public struct Connect: Reducer {
         case onAppear
         case onUsernameSubmit
         case select(Profile.ID)
-        case startAgainTapped
+        case reconnectTapped
     }
     
     @Reducer(state: .equatable, action: .equatable)
@@ -261,7 +279,10 @@ public struct Connect: Reducer {
         case websiteAlert(AlertState<WebsiteAlertAction>)
     }
     
-    public enum AlertAction: Equatable { }
+    public enum AlertAction: Equatable {
+        case findNetworkButtonTapped
+        case reconnectButtonTapped
+    }
     
     public enum TermsAlertAction: Equatable {
         case agreeButtonTapped
@@ -271,7 +292,12 @@ public struct Connect: Reducer {
     public enum WebsiteAlertAction: Equatable {
         case continueButtonTapped(URL)
     }
-
+    
+//    public enum ReconnectAlertAction: Equatable {
+//        case findNetworkButtonTapped
+//        case reconnectButtonTapped
+//    }
+    
     public enum OrganizationSetupError: Error, LocalizedError, Equatable {
         public static func == (lhs: Connect.OrganizationSetupError, rhs: Connect.OrganizationSetupError) -> Bool {
             (lhs as NSError) == (rhs as NSError)
@@ -394,7 +420,7 @@ public struct Connect: Reducer {
         return .run { send in
             await send(
                 .connectResponse(TaskResult<ConnectResponse> {
-                    let (providerInfo, expectedSSIDs, reusableInfo) = try await connect(
+                    let (providerInfo, expectedSSIDs, validUntil, reusableInfo) = try await connect(
                         organization: organization,
                         profile: profile,
                         authClient: authClient,
@@ -411,7 +437,7 @@ public struct Connect: Reducer {
                     } else {
                         connection = .ssids(expectedSSIDs: expectedSSIDs)
                     }
-                    return .init(providerInfo: providerInfo, result: dryRun ? .verified(credentials: credentials, reusableInfo: reusableInfo) : .applied(connection))
+                    return .init(providerInfo: providerInfo, result: dryRun ? .verified(credentials: credentials, reusableInfo: reusableInfo) : .applied(connection, validUntil: validUntil))
                 })
             )
         }
@@ -475,16 +501,16 @@ public struct Connect: Reducer {
                     state.reusableInfo = reusableInfo
                     return connect(state: &state, dryRun: false)
                     
-                case let .applied(connection):
+                case let .applied(connection, validUntil):
                     state.providerInfo = connectResponse.providerInfo
                     
                     switch connection {
                     case .hotspot20:
-                        state.loadingState = .success(.unknown)
+                        state.loadingState = .success(.unknown, connection, validUntil: validUntil)
                         return .none
                         
                     case let .ssids(expectedSSIDs: expectedSSIDs):
-                        state.loadingState = .success(.disconnected)
+                        state.loadingState = .success(.disconnected, connection, validUntil: validUntil)
                         return .run { send in
                             let currentNetwork = await hotspotNetworkClient.fetchCurrent()
                             if let currentNetwork, expectedSSIDs.contains(currentNetwork.ssid) {
@@ -615,13 +641,75 @@ public struct Connect: Reducer {
                 return connect(state: &state, dryRun: true)
                 
             case .foundSSID:
-                guard case .success = state.loadingState else {
+                guard case let .success(_, type, validUntil) = state.loadingState else {
                     return .none
                 }
-                state.loadingState = .success(.connected)
+                state.loadingState = .success(.connected, type, validUntil: validUntil)
                 return .none
                 
-            case .startAgainTapped:
+            case .reconnectTapped:
+                guard case let .success(connectionState, _, _) = state.loadingState else {
+                    assertionFailure("Reconnect only valid when in success state")
+                    return .none
+                }
+                
+                switch connectionState {
+                case .connected:
+                    let alert = AlertState<AlertAction>(
+                        title: {
+                            TextState("Already connected", bundle: .module)
+                        }, actions: {
+                            ButtonState(role: .destructive, action: .send(.reconnectButtonTapped)) {
+                                TextState("Continue", bundle: .module)
+                            }
+                            ButtonState(role: .cancel) {
+                                TextState("Cancel", bundle: .module)
+                            }
+                        }, message: {
+                            TextState("You appear to already be configured and connected.\n\nContinue to renew your network access or if you are experiencing network issues.", bundle: .module)
+                        })
+                    state.destination = .alert(alert)
+                    
+                case .disconnected:
+                    let alert = AlertState<AlertAction>(
+                        title: {
+                            TextState("Already configured", bundle: .module)
+                        }, actions: {
+                            ButtonState(action: .send(.findNetworkButtonTapped)) {
+                                TextState("Find Network", bundle: .module)
+                            }
+                            // Is this even possible?!
+                            ButtonState(role: .destructive, action: .send(.reconnectButtonTapped)) {
+                                TextState("Reconfigure", bundle: .module)
+                            }
+                            ButtonState(role: .cancel) {
+                                TextState("Cancel", bundle: .module)
+                            }
+                        }, message: {
+                            TextState("You appear to already be configured but disconnected from the network.\n\nDo you want to find and connect to the network, or to reconfigure your device?", bundle: .module)
+                        })
+                    state.destination = .alert(alert)
+                    
+                case .unknown:
+                    let alert = AlertState<AlertAction>(
+                        title: {
+                            TextState("Already configured", bundle: .module)
+                        }, actions: {
+                            ButtonState(action: .send(.findNetworkButtonTapped)) {
+                                TextState("Find Network", bundle: .module)
+                            }
+                            // Is this even possible?!
+                            ButtonState(role: .destructive, action: .send(.reconnectButtonTapped)) {
+                                TextState("Reconfigure", bundle: .module)
+                            }
+                            ButtonState(role: .cancel) {
+                                TextState("Cancel", bundle: .module)
+                            }
+                        }, message: {
+                            TextState("You appear to already be configured.\n\nDo you want to find and connect to the network, or to reconfigure your device?", bundle: .module)
+                        })
+                    state.destination = .alert(alert)
+                }
                 return .none
                 
             case .onUsernameSubmit:
@@ -655,7 +743,7 @@ public struct Connect: Reducer {
         dryRun: Bool,
         ignoreServerCertificateImportFailureEnabled: IgnoreServerCertificateImportFailureEnabled?,
         ignoreMissingServerCertificateNameEnabled: IgnoreMissingServerCertificateNameEnabled?
-    ) async throws -> (ProviderInfo?, [String], ReusableInfo?) {
+    ) async throws -> (ProviderInfo?, [String], Date?, ReusableInfo?) {
         let accessToken: String?
         let eapConfigURL: URL?
         let mobileConfigURL: URL?
@@ -775,16 +863,20 @@ public struct Connect: Reducer {
         do {
             let expectedSSIDs = try await eapClient.configure(firstValidProvider, credentials, dryRun, ignoreServerCertificateImportFailureEnabled, ignoreMissingServerCertificateNameEnabled)
             
+            let validUntil: Date?
             if !dryRun {
                 // Schedule reminder for user to renew network access
-                if let validUntil = firstValidProvider.validUntil {
+                validUntil = firstValidProvider.validUntil
+                if let validUntil {
                     let organizationId = organization.id
                     let profileId = profile.id
                     try await notificationClient.scheduleRenewReminder(validUntil, organizationId, profileId)
                 }
+            } else {
+                validUntil = nil
             }
             
-            return (firstValidProvider.providerInfo, expectedSSIDs, reusableInfo)
+            return (firstValidProvider.providerInfo, expectedSSIDs, validUntil, reusableInfo)
             
         } catch let error as EAPConfiguratorError {
             throw OrganizationSetupError.eapConfigurationFailed(error, firstValidProvider.providerInfo)
@@ -841,7 +933,7 @@ public struct Connect: Reducer {
 //            let profileId = profile.id
 //            try await notificationClient.scheduleRenewReminder(validUntil, organizationId, profileId)
 
-            return (firstValidProviderInfo, [], reusableInfo)
+            return (firstValidProviderInfo, [], nil, reusableInfo)
         } catch {
             throw OrganizationSetupError.unknownError(error, firstValidProviderInfo)
         }

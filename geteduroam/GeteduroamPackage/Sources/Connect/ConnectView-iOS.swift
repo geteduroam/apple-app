@@ -128,10 +128,22 @@ public struct ConnectView_iOS: View {
                                 Text("CONNECT", bundle: .module)
                                     .multilineTextAlignment(.center)
                             }
-                            .disabled(store.isLoading)
+                            .disabled(!store.canConnect)
                             .buttonStyle(ConnectButtonStyle())
                         }
                     }
+                    
+                    if store.canReconnect {
+                        Button {
+                            store.send(.reconnectTapped)
+                        } label: {
+                            Image(systemName: "arrow.clockwise")
+                                .accessibilityLabel(Text("Reconnect", bundle: .module))
+                                .accentColor(Color.accentColor)
+                        }
+                        .buttonStyle(.bordered)
+                    }
+                    
                     Spacer()
                 }
                 .padding(20)
