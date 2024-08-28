@@ -21,7 +21,7 @@ public struct Connect: Reducer {
     
     @ObservableState
     public struct State: Equatable {
-        public init(organization: Organization, selectedProfileId: Profile.ID? = nil, autoConnectOnAppear: Bool = false, loadingState: LoadingState = .initial, providerInfo: ProviderInfo? = nil, credentials: Credentials? = nil, destination: Destination.State? = nil) {
+        public init(organization: Organization, selectedProfileId: Profile.ID? = nil, autoConnectOnAppear: Bool = false, loadingState: LoadingState = .initial, providerInfo: ProviderInfo? = nil, credentials: Credentials? = nil, destination: Destination.State? = nil, validUntil: Date? = nil) {
             self.organization = organization
             self.selectedProfileId = selectedProfileId
             self.autoConnectOnAppear = autoConnectOnAppear
@@ -29,6 +29,7 @@ public struct Connect: Reducer {
             self.providerInfo = providerInfo
             self.credentials = credentials
             self.destination = destination
+            self.validUntil = validUntil
         }
         
         public let organization: Organization
@@ -56,6 +57,8 @@ public struct Connect: Reducer {
                 }
             }
         }
+        
+        public var validUntil: Date?
         
         public var promptForPasswordOnlyCredentials: Bool {
             get {
@@ -139,7 +142,7 @@ public struct Connect: Reducer {
             }
         }
         
-        public var canSelectProfile: Bool {
+        public var ore: Bool {
             switch loadingState {
             case .initial, .failure:
                 return true
@@ -425,7 +428,7 @@ public struct Connect: Reducer {
                 defer {
                     state.autoConnectOnAppear = false
                 }
-                guard let _ = state.selectedProfile, (state.organization.hasSingleProfile || state.autoConnectOnAppear) else {
+                guard let _ = state.selectedProfile, (state.organization.hasSingleProfile || state.autoConnectOnAppear) && !state.isConfigured else {
                     return .none
                 }
                 // Auto connect if there is only a single profile or a reminder was tapped

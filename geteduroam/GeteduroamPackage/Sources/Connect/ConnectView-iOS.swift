@@ -35,7 +35,39 @@ public struct ConnectView_iOS: View {
                 }
                 .padding(20)
                 
-                if store.isConfigured == false {
+                if store.isConfigured {
+                    List {
+                        Section {
+                            let selectedProfile = store.selectedProfile
+                            ForEach(store.organization.profiles) { profile in
+                                Button {
+                                    store.send(.select(profile.id))
+                                } label: {
+                                    ProfileRowView(profile: profile, isSelected: selectedProfile == profile)
+                                }
+                                .buttonStyle(.plain)
+                                .backport
+                                .listRowSeparatorTint(Color("ListSeparator"))
+                                .listRowBackground(Color("Background"))
+                            }
+                        } header: {
+                            Text("Profiles", bundle: .module)
+                                .font(theme.profilesHeaderFont)
+                        }
+                    }
+                    .listStyle(.plain)
+                    .disabled(store.canSelectProfile == false)
+                    
+                    if let validUntil = store.validUntil {
+                        Group {
+                            Text("You have access until \(validUntil, format: .dateTime) ") +
+                            Text("(\(validUntil, format: .relative(presentation: .numeric)))").bold() +
+                            Text(".")
+                        }
+                        .font(theme.statusFont)
+                        .padding(20)
+                    }
+                } else {
                     List {
                         Section {
                             let selectedProfile = store.selectedProfile

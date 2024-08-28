@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "." : {
+
+    },
+    "(%@)" : {
+
+    },
     "Agree" : {
       "localizations" : {
         "ar" : {
@@ -3444,6 +3450,9 @@
           }
         }
       }
+    },
+    "You have access until %@ " : {
+
     },
     "You must agree to the terms of use before you can use this network." : {
       "localizations" : {
