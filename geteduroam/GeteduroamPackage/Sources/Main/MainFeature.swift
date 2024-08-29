@@ -63,6 +63,7 @@ public struct Main: Reducer {
         }
         
         @Presents public var destination: Destination.State?
+        @Shared(.connection) var configuredConnection
     }
     
     public enum Action: BindableAction {
@@ -76,6 +77,7 @@ public struct Main: Reducer {
         case select(Organization)
         case tryAgainTapped
         case useLocalFile(URL)
+        case configuredConnectionFound(ConfiguredConnection)
         case currentConnectionFound(validUntil: Date, organizationId: String, profileId: String)
     }
     
@@ -152,9 +154,12 @@ public struct Main: Reducer {
                         }))
                     },
                     .run { send in
-                        if let (validUntil, organizationId, profileId) = await notificationClient.scheduledRenewReminder() {
-                            await send(.currentConnectionFound(validUntil: validUntil, organizationId: organizationId, profileId: profileId))
+                        if let configuredConnection = state.configuredConnection {
+                            await send(.configuredConnectionFound(configuredConnection))
                         }
+//                        if let (validUntil, organizationId, profileId) = await notificationClient.scheduledRenewReminder() {
+//                            await send(.currentConnectionFound(validUntil: validUntil, organizationId: organizationId, profileId: profileId))
+//                        }
                     })
                 
             case let .discoveryResponse(.success(response)):
@@ -285,12 +290,21 @@ public struct Main: Reducer {
 #endif
                 return .none
                 
+            case let .configuredConnectionFound(configuredConnection):
+                let organizationId = configuredConnection.organizationId
+                let profileId = configuredConnection.profileId
+                let type = configuredConnection.type
+                let validUntil = configuredConnection.validUntil
+                let connectionType = configuredConnection.type
+                let providerInfo = configuredConnection.providerInfo
+                let organization = state.organizations[id: organizationId]!
+                state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, loadingState: .success(.unknown, type, validUntil: validUntil), providerInfo: providerInfo))
+                return .none
+                
             case let .currentConnectionFound(validUntil, organizationId, profileId):
                 let organization = state.organizations[id: organizationId]!
                 let providerInfo = ProviderInfo(displayName: .init(string: "test"), description:  .init(string: "test"), providerLocations: [], providerLogo: nil, termsOfUse: nil, helpdesk: .init(emailAdress: nil, webAddress: .init(string: "https://www.example.com"), phone: nil))
                 state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, loadingState: .success(.unknown, .ssids(expectedSSIDs: ["eduroam"]), validUntil: validUntil), providerInfo: providerInfo))
-                
-//                state.destination = .status(.init(validUntil: validUntil, organization:  state.organizations[id: organizationId]!, organizationId: organizationId, profileId: profileId, providerInfo: ProviderInfo(displayName: .init(string: "test"), description:  .init(string: "test"), providerLocations: [], providerLogo: nil, termsOfUse: nil, helpdesk: .init(emailAdress: nil, webAddress: .init(string: "https://www.example.com"), phone: nil))))
                 return .none
             }
         }

@@ -21,7 +21,7 @@ public struct Connect: Reducer {
     
     @ObservableState
     public struct State: Equatable {
-        public init(organization: Organization, selectedProfileId: Profile.ID? = nil, autoConnectOnAppear: Bool = false, loadingState: LoadingState = .initial, providerInfo: ProviderInfo? = nil, credentials: Credentials? = nil, destination: Destination.State? = nil, validUntil: Date? = nil) {
+        public init(organization: Organization, selectedProfileId: Profile.ID? = nil, autoConnectOnAppear: Bool = false, loadingState: LoadingState = .initial, providerInfo: ProviderInfo? = nil, credentials: Credentials? = nil, destination: Destination.State? = nil) {
             self.organization = organization
             self.selectedProfileId = selectedProfileId
             self.autoConnectOnAppear = autoConnectOnAppear
@@ -29,7 +29,6 @@ public struct Connect: Reducer {
             self.providerInfo = providerInfo
             self.credentials = credentials
             self.destination = destination
-            self.validUntil = validUntil
         }
         
         public let organization: Organization
@@ -58,7 +57,12 @@ public struct Connect: Reducer {
             }
         }
         
-        public var validUntil: Date?
+        public var validUntil: Date? {
+            guard case let .success(_, _ , validUntil) = loadingState else {
+                return nil
+            }
+            return validUntil
+        }
         
         public var promptForPasswordOnlyCredentials: Bool {
             get {
@@ -224,6 +228,7 @@ public struct Connect: Reducer {
         var loadingState: LoadingState
 
         @Presents public var destination: Destination.State?
+        @Shared(.connection) var configuredConnection
     }
     
     public enum ConnectResult: Equatable {
@@ -237,7 +242,7 @@ public struct Connect: Reducer {
         var eapConfigData: Data?
     }
     
-    public enum ConnectionType: Equatable {
+    public enum ConnectionType: Equatable, Codable {
         case ssids(expectedSSIDs: [String])
         case hotspot20
     }
@@ -252,7 +257,7 @@ public struct Connect: Reducer {
         public let result: Connect.ConnectResult
     }
     
-    public enum ConnectionState {
+    public enum ConnectionState: Codable {
         case unknown
         case disconnected
         case connected
@@ -292,11 +297,6 @@ public struct Connect: Reducer {
     public enum WebsiteAlertAction: Equatable {
         case continueButtonTapped(URL)
     }
-    
-//    public enum ReconnectAlertAction: Equatable {
-//        case findNetworkButtonTapped
-//        case reconnectButtonTapped
-//    }
     
     public enum OrganizationSetupError: Error, LocalizedError, Equatable {
         public static func == (lhs: Connect.OrganizationSetupError, rhs: Connect.OrganizationSetupError) -> Bool {
@@ -417,6 +417,9 @@ public struct Connect: Reducer {
         let agreedToTerms = state.agreedToTerms
         let ignoreServerCertificateImportFailureEnabled = configClient.values().ignoreServerCertificateImportFailureEnabled
         let ignoreMissingServerCertificateNameEnabled = configClient.values().ignoreMissingServerCertificateNameEnabled
+        if !dryRun {
+            state.configuredConnection = nil
+        }
         return .run { send in
             await send(
                 .connectResponse(TaskResult<ConnectResponse> {
@@ -459,6 +462,22 @@ public struct Connect: Reducer {
                 }
                 // Auto connect if there is only a single profile or a reminder was tapped
                 return connect(state: &state, dryRun: true)
+                
+            case let .destination(.presented(.alert(action))):
+                switch action {
+                case .findNetworkButtonTapped:
+                    assertionFailure()
+                    return .none
+                    
+                case .reconnectButtonTapped:
+                    state.loadingState = .initial
+                    state.credentials = nil
+                    state.agreedToTerms = false
+                    state.requiredUserNameSuffix = nil
+                    state.userTappedLogIn = false
+                    state.promptForCredentials = nil
+                    return connect(state: &state, dryRun: true)
+                }
                 
             case let .destination(.presented(.termsAlert(action))):
                 switch action {
@@ -503,6 +522,8 @@ public struct Connect: Reducer {
                     
                 case let .applied(connection, validUntil):
                     state.providerInfo = connectResponse.providerInfo
+                    
+                    state.configuredConnection = ConfiguredConnection(organizationId: state.organizationId, profileId: state.selectedProfileId!, type: connection, validUntil: validUntil, providerInfo: state.providerInfo)
                     
                     switch connection {
                     case .hotspot20:
