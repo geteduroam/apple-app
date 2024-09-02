@@ -5,7 +5,6 @@ import Connect
 import Dependencies
 import Models
 import Perception
-import Status
 import SwiftUI
 #if canImport(UIKit)
 import UIKit
@@ -27,11 +26,6 @@ public struct MainView: View {
                 .sheet(item: $store.scope(state: \.destination?.connect, action: \.destination.connect)) { store in
                     WithPerceptionTracking {
                         ConnectView(store: store)
-                    }
-                }
-                .sheet(item: $store.scope(state: \.destination?.status, action: \.destination.status)) { store in
-                    WithPerceptionTracking {
-                        StatusView(store: store)
                     }
                 }
 #elseif os(macOS)
@@ -195,7 +189,7 @@ struct MainContentView: View {
                                 Button {
                                     store.send(.select(organization))
                                 } label: {
-                                    OrganizationRowView(organization: organization)
+                                    OrganizationRowView(organization: organization, configured: organization.id == store.configuredConnection?.organizationId)
                                 }
                                 .buttonStyle(.plain)
                                 .backport

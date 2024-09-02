@@ -21,8 +21,8 @@ extension PersistenceKey where Self == FileStorageKey<ConfiguredConnection?> {
     }
 }
 
-public struct ConfiguredConnection: Codable {
-    public init(organizationId: String, profileId: String, type: Connect.ConnectionType, validUntil: Date? = nil, providerInfo: ProviderInfo? = nil) {
+public struct ConfiguredConnection: Codable, Equatable {
+    public init(organizationId: String, profileId: String?, type: Connect.ConnectionType, validUntil: Date? = nil, providerInfo: ProviderInfo? = nil) {
         self.organizationId = organizationId
         self.profileId = profileId
         self.type = type
@@ -31,7 +31,7 @@ public struct ConfiguredConnection: Codable {
     }
     
     public let organizationId: String
-    public let profileId: String
+    public let profileId: String?
     public let type: Connect.ConnectionType
     public let validUntil: Date?
     public let providerInfo: ProviderInfo?

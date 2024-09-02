@@ -15,6 +15,11 @@ public struct ConnectView_iOS: View {
     
     @EnvironmentObject var theme: Theme
     
+    enum Constants {
+        // Closer to the date we show the time as well
+        static let detailedDataTimeInterval: TimeInterval = 7 * 24 * 60 * 60
+    }
+
     public var body: some View {
         WithPerceptionTracking {
             VStack(alignment: .leading) {
@@ -59,13 +64,33 @@ public struct ConnectView_iOS: View {
                     .disabled(store.canSelectProfile == false)
                     
                     if let validUntil = store.validUntil {
-                        Group {
-                            Text("You have access until \(validUntil, format: .dateTime) ") +
-                            Text("(\(validUntil, format: .relative(presentation: .numeric)))").bold() +
-                            Text(".")
+                        TimelineView(.explicit([validUntil, validUntil.addingTimeInterval(Constants.detailedDataTimeInterval)])) { context in
+                            if context.date.timeIntervalSinceNow <= 0 {
+                                Group {
+                                    Text("You had access until \(context.date, format: .dateTime.day().month().year().hour().minute()) ", bundle: .module) +
+                                    Text("(\(context.date, format: .relative(presentation: .numeric)))", bundle: .module).bold() +
+                                    Text(".", bundle: .module)
+                                }
+                                .font(theme.statusFont)
+                                .padding(20)
+                            } else if context.date.timeIntervalSinceNow >= Constants.detailedDataTimeInterval {
+                                Group {
+                                    Text("You have access until \(context.date, format: .dateTime.day().month().year()) ", bundle: .module) +
+                                    Text("(\(context.date, format: .relative(presentation: .numeric)))", bundle: .module).bold() +
+                                    Text(".", bundle: .module)
+                                }
+                                .font(theme.statusFont)
+                                .padding(20)
+                            } else {
+                                Group {
+                                    Text("You have access until \(context.date, format: .dateTime.day().month().year().hour().minute()) ", bundle: .module) +
+                                    Text("(\(context.date, format: .relative(presentation: .numeric)))", bundle: .module).bold() +
+                                    Text(".", bundle: .module)
+                                }
+                                .font(theme.statusFont)
+                                .padding(20)
+                            }
                         }
-                        .font(theme.statusFont)
-                        .padding(20)
                     }
                 } else {
                     List {
@@ -139,7 +164,7 @@ public struct ConnectView_iOS: View {
                         } label: {
                             Image(systemName: "arrow.clockwise")
                                 .accessibilityLabel(Text("Reconnect", bundle: .module))
-                                .accentColor(Color.accentColor)
+                                .accentColor(Color("RefreshArrow/Foreground"))
                         }
                         .buttonStyle(.bordered)
                     }

@@ -8,6 +8,7 @@ import HotspotNetworkClient
 import Models
 import NotificationClient
 import SwiftUI
+import UIKit
 import XMLCoder
 
 @Reducer
@@ -150,8 +151,10 @@ public struct Connect: Reducer {
             switch loadingState {
             case .initial, .failure:
                 return true
-            case .isLoading, .success:
+            case .isLoading:
                 return false
+            case .success:
+                return true
             }
         }
         
@@ -227,8 +230,17 @@ public struct Connect: Reducer {
         
         var loadingState: LoadingState
 
+        var expectedSSIDs: [String]? {
+            switch loadingState {
+            case let .success(_, .ssids(expectedSSIDs), _):
+                return expectedSSIDs
+            default:
+                return nil
+            }
+        }
+        
         @Presents public var destination: Destination.State?
-        @Shared(.connection) var configuredConnection
+        @Shared(.connection) var configuredConnection = nil
     }
     
     public enum ConnectResult: Equatable {
@@ -270,6 +282,7 @@ public struct Connect: Reducer {
         case destination(PresentationAction<Destination.Action>)
         case dismissTapped
         case foundSSID(String)
+        case notFoundSSID
         case logInButtonTapped
         case onAppear
         case onUsernameSubmit
@@ -287,6 +300,7 @@ public struct Connect: Reducer {
     public enum AlertAction: Equatable {
         case findNetworkButtonTapped
         case reconnectButtonTapped
+        case switchProfileButtonTapped(Profile.ID)
     }
     
     public enum TermsAlertAction: Equatable {
@@ -446,9 +460,9 @@ public struct Connect: Reducer {
         }
     }
     
-    public var body: some Reducer<State, Action> {
+    public var body: some ReducerOf<Self> {
         BindingReducer()
-        Reduce { state, action in
+        Reduce { state, action -> Effect<Connect.Action> in
             switch action {
             case .binding:
                 return .none
@@ -456,6 +470,16 @@ public struct Connect: Reducer {
             case .onAppear:
                 defer {
                     state.autoConnectOnAppear = false
+                }
+                if state.isConfigured, let expectedSSIDs = state.expectedSSIDs, expectedSSIDs.isEmpty == false {
+                    return .run { send in
+                        let currentNetwork = await hotspotNetworkClient.fetchCurrent()
+                        if let currentNetwork, expectedSSIDs.contains(currentNetwork.ssid) {
+                            await send(.foundSSID(currentNetwork.ssid))
+                        } else {
+                            await send(.notFoundSSID)
+                        }
+                    }
                 }
                 guard let _ = state.selectedProfile, (state.organization.hasSingleProfile || state.autoConnectOnAppear) && !state.isConfigured else {
                     return .none
@@ -466,16 +490,38 @@ public struct Connect: Reducer {
             case let .destination(.presented(.alert(action))):
                 switch action {
                 case .findNetworkButtonTapped:
-                    assertionFailure()
-                    return .none
+                    guard let expectedSSIDs = state.expectedSSIDs, expectedSSIDs.isEmpty == false else {
+                        return .none
+                    }
+                    return .run { send in
+                        try? await eapClient.connect(expectedSSIDs[0])
+                        let currentNetwork = await hotspotNetworkClient.fetchCurrent()
+                        if let currentNetwork, expectedSSIDs.contains(currentNetwork.ssid) {
+                            await send(.foundSSID(currentNetwork.ssid))
+                        } else {
+                            await send(.notFoundSSID)
+                        }
+                    }
                     
                 case .reconnectButtonTapped:
+                    state.configuredConnection = nil
                     state.loadingState = .initial
                     state.credentials = nil
                     state.agreedToTerms = false
                     state.requiredUserNameSuffix = nil
                     state.userTappedLogIn = false
                     state.promptForCredentials = nil
+                    return connect(state: &state, dryRun: true)
+                    
+                case let .switchProfileButtonTapped(profileId):
+                    state.configuredConnection = nil
+                    state.loadingState = .initial
+                    state.credentials = nil
+                    state.agreedToTerms = false
+                    state.requiredUserNameSuffix = nil
+                    state.userTappedLogIn = false
+                    state.promptForCredentials = nil
+                    state.selectedProfileId = profileId
                     return connect(state: &state, dryRun: true)
                 }
                 
@@ -505,7 +551,36 @@ public struct Connect: Reducer {
                 }
                 
             case let .select(profileId):
-                state.selectedProfileId = profileId
+                if state.isConfigured {
+                    guard let currentProfile = state.selectedProfile else {
+                        return .none
+                    }
+                    
+                    guard let selectedProfile = state.organization.profiles.first(where: { $0.id == profileId }) else {
+                        return .none
+                    }
+                    
+                    guard currentProfile.id != selectedProfile.id else {
+                        return .none
+                    }
+                    
+                    let alert = AlertState<AlertAction>(
+                        title: {
+                            TextState("Already configured for \(currentProfile.nameOrId) profile", bundle: .module)
+                        }, actions: {
+                            ButtonState(role: .destructive, action: .send(.switchProfileButtonTapped(profileId))) {
+                                TextState("Reconfigure \(UIDevice.current.localizedModel)", bundle: .module)
+                            }
+                            ButtonState(role: .cancel) {
+                                TextState("Cancel", bundle: .module)
+                            }
+                        }, message: {
+                            TextState("Do you want to reconfigure your \(UIDevice.current.localizedModel) to use \(selectedProfile.nameOrId) profile instead?", bundle: .module)
+                        })
+                    state.destination = .alert(alert)
+                } else {
+                    state.selectedProfileId = profileId
+                }
                 return .none
                 
             case .connect:
@@ -523,7 +598,7 @@ public struct Connect: Reducer {
                 case let .applied(connection, validUntil):
                     state.providerInfo = connectResponse.providerInfo
                     
-                    state.configuredConnection = ConfiguredConnection(organizationId: state.organizationId, profileId: state.selectedProfileId!, type: connection, validUntil: validUntil, providerInfo: state.providerInfo)
+                    state.configuredConnection = ConfiguredConnection(organizationId: state.organization.id, profileId: state.selectedProfile?.id, type: connection, validUntil: validUntil, providerInfo: state.providerInfo)
                     
                     switch connection {
                     case .hotspot20:
@@ -536,6 +611,8 @@ public struct Connect: Reducer {
                             let currentNetwork = await hotspotNetworkClient.fetchCurrent()
                             if let currentNetwork, expectedSSIDs.contains(currentNetwork.ssid) {
                                 await send(.foundSSID(currentNetwork.ssid))
+                            } else {
+                                await send(.notFoundSSID)
                             }
                         }
                     }
@@ -668,6 +745,13 @@ public struct Connect: Reducer {
                 state.loadingState = .success(.connected, type, validUntil: validUntil)
                 return .none
                 
+            case .notFoundSSID:
+                guard case let .success(_, type, validUntil) = state.loadingState else {
+                    return .none
+                }
+                state.loadingState = .success(.disconnected, type, validUntil: validUntil)
+                return .none
+                
             case .reconnectTapped:
                 guard case let .success(connectionState, _, _) = state.loadingState else {
                     assertionFailure("Reconnect only valid when in success state")
@@ -681,33 +765,33 @@ public struct Connect: Reducer {
                             TextState("Already connected", bundle: .module)
                         }, actions: {
                             ButtonState(role: .destructive, action: .send(.reconnectButtonTapped)) {
-                                TextState("Continue", bundle: .module)
+                                TextState("Reconfigure \(UIDevice.current.localizedModel)", bundle: .module)
                             }
                             ButtonState(role: .cancel) {
                                 TextState("Cancel", bundle: .module)
                             }
                         }, message: {
-                            TextState("You appear to already be configured and connected.\n\nContinue to renew your network access or if you are experiencing network issues.", bundle: .module)
+                            TextState("Reconfigure to renew your network access or if you are experiencing network issues.", bundle: .module)
                         })
                     state.destination = .alert(alert)
                     
                 case .disconnected:
                     let alert = AlertState<AlertAction>(
                         title: {
-                            TextState("Already configured", bundle: .module)
+                            TextState("Already configured, but not connected", bundle: .module)
                         }, actions: {
                             ButtonState(action: .send(.findNetworkButtonTapped)) {
                                 TextState("Find Network", bundle: .module)
                             }
                             // Is this even possible?!
                             ButtonState(role: .destructive, action: .send(.reconnectButtonTapped)) {
-                                TextState("Reconfigure", bundle: .module)
+                                TextState("Reconfigure \(UIDevice.current.localizedModel)", bundle: .module)
                             }
                             ButtonState(role: .cancel) {
                                 TextState("Cancel", bundle: .module)
                             }
                         }, message: {
-                            TextState("You appear to already be configured but disconnected from the network.\n\nDo you want to find and connect to the network, or to reconfigure your device?", bundle: .module)
+                            TextState("Do you want to find and connect to the network, or to reconfigure your \(UIDevice.current.localizedModel)?", bundle: .module)
                         })
                     state.destination = .alert(alert)
                     
@@ -721,13 +805,13 @@ public struct Connect: Reducer {
                             }
                             // Is this even possible?!
                             ButtonState(role: .destructive, action: .send(.reconnectButtonTapped)) {
-                                TextState("Reconfigure", bundle: .module)
+                                TextState("Reconfigure \(UIDevice.current.localizedModel)", bundle: .module)
                             }
                             ButtonState(role: .cancel) {
                                 TextState("Cancel", bundle: .module)
                             }
                         }, message: {
-                            TextState("You appear to already be configured.\n\nDo you want to find and connect to the network, or to reconfigure your device?", bundle: .module)
+                            TextState("Do you want to find and connect to the network, or to reconfigure your \(UIDevice.current.localizedModel)?", bundle: .module)
                         })
                     state.destination = .alert(alert)
                 }

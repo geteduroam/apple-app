@@ -10,6 +10,7 @@ import XCTestDynamicOverlay
 
 public struct EAPClient {
     public var configure: (EAPIdentityProvider, Credentials?, Bool, IgnoreServerCertificateImportFailureEnabled?, IgnoreMissingServerCertificateNameEnabled?) async throws -> [String]
+    public var connect: (_ ssid: String) async throws -> Void
 }
 
 extension DependencyValues {
@@ -25,7 +26,8 @@ extension DependencyValues {
 
 extension EAPClient {
     static var mock: Self = .init(
-        configure: unimplemented()
+        configure: unimplemented(),
+        connect: unimplemented()
     )
 }
 
@@ -49,9 +51,13 @@ extension EAPClient {
                 ignoreServerCertificateImportFailureEnabled: ignoreServerCertificateImportFailureEnabled,
                 ignoreMissingServerCertificateNameEnabled: ignoreMissingServerCertificateNameEnabled
             )
-            #else
+#else
             fatalError("EAPConfigurator not available")
-            #endif
+#endif
+        },
+        connect: { ssid in
+            let ssidConfiguration = NEHotspotConfiguration(ssid: ssid)
+            try await NEHotspotConfigurationManager.shared.apply(ssidConfiguration)
         }
     )
 }
@@ -287,9 +293,12 @@ class EAPConfigurator {
             guard let clientCertificate = clientSideCredential.clientCertificate,
                   let passphrase = clientSideCredential.passphrase ?? credentials?.password,
                   clientCertificate.encoding == "base64",
-                  clientCertificate.format == "PKCS12",
-                  passphrase.isEmpty == false
+                  clientCertificate.format == "PKCS12"
             else {
+                throw EAPConfiguratorError.noValidClientCertificate
+            }
+            
+            guard passphrase.isEmpty == false else {
                 throw EAPConfiguratorError.missingPassword(clientSideCredential)
             }
             

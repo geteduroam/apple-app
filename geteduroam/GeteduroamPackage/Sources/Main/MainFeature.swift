@@ -6,7 +6,6 @@ import Foundation
 import Models
 import NotificationClient
 import OSLog
-import Status
 
 @Reducer
 public struct Main: Reducer {
@@ -63,7 +62,7 @@ public struct Main: Reducer {
         }
         
         @Presents public var destination: Destination.State?
-        @Shared(.connection) var configuredConnection
+        @Shared(.connection) var configuredConnection = nil
     }
     
     public enum Action: BindableAction {
@@ -79,12 +78,12 @@ public struct Main: Reducer {
         case useLocalFile(URL)
         case configuredConnectionFound(ConfiguredConnection)
         case currentConnectionFound(validUntil: Date, organizationId: String, profileId: String)
+        case configuredConnectionUpdated(ConfiguredConnection?)
     }
     
     @Reducer(state: .equatable)
     public enum Destination {
         case connect(Connect)
-        case status(Status)
         case alert(AlertState<AlertAction>)
     }
     
@@ -98,23 +97,38 @@ public struct Main: Reducer {
     
     private enum CancelID { case search }
 
-    func search(query: String, organizations: IdentifiedArrayOf<Organization>) async -> IdentifiedArrayOf<Organization> {
+    func search(query: String, organizations: IdentifiedArrayOf<Organization>, configuredOrganization: Organization?) -> IdentifiedArrayOf<Organization> {
         guard query.isEmpty == false else {
-            return .init(uniqueElements: [])
+            if let configuredOrganization {
+                return .init(uniqueElements: [configuredOrganization])
+            } else {
+                return .init(uniqueElements: [])
+            }
         }
         let locale = Locale.current
         let languageCode = locale.languageCode
         let options: String.CompareOptions = query.contains(" ") ? [.caseInsensitive, .diacriticInsensitive] : [.caseInsensitive, .diacriticInsensitive, .anchored]
-        return .init(uniqueElements: organizations
+        return [configuredOrganization].compactMap({ $0 }) + .init(uniqueElements: organizations
             // Apple recommends this, but that seems to be diacritic sensitive
             // .filter({ $0.name.localizedCaseInsensitiveContains(query) })
             .filter({ $0.matchWords(for: languageCode).contains(where: { $0.range(of: query, options: options, locale: locale) != nil } )})
             .sorted(by: { $0.nameOrId.lowercased() < $1.nameOrId.lowercased() }))
+            .filter({ $0.id != configuredOrganization?.id })
     }
 
     public var body: some Reducer<State, Action> {
         BindingReducer()
         Reduce { state, action in
+            func updateSearchResults() -> IdentifiedArrayOf<Organization> {
+                let configuredOrganization: Organization?
+                if let configuredOrganizationId = state.configuredConnection?.organizationId {
+                    configuredOrganization = state.organizations[id: configuredOrganizationId]
+                } else {
+                    configuredOrganization = nil
+                }
+                return search(query: state.searchQuery, organizations: state.organizations, configuredOrganization: configuredOrganization)
+            }
+            
             switch action {
             case .applicationDidFinishLaunching:
                 Logger.notifications.debug("Application did finish launching")
@@ -153,14 +167,18 @@ public struct Main: Reducer {
                             }
                         }))
                     },
-                    .run { send in
-                        if let configuredConnection = state.configuredConnection {
+                    .run { [configuredConnection = state.configuredConnection] send in
+                        if let configuredConnection {
                             await send(.configuredConnectionFound(configuredConnection))
+                        } else if let (validUntil, organizationId, profileId) = await notificationClient.scheduledRenewReminder() {
+                            await send(.currentConnectionFound(validUntil: validUntil, organizationId: organizationId, profileId: profileId))
                         }
-//                        if let (validUntil, organizationId, profileId) = await notificationClient.scheduledRenewReminder() {
-//                            await send(.currentConnectionFound(validUntil: validUntil, organizationId: organizationId, profileId: profileId))
-//                        }
-                    })
+                    },
+                    .publisher {
+                        state.$configuredConnection.publisher
+                            .map(Action.configuredConnectionUpdated)
+                    }
+                )
                 
             case let .discoveryResponse(.success(response)):
                 state.loadingState = .success
@@ -168,6 +186,7 @@ public struct Main: Reducer {
                 if let pendingRenewAction = state.pendingRenewAction {
                     return .send(.renewActionInReminderTapped(organizationId: pendingRenewAction.organizationId, profileId: pendingRenewAction.profileId))
                 }
+                state.searchResults = updateSearchResults()
                 return .none
                 
             case let .discoveryResponse(.failure(error)):
@@ -211,9 +230,20 @@ public struct Main: Reducer {
                 return .none
                 
             case .binding(\.searchQuery):
+                let configuredOrganization: Organization?
+                if let configuredOrganizationId = state.configuredConnection?.organizationId {
+                    configuredOrganization = state.organizations[id: configuredOrganizationId]
+                } else {
+                    configuredOrganization = nil
+                }
+                
                 // Clear search without debounce
                 guard !state.searchQuery.isEmpty else {
-                    state.searchResults = []
+                    if let configuredOrganization {
+                        state.searchResults = .init(uniqueElements: [configuredOrganization])
+                    } else {
+                        state.searchResults = []
+                    }
                     state.isSearching = false
                     return .cancel(id: CancelID.search)
                 }
@@ -226,7 +256,7 @@ public struct Main: Reducer {
                             if Task.isCancelled {
                                 throw MainFeatureError.searchCancelled
                             }
-                            var searchResults = await self.search(query: query, organizations: organizations)
+                            var searchResults = search(query: query, organizations: organizations, configuredOrganization: configuredOrganization)
                             if Task.isCancelled {
                                 throw MainFeatureError.searchCancelled
                             }
@@ -262,13 +292,18 @@ public struct Main: Reducer {
                 return .none
                 
             case let .select(organization):
-                state.destination = .connect(.init(organization: organization))
-                return .none
-                
-            case let .destination(.presented(.status(.delegate(action)))):
-                switch action {
-                case let .renew(organizationId, profileId):
-                    return .send(.renewActionInReminderTapped(organizationId: organizationId, profileId: profileId))
+                if let configuredConnection = state.configuredConnection,
+                   let configuredOrganization = state.organizations[id: organization.id],
+                   organization.id == configuredConnection.organizationId {
+                    let profileId = configuredConnection.profileId
+                    let connectionType = configuredConnection.type
+                    let validUntil = configuredConnection.validUntil
+                    let providerInfo = configuredConnection.providerInfo
+                    state.destination = .connect(.init(organization: configuredOrganization, selectedProfileId: profileId, loadingState: .success(.unknown, connectionType, validUntil: validUntil), providerInfo: providerInfo))
+                    return .none
+                } else {
+                    state.destination = .connect(.init(organization: organization))
+                    return .none
                 }
                 
             case .destination:
@@ -293,18 +328,24 @@ public struct Main: Reducer {
             case let .configuredConnectionFound(configuredConnection):
                 let organizationId = configuredConnection.organizationId
                 let profileId = configuredConnection.profileId
-                let type = configuredConnection.type
-                let validUntil = configuredConnection.validUntil
                 let connectionType = configuredConnection.type
+                let validUntil = configuredConnection.validUntil
                 let providerInfo = configuredConnection.providerInfo
                 let organization = state.organizations[id: organizationId]!
-                state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, loadingState: .success(.unknown, type, validUntil: validUntil), providerInfo: providerInfo))
+                state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, loadingState: .success(.unknown, connectionType, validUntil: validUntil), providerInfo: providerInfo))
+                
+                state.searchResults = updateSearchResults()
                 return .none
                 
             case let .currentConnectionFound(validUntil, organizationId, profileId):
                 let organization = state.organizations[id: organizationId]!
-                let providerInfo = ProviderInfo(displayName: .init(string: "test"), description:  .init(string: "test"), providerLocations: [], providerLogo: nil, termsOfUse: nil, helpdesk: .init(emailAdress: nil, webAddress: .init(string: "https://www.example.com"), phone: nil))
-                state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, loadingState: .success(.unknown, .ssids(expectedSSIDs: ["eduroam"]), validUntil: validUntil), providerInfo: providerInfo))
+                state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, loadingState: .success(.unknown, .ssids(expectedSSIDs: ["eduroam"]), validUntil: validUntil), providerInfo: nil))
+                
+                state.searchResults = updateSearchResults()
+                return .none
+                
+            case .configuredConnectionUpdated:
+                state.searchResults = updateSearchResults()
                 return .none
             }
         }

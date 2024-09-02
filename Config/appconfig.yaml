@@ -5,6 +5,12 @@ settings:
 
   # Enable when the API is undergoing maintenance
   maintenance: false
+  
+  # A feature flag to ignore failed server certificate import
+  ignoreServerCertificateImportFailure: true
+  
+  # A feature flag to ignore missing server certificate name
+  ignoreMissingServerCertificateName: false
 
 # Keep track of keys that are no longer in use.
 deprecatedKeys: []

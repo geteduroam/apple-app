@@ -49,6 +49,22 @@
         }
       }
     },
+    "Configured" : {
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configured"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingesteld"
+          }
+        }
+      }
+    },
     "Failed to load organizations" : {
       "comment" : "Message when organizations can't be loaded and the fallback fails too",
       "localizations" : {

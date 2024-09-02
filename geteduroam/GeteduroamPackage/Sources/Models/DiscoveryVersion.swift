@@ -6,7 +6,7 @@ public struct DiscoveryVersion: Codable, Equatable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case organizations =  "providers"
+        case organizations = "providers"
     }
     
     public let organizations: [Organization]

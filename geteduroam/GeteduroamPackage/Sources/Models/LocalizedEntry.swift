@@ -18,8 +18,11 @@ public struct LocalizedEntry: Codable, Equatable, Sendable {
 
 extension [LocalizedEntry] {
     public func localized(for languageCode: String? = Locale.current.languageCode) -> String? {
+        // When the requested language isn't there:
+        // 1. find entry with language "any" or language not set
+        // 2. use first entry
         func fallback() -> String? {
-            first(where: { $0.language == "any" || $0.language == nil })?.value
+            first(where: { $0.language == "any" || $0.language == nil })?.value ?? first?.value
         }
         guard let language = languageCode else {
             return fallback()

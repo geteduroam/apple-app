@@ -2,10 +2,36 @@
   "sourceLanguage" : "en",
   "strings" : {
     "." : {
-
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "."
+          }
+        }
+      }
     },
     "(%@)" : {
-
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "(%@)"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "(%@)"
+          }
+        }
+      }
     },
     "Agree" : {
       "localizations" : {
@@ -108,10 +134,68 @@
       }
     },
     "Already configured" : {
-
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Already configured"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reeds ingesteld"
+          }
+        }
+      }
+    },
+    "Already configured for %@ profile" : {
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Already configured for %@ profile"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reeds ingesteld voor %@-profiel"
+          }
+        }
+      }
+    },
+    "Already configured, but not connected" : {
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Already configured, but not connected"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reeds ingesteld, maar niet verbonden"
+          }
+        }
+      }
     },
     "Already connected" : {
-
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Already connected"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reeds verbonden"
+          }
+        }
+      }
     },
     "Cancel" : {
       "localizations" : {
@@ -1213,6 +1297,44 @@
         }
       }
     },
+    "Do you want to find and connect to the network, or to reconfigure your %@?" : {
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you want to find and connect to the network, or to reconfigure your %@?"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wil je verbinding maken met het netwerk, of jouw %@ opnieuw instellen?"
+          }
+        }
+      }
+    },
+    "Do you want to reconfigure your %@ to use %@ profile instead?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Do you want to reconfigure your %1$@ to use %2$@ profile instead?"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you want to reconfigure your %1$@ to use %2$@ profile instead?"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wil je jouw %@ instellen om het %@-profiel te gebruiken?"
+          }
+        }
+      }
+    },
     "Double-click to review the profile and then press the \"Install…\" button to setup the network on your computer." : {
       "localizations" : {
         "ar" : {
@@ -1415,7 +1537,20 @@
       }
     },
     "Find Network" : {
-
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find Network"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zoek netwerk"
+          }
+        }
+      }
     },
     "Helpdesk" : {
       "localizations" : {
@@ -2959,11 +3094,53 @@
         }
       }
     },
-    "Reconfigure" : {
-
+    "Reconfigure %@" : {
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reconfigure %@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stel %@ opnieuw in"
+          }
+        }
+      }
+    },
+    "Reconfigure to renew your network access or if you are experiencing network issues." : {
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reconfigure to renew your network access or if you are experiencing network issues."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stel opnieuw in om netwerktoegang te vernieuwen of als je problemen ervaart met het netwerk."
+          }
+        }
+      }
     },
     "Reconnect" : {
-
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reconnect"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stel opnieuw in"
+          }
+        }
+      }
     },
     "Review the profile and then press the \"Install…\" button to setup the network on your computer." : {
       "localizations" : {
@@ -3366,15 +3543,6 @@
         }
       }
     },
-    "You appear to already be configured and connected.\n\nContinue to renew your network access or if you are experiencing network issues." : {
-
-    },
-    "You appear to already be configured but disconnected from the network.\n\nDo you want to find and connect to the network, or to reconfigure your device?" : {
-
-    },
-    "You appear to already be configured.\n\nDo you want to find and connect to the network, or to reconfigure your device?" : {
-
-    },
     "You are redirected to a website." : {
       "localizations" : {
         "ar" : {
@@ -3475,8 +3643,37 @@
         }
       }
     },
+    "You had access until %@ " : {
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You had access until %@ "
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je had toegang tot %@ "
+          }
+        }
+      }
+    },
     "You have access until %@ " : {
-
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have access until %@ "
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je hebt toegang tot %@ "
+          }
+        }
+      }
     },
     "You must agree to the terms of use before you can use this network." : {
       "localizations" : {

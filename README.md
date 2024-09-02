@@ -21,6 +21,9 @@ A: Run these commands:
     curl --silent --compressed 'https://discovery.eduroam.app/v2/discovery.json' > geteduroam/discovery.json
     curl --silent --compressed 'https://getgovroam.nl/v2/discovery.json' > getgovroam/discovery.json
 
+    care prepare Config/appconfig.yaml geteduroam/appconfig.json
+    care prepare Config/appconfig.yaml getgovroam/appconfig.json
+    
 ## License
 
 See [license](LICENSE.md).
@@ -49,7 +52,7 @@ Stores the responses from the discovery client to disk and helps to ensure there
 
 ### Connect
 
-The detail screen with profile selection, helpdesk info and connect functionality. Also collects credentials and agreements to terms of use as needed.
+The detail screen with profile selection, helpdesk info and (re)connect functionality. Also collects credentials and agreements to terms of use as needed.
 
 ### DiscoveryClient
 
@@ -70,10 +73,6 @@ Models used throughout the app.
 ### NotificationClient
 
 Schedules reminders for when network configurations expire.
-
-### Status
-
-The status screen with the renewal functionality.
 
 ## Creating screenshots
 
