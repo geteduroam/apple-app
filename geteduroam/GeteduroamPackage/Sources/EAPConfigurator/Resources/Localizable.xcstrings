@@ -208,6 +208,23 @@
         }
       }
     },
+    "No valid client certificate in configuration" : {
+      "comment" : "noValidClientCertificate",
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No valid client certificate in configuration"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geen geldig clientcertificaat in configuratie"
+          }
+        }
+      }
+    },
     "No valid configuration found" : {
       "comment" : "noConfigurations",
       "localizations" : {
