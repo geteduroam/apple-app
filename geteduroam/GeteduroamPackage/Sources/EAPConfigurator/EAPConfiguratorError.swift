@@ -52,6 +52,9 @@ public enum EAPConfiguratorError: Error {
     
     /// Username must end with
     case invalidUsername(suffix: String)
+    
+    /// No valid client certificate in configuration
+    case noValidClientCertificate
 }
 
 extension EAPConfiguratorError: LocalizedError {
@@ -107,6 +110,9 @@ extension EAPConfiguratorError: LocalizedError {
             
         case let .invalidUsername(suffix):
             return String(format: NSLocalizedString("Username must end with \"%@\"", bundle: .module, comment: "invalid username"), suffix)
+            
+        case .noValidClientCertificate:
+            return NSLocalizedString("No valid client certificate in configuration", bundle: .module, comment: "noValidClientCertificate")
         }
     }
 }

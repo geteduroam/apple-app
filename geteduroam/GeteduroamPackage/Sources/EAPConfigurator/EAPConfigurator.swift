@@ -287,9 +287,12 @@ class EAPConfigurator {
             guard let clientCertificate = clientSideCredential.clientCertificate,
                   let passphrase = clientSideCredential.passphrase ?? credentials?.password,
                   clientCertificate.encoding == "base64",
-                  clientCertificate.format == "PKCS12",
-                  passphrase.isEmpty == false
+                  clientCertificate.format == "PKCS12"
             else {
+                throw EAPConfiguratorError.noValidClientCertificate
+            }
+            
+            guard passphrase.isEmpty == false else {
                 throw EAPConfiguratorError.missingPassword(clientSideCredential)
             }
             
