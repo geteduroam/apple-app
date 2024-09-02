@@ -70,6 +70,8 @@ final class MainTests: XCTestCase {
             $0.loadingState = .success
             $0.organizations = [demoInstance]
         }
+        
+        await store.skipInFlightEffects()
     }
 
     func testSearchByFullname() async throws {
