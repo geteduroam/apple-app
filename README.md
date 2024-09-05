@@ -52,7 +52,7 @@ Stores the responses from the discovery client to disk and helps to ensure there
 
 ### Connect
 
-The detail screen with profile selection, helpdesk info and connect functionality. Also collects credentials and agreements to terms of use as needed.
+The detail screen with profile selection, helpdesk info and (re)connect functionality. Also collects credentials and agreements to terms of use as needed.
 
 ### DiscoveryClient
 

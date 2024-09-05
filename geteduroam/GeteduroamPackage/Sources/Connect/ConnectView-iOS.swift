@@ -15,6 +15,11 @@ public struct ConnectView_iOS: View {
     
     @EnvironmentObject var theme: Theme
     
+    enum Constants {
+        // Closer to the date we show the time as well
+        static let detailedDataTimeInterval: TimeInterval = 7 * 24 * 60 * 60
+    }
+
     public var body: some View {
         WithPerceptionTracking {
             VStack(alignment: .leading) {
@@ -35,7 +40,59 @@ public struct ConnectView_iOS: View {
                 }
                 .padding(20)
                 
-                if store.isConfigured == false {
+                if store.isConfigured {
+                    List {
+                        Section {
+                            let selectedProfile = store.selectedProfile
+                            ForEach(store.organization.profiles) { profile in
+                                Button {
+                                    store.send(.select(profile.id))
+                                } label: {
+                                    ProfileRowView(profile: profile, isSelected: selectedProfile == profile)
+                                }
+                                .buttonStyle(.plain)
+                                .backport
+                                .listRowSeparatorTint(Color("ListSeparator"))
+                                .listRowBackground(Color("Background"))
+                            }
+                        } header: {
+                            Text("Profiles", bundle: .module)
+                                .font(theme.profilesHeaderFont)
+                        }
+                    }
+                    .listStyle(.plain)
+                    .disabled(store.canSelectProfile == false)
+                    
+                    if let validUntil = store.validUntil {
+                        TimelineView(.explicit([validUntil, validUntil.addingTimeInterval(Constants.detailedDataTimeInterval)])) { context in
+                            if context.date.timeIntervalSinceNow <= 0 {
+                                Group {
+                                    Text("You had access until \(context.date, format: .dateTime.day().month().year().hour().minute()) ", bundle: .module) +
+                                    Text("(\(context.date, format: .relative(presentation: .numeric)))", bundle: .module).bold() +
+                                    Text(".", bundle: .module)
+                                }
+                                .font(theme.statusFont)
+                                .padding(20)
+                            } else if context.date.timeIntervalSinceNow >= Constants.detailedDataTimeInterval {
+                                Group {
+                                    Text("You have access until \(context.date, format: .dateTime.day().month().year()) ", bundle: .module) +
+                                    Text("(\(context.date, format: .relative(presentation: .numeric)))", bundle: .module).bold() +
+                                    Text(".", bundle: .module)
+                                }
+                                .font(theme.statusFont)
+                                .padding(20)
+                            } else {
+                                Group {
+                                    Text("You have access until \(context.date, format: .dateTime.day().month().year().hour().minute()) ", bundle: .module) +
+                                    Text("(\(context.date, format: .relative(presentation: .numeric)))", bundle: .module).bold() +
+                                    Text(".", bundle: .module)
+                                }
+                                .font(theme.statusFont)
+                                .padding(20)
+                            }
+                        }
+                    }
+                } else {
                     List {
                         Section {
                             let selectedProfile = store.selectedProfile
@@ -96,10 +153,22 @@ public struct ConnectView_iOS: View {
                                 Text("CONNECT", bundle: .module)
                                     .multilineTextAlignment(.center)
                             }
-                            .disabled(store.isLoading)
+                            .disabled(!store.canConnect)
                             .buttonStyle(ConnectButtonStyle())
                         }
                     }
+                    
+                    if store.canReconnect {
+                        Button {
+                            store.send(.reconnectTapped)
+                        } label: {
+                            Image(systemName: "arrow.clockwise")
+                                .accessibilityLabel(Text("Reconnect", bundle: .module))
+                                .accentColor(Color("RefreshArrow/Foreground"))
+                        }
+                        .buttonStyle(.bordered)
+                    }
+                    
                     Spacer()
                 }
                 .padding(20)

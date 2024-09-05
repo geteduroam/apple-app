@@ -19,7 +19,8 @@ extension Theme {
         connectedFont: .custom("OpenSans-Bold", size: 14, relativeTo: .body),
         infoHeaderFont: .custom("OpenSans-Bold", size: 14, relativeTo: .body),
         infoDetailFont: .custom("OpenSans-Regular", size: 14, relativeTo: .body),
-        versionFont: .custom("OpenSans-Regular", size: 9, relativeTo: .caption2)
+        versionFont: .custom("OpenSans-Regular", size: 9, relativeTo: .caption2),
+        statusFont: .custom("OpenSans-Regular", size: 14, relativeTo: .body)
     )
 }
 #elseif os(macOS)
@@ -37,7 +38,8 @@ extension Theme {
         connectedFont: .system(.body, design: .default),
         infoHeaderFont: .system(.body, design: .default).bold(),
         infoDetailFont: .system(.body, design: .default),
-        versionFont: .system(.body, design: .default)
+        versionFont: .system(.body, design: .default),
+        statusFont: .system(.body, design: .default)
     )
 }
 #endif

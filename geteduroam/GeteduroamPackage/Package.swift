@@ -65,9 +65,9 @@ let package = Package(
                 "Backport",
                 "CacheClient",
                 "Connect",
-                .product(name: "Dependencies", package: "swift-dependencies"),
                 "DiscoveryClient",
-                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                .product(name: "Dependencies", package: "swift-dependencies")
             ]
         ),
         .testTarget(
@@ -153,7 +153,8 @@ let package = Package(
         .target(
             name: "NotificationClient",
             dependencies: [
-                .product(name: "Dependencies", package: "swift-dependencies")
-            ]),
+                .product(name: "Dependencies", package: "swift-dependencies"),
+                .product(name: "DependenciesMacros", package: "swift-dependencies")
+            ])
     ]
 )

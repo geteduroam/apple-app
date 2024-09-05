@@ -186,14 +186,16 @@ final class ConnectTests: XCTestCase {
                 $0.eapClient.configure = { provider, credentials, dryRun, _, _ in
                     return ["ssid"]
                 }
-                $0.notificationClient.scheduleRenewReminder = { validUntil, organizationId, profileId in
+                $0.notificationClient.scheduleRenewReminder = { validUntil, organizationId, organizationURLString, profileId in
                     XCTAssertEqual(validUntil, Date(timeIntervalSince1970: 3600))
                     XCTAssertEqual(organizationId, "cat_7016")
                     XCTAssertEqual(profileId, "profile2")
                 }
+                $0.notificationClient.unscheduleRenewReminder = { }
                 $0.hotspotNetworkClient.fetchCurrent = {
                     NetworkInfo(ssid: "ssid", bssid: "", signalStrength: 1, isSecure: true, didAutoJoin: false, didJustJoin: true, isChosenHelper: true)
                 }
+                $0.defaultFileStorage = .inMemory
             })
         
         await store.send(.onAppear)
@@ -210,14 +212,35 @@ final class ConnectTests: XCTestCase {
         await store.receive(\.connectResponse) {
             $0.loadingState = .isLoading
             $0.providerInfo = providerInfo
+            $0.configuredConnection = .init(
+                organizationType: .id("cat_7016"),
+                profileId: "profile2",
+                type: .ssids(expectedSSIDs: ["ssid"]),
+                validUntil: Date(timeIntervalSince1970: 3600),
+                providerInfo: .init(
+                    displayName: [LocalizedStringEntry(language: "en", value: "English Test Config")],
+                    description: [.init(value: "")],
+                    providerLocations: [.init(latitude: 53, longitude: 5)],
+                    providerLogo: .init(value: "", mime: "", encoding: ""),
+                    termsOfUse: nil,
+                    helpdesk: .init(
+                        emailAdress: [.init(value: "helpdesk@example.com")],
+                        webAddress: [
+                            .init(language: "en", value: "https://www.example.com/en"),
+                            .init(language: "nl", value: "https://www.example.com/nl")
+                        ],
+                        phone: [.init(value: "+31-555-123456")]
+                    )
+                )
+            )
         }
         
         await store.receive(\.connectResponse) {
-            $0.loadingState = .success(.disconnected)
+            $0.loadingState = .success(.disconnected, .ssids(expectedSSIDs: ["ssid"]), validUntil: Date(timeIntervalSince1970: 3600))
         }
         
         await store.receive(\.foundSSID) {
-            $0.loadingState = .success(.connected)
+            $0.loadingState = .success(.connected, .ssids(expectedSSIDs: ["ssid"]), validUntil: Date(timeIntervalSince1970: 3600))
         }
     }
     #endif
