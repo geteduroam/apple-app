@@ -186,11 +186,12 @@ final class ConnectTests: XCTestCase {
                 $0.eapClient.configure = { provider, credentials, dryRun, _, _ in
                     return ["ssid"]
                 }
-                $0.notificationClient.scheduleRenewReminder = { validUntil, organizationId, profileId in
+                $0.notificationClient.scheduleRenewReminder = { validUntil, organizationId, organizationURLString, profileId in
                     XCTAssertEqual(validUntil, Date(timeIntervalSince1970: 3600))
                     XCTAssertEqual(organizationId, "cat_7016")
                     XCTAssertEqual(profileId, "profile2")
                 }
+                $0.notificationClient.unscheduleRenewReminder = { }
                 $0.hotspotNetworkClient.fetchCurrent = {
                     NetworkInfo(ssid: "ssid", bssid: "", signalStrength: 1, isSecure: true, didAutoJoin: false, didJustJoin: true, isChosenHelper: true)
                 }
@@ -212,7 +213,7 @@ final class ConnectTests: XCTestCase {
             $0.loadingState = .isLoading
             $0.providerInfo = providerInfo
             $0.configuredConnection = .init(
-                organizationId: "cat_7016",
+                organizationType: .id("cat_7016"),
                 profileId: "profile2",
                 type: .ssids(expectedSSIDs: ["ssid"]),
                 validUntil: Date(timeIntervalSince1970: 3600),

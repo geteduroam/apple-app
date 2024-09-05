@@ -56,8 +56,12 @@ extension EAPClient {
 #endif
         },
         connect: { ssid in
+#if os(iOS)
             let ssidConfiguration = NEHotspotConfiguration(ssid: ssid)
             try await NEHotspotConfigurationManager.shared.apply(ssidConfiguration)
+#else
+            fatalError("EAPConfigurator not available")
+#endif
         }
     )
 }

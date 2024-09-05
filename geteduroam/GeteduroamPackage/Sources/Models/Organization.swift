@@ -75,8 +75,9 @@ public struct Organization: Codable, Identifiable, Equatable, Sendable {
         self.country = "URL"
         self.profiles = [Profile(id: "url", name: [LocalizedEntry(value: host)], default: true, letsWiFiEndpoint: url, type: .letswifi)]
         self.geo = []
-        self.matchWordsLanguageCode = ""
-        self.matchWords = []
+        // For the language set during initialization we store the match words to improve query performance
+        self.matchWordsLanguageCode = Locale.current.languageCode
+        self.matchWords = Self.determineMatchWords(for: self.matchWordsLanguageCode, id: id, name: name)
     }
     
     public init(local fileURL: URL) {
@@ -86,8 +87,9 @@ public struct Organization: Codable, Identifiable, Equatable, Sendable {
         self.country = "FILE"
         self.profiles = [Profile(id: "local", name: [LocalizedEntry(value: displayName)], default: true, eapConfigEndpoint: fileURL, mobileConfigEndpoint: nil, letsWiFiEndpoint: nil, webviewEndpoint: nil, type: .eapConfig)]
         self.geo = []
-        self.matchWordsLanguageCode = ""
-        self.matchWords = []
+        // For the language set during initialization we store the match words to improve query performance
+        self.matchWordsLanguageCode = Locale.current.languageCode
+        self.matchWords = Self.determineMatchWords(for: self.matchWordsLanguageCode, id: id, name: name)
     }
     
     enum CodingKeys: CodingKey {

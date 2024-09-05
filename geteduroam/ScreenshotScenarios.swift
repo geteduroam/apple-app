@@ -112,7 +112,7 @@ enum Scenario: String, CaseIterable {
                 destination: .connect(
                     .init(
                         organization: .example,
-                        loadingState: .success(.connected, .ssids(expectedSSIDs: []), validUntil: nil),
+                        loadingState: .success(.connected, .ssids(expectedSSIDs: ["eduroam"]), validUntil: nil),
                         providerInfo: .example
                     )
                 ))

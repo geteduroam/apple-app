@@ -8,7 +8,9 @@ import HotspotNetworkClient
 import Models
 import NotificationClient
 import SwiftUI
+#if canImport(UIKit)
 import UIKit
+#endif
 import XMLCoder
 
 @Reducer
@@ -555,6 +557,7 @@ public struct Connect: Reducer {
                 
             case let .select(profileId):
                 if state.isConfigured {
+#if os(iOS)
                     guard let currentProfile = state.selectedProfile else {
                         return .none
                     }
@@ -581,6 +584,7 @@ public struct Connect: Reducer {
                             TextState("Do you want to reconfigure your \(UIDevice.current.localizedModel) to use \(selectedProfile.nameOrId) profile instead?", bundle: .module)
                         })
                     state.destination = .alert(alert)
+#endif
                 } else {
                     state.selectedProfileId = profileId
                 }
@@ -762,6 +766,7 @@ public struct Connect: Reducer {
                 return .none
                 
             case .reconnectTapped:
+#if os(iOS)
                 guard case let .success(connectionState, _, _) = state.loadingState else {
                     assertionFailure("Reconnect only valid when in success state")
                     return .none
@@ -825,6 +830,10 @@ public struct Connect: Reducer {
                     state.destination = .alert(alert)
                 }
                 return .none
+#else
+                assertionFailure()
+                return .none
+#endif
                 
             case .onUsernameSubmit:
                 state.appendRequiredUserNameSuffix()
