@@ -39,7 +39,7 @@ public class Values {
     public fileprivate(set) var maintenance: Bool = false
     
     /// A feature flag to ignore failed server certificate import
-    fileprivate var ignoreServerCertificateImportFailure: Bool = false
+    fileprivate var ignoreServerCertificateImportFailure: Bool = true
     public var ignoreServerCertificateImportFailureEnabled: IgnoreServerCertificateImportFailureEnabled? { ignoreServerCertificateImportFailure ? IgnoreServerCertificateImportFailureEnabled() : nil }
     
     /// A feature flag to ignore missing server certificate name
