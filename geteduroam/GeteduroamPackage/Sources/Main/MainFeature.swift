@@ -18,6 +18,7 @@ public struct Main: Reducer {
     
     public struct PendingRenewAction: Equatable {
         let organizationId: String
+        let organizationURLString: String?
         let profileId: String
     }
     
@@ -71,13 +72,13 @@ public struct Main: Reducer {
         case destination(PresentationAction<Destination.Action>)
         case discoveryResponse(TaskResult<DiscoveryResponse>)
         case onAppear
-        case renewActionInReminderTapped(organizationId: String, profileId: String)
+        case renewActionInReminderTapped(organizationId: String, organizationURLString: String?, profileId: String)
         case searchResponse(TaskResult<IdentifiedArrayOf<Organization>>)
         case select(Organization)
         case tryAgainTapped
         case useLocalFile(URL)
         case configuredConnectionFound(ConfiguredConnection)
-        case currentConnectionFound(validUntil: Date, organizationId: String, profileId: String)
+        case currentConnectionFound(validUntil: Date, organizationId: String, organizationURLString: String?, profileId: String)
         case configuredConnectionUpdated(ConfiguredConnection?)
     }
     
@@ -121,8 +122,15 @@ public struct Main: Reducer {
         Reduce { state, action in
             func updateSearchResults() -> IdentifiedArrayOf<Organization> {
                 let configuredOrganization: Organization?
-                if let configuredOrganizationId = state.configuredConnection?.organizationId {
-                    configuredOrganization = state.organizations[id: configuredOrganizationId]
+                if let configuredOrganizationType = state.configuredConnection?.organizationType {
+                    switch configuredOrganizationType {
+                    case let .id(id):
+                        configuredOrganization = state.organizations[id: id]
+                    case let .url(url):
+                        configuredOrganization = Organization(query: url)
+                    case let .local(url):
+                        configuredOrganization = Organization(local: url)
+                    }
                 } else {
                     configuredOrganization = nil
                 }
@@ -138,14 +146,14 @@ public struct Main: Reducer {
                         group.addTask {
                             for await event in delegate {
                                 switch event {
-                                case let .renewActionTriggered(organizationId, profileId):
-                                    await send(.renewActionInReminderTapped(organizationId: organizationId, profileId: profileId))
+                                case let .renewActionTriggered(organizationId, organizationURLString, profileId):
+                                    await send(.renewActionInReminderTapped(organizationId: organizationId, organizationURLString: organizationURLString, profileId: profileId))
                                     
-                                case let .remindMeLaterActionTriggered(validUntil, organizationId, profileId):
+                                case let .remindMeLaterActionTriggered(validUntil, organizationId, organizationURLString, profileId):
                                     guard validUntil.timeIntervalSince(now) > 0 else {
                                         return
                                     }
-                                    try await notificationClient.scheduleRenewReminder(validUntil, organizationId, profileId)
+                                    try await notificationClient.scheduleRenewReminder(validUntil: validUntil, organizationId: organizationId, organizationURLString: organizationURLString, profileId: profileId)
                                 }
                             }
                         }
@@ -170,8 +178,8 @@ public struct Main: Reducer {
                     .run { [configuredConnection = state.configuredConnection] send in
                         if let configuredConnection {
                             await send(.configuredConnectionFound(configuredConnection))
-                        } else if let (validUntil, organizationId, profileId) = await notificationClient.scheduledRenewReminder() {
-                            await send(.currentConnectionFound(validUntil: validUntil, organizationId: organizationId, profileId: profileId))
+                        } else if let (validUntil, organizationId, organizationURLString, profileId) = await notificationClient.scheduledRenewReminder() {
+                            await send(.currentConnectionFound(validUntil: validUntil, organizationId: organizationId, organizationURLString: organizationURLString, profileId: profileId))
                         }
                     },
                     .publisher {
@@ -184,7 +192,7 @@ public struct Main: Reducer {
                 state.loadingState = .success
                 state.organizations = .init(uniqueElements: response.content.organizations)
                 if let pendingRenewAction = state.pendingRenewAction {
-                    return .send(.renewActionInReminderTapped(organizationId: pendingRenewAction.organizationId, profileId: pendingRenewAction.profileId))
+                    return .send(.renewActionInReminderTapped(organizationId: pendingRenewAction.organizationId, organizationURLString: pendingRenewAction.organizationURLString, profileId: pendingRenewAction.profileId))
                 }
                 state.searchResults = updateSearchResults()
                 return .none
@@ -203,16 +211,18 @@ public struct Main: Reducer {
                 state.destination = .alert(alert)
                 return .none
                 
-            case let .renewActionInReminderTapped(organizationId, profileId):
+            case let .renewActionInReminderTapped(organizationId, organizationURLString, profileId):
                 switch state.loadingState {
                 case .initial, .isLoading:
                     // Perform action when organizations are known
-                    state.pendingRenewAction = PendingRenewAction(organizationId: organizationId, profileId: profileId)
+                    state.pendingRenewAction = PendingRenewAction(organizationId: organizationId, organizationURLString: organizationURLString, profileId: profileId)
                     
                 case .success, .failure:
                     state.pendingRenewAction = nil
                     
                     if let organization = state.organizations[id: organizationId] {
+                        state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, autoConnectOnAppear: true))
+                    } else if let organizationURLString, let organization = Organization(query: organizationURLString) {
                         state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, autoConnectOnAppear: true))
                     } else {
                         let alert = AlertState<AlertAction>(title: {
@@ -231,8 +241,15 @@ public struct Main: Reducer {
                 
             case .binding(\.searchQuery):
                 let configuredOrganization: Organization?
-                if let configuredOrganizationId = state.configuredConnection?.organizationId {
-                    configuredOrganization = state.organizations[id: configuredOrganizationId]
+                if let configuredOrganizationType = state.configuredConnection?.organizationType {
+                    switch configuredOrganizationType {
+                    case let .id(id):
+                        configuredOrganization = state.organizations[id: id]
+                    case let .url(url):
+                        configuredOrganization = Organization(query: url)
+                    case let .local(url):
+                        configuredOrganization = Organization(local: url)
+                    }
                 } else {
                     configuredOrganization = nil
                 }
@@ -262,16 +279,7 @@ public struct Main: Reducer {
                             }
                             
                             // If the query could be an URL, treat it as if it's a Let's Wifi URL
-                            let prefixedQuery: String
-                            if !query.lowercased().hasPrefix("https") {
-                                prefixedQuery = "https://" + query
-                            } else {
-                                prefixedQuery = query
-                            }
-                            let urlComponents = URLComponents(string: prefixedQuery)
-                            if let url = urlComponents?.url, let host = urlComponents?.host, let scheme = urlComponents?.scheme, host.contains("."), scheme == "https" {
-                                let name = host
-                                let urlOrganization = Organization(id: "url", name: [LocalizedEntry(value: name)], country: "URL", profiles: [Profile(id: "url", name: [LocalizedEntry(value: name)], default: true, letsWiFiEndpoint: url, type: .letswifi)])
+                            if let urlOrganization = Organization(query: query) {
                                 searchResults.append(urlOrganization)
                             }
                             return searchResults
@@ -292,14 +300,12 @@ public struct Main: Reducer {
                 return .none
                 
             case let .select(organization):
-                if let configuredConnection = state.configuredConnection,
-                   let configuredOrganization = state.organizations[id: organization.id],
-                   organization.id == configuredConnection.organizationId {
+                if let configuredConnection = state.configuredConnection, configuredConnection.isConfigured(organization.id, name: organization.nameOrId) {
                     let profileId = configuredConnection.profileId
                     let connectionType = configuredConnection.type
                     let validUntil = configuredConnection.validUntil
                     let providerInfo = configuredConnection.providerInfo
-                    state.destination = .connect(.init(organization: configuredOrganization, selectedProfileId: profileId, loadingState: .success(.unknown, connectionType, validUntil: validUntil), providerInfo: providerInfo))
+                    state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, loadingState: .success(.unknown, connectionType, validUntil: validUntil), providerInfo: providerInfo))
                     return .none
                 } else {
                     state.destination = .connect(.init(organization: organization))
@@ -326,20 +332,49 @@ public struct Main: Reducer {
                 return .none
                 
             case let .configuredConnectionFound(configuredConnection):
-                let organizationId = configuredConnection.organizationId
+                let organization: Organization?
+                switch configuredConnection.organizationType {
+                case let .id(organizationId):
+                    organization = state.organizations[id: organizationId]
+                case let .url(url):
+                    organization = Organization(query: url)
+                case let .local(url):
+                    organization = Organization(local: url)
+                }
+                guard let organization else {
+                    return .none
+                }
                 let profileId = configuredConnection.profileId
                 let connectionType = configuredConnection.type
                 let validUntil = configuredConnection.validUntil
                 let providerInfo = configuredConnection.providerInfo
-                let organization = state.organizations[id: organizationId]!
                 state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, loadingState: .success(.unknown, connectionType, validUntil: validUntil), providerInfo: providerInfo))
                 
                 state.searchResults = updateSearchResults()
                 return .none
                 
-            case let .currentConnectionFound(validUntil, organizationId, profileId):
-                let organization = state.organizations[id: organizationId]!
-                state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, loadingState: .success(.unknown, .ssids(expectedSSIDs: ["eduroam"]), validUntil: validUntil), providerInfo: nil))
+            case let .currentConnectionFound(validUntil, organizationId, organizationURLString, profileId):
+                let organization: Organization?
+                let organizationType: ConfiguredConnection.OrganizationType?
+                if let anOrganization = state.organizations[id: organizationId] {
+                    organization = anOrganization
+                    organizationType = .id(organizationId)
+                } else if let organizationURLString, organizationURLString.hasPrefix("https"), let anOrganization = Organization(query: organizationURLString) {
+                    organization = anOrganization
+                    organizationType = .url(organizationURLString)
+                } else if let organizationURLString, organizationURLString.hasPrefix("file"), let organizationURL = URL(string: organizationURLString) {
+                    organization = Organization(local: organizationURL)
+                    organizationType = .local(organizationURL)
+                } else {
+                    organization = nil
+                    organizationType = nil
+                }
+                guard let organization, let organizationType else {
+                    return .none
+                }
+                
+                state.configuredConnection = .init(organizationType: organizationType, profileId: profileId, type: nil, validUntil: validUntil, providerInfo: nil)
+                state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, loadingState: .success(.unknown, nil, validUntil: validUntil), providerInfo: nil))
                 
                 state.searchResults = updateSearchResults()
                 return .none

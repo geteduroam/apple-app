@@ -224,7 +224,7 @@ public struct Connect: Reducer {
         public enum LoadingState: Equatable {
             case initial
             case isLoading
-            case success(ConnectionState, ConnectionType, validUntil: Date?)
+            case success(ConnectionState, ConnectionType?, validUntil: Date?)
             case failure
         }
         
@@ -433,6 +433,7 @@ public struct Connect: Reducer {
         let ignoreMissingServerCertificateNameEnabled = configClient.values().ignoreMissingServerCertificateNameEnabled
         if !dryRun {
             state.configuredConnection = nil
+            notificationClient.unscheduleRenewReminder()
         }
         return .run { send in
             await send(
@@ -505,6 +506,7 @@ public struct Connect: Reducer {
                     
                 case .reconnectButtonTapped:
                     state.configuredConnection = nil
+                    notificationClient.unscheduleRenewReminder()
                     state.loadingState = .initial
                     state.credentials = nil
                     state.agreedToTerms = false
@@ -515,6 +517,7 @@ public struct Connect: Reducer {
                     
                 case let .switchProfileButtonTapped(profileId):
                     state.configuredConnection = nil
+                    notificationClient.unscheduleRenewReminder()
                     state.loadingState = .initial
                     state.credentials = nil
                     state.agreedToTerms = false
@@ -598,7 +601,13 @@ public struct Connect: Reducer {
                 case let .applied(connection, validUntil):
                     state.providerInfo = connectResponse.providerInfo
                     
-                    state.configuredConnection = ConfiguredConnection(organizationId: state.organization.id, profileId: state.selectedProfile?.id, type: connection, validUntil: validUntil, providerInfo: state.providerInfo)
+                    if let url = state.selectedProfile?.letsWiFiEndpoint?.absoluteString, state.organization.id == "url" {
+                        state.configuredConnection = ConfiguredConnection(organizationType: .url(url), profileId: state.selectedProfile?.id, type: connection, validUntil: validUntil, providerInfo: state.providerInfo)
+                    } else if let url = state.selectedProfile?.eapConfigEndpoint, state.organization.id == "local" {
+                        state.configuredConnection = ConfiguredConnection(organizationType: .local(url), profileId: state.selectedProfile?.id, type: connection, validUntil: validUntil, providerInfo: state.providerInfo)
+                    } else {
+                        state.configuredConnection = ConfiguredConnection(organizationType: .id(state.organization.id), profileId: state.selectedProfile?.id, type: connection, validUntil: validUntil, providerInfo: state.providerInfo)
+                    }
                     
                     switch connection {
                     case .hotspot20:
@@ -972,10 +981,18 @@ public struct Connect: Reducer {
             if !dryRun {
                 // Schedule reminder for user to renew network access
                 validUntil = firstValidProvider.validUntil
+                let organizationURLString: String?
+                if let organizationURL = profile.letsWiFiEndpoint?.absoluteString, organization.id == "url" {
+                    organizationURLString = organizationURL
+                } else if let organizationURL = profile.eapConfigEndpoint?.absoluteString, organization.id == "local" {
+                    organizationURLString = organizationURL
+                } else {
+                    organizationURLString = nil
+                }
                 if let validUntil {
                     let organizationId = organization.id
                     let profileId = profile.id
-                    try await notificationClient.scheduleRenewReminder(validUntil, organizationId, profileId)
+                    try await notificationClient.scheduleRenewReminder(validUntil: validUntil, organizationId: organizationId, organizationURLString: organizationURLString, profileId: profileId)
                 }
             } else {
                 validUntil = nil

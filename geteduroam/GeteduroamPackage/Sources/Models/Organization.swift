@@ -58,6 +58,38 @@ public struct Organization: Codable, Identifiable, Equatable, Sendable {
         self.matchWords = Self.determineMatchWords(for: self.matchWordsLanguageCode, id: id, name: name)
     }
     
+    public init?(query: String) {
+        // If the query could be an URL, treat it as if it's a Let's Wifi URL
+        let prefixedQuery: String
+        if !query.lowercased().hasPrefix("https") {
+            prefixedQuery = "https://" + query
+        } else {
+            prefixedQuery = query
+        }
+        let urlComponents = URLComponents(string: prefixedQuery)
+        guard let url = urlComponents?.url, let host = urlComponents?.host, let scheme = urlComponents?.scheme, host.contains("."), scheme == "https" else {
+            return nil
+        }
+        self.id = "url"
+        self.name = [LocalizedEntry(value: host)]
+        self.country = "URL"
+        self.profiles = [Profile(id: "url", name: [LocalizedEntry(value: host)], default: true, letsWiFiEndpoint: url, type: .letswifi)]
+        self.geo = []
+        self.matchWordsLanguageCode = ""
+        self.matchWords = []
+    }
+    
+    public init(local fileURL: URL) {
+        let displayName = FileManager().displayName(atPath: fileURL.path)
+        self.id = "local"
+        self.name = [LocalizedEntry(value: displayName)]
+        self.country = "FILE"
+        self.profiles = [Profile(id: "local", name: [LocalizedEntry(value: displayName)], default: true, eapConfigEndpoint: fileURL, mobileConfigEndpoint: nil, letsWiFiEndpoint: nil, webviewEndpoint: nil, type: .eapConfig)]
+        self.geo = []
+        self.matchWordsLanguageCode = ""
+        self.matchWords = []
+    }
+    
     enum CodingKeys: CodingKey {
         case id
         case name

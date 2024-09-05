@@ -153,7 +153,8 @@ let package = Package(
         .target(
             name: "NotificationClient",
             dependencies: [
-                .product(name: "Dependencies", package: "swift-dependencies")
+                .product(name: "Dependencies", package: "swift-dependencies"),
+                .product(name: "DependenciesMacros", package: "swift-dependencies")
             ])
     ]
 )

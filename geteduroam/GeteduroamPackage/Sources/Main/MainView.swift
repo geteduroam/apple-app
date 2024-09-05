@@ -189,7 +189,7 @@ struct MainContentView: View {
                                 Button {
                                     store.send(.select(organization))
                                 } label: {
-                                    OrganizationRowView(organization: organization, configured: organization.id == store.configuredConnection?.organizationId)
+                                    OrganizationRowView(organization: organization, configured: store.configuredConnection?.isConfigured(organization.id, name: organization.nameOrId) ?? false)
                                 }
                                 .buttonStyle(.plain)
                                 .backport

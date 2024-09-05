@@ -1,4 +1,5 @@
 import Dependencies
+import DependenciesMacros
 import Foundation
 import OSLog
 import UserNotifications
@@ -9,50 +10,42 @@ extension String {
     public static let renewNowActionId = "RENEW_NOW_ACTION"
     public static let remindMeActionId = "REMIND_ME_ACTION"
     public static let organizationIdKey = "ORGANIZATION_ID"
+    public static let organizationURLKey = "ORGANIZATION_URL"
     public static let profileIdKey = "PROFILE_ID"
     public static let validUntilKey = "VALID_UNTIL"
 }
 
 extension DependencyValues {
     public var notificationClient: NotificationClient {
-        get { self[NotificationClientKey.self] }
-        set { self[NotificationClientKey.self] = newValue }
-    }
-    
-    public enum NotificationClientKey: TestDependencyKey {
-        public static var testValue = NotificationClient.mock
+        get { self[NotificationClient.self] }
+        set { self[NotificationClient.self] = newValue }
     }
 }
 
-extension DependencyValues.NotificationClientKey: DependencyKey {
-    public static let liveValue = NotificationClient.live
+extension NotificationClient: TestDependencyKey {
+    public static let testValue = Self()
 }
 
+@DependencyClient
 public struct NotificationClient {
-    public var scheduleRenewReminder: (/* validUntil: */ Date, /* organizationId: */ String, /* profileId: */ String) async throws -> Void
-    public var scheduledRenewReminder: () async -> ((/* validUntil: */ Date, /* organizationId: */ String, /* profileId: */ String)?)
-    public var delegate: @Sendable () -> AsyncStream<DelegateEvent>
+    public var scheduleRenewReminder: (_ validUntil: Date, _ organizationId: String, _ organizationURLString: String?, _ profileId: String) async throws -> Void
+    public var unscheduleRenewReminder: () -> Void
+    public var scheduledRenewReminder: () async -> ((validUntil: Date, organizationId: String, organizationURLString: String?, profileId: String)?) = { nil }
+    public var delegate: @Sendable () -> AsyncStream<DelegateEvent> = { .never }
     
     public enum DelegateEvent: Equatable {
-        case renewActionTriggered(organizationId: String, profileId: String)
-        case remindMeLaterActionTriggered(validUntil: Date, organizationId: String, profileId: String)
+        case renewActionTriggered(organizationId: String, organizationURLString: String?, profileId: String)
+        case remindMeLaterActionTriggered(validUntil: Date, organizationId: String, organizationURLString: String?, profileId: String)
     }
-}
-
-extension NotificationClient {
-    static var mock: Self = .init(
-        scheduleRenewReminder: unimplemented("\(Self.self).scheduleRenewReminder"),
-        scheduledRenewReminder: unimplemented("\(Self.self).scheduledRenewReminder"),
-        delegate: unimplemented("\(Self.self).delegate"))
 }
 
 extension Logger {
     public static var notifications = Logger(subsystem: Bundle.main.bundleIdentifier ?? "NotificationClient", category: "notifications")
 }
 
-extension NotificationClient {
-    static var live: Self = .init(
-        scheduleRenewReminder: { validUntil, organizationId, profileId in
+extension NotificationClient: DependencyKey {
+    public static let liveValue = Self(
+        scheduleRenewReminder: { validUntil, organizationId, organizationURLString, profileId in
             Logger.notifications.info("Try to schedule renew reminder for organization \(organizationId) profile \(profileId) valid until \(validUntil)")
             
             @Dependency(\.calendar) var calendar
@@ -80,7 +73,7 @@ extension NotificationClient {
             let settings = await center.notificationSettings()
             
             // Create notification content
-            let userInfo: [String: Any] = [.organizationIdKey: organizationId, .profileIdKey: profileId, .validUntilKey: validUntil]
+            let userInfo: [String: Any] = [.organizationIdKey: organizationId, .organizationURLKey: organizationURLString ?? "", .profileIdKey: profileId, .validUntilKey: validUntil]
             
             let willExpireContent = UNMutableNotificationContent()
             willExpireContent.title = NSLocalizedString("Your network access is about to expire", bundle: .module, comment: "Your network access is about to expire")
@@ -153,9 +146,16 @@ extension NotificationClient {
             try await center.add(hasExpiredRequest)
             Logger.notifications.info("Scheduled expiration notification for organization \(organizationId) profile \(profileId) on \(validUntil)")
         },
+        unscheduleRenewReminder: {
+            let center = UNUserNotificationCenter.current()
+            
+            // Cancel any pending or delivered reminders
+            center.removeDeliveredNotifications(withIdentifiers: [.willExpireCategoryId, .hasExpiredCategoryId])
+            center.removePendingNotificationRequests(withIdentifiers: [.willExpireCategoryId, .hasExpiredCategoryId])
+        },
         scheduledRenewReminder: {
             Logger.notifications.info("Try to see if a renew reminder was scheduled")
-
+            
             guard
                 let userInfo = await  UNUserNotificationCenter.current()
                     .pendingNotificationRequests()
@@ -166,7 +166,13 @@ extension NotificationClient {
                 let profileId = userInfo[.profileIdKey] as? String else {
                return nil
             }
-            return (validUntil, organizationId, profileId)
+            let organizationURLString: String?
+            if let organizationURL = userInfo[.organizationURLKey] as? String, !organizationURL.isEmpty {
+                organizationURLString = organizationURL
+            } else {
+                organizationURLString = nil
+            }
+            return (validUntil, organizationId, organizationURLString, profileId)
         },
         delegate: {
             AsyncStream { continuation in
@@ -209,18 +215,25 @@ extension NotificationClient {
             let userInfo = response.notification.request.content.userInfo
             guard let organizationId = userInfo[String.organizationIdKey] as? String, let profileId = userInfo[String.profileIdKey] as? String, let validUntil = userInfo[String.validUntilKey] as? Date else { return }
 
+            let organizationURLString: String?
+            if let organizationURL = userInfo[String.organizationURLKey] as? String, !organizationURL.isEmpty {
+                organizationURLString = organizationURL
+            } else {
+                organizationURLString = nil
+            }
+            
             switch response.actionIdentifier {
             case .renewNowActionId:
-                Logger.notifications.info("Renew now for organization \(organizationId) profile \(profileId)")
-                continuation.yield(.renewActionTriggered(organizationId: organizationId, profileId: profileId))
+                Logger.notifications.info("Renew now for organization \(organizationId) url \(organizationURLString ?? "N/A") profile \(profileId)")
+                continuation.yield(.renewActionTriggered(organizationId: organizationId, organizationURLString: organizationURLString, profileId: profileId))
 
             case .remindMeActionId:
-                Logger.notifications.info("Remind me later for organization \(organizationId) profile \(profileId) valid until \(validUntil)")
-                continuation.yield(.remindMeLaterActionTriggered(validUntil: validUntil, organizationId: organizationId, profileId: profileId))
+                Logger.notifications.info("Remind me later for organization \(organizationId) url \(organizationURLString ?? "N/A") profile \(profileId) valid until \(validUntil)")
+                continuation.yield(.remindMeLaterActionTriggered(validUntil: validUntil, organizationId: organizationId, organizationURLString: organizationURLString, profileId: profileId))
 
             default:
-                Logger.notifications.info("Renew now for organization \(organizationId) profile \(profileId)")
-                continuation.yield(.renewActionTriggered(organizationId: organizationId, profileId: profileId))
+                Logger.notifications.info("Renew now for organization \(organizationId) url \(organizationURLString ?? "N/A") profile \(profileId)")
+                continuation.yield(.renewActionTriggered(organizationId: organizationId, organizationURLString: organizationURLString, profileId: profileId))
             }
         }
     }
