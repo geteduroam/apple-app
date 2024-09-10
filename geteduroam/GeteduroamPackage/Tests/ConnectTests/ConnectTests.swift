@@ -242,6 +242,8 @@ final class ConnectTests: XCTestCase {
         await store.receive(\.foundSSID) {
             $0.loadingState = .success(.connected, .ssids(expectedSSIDs: ["ssid"]), validUntil: Date(timeIntervalSince1970: 3600))
         }
+        
+        await store.send(.onDisappear)
     }
     #endif
 }

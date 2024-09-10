@@ -287,6 +287,7 @@ public struct Connect: Reducer {
         case notFoundSSID
         case logInButtonTapped
         case onAppear
+        case onDisappear
         case onUsernameSubmit
         case select(Profile.ID)
         case reconnectTapped
@@ -300,7 +301,6 @@ public struct Connect: Reducer {
     }
     
     public enum AlertAction: Equatable {
-        case findNetworkButtonTapped
         case reconnectButtonTapped
         case switchProfileButtonTapped(Profile.ID)
     }
@@ -463,9 +463,31 @@ public struct Connect: Reducer {
         }
     }
     
+    private enum CancelID { case checkNetwork }
+    
+    static let checkNetworkRefreshInterval: UInt64 = 3
+    
     public var body: some ReducerOf<Self> {
         BindingReducer()
         Reduce { state, action -> Effect<Connect.Action> in
+            func checkNetwork(expectedSSIDs: [String]?, afterDelay delay: UInt64? = nil) -> Effect<Connect.Action> {
+                .run { send in
+                    guard let expectedSSIDs, !expectedSSIDs.isEmpty else {
+                        return
+                    }
+                    if let delay {
+                        try await Task.sleep(nanoseconds: NSEC_PER_SEC * delay)
+                    }
+                    let currentNetwork = await hotspotNetworkClient.fetchCurrent()
+                    if let currentNetwork, expectedSSIDs.contains(currentNetwork.ssid) {
+                        await send(.foundSSID(currentNetwork.ssid))
+                    } else {
+                        await send(.notFoundSSID)
+                    }
+                }
+                .cancellable(id: CancelID.checkNetwork, cancelInFlight: true)
+            }
+            
             switch action {
             case .binding:
                 return .none
@@ -475,14 +497,7 @@ public struct Connect: Reducer {
                     state.autoConnectOnAppear = false
                 }
                 if state.isConfigured, let expectedSSIDs = state.expectedSSIDs, expectedSSIDs.isEmpty == false {
-                    return .run { send in
-                        let currentNetwork = await hotspotNetworkClient.fetchCurrent()
-                        if let currentNetwork, expectedSSIDs.contains(currentNetwork.ssid) {
-                            await send(.foundSSID(currentNetwork.ssid))
-                        } else {
-                            await send(.notFoundSSID)
-                        }
-                    }
+                    return checkNetwork(expectedSSIDs: expectedSSIDs)
                 }
                 guard let _ = state.selectedProfile, (state.organization.hasSingleProfile || state.autoConnectOnAppear) && !state.isConfigured else {
                     return .none
@@ -490,22 +505,11 @@ public struct Connect: Reducer {
                 // Auto connect if there is only a single profile or a reminder was tapped
                 return connect(state: &state, dryRun: true)
                 
+            case .onDisappear:
+                return .cancel(id: CancelID.checkNetwork)
+                
             case let .destination(.presented(.alert(action))):
-                switch action {
-                case .findNetworkButtonTapped:
-                    guard let expectedSSIDs = state.expectedSSIDs, expectedSSIDs.isEmpty == false else {
-                        return .none
-                    }
-                    return .run { send in
-                        try? await eapClient.connect(expectedSSIDs[0])
-                        let currentNetwork = await hotspotNetworkClient.fetchCurrent()
-                        if let currentNetwork, expectedSSIDs.contains(currentNetwork.ssid) {
-                            await send(.foundSSID(currentNetwork.ssid))
-                        } else {
-                            await send(.notFoundSSID)
-                        }
-                    }
-                    
+                switch action {                    
                 case .reconnectButtonTapped:
                     state.configuredConnection = nil
                     notificationClient.unscheduleRenewReminder()
@@ -620,14 +624,7 @@ public struct Connect: Reducer {
                         
                     case let .ssids(expectedSSIDs: expectedSSIDs):
                         state.loadingState = .success(.disconnected, connection, validUntil: validUntil)
-                        return .run { send in
-                            let currentNetwork = await hotspotNetworkClient.fetchCurrent()
-                            if let currentNetwork, expectedSSIDs.contains(currentNetwork.ssid) {
-                                await send(.foundSSID(currentNetwork.ssid))
-                            } else {
-                                await send(.notFoundSSID)
-                            }
-                        }
+                        return checkNetwork(expectedSSIDs: expectedSSIDs)
                     }
                 }
                 
@@ -756,14 +753,14 @@ public struct Connect: Reducer {
                     return .none
                 }
                 state.loadingState = .success(.connected, type, validUntil: validUntil)
-                return .none
+                return checkNetwork(expectedSSIDs: state.expectedSSIDs, afterDelay: Self.checkNetworkRefreshInterval)
                 
             case .notFoundSSID:
                 guard case let .success(_, type, validUntil) = state.loadingState else {
                     return .none
                 }
                 state.loadingState = .success(.disconnected, type, validUntil: validUntil)
-                return .none
+                return checkNetwork(expectedSSIDs: state.expectedSSIDs, afterDelay: Self.checkNetworkRefreshInterval)
                 
             case .reconnectTapped:
 #if os(iOS)
@@ -785,7 +782,7 @@ public struct Connect: Reducer {
                                 TextState("Cancel", bundle: .module)
                             }
                         }, message: {
-                            TextState("Reconfigure to renew your network access or if you are experiencing network issues.", bundle: .module)
+                            TextState("Reconfigure your \(UIDevice.current.localizedModel) to renew your network access or if you are experiencing network issues.", bundle: .module)
                         })
                     state.destination = .alert(alert)
                     
@@ -794,10 +791,6 @@ public struct Connect: Reducer {
                         title: {
                             TextState("Already configured, but not connected", bundle: .module)
                         }, actions: {
-                            ButtonState(action: .send(.findNetworkButtonTapped)) {
-                                TextState("Find Network", bundle: .module)
-                            }
-                            // Is this even possible?!
                             ButtonState(role: .destructive, action: .send(.reconnectButtonTapped)) {
                                 TextState("Reconfigure \(UIDevice.current.localizedModel)", bundle: .module)
                             }
@@ -805,7 +798,7 @@ public struct Connect: Reducer {
                                 TextState("Cancel", bundle: .module)
                             }
                         }, message: {
-                            TextState("Do you want to find and connect to the network, or to reconfigure your \(UIDevice.current.localizedModel)?", bundle: .module)
+                            TextState("Reconfigure your \(UIDevice.current.localizedModel) to renew your network access or if you are experiencing network issues.", bundle: .module)
                         })
                     state.destination = .alert(alert)
                     
@@ -814,10 +807,6 @@ public struct Connect: Reducer {
                         title: {
                             TextState("Already configured", bundle: .module)
                         }, actions: {
-                            ButtonState(action: .send(.findNetworkButtonTapped)) {
-                                TextState("Find Network", bundle: .module)
-                            }
-                            // Is this even possible?!
                             ButtonState(role: .destructive, action: .send(.reconnectButtonTapped)) {
                                 TextState("Reconfigure \(UIDevice.current.localizedModel)", bundle: .module)
                             }
@@ -825,7 +814,7 @@ public struct Connect: Reducer {
                                 TextState("Cancel", bundle: .module)
                             }
                         }, message: {
-                            TextState("Do you want to find and connect to the network, or to reconfigure your \(UIDevice.current.localizedModel)?", bundle: .module)
+                            TextState("Reconfigure your \(UIDevice.current.localizedModel) to renew your network access or if you are experiencing network issues.", bundle: .module)
                         })
                     state.destination = .alert(alert)
                 }
