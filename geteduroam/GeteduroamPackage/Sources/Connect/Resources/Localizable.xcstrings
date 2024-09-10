@@ -1297,22 +1297,6 @@
         }
       }
     },
-    "Do you want to find and connect to the network, or to reconfigure your %@?" : {
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do you want to find and connect to the network, or to reconfigure your %@?"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wil je verbinding maken met het netwerk, of jouw %@ opnieuw instellen?"
-          }
-        }
-      }
-    },
     "Do you want to reconfigure your %@ to use %@ profile instead?" : {
       "localizations" : {
         "en" : {
@@ -1532,22 +1516,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Не вдалося встановити зв'язок"
-          }
-        }
-      }
-    },
-    "Find Network" : {
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Find Network"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zoek netwerk"
           }
         }
       }
@@ -3110,18 +3078,18 @@
         }
       }
     },
-    "Reconfigure to renew your network access or if you are experiencing network issues." : {
+    "Reconfigure your %@ to renew your network access or if you are experiencing network issues." : {
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reconfigure to renew your network access or if you are experiencing network issues."
+            "value" : "Reconfigure your %@ to renew your network access or if you are experiencing network issues."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stel opnieuw in om netwerktoegang te vernieuwen of als je problemen ervaart met het netwerk."
+            "value" : "Stel jouw %@ opnieuw in om netwerktoegang te vernieuwen of als je problemen ervaart met het netwerk."
           }
         }
       }

@@ -10,7 +10,6 @@ import XCTestDynamicOverlay
 
 public struct EAPClient {
     public var configure: (EAPIdentityProvider, Credentials?, Bool, IgnoreServerCertificateImportFailureEnabled?, IgnoreMissingServerCertificateNameEnabled?) async throws -> [String]
-    public var connect: (_ ssid: String) async throws -> Void
 }
 
 extension DependencyValues {
@@ -26,8 +25,7 @@ extension DependencyValues {
 
 extension EAPClient {
     static var mock: Self = .init(
-        configure: unimplemented(),
-        connect: unimplemented()
+        configure: unimplemented()
     )
 }
 
@@ -51,14 +49,6 @@ extension EAPClient {
                 ignoreServerCertificateImportFailureEnabled: ignoreServerCertificateImportFailureEnabled,
                 ignoreMissingServerCertificateNameEnabled: ignoreMissingServerCertificateNameEnabled
             )
-#else
-            fatalError("EAPConfigurator not available")
-#endif
-        },
-        connect: { ssid in
-#if os(iOS)
-            let ssidConfiguration = NEHotspotConfiguration(ssid: ssid)
-            try await NEHotspotConfigurationManager.shared.apply(ssidConfiguration)
 #else
             fatalError("EAPConfigurator not available")
 #endif

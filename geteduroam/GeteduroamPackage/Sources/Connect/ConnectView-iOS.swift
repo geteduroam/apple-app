@@ -176,6 +176,9 @@ public struct ConnectView_iOS: View {
             .onAppear {
                 store.send(.onAppear)
             }
+            .onDisappear {
+                store.send(.onDisappear)
+            }
             .background {
                 BackgroundView(showLogo: false)
             }
