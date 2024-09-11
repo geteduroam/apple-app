@@ -48,7 +48,7 @@ final class ConnectTests: XCTestCase {
         
         await store.receive(\.connectResponse) {
             $0.loadingState = .failure
-            $0.destination = .alert(AlertState(title: TextState("Failed to connect"), message: TextState("No valid provider found.")))
+            $0.destination = .alert(AlertState(title: { TextState("Failed to connect", bundle: .module) }, message: { TextState("No valid provider found.", bundle: .module) }))
         }
     }
 

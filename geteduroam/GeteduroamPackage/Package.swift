@@ -41,7 +41,7 @@ let package = Package(
             targets: ["NotificationClient"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/CoreOffice/XMLCoder", .upToNextMajor(from: "0.16.0")),
+        .package(url: "https://github.com/CoreOffice/XMLCoder", from: "0.16.0"),
         .package(url: "https://github.com/egeniq/app-remote-config-ios", from: "0.2.0"),
         .package(url: "https://github.com/egeniq/network-ios", branch: "main"),
         .package(url: "https://github.com/openid/AppAuth-iOS", from: "1.0.0"),
