@@ -1,6 +1,6 @@
 import Dependencies
 import Foundation
-import URLRouting
+@preconcurrency import URLRouting
 
 extension DependencyValues {
     public var discoveryClient: URLRoutingClient<DiscoveryRoute> {
@@ -9,7 +9,7 @@ extension DependencyValues {
     }
     
     public enum DiscoveryClientKey: TestDependencyKey {
-        public static var testValue = mockClient
+        public static let testValue = mockClient
     }
 }
 

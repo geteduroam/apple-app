@@ -2,7 +2,7 @@ import Dependencies
 import DependenciesMacros
 import Foundation
 import OSLog
-import UserNotifications
+@preconcurrency import UserNotifications
 
 extension String {
     public static let willExpireCategoryId = "WILL_EXPIRE_CATEGORY"
@@ -27,20 +27,20 @@ extension NotificationClient: TestDependencyKey {
 }
 
 @DependencyClient
-public struct NotificationClient {
-    public var scheduleRenewReminder: (_ validUntil: Date, _ organizationId: String, _ organizationURLString: String?, _ profileId: String) async throws -> Void
-    public var unscheduleRenewReminder: () -> Void
-    public var scheduledRenewReminder: () async -> ((validUntil: Date, organizationId: String, organizationURLString: String?, profileId: String)?) = { nil }
+public struct NotificationClient: Sendable {
+    public var scheduleRenewReminder: @Sendable (_ validUntil: Date, _ organizationId: String, _ organizationURLString: String?, _ profileId: String) async throws -> Void
+    public var unscheduleRenewReminder: @Sendable () -> Void
+    public var scheduledRenewReminder: @Sendable () async -> ((validUntil: Date, organizationId: String, organizationURLString: String?, profileId: String)?) = { nil }
     public var delegate: @Sendable () -> AsyncStream<DelegateEvent> = { .never }
     
-    public enum DelegateEvent: Equatable {
+    public enum DelegateEvent: Equatable, Sendable {
         case renewActionTriggered(organizationId: String, organizationURLString: String?, profileId: String)
         case remindMeLaterActionTriggered(validUntil: Date, organizationId: String, organizationURLString: String?, profileId: String)
     }
 }
 
 extension Logger {
-    public static var notifications = Logger(subsystem: Bundle.main.bundleIdentifier ?? "NotificationClient", category: "notifications")
+    public static let notifications = Logger(subsystem: Bundle.main.bundleIdentifier ?? "NotificationClient", category: "notifications")
 }
 
 extension NotificationClient: DependencyKey {
@@ -186,8 +186,11 @@ extension NotificationClient: DependencyKey {
         })
 }
 
+extension UNNotificationResponse: @retroactive @unchecked Sendable { }
+extension UNUserNotificationCenter: @retroactive @unchecked Sendable { }
+
 extension NotificationClient {
-    fileprivate class Delegate: NSObject, UNUserNotificationCenterDelegate {
+    fileprivate final class Delegate: NSObject, UNUserNotificationCenterDelegate, Sendable {
         let continuation: AsyncStream<NotificationClient.DelegateEvent>.Continuation
         
         init(continuation: AsyncStream<NotificationClient.DelegateEvent>.Continuation) {

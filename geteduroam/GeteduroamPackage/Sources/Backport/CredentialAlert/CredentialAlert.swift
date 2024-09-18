@@ -85,7 +85,7 @@ public extension View {
 }
 
 public extension Backport where Content: View {
-    @ViewBuilder
+    @MainActor @ViewBuilder
     func credentialAlert(_ alert: CredentialAlert) -> some View {
         if #available(iOS 16, tvOS 16.0, watchOS 9.0, macOS 12.0, *) {
             content.alert(

@@ -228,26 +228,31 @@ public struct ConnectView_iOS: View {
 }
 
 #Preview {
-    ConnectView_iOS(store: .init(
-        initialState: .init(
-            organization: .init(
-                id: "1",
-                name: [LocalizedEntry(value: "My Organization")],
-                country: "NL",
-                profiles: [
-                    Profile(
-                        id: "2",
-                        name: [LocalizedEntry(value: "My Profile")],
-                        default: true,
-                        type: .letswifi),
-                    Profile(
-                        id: "3",
-                        name: [LocalizedEntry(value: "Other Profile")],
-                        default: false,
-                        type: .eapConfig)
-                ],
-                geo: [Coordinate(lat: 0, lon: 0)])),
-        reducer: { Connect() }))
+    ConnectView_iOS(
+        store: .init(
+            initialState: .init(
+                organization: .init(
+                    id: "1",
+                    name: [LocalizedEntry(value: "My Organization")],
+                    country: "NL",
+                    profiles: [
+                        Profile(
+                            id: "2",
+                            name: [LocalizedEntry(value: "My Profile")],
+                            default: true,
+                            type: .letswifi),
+                        Profile(
+                            id: "3",
+                            name: [LocalizedEntry(value: "Other Profile")],
+                            default: false,
+                            type: .eapConfig)
+                    ],
+                    geo: [Coordinate(lat: 0, lon: 0)]),
+                localizedModel: "iPhone"
+            ),
+            reducer: { Connect()
+            })
+    )
     .environmentObject(Theme.demo)
 }
 #endif

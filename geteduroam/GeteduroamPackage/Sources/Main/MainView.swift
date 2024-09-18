@@ -268,7 +268,7 @@ extension View {
 #if DEBUG
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(store: .init(initialState: .init(), reducer: { Main() }))
+        MainView(store: .init(initialState: .init(localizedModel: "iPhone"), reducer: { Main() }))
     }
 }
 #endif

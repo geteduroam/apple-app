@@ -21,8 +21,8 @@ extension PersistenceKey where Self == FileStorageKey<ConfiguredConnection?> {
     }
 }
 
-public struct ConfiguredConnection: Codable, Equatable {
-    public enum OrganizationType: Codable, Equatable {
+public struct ConfiguredConnection: Codable, Equatable, Sendable {
+    public enum OrganizationType: Codable, Equatable, Sendable {
         case id(String)
         case url(String)
         case local(URL)

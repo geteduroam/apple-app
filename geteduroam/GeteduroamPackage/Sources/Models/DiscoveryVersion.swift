@@ -1,6 +1,6 @@
 import Foundation
 
-public struct DiscoveryVersion: Codable, Equatable {
+public struct DiscoveryVersion: Codable, Equatable, Sendable {
     public init(organizations: [Organization]) {
         self.organizations = organizations
     }

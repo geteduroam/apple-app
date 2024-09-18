@@ -35,7 +35,7 @@ final class ModelsTests: XCTestCase {
 
         let decoded = try decoder.decode(ProviderInfo.self, from: Data(sourceXML.utf8))
         
-        XCTAssertNoDifference(decoded, ProviderInfo(
+        expectNoDifference(decoded, ProviderInfo(
             displayName: .init(string: "Provider Display Name"),
             description: .init(string: "Description"),
             providerLocations: [
@@ -60,7 +60,7 @@ final class ModelsTests: XCTestCase {
         
         let decoded = try decoder.decode(ServerCredential.self, from: Data(sourceXML.utf8))
         
-        XCTAssertNoDifference(decoded, ServerCredential(
+        expectNoDifference(decoded, ServerCredential(
             certificates: [
                 .init(value: "DEADBEEF==", format: "X.509", encoding: "base64")
             ],
@@ -113,7 +113,7 @@ final class ModelsTests: XCTestCase {
         
         let decoded = try decoder.decode(EAPIdentityProviderList.self, from: Data(sourceXML.utf8))
         
-        XCTAssertNoDifference(decoded, EAPIdentityProviderList(providers: [
+        expectNoDifference(decoded, EAPIdentityProviderList(providers: [
             .init(
                 id: "moreelsepark.geteduroam.nl",
                 validUntil: ISO8601DateFormatter().date(from: "2023-11-25T08:01:26Z")!,
@@ -170,7 +170,7 @@ final class ModelsTests: XCTestCase {
 
         let decoded = try decoder.decode(ProviderInfo.self, from: Data(sourceXML.utf8))
         
-        XCTAssertNoDifference(decoded, ProviderInfo(
+        expectNoDifference(decoded, ProviderInfo(
             displayName: [
                 .init(language: "nl", value: "Te tonen naam voor provider"),
                 .init(language: "en", value: "Provider Display Name"),
@@ -198,7 +198,7 @@ final class ModelsTests: XCTestCase {
 
         let decoded = try decoder.decode(ProviderInfo.self, from: Data(sourceXML.utf8))
         
-        XCTAssertNoDifference(decoded, ProviderInfo(
+        expectNoDifference(decoded, ProviderInfo(
             displayName: nil,
             description: nil,
             providerLocations: [],

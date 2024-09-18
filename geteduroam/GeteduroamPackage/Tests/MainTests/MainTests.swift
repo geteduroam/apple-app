@@ -15,7 +15,7 @@ final class MainTests: XCTestCase {
 
     func testLoading() async throws {
         let store = TestStore(
-            initialState: Main.State(),
+            initialState: Main.State(localizedModel: "test model"),
             reducer: { Main() },
             withDependencies: {
                 $0.discoveryClient = URLRoutingClient<DiscoveryRoute>.failing.override(.discover) {
@@ -76,7 +76,7 @@ final class MainTests: XCTestCase {
 
     func testSearchByFullname() async throws {
         let store = TestStore(
-            initialState: Main.State(organizations: [demoInstance], loadingState: .success),
+            initialState: Main.State(organizations: [demoInstance], localizedModel: "test model", loadingState: .success),
             reducer: { Main() },
             withDependencies: {
                 $0.notificationClient.delegate = { .finished }
@@ -95,7 +95,7 @@ final class MainTests: XCTestCase {
 
     func testSearchByAbbreviation() async throws {
         let store = TestStore(
-            initialState: Main.State(organizations: [demoInstance], loadingState: .success),
+            initialState: Main.State(organizations: [demoInstance], localizedModel: "test model", loadingState: .success),
             reducer: { Main() },
             withDependencies: {
                 $0.notificationClient.delegate = { .finished }
@@ -114,7 +114,7 @@ final class MainTests: XCTestCase {
 
     func testSearchCaseInsensitive() async throws {
         let store = TestStore(
-            initialState: Main.State(organizations: [demoInstance], loadingState: .success),
+            initialState: Main.State(organizations: [demoInstance], localizedModel: "test model", loadingState: .success),
             reducer: { Main() },
             withDependencies: {
                 $0.notificationClient.delegate = { .finished }
@@ -133,7 +133,7 @@ final class MainTests: XCTestCase {
 
     func testSearchDiacriticInsensitive() async throws {
         let store = TestStore(
-            initialState: Main.State(organizations: [demoInstance], loadingState: .success),
+            initialState: Main.State(organizations: [demoInstance], localizedModel: "test model", loadingState: .success),
             reducer: { Main() },
             withDependencies: {
                 $0.notificationClient.delegate = { .finished }
@@ -152,7 +152,7 @@ final class MainTests: XCTestCase {
 
     func testSearchWithPrefixOnly() async throws {
         let store = TestStore(
-            initialState: Main.State(organizations: [demoInstance], loadingState: .success),
+            initialState: Main.State(organizations: [demoInstance], localizedModel: "test model", loadingState: .success),
             reducer: { Main() },
             withDependencies: {
                 $0.notificationClient.delegate = { .finished }
@@ -170,7 +170,7 @@ final class MainTests: XCTestCase {
     
     func testSearchWithURL() async throws {
         let store = TestStore(
-            initialState: Main.State(organizations: [demoInstance], loadingState: .success),
+            initialState: Main.State(organizations: [demoInstance], localizedModel: "test model", loadingState: .success),
             reducer: { Main() },
             withDependencies: {
                 $0.notificationClient.delegate = { .finished }

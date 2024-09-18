@@ -31,7 +31,8 @@ public final class Theme: ObservableObject {
 }
 
 extension Theme {
-    public static var demo = Theme(
+    @MainActor
+    public static let demo = Theme(
         searchFont: .custom("OpenSans-Regular", size: 20, relativeTo: .body),
         errorFont: .custom("OpenSans-Regular", size: 16, relativeTo: .body),
         organizationNameFont: .custom("OpenSans-Bold", size: 16, relativeTo: .body),

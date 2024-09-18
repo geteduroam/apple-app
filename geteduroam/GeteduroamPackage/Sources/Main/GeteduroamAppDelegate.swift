@@ -1,4 +1,4 @@
-import AppAuth
+@preconcurrency import AppAuth
 import AuthClient
 import ComposableArchitecture
 import Foundation
@@ -9,7 +9,10 @@ public enum StartAuthError: Error {
     case unknownError
 }
 
+extension OIDAuthorizationRequest: @retroactive @unchecked Sendable { }
+
 #if os(iOS)
+@MainActor
 public class GeteduroamAppDelegate: NSObject, UIApplicationDelegate, ObservableObject, AuthClient {
     
     public func createStore(initialState: Main.State) {
@@ -89,7 +92,8 @@ extension UIApplication {
     
 }
 #elseif os(macOS)
-public class GeteduroamAppDelegate: NSObject, NSApplicationDelegate, ObservableObject, AuthClient {
+@MainActor
+public final class GeteduroamAppDelegate: NSObject, NSApplicationDelegate, ObservableObject, AuthClient {
     
     public func createStore(initialState: Main.State) {
         assert(store == nil, "Call this method only once")
@@ -109,7 +113,7 @@ public class GeteduroamAppDelegate: NSObject, NSApplicationDelegate, ObservableO
     private var currentAuthorizationFlow: OIDExternalUserAgentSession?
   
     public func startAuth(request: OIDAuthorizationRequest) async throws -> OIDAuthState {
-        guard let window = await NSApplication.shared.keyWindow else {
+        guard let window = NSApplication.shared.keyWindow else {
             throw StartAuthError.noWindow
         }
         return try await withCheckedThrowingContinuation { continuation in

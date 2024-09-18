@@ -3,9 +3,9 @@ import Foundation
 import Models
 import OSLog
 
-public struct CacheClient {
-    public var cacheDiscovery: (DiscoveryResponse) -> Void
-    public var restoreDiscovery: () throws -> DiscoveryResponse
+public struct CacheClient: Sendable {
+    public var cacheDiscovery: @Sendable (DiscoveryResponse) -> Void
+    public var restoreDiscovery: @Sendable () throws -> DiscoveryResponse
     
     static func cacheURLForDiscovery() throws -> URL {
         guard let directoryURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).last else {
@@ -23,12 +23,12 @@ extension DependencyValues {
     }
     
     public enum CacheClientKey: TestDependencyKey {
-        public static var testValue = CacheClient.mock
+        public static let testValue = CacheClient.mock
     }
 }
 
 extension CacheClient {
-    static var mock: Self = .init(
+    static let mock: Self = .init(
         cacheDiscovery: { _ in
             print("Should now create cache")
         },
@@ -39,15 +39,15 @@ extension CacheClient {
 }
 
 extension DependencyValues.CacheClientKey: DependencyKey {
-    public static var liveValue = CacheClient.live
+    public static let liveValue = CacheClient.live
 }
 
 extension Logger {
-  static var cache = Logger(subsystem: Bundle.main.bundleIdentifier ?? "CacheClient", category: "cache")
+    static let cache = Logger(subsystem: Bundle.main.bundleIdentifier ?? "CacheClient", category: "cache")
 }
 
 extension CacheClient {
-    static var live: Self = .init(
+    static let live: Self = .init(
         cacheDiscovery: { organizations in
             guard let data = try? JSONEncoder().encode(organizations), let cacheURL = try? Self.cacheURLForDiscovery() else {
                 Logger.cache.error("Failed to cache discovery")

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct DiscoveryResponse: Codable, Equatable {
+public struct DiscoveryResponse: Codable, Equatable, Sendable {
     public init(content: DiscoveryVersion) {
         self.content = content
     }

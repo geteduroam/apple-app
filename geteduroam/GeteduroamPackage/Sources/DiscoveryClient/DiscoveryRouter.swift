@@ -1,6 +1,6 @@
 import CasePaths
 import Foundation
-import URLRouting
+@preconcurrency import URLRouting
 
 public enum DiscoveryRoute: Equatable {
     case discover
