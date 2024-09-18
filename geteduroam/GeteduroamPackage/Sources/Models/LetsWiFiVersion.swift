@@ -1,6 +1,6 @@
 import Foundation
 
-public struct LetsWiFiVersion: Codable, Equatable {
+public struct LetsWiFiVersion: Codable, Equatable, Sendable {
     public init(eapConfigEndpoint: URL? = nil, mobileConfigEndpoint: URL? = nil, authorizationEndpoint: URL? = nil, tokenEndpoint: URL? = nil) {
         self.eapConfigEndpoint = eapConfigEndpoint
         self.mobileConfigEndpoint = mobileConfigEndpoint

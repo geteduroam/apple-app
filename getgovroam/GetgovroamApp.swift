@@ -67,7 +67,11 @@ struct GeteduroamApp: App {
         if let scenario = UserDefaults.standard.string(forKey: "Scenario"),  let scenario = Scenario(rawValue: scenario) {
             initialState = scenario.initialState
         } else {
-            initialState = .init()
+#if os(macOS)
+            initialState = .init(localizedModel: "Mac")
+#else
+            initialState = .init(localizedModel: UIDevice.current.localizedModel)
+#endif
         }
 #else
         let initialState = Main.State()

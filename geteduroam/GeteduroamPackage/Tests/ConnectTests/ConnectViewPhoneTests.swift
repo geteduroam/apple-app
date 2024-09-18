@@ -6,11 +6,8 @@ import XCTest
 @testable import Connect
 
 #if os(iOS)
+@MainActor
 final class ConnectViewPhoneTests: XCTestCase {
-
-    override class func setUp() {
-        SnapshotTesting.diffTool = "ksdiff"
-    }
     
     let theme = Theme(
         searchFont: .system(.body, design: .default),
@@ -31,7 +28,7 @@ final class ConnectViewPhoneTests: XCTestCase {
         throw XCTSkip("Work in progress")
         let profile = Profile(id: "1", name: [LocalizedEntry(value: "My Profile")], default: true, type: .eapConfig)
         let organization = Organization(id: "test", name: [LocalizedEntry(value: "My Test Organization")], country: "AB", profiles: [profile], geo: [])
-        let store = StoreOf<Connect>(initialState: .init(organization: organization), reducer: { })
+        let store = StoreOf<Connect>(initialState: .init(organization: organization, localizedModel: "test model"), reducer: { })
         
         let connectView = ConnectView(store: store)
             .environmentObject(theme)
@@ -45,11 +42,8 @@ final class ConnectViewPhoneTests: XCTestCase {
 #endif
 
 #if os(macOS)
+@MainActor
 final class ConnectViewMacTests: XCTestCase {
-
-    override class func setUp() {
-        SnapshotTesting.diffTool = "ksdiff"
-    }
     
     let theme = Theme(
         searchFont: .system(.body, design: .default),
@@ -70,7 +64,7 @@ final class ConnectViewMacTests: XCTestCase {
         throw XCTSkip("Work in progress")
         let profile = Profile(id: "1", name: [LocalizedEntry(value: "My Profile")], default: true, type: .eapConfig)
         let organization = Organization(id: "test", name: [LocalizedEntry(value: "My Test Organization")], country: "AB", profiles: [profile], geo: [])
-        let store = StoreOf<Connect>(initialState: .init(organization: organization), reducer: { })
+        let store = StoreOf<Connect>(initialState: .init(organization: organization, localizedModel: "test model"), reducer: { })
         
         let connectView = ConnectView(store: store)
             .environmentObject(theme)

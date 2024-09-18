@@ -1,7 +1,7 @@
 import Foundation
 import XMLCoder
 
-public struct CertificateData: Codable, Equatable {
+public struct CertificateData: Codable, Equatable, Sendable {
     public init(value: String, format: String, encoding: String) {
         self.value = value
         self.format = format

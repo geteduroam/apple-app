@@ -3,8 +3,8 @@ import Foundation
 import NetworkExtension
 import XCTestDynamicOverlay
 
-public struct HotspotNetworkClient {
-    public var fetchCurrent: () async -> NetworkInfo?
+public struct HotspotNetworkClient: Sendable {
+    public var fetchCurrent: (@Sendable () async -> NetworkInfo?)
 }
 
 extension DependencyValues {
@@ -14,22 +14,22 @@ extension DependencyValues {
     }
     
     public enum HotspotNetworkClientKey: TestDependencyKey {
-        public static var testValue = HotspotNetworkClient.mock
+        public static let testValue = HotspotNetworkClient.mock
     }
 }
 
 extension HotspotNetworkClient {
-    static var mock: Self = .init(
-        fetchCurrent: unimplemented()
+    static let mock: Self = .init(
+        fetchCurrent: unimplemented("fetchCurrent", placeholder: nil)
     )
 }
 
 extension DependencyValues.HotspotNetworkClientKey: DependencyKey {
-    public static var liveValue = HotspotNetworkClient.live
+    public static let liveValue = HotspotNetworkClient.live
 }
 
 extension HotspotNetworkClient {
-    static var live: Self = .init(
+    static let live: Self = .init(
         fetchCurrent: {
             #if os(iOS)
             guard let network = await NEHotspotNetwork.fetchCurrent() else {

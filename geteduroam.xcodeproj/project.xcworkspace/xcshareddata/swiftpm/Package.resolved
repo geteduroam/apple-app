@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/egeniq/app-remote-config",
       "state" : {
-        "revision" : "0ab2f3e3b3d5cc0a41112cbd8b4adb9079323373",
-        "version" : "0.2.0"
+        "revision" : "13d7fab57b522d05b5fc540a6f784c9fb461de67",
+        "version" : "0.3.0"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/egeniq/app-remote-config-ios",
       "state" : {
-        "revision" : "858aa2ee1b2a1a2a3f1389f1cdb7543770acb43b",
-        "version" : "0.2.0"
+        "revision" : "046504fa6899aaa8b97c70ca0c38c8675c461de5",
+        "version" : "0.3.0"
       }
     },
     {

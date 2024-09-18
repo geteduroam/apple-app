@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Credentials: Equatable {
+public struct Credentials: Equatable, Sendable {
     public init(username: String = "", password: String = "") {
         self.username = username
         self.password = password

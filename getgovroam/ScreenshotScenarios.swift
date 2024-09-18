@@ -85,6 +85,7 @@ enum Scenario: String, CaseIterable {
         case .main:
             Main.State(
                 organizations: .init(uniqueElements: [.example, .example2, .example3]),
+                localizedModel: "iPhone",
                 loadingState: .success
             )
             
@@ -92,26 +93,31 @@ enum Scenario: String, CaseIterable {
             Main.State(
                 searchQuery: "demo",
                 organizations: .init(uniqueElements: [.example, .example2, .example3]),
+                localizedModel: "iPhone",
                 loadingState: .success,
                 searchResults:  .init(uniqueElements: [.example, .example2, .example3])
             )
             
         case .connect:
             Main.State(
+                localizedModel: "iPhone",
                 loadingState: .success,
                 destination: .connect(
                     .init(
                         organization: .example,
+                        localizedModel: "iPhone",
                         providerInfo: .example
                     )
                 ))
             
         case .connected:
             Main.State(
+                localizedModel: "iPhone",
                 loadingState: .success,
                 destination: .connect(
                     .init(
                         organization: .example,
+                        localizedModel: "iPhone",
                         loadingState: .success(.connected, .ssids(expectedSSIDs: ["eduroam"]), validUntil: nil),
                         providerInfo: .example
                     )

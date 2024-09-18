@@ -1,7 +1,7 @@
 import Foundation
 import XMLCoder
 
-public struct ClientCredential: Codable, Equatable {
+public struct ClientCredential: Codable, Equatable, Sendable {
     public init(outerIdentity: String? = nil, innerIdentityPrefix: String? = nil, innerIdentitySuffix: String? = nil, innerIdentityHint: Bool? = nil, userName: String? = nil, password: String? = nil, clientCertificate: CertificateData? = nil, intermediateCACertificates: [CertificateData], passphrase: String? = nil, PAC: String? = nil, provisionPAC: Bool? = nil, allowSave: Bool? = nil) {
         self.outerIdentity = outerIdentity
         self.innerIdentityPrefix = innerIdentityPrefix

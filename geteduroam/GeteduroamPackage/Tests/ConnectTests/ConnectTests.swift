@@ -21,7 +21,7 @@ final class ConnectTests: XCTestCase {
     #if !os(macOS) // TODO: Write tests for macOS
     func testInvalidEAPConfig() async throws {
         let store = TestStore(
-            initialState: Connect.State(organization: demoInstance),
+            initialState: Connect.State(organization: demoInstance, localizedModel: "test model"),
             reducer: { Connect() },
             withDependencies: {
                 var urlRequest = URLRequest(url: ConnectTests.eapConfigEndpoint)
@@ -169,7 +169,7 @@ final class ConnectTests: XCTestCase {
                             """#.data(using: .utf8)
         
         let store = TestStore(
-            initialState: Connect.State(organization: demoInstance),
+            initialState: Connect.State(organization: demoInstance, localizedModel: "test model"),
             reducer: { Connect() },
             withDependencies: {
                 var urlRequest = URLRequest(url: ConnectTests.eapConfigEndpoint)
@@ -186,7 +186,7 @@ final class ConnectTests: XCTestCase {
                 $0.eapClient.configure = { provider, credentials, dryRun, _, _ in
                     return ["ssid"]
                 }
-                $0.notificationClient.scheduleRenewReminder = { validUntil, organizationId, organizationURLString, profileId in
+                $0.notificationClient.scheduleRenewReminder = { @MainActor validUntil, organizationId, organizationURLString, profileId in
                     XCTAssertEqual(validUntil, Date(timeIntervalSince1970: 3600))
                     XCTAssertEqual(organizationId, "cat_7016")
                     XCTAssertEqual(profileId, "profile2")

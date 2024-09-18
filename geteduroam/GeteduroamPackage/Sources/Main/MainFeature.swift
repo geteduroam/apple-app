@@ -8,7 +8,7 @@ import NotificationClient
 import OSLog
 
 @Reducer
-public struct Main: Reducer {
+public struct Main: Sendable {
     public init() { }
     
     @Dependency(\.cacheClient) var cacheClient
@@ -24,9 +24,10 @@ public struct Main: Reducer {
     
     @ObservableState
     public struct State: Equatable {
-        public init(searchQuery: String = "", organizations: IdentifiedArrayOf<Organization> = .init(uniqueElements: []), loadingState: LoadingState = .initial, searchResults: IdentifiedArrayOf<Organization> = .init(uniqueElements: []), destination: Destination.State? = nil) {
+        public init(searchQuery: String = "", organizations: IdentifiedArrayOf<Organization> = .init(uniqueElements: []), localizedModel: String, loadingState: LoadingState = .initial, searchResults: IdentifiedArrayOf<Organization> = .init(uniqueElements: []), destination: Destination.State? = nil) {
             self.searchQuery = searchQuery
             self.organizations = organizations
+            self.localizedModel = localizedModel
             self.loadingState = loadingState
             self.searchResults = searchResults
             self.destination = destination
@@ -41,6 +42,7 @@ public struct Main: Reducer {
         
         var loadingState: LoadingState
         var organizations: IdentifiedArrayOf<Organization>
+        let localizedModel: String
         var isSearching: Bool = false
         var searchQuery: String
         var searchResults: IdentifiedArrayOf<Organization>
@@ -221,9 +223,9 @@ public struct Main: Reducer {
                     state.pendingRenewAction = nil
                     
                     if let organization = state.organizations[id: organizationId] {
-                        state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, autoConnectOnAppear: true))
+                        state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, autoConnectOnAppear: true, localizedModel: state.localizedModel))
                     } else if let organizationURLString, let organization = Organization(query: organizationURLString) {
-                        state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, autoConnectOnAppear: true))
+                        state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, autoConnectOnAppear: true, localizedModel: state.localizedModel))
                     } else {
                         let alert = AlertState<AlertAction>(title: {
                             TextState(NSLocalizedString("Unknown organization", bundle: .module, comment: "Title when user asked to renew but the organization could not be found"))
@@ -305,10 +307,10 @@ public struct Main: Reducer {
                     let connectionType = configuredConnection.type
                     let validUntil = configuredConnection.validUntil
                     let providerInfo = configuredConnection.providerInfo
-                    state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, loadingState: .success(.unknown, connectionType, validUntil: validUntil), providerInfo: providerInfo))
+                    state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, localizedModel: state.localizedModel, loadingState: .success(.unknown, connectionType, validUntil: validUntil), providerInfo: providerInfo))
                     return .none
                 } else {
-                    state.destination = .connect(.init(organization: organization))
+                    state.destination = .connect(.init(organization: organization, localizedModel: state.localizedModel))
                     return .none
                 }
                 
@@ -325,7 +327,7 @@ public struct Main: Reducer {
                     profiles: [Profile(id: "local", name: [LocalizedEntry(value: displayName)], default: true, eapConfigEndpoint: url, mobileConfigEndpoint: nil, letsWiFiEndpoint: nil, webviewEndpoint: nil, type: .eapConfig)],
                     geo: []
                 )
-                state.destination = .connect(.init(organization: organization))
+                state.destination = .connect(.init(organization: organization, localizedModel: state.localizedModel))
 #else
                 NSLog("Opening EAP Config files not supported on macOS/this OS.")
 #endif
@@ -348,7 +350,7 @@ public struct Main: Reducer {
                 let connectionType = configuredConnection.type
                 let validUntil = configuredConnection.validUntil
                 let providerInfo = configuredConnection.providerInfo
-                state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, loadingState: .success(.unknown, connectionType, validUntil: validUntil), providerInfo: providerInfo))
+                state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, localizedModel: state.localizedModel, loadingState: .success(.unknown, connectionType, validUntil: validUntil), providerInfo: providerInfo))
                 
                 state.searchResults = updateSearchResults()
                 return .none
@@ -374,7 +376,7 @@ public struct Main: Reducer {
                 }
                 
                 state.configuredConnection = .init(organizationType: organizationType, profileId: profileId, type: nil, validUntil: validUntil, providerInfo: nil)
-                state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, loadingState: .success(.unknown, nil, validUntil: validUntil), providerInfo: nil))
+                state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, localizedModel: state.localizedModel, loadingState: .success(.unknown, nil, validUntil: validUntil), providerInfo: nil))
                 
                 state.searchResults = updateSearchResults()
                 return .none

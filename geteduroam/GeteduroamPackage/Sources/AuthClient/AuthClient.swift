@@ -2,7 +2,7 @@ import AppAuth
 import Dependencies
 import Foundation
 
-public protocol AuthClient {
+public protocol AuthClient: Sendable {
     func startAuth(request: OIDAuthorizationRequest) async throws -> OIDAuthState
 }
 
@@ -13,7 +13,7 @@ extension DependencyValues {
     }
     
     public enum AuthClientKey: TestDependencyKey {
-        public static var testValue = mockClient
+        public static let testValue = mockClient
     }
 }
 

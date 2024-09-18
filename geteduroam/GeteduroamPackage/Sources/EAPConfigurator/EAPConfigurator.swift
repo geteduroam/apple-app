@@ -8,8 +8,8 @@ import OSLog
 import SystemConfiguration.CaptiveNetwork
 import XCTestDynamicOverlay
 
-public struct EAPClient {
-    public var configure: (EAPIdentityProvider, Credentials?, Bool, IgnoreServerCertificateImportFailureEnabled?, IgnoreMissingServerCertificateNameEnabled?) async throws -> [String]
+public struct EAPClient: Sendable {
+    public var configure: @Sendable (EAPIdentityProvider, Credentials?, Bool, IgnoreServerCertificateImportFailureEnabled?, IgnoreMissingServerCertificateNameEnabled?) async throws -> [String]
 }
 
 extension DependencyValues {
@@ -19,22 +19,22 @@ extension DependencyValues {
     }
     
     public enum EAPClientKey: TestDependencyKey {
-        public static var testValue = EAPClient.mock
+        public static let testValue = EAPClient.mock
     }
 }
 
 extension EAPClient {
-    static var mock: Self = .init(
+    static let mock: Self = .init(
         configure: unimplemented()
     )
 }
 
 extension DependencyValues.EAPClientKey: DependencyKey {
-    public static var liveValue = EAPClient.live
+    public static let liveValue = EAPClient.live
 }
 
 extension EAPClient {
-    static var live: Self = .init(
+    static let live: Self = .init(
         configure: {
             identityProvider,
             credentials,
@@ -57,7 +57,7 @@ extension EAPClient {
 }
 
 extension Logger {
-    static var eap = Logger(subsystem: Bundle.main.bundleIdentifier ?? "EAPConfigurator", category: "eap")
+    static let eap = Logger(subsystem: Bundle.main.bundleIdentifier ?? "EAPConfigurator", category: "eap")
 }
 
 class EAPConfigurator {

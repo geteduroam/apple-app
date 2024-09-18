@@ -6,6 +6,7 @@ import UIKit
 // Source: https://mathijsbernson.nl/posts/using-readable-content-guides-in-swiftui/
 
 // Not really a backport, since it isn't even available in the current SwiftUI, but who knows what iOS 17 brings…
+@MainActor
 struct ReadableContentWidth: ViewModifier {
     private let measureViewController = UIViewController()
     
@@ -27,7 +28,8 @@ struct ReadableContentWidth: ViewModifier {
 }
 
 public extension Backport where Content: View {
-    @ViewBuilder func readableContentWidth() -> some View {
+    @MainActor @ViewBuilder
+    func readableContentWidth() -> some View {
         content.modifier(ReadableContentWidth())
     }
 }
@@ -64,7 +66,8 @@ struct ReadableContentWidthPadding: ViewModifier {
 }
 
 public extension Backport where Content: View {
-    @ViewBuilder func readableContentWidthPadding() -> some View {
+    @MainActor @ViewBuilder
+    func readableContentWidthPadding() -> some View {
         content.modifier(ReadableContentWidthPadding())
     }
 }

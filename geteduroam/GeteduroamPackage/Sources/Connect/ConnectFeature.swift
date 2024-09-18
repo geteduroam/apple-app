@@ -11,10 +11,10 @@ import SwiftUI
 #if canImport(UIKit)
 import UIKit
 #endif
-import XMLCoder
+@preconcurrency import XMLCoder
 
 @Reducer
-public struct Connect: Reducer {
+public struct Connect: Sendable {
     public init() { }
     
     public enum CredentialPromptType {
@@ -24,10 +24,11 @@ public struct Connect: Reducer {
     
     @ObservableState
     public struct State: Equatable {
-        public init(organization: Organization, selectedProfileId: Profile.ID? = nil, autoConnectOnAppear: Bool = false, loadingState: LoadingState = .initial, providerInfo: ProviderInfo? = nil, credentials: Credentials? = nil, destination: Destination.State? = nil) {
+        public init(organization: Organization, selectedProfileId: Profile.ID? = nil, autoConnectOnAppear: Bool = false, localizedModel: String, loadingState: LoadingState = .initial, providerInfo: ProviderInfo? = nil, credentials: Credentials? = nil, destination: Destination.State? = nil) {
             self.organization = organization
             self.selectedProfileId = selectedProfileId
             self.autoConnectOnAppear = autoConnectOnAppear
+            self.localizedModel = localizedModel
             self.loadingState = loadingState
             self.providerInfo = providerInfo
             self.credentials = credentials
@@ -37,6 +38,7 @@ public struct Connect: Reducer {
         public let organization: Organization
         public var selectedProfileId: Profile.ID?
         public var autoConnectOnAppear: Bool
+        public let localizedModel: String
 
         public var providerInfo: ProviderInfo?
         public var agreedToTerms: Bool = false
@@ -245,23 +247,23 @@ public struct Connect: Reducer {
         @Shared(.connection) var configuredConnection = nil
     }
     
-    public enum ConnectResult: Equatable {
+    public enum ConnectResult: Equatable, Sendable {
         case verified(credentials: Credentials?, reusableInfo: ReusableInfo?)
         case applied(ConnectionType, validUntil: Date?)
     }
     
-    public struct ReusableInfo: Equatable {
+    public struct ReusableInfo: Equatable, Sendable {
         var accessToken: String?
         var letsWiFiVersion: LetsWiFiVersion?
         var eapConfigData: Data?
     }
     
-    public enum ConnectionType: Equatable, Codable {
+    public enum ConnectionType: Equatable, Codable, Sendable {
         case ssids(expectedSSIDs: [String])
         case hotspot20
     }
     
-    public struct ConnectResponse: Equatable {
+    public struct ConnectResponse: Equatable, Sendable {
         public init(providerInfo: ProviderInfo? = nil, result: Connect.ConnectResult) {
             self.providerInfo = providerInfo
             self.result = result
@@ -431,13 +433,14 @@ public struct Connect: Reducer {
         let reusableInfo = state.reusableInfo
         state.reusableInfo = nil
         let agreedToTerms = state.agreedToTerms
-        let ignoreServerCertificateImportFailureEnabled = configClient.values().ignoreServerCertificateImportFailureEnabled
-        let ignoreMissingServerCertificateNameEnabled = configClient.values().ignoreMissingServerCertificateNameEnabled
         if !dryRun {
             state.configuredConnection = nil
             notificationClient.unscheduleRenewReminder()
         }
         return .run { send in
+            let configValues = await configClient.values()
+            let ignoreServerCertificateImportFailureEnabled = await configValues.ignoreServerCertificateImportFailureEnabled
+            let ignoreMissingServerCertificateNameEnabled = await configValues.ignoreMissingServerCertificateNameEnabled
             await send(
                 .connectResponse(TaskResult<ConnectResponse> {
                     let (providerInfo, expectedSSIDs, validUntil, reusableInfo) = try await connect(
@@ -574,18 +577,19 @@ public struct Connect: Reducer {
                         return .none
                     }
                     
+                    let localizedModel = state.localizedModel
                     let alert = AlertState<AlertAction>(
                         title: {
                             TextState("Already configured for \(currentProfile.nameOrId) profile", bundle: .module)
                         }, actions: {
                             ButtonState(role: .destructive, action: .send(.switchProfileButtonTapped(profileId))) {
-                                TextState("Reconfigure \(UIDevice.current.localizedModel)", bundle: .module)
+                                TextState("Reconfigure \(localizedModel)", bundle: .module)
                             }
                             ButtonState(role: .cancel) {
                                 TextState("Cancel", bundle: .module)
                             }
                         }, message: {
-                            TextState("Do you want to reconfigure your \(UIDevice.current.localizedModel) to use \(selectedProfile.nameOrId) profile instead?", bundle: .module)
+                            TextState("Do you want to reconfigure your \(localizedModel) to use \(selectedProfile.nameOrId) profile instead?", bundle: .module)
                         })
                     state.destination = .alert(alert)
 #endif
@@ -769,6 +773,7 @@ public struct Connect: Reducer {
                     return .none
                 }
                 
+                let localizedModel = state.localizedModel
                 switch connectionState {
                 case .connected:
                     let alert = AlertState<AlertAction>(
@@ -776,13 +781,13 @@ public struct Connect: Reducer {
                             TextState("Already connected", bundle: .module)
                         }, actions: {
                             ButtonState(role: .destructive, action: .send(.reconnectButtonTapped)) {
-                                TextState("Reconfigure \(UIDevice.current.localizedModel)", bundle: .module)
+                                TextState("Reconfigure \(localizedModel)", bundle: .module)
                             }
                             ButtonState(role: .cancel) {
                                 TextState("Cancel", bundle: .module)
                             }
                         }, message: {
-                            TextState("Reconfigure your \(UIDevice.current.localizedModel) to renew your network access or if you are experiencing network issues.", bundle: .module)
+                            TextState("Reconfigure your \(localizedModel) to renew your network access or if you are experiencing network issues.", bundle: .module)
                         })
                     state.destination = .alert(alert)
                     
@@ -792,13 +797,13 @@ public struct Connect: Reducer {
                             TextState("Already configured, but not connected", bundle: .module)
                         }, actions: {
                             ButtonState(role: .destructive, action: .send(.reconnectButtonTapped)) {
-                                TextState("Reconfigure \(UIDevice.current.localizedModel)", bundle: .module)
+                                TextState("Reconfigure \(localizedModel)", bundle: .module)
                             }
                             ButtonState(role: .cancel) {
                                 TextState("Cancel", bundle: .module)
                             }
                         }, message: {
-                            TextState("Reconfigure your \(UIDevice.current.localizedModel) to renew your network access or if you are experiencing network issues.", bundle: .module)
+                            TextState("Reconfigure your \(localizedModel) to renew your network access or if you are experiencing network issues.", bundle: .module)
                         })
                     state.destination = .alert(alert)
                     
@@ -808,13 +813,13 @@ public struct Connect: Reducer {
                             TextState("Already configured", bundle: .module)
                         }, actions: {
                             ButtonState(role: .destructive, action: .send(.reconnectButtonTapped)) {
-                                TextState("Reconfigure \(UIDevice.current.localizedModel)", bundle: .module)
+                                TextState("Reconfigure \(localizedModel)", bundle: .module)
                             }
                             ButtonState(role: .cancel) {
                                 TextState("Cancel", bundle: .module)
                             }
                         }, message: {
-                            TextState("Reconfigure your \(UIDevice.current.localizedModel) to renew your network access or if you are experiencing network issues.", bundle: .module)
+                            TextState("Reconfigure your \(localizedModel) to renew your network access or if you are experiencing network issues.", bundle: .module)
                         })
                     state.destination = .alert(alert)
                 }
