@@ -3,10 +3,10 @@
   "project" : "geteduroam.xcodeproj",
   "targetLocale" : "hu",
   "toolInfo" : {
-    "toolBuildNumber" : "15C65",
+    "toolBuildNumber" : "16A242",
     "toolID" : "com.apple.dt.xcode",
     "toolName" : "Xcode",
-    "toolVersion" : "15.1"
+    "toolVersion" : "16.0"
   },
   "version" : "1.0"
 }

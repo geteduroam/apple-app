@@ -7,6 +7,12 @@
     "No OID or SSID in configuration" : {
       "comment" : "No OID or SSID in configuration"
     },
+    "No password in configuration" : {
+      "comment" : "empty pass"
+    },
+    "No valid client certificate in configuration" : {
+      "comment" : "noValidClientCertificate"
+    },
     "No valid configuration found" : {
       "comment" : "noConfigurations"
     },
@@ -34,7 +40,7 @@
       "comment" : "Unable to base64 decode certificate data"
     },
     "Unable to get common name from certificate" : {
-      "comment" : "Certificate: unable to get common name"
+      "comment" : "Certificate: unable to get common name or subject sequence "
     },
     "Unable to import certificate into keychain (%d)" : {
       "comment" : "addClientCertificate"

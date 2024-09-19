@@ -1,6 +1,25 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "App Configuration" : {
+
+    },
+    "App Configuration…" : {
+
+    },
+    "Close" : {
+
+    },
+    "Configured" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configured"
+          }
+        }
+      }
+    },
     "Failed to load organizations" : {
       "comment" : "Message when organizations can't be loaded and the fallback fails too",
       "localizations" : {
@@ -11,6 +30,18 @@
           }
         }
       }
+    },
+    "It is recommended to update %@ to a newer version." : {
+
+    },
+    "It is recommended to update this app to the latest version." : {
+
+    },
+    "It is required to update %@ to a newer version." : {
+
+    },
+    "It is required to update this app to the latest version." : {
+
     },
     "No matches found" : {
       "localizations" : {
@@ -31,6 +62,9 @@
           }
         }
       }
+    },
+    "Open File…" : {
+
     },
     "Search for your organization" : {
       "comment" : "Search prompt",
@@ -53,6 +87,15 @@
           }
         }
       }
+    },
+    "This app is disabled." : {
+
+    },
+    "This app is obsolete." : {
+
+    },
+    "This app is under maintenance." : {
+
     },
     "Unknown organization" : {
       "comment" : "Title when user asked to renew but the organization could not be found",

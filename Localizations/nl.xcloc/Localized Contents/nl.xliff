@@ -2,7 +2,7 @@
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
   <file original="geteduroam/AppStore.xcstrings" source-language="en" target-language="nl" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="15.1" build-num="15C65"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
     </header>
     <body>
       <trans-unit id="Description" xml:space="preserve">
@@ -62,9 +62,24 @@
       </trans-unit>
     </body>
   </file>
+  <file original="geteduroam/GeteduroamPackage/Sources/AppRemoteConfigClient/Resources/en.lproj/Localizable.strings" datatype="plaintext" source-language="en" target-language="nl">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
+    </header>
+    <body>
+      <trans-unit id="Connecting" xml:space="preserve">
+        <source>Connecting</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="This menu is for testing purposes only." xml:space="preserve">
+        <source>This menu is for testing purposes only.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+    </body>
+  </file>
   <file original="geteduroam/GeteduroamPackage/Sources/AuthClient/Resources/Localizable.xcstrings" source-language="en" target-language="nl" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="15.1" build-num="15C65"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
     </header>
     <body>
       <trans-unit id="No access token obtained for unknown reason" xml:space="preserve">
@@ -76,7 +91,7 @@
   </file>
   <file original="geteduroam/GeteduroamPackage/Sources/Backport/Resources/Localizable.xcstrings" source-language="en" target-language="nl" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="15.1" build-num="15C65"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
     </header>
     <body>
       <trans-unit id="Search" xml:space="preserve">
@@ -88,12 +103,42 @@
   </file>
   <file original="geteduroam/GeteduroamPackage/Sources/Connect/Resources/Localizable.xcstrings" source-language="en" target-language="nl" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="15.1" build-num="15C65"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
     </header>
     <body>
+      <trans-unit id="(%@)" xml:space="preserve">
+        <source>(%@)</source>
+        <target state="translated">(%@)</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="." xml:space="preserve">
+        <source>.</source>
+        <target state="translated">.</target>
+        <note/>
+      </trans-unit>
       <trans-unit id="Agree" xml:space="preserve">
         <source>Agree</source>
         <target state="translated">Accepteer</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Already configured" xml:space="preserve">
+        <source>Already configured</source>
+        <target state="translated">Reeds ingesteld</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Already configured for %@ profile" xml:space="preserve">
+        <source>Already configured for %@ profile</source>
+        <target state="translated">Reeds ingesteld voor %@-profiel</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Already configured, but not connected" xml:space="preserve">
+        <source>Already configured, but not connected</source>
+        <target state="translated">Reeds ingesteld, maar niet verbonden</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Already connected" xml:space="preserve">
+        <source>Already connected</source>
+        <target state="translated">Reeds verbonden</target>
         <note/>
       </trans-unit>
       <trans-unit id="CONNECT" xml:space="preserve">
@@ -149,6 +194,11 @@
       <trans-unit id="Disagree" xml:space="preserve">
         <source>Disagree</source>
         <target state="translated">Weiger</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Do you want to reconfigure your %@ to use %@ profile instead?" xml:space="preserve">
+        <source>Do you want to reconfigure your %1$@ to use %2$@ profile instead?</source>
+        <target state="translated">Wil je jouw %@ instellen om het %@-profiel te gebruiken?</target>
         <note/>
       </trans-unit>
       <trans-unit id="Double-click to review the profile and then press the &quot;Install…&quot; button to setup the network on your computer." xml:space="preserve">
@@ -216,14 +266,19 @@
         <target state="translated">Geen geldige provider gevonden.</target>
         <note>noValidProviderFound</note>
       </trans-unit>
-      <trans-unit id="OK" xml:space="preserve">
-        <source>OK</source>
-        <target state="translated">OK</target>
-        <note/>
-      </trans-unit>
       <trans-unit id="Password" xml:space="preserve">
         <source>Password</source>
         <target state="translated">Wachtwoord</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Password Required" xml:space="preserve">
+        <source>Password Required</source>
+        <target state="translated">Wachtwoord vereist</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Please enter your password." xml:space="preserve">
+        <source>Please enter your password.</source>
+        <target state="translated">Voer wachtwoord in.</target>
         <note/>
       </trans-unit>
       <trans-unit id="Please enter your username and password." xml:space="preserve">
@@ -235,6 +290,21 @@
         <source>Profiles</source>
         <target state="translated">Profielen</target>
         <note>Profiles</note>
+      </trans-unit>
+      <trans-unit id="Reconfigure %@" xml:space="preserve">
+        <source>Reconfigure %@</source>
+        <target state="translated">Stel %@ opnieuw in</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Reconfigure your %@ to renew your network access or if you are experiencing network issues." xml:space="preserve">
+        <source>Reconfigure your %@ to renew your network access or if you are experiencing network issues.</source>
+        <target state="translated">Stel jouw %@ opnieuw in om netwerktoegang te vernieuwen of als je problemen ervaart met het netwerk.</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Reconnect" xml:space="preserve">
+        <source>Reconnect</source>
+        <target state="translated">Stel opnieuw in</target>
+        <note/>
       </trans-unit>
       <trans-unit id="Review the profile and then press the &quot;Install…&quot; button to setup the network on your computer." xml:space="preserve">
         <source>Review the profile and then press the "Install…" button to setup the network on your computer.</source>
@@ -261,6 +331,16 @@
         <target state="translated">Je wordt doorverwezen naar een webpagina.</target>
         <note/>
       </trans-unit>
+      <trans-unit id="You had access until %@ " xml:space="preserve">
+        <source>You had access until %@ </source>
+        <target state="translated">Je had toegang tot %@ </target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="You have access until %@ " xml:space="preserve">
+        <source>You have access until %@ </source>
+        <target state="translated">Je hebt toegang tot %@ </target>
+        <note/>
+      </trans-unit>
       <trans-unit id="You must agree to the terms of use before you can use this network." xml:space="preserve">
         <source>You must agree to the terms of use before you can use this network.</source>
         <target state="translated">Je moet de gebruiksvoorwaarden accepteren voordat je gebruik kan maken van dit netwerk.</target>
@@ -271,11 +351,31 @@
         <target state="translated">Je moet de gebruiksvoorwaarden accepteren.</target>
         <note>missingTermsAcceptance (leave text in brackets out of localization)</note>
       </trans-unit>
+      <trans-unit id="You need to provide a password." xml:space="preserve">
+        <source>You need to provide a password.</source>
+        <target state="translated">Je moet een wachtwoord invoeren.</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="You need to provide a username and password." xml:space="preserve">
+        <source>You need to provide a username and password.</source>
+        <target state="translated">Je moet een gebruikersnaam en wachtwoord invoeren.</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="You need to provide a valid username." xml:space="preserve">
+        <source>You need to provide a valid username.</source>
+        <target state="translated">Je moet een geldige gebruikersnaam invoeren.</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Your username should end with '@%@'." xml:space="preserve">
+        <source>Your username should end with '@%@'.</source>
+        <target state="translated">Jouw gebruikersnaam moet eindigen op '@%@'.</target>
+        <note/>
+      </trans-unit>
     </body>
   </file>
   <file original="geteduroam/GeteduroamPackage/Sources/EAPConfigurator/Resources/Localizable.xcstrings" source-language="en" target-language="nl" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="15.1" build-num="15C65"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
     </header>
     <body>
       <trans-unit id="No OID or SSID in configuration" xml:space="preserve">
@@ -287,6 +387,16 @@
         <source>No credentials in configuration</source>
         <target state="translated">Geen gebruikersnaam en wachtwoord in configuratie</target>
         <note>empty user/pass</note>
+      </trans-unit>
+      <trans-unit id="No password in configuration" xml:space="preserve">
+        <source>No password in configuration</source>
+        <target state="translated">Geen wachtwoord in configuratie</target>
+        <note>empty pass</note>
+      </trans-unit>
+      <trans-unit id="No valid client certificate in configuration" xml:space="preserve">
+        <source>No valid client certificate in configuration</source>
+        <target state="translated">Geen geldig clientcertificaat in configuratie</target>
+        <note>noValidClientCertificate</note>
       </trans-unit>
       <trans-unit id="No valid configuration found" xml:space="preserve">
         <source>No valid configuration found</source>
@@ -321,7 +431,7 @@
       <trans-unit id="Unable to get common name from certificate" xml:space="preserve">
         <source>Unable to get common name from certificate</source>
         <target state="translated">Kon geen generieke naam uit certificaat halen</target>
-        <note>Certificate: unable to get common name</note>
+        <note>Certificate: unable to get common name or subject sequence </note>
       </trans-unit>
       <trans-unit id="Unable to import certificate into keychain (%d)" xml:space="preserve">
         <source>Unable to import certificate into keychain (%d)</source>
@@ -362,13 +472,53 @@
   </file>
   <file original="geteduroam/GeteduroamPackage/Sources/Main/Resources/Localizable.xcstrings" source-language="en" target-language="nl" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="15.1" build-num="15C65"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
     </header>
     <body>
+      <trans-unit id="App Configuration" xml:space="preserve">
+        <source>App Configuration</source>
+        <target state="translated">App-configuratie</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="App Configuration…" xml:space="preserve">
+        <source>App Configuration…</source>
+        <target state="translated">App-configuratie…</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Close" xml:space="preserve">
+        <source>Close</source>
+        <target state="translated">Sluit</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Configured" xml:space="preserve">
+        <source>Configured</source>
+        <target state="translated">Ingesteld</target>
+        <note/>
+      </trans-unit>
       <trans-unit id="Failed to load organizations" xml:space="preserve">
         <source>Failed to load organizations</source>
         <target state="translated">Laden van organisaties mislukt</target>
         <note>Message when organizations can't be loaded and the fallback fails too</note>
+      </trans-unit>
+      <trans-unit id="It is recommended to update %@ to a newer version." xml:space="preserve">
+        <source>It is recommended to update %@ to a newer version.</source>
+        <target state="translated">Het is aanbevolen om %@ bij te werken naar een nieuwere versie.</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="It is recommended to update this app to the latest version." xml:space="preserve">
+        <source>It is recommended to update this app to the latest version.</source>
+        <target state="translated">Het is aanbevolen om deze app bij te werken naar de laatste versie.</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="It is required to update %@ to a newer version." xml:space="preserve">
+        <source>It is required to update %@ to a newer version.</source>
+        <target state="translated">Het is vereist om %@ bij te werken naar een nieuwere versie.</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="It is required to update this app to the latest version." xml:space="preserve">
+        <source>It is required to update this app to the latest version.</source>
+        <target state="translated">Het is vereist om deze app bij te werken naar de laatste versie.</target>
+        <note/>
       </trans-unit>
       <trans-unit id="No matches found" xml:space="preserve">
         <source>No matches found</source>
@@ -378,6 +528,11 @@
       <trans-unit id="OK" xml:space="preserve">
         <source>OK</source>
         <target state="translated">OK</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Open File…" xml:space="preserve">
+        <source>Open File…</source>
+        <target state="translated">Open bestand…</target>
         <note/>
       </trans-unit>
       <trans-unit id="Search for your organization" xml:space="preserve">
@@ -390,6 +545,21 @@
         <target state="translated">De organisatie wordt niet meer vermeld.</target>
         <note>Message when user asked to renew but the organization could not be found</note>
       </trans-unit>
+      <trans-unit id="This app is disabled." xml:space="preserve">
+        <source>This app is disabled.</source>
+        <target state="translated">Deze app is uitgeschakeld.</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="This app is obsolete." xml:space="preserve">
+        <source>This app is obsolete.</source>
+        <target state="translated">Deze app wordt niet meer ondersteund.</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="This app is under maintenance." xml:space="preserve">
+        <source>This app is under maintenance.</source>
+        <target state="translated">Deze app is in onderhoud.</target>
+        <note/>
+      </trans-unit>
       <trans-unit id="Unknown organization" xml:space="preserve">
         <source>Unknown organization</source>
         <target state="translated">Onbekende organisatie</target>
@@ -399,7 +569,7 @@
   </file>
   <file original="geteduroam/GeteduroamPackage/Sources/NotificationClient/Resources/Localizable.xcstrings" source-language="en" target-language="nl" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="15.1" build-num="15C65"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
     </header>
     <body>
       <trans-unit id="Remind Me Later" xml:space="preserve">
@@ -441,7 +611,7 @@
   </file>
   <file original="geteduroam/InfoPlist.xcstrings" source-language="en" target-language="nl" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="15.1" build-num="15C65"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
     </header>
     <body>
       <trans-unit id="CFBundleName" xml:space="preserve">
@@ -449,11 +619,15 @@
         <target state="translated">geteduroam</target>
         <note>Bundle name</note>
       </trans-unit>
+      <trans-unit id="EAP Config" xml:space="preserve">
+        <source>EAP Config</source>
+        <note/>
+      </trans-unit>
     </body>
   </file>
   <file original="geteduroam/Localizable.xcstrings" source-language="en" target-language="nl" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="15.1" build-num="15C65"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
     </header>
     <body>
       <trans-unit id="geteduroam" xml:space="preserve">
@@ -470,7 +644,7 @@
   </file>
   <file original="getgovroam/AppStore.xcstrings" source-language="en" target-language="nl" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="15.1" build-num="15C65"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
     </header>
     <body>
       <trans-unit id="Description" xml:space="preserve">
@@ -532,7 +706,7 @@
   </file>
   <file original="getgovroam/InfoPlist.xcstrings" source-language="en" target-language="nl" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="15.1" build-num="15C65"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
     </header>
     <body>
       <trans-unit id="CFBundleName" xml:space="preserve">
@@ -540,11 +714,15 @@
         <target state="translated">getgovroam</target>
         <note>Bundle name</note>
       </trans-unit>
+      <trans-unit id="EAP Config" xml:space="preserve">
+        <source>EAP Config</source>
+        <note/>
+      </trans-unit>
     </body>
   </file>
   <file original="getgovroam/Localizable.xcstrings" source-language="en" target-language="nl" datatype="plaintext">
     <header>
-      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="15.1" build-num="15C65"/>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
     </header>
     <body>
       <trans-unit id="getgovroam" xml:space="preserve">
