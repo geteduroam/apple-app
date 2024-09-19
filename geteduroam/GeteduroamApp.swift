@@ -60,6 +60,10 @@ struct GeteduroamApp: App {
     init() {
 #if os(macOS)
         fakeInitialWindowPositionPreference()
+        
+        let localizedModel = "Mac"
+#else
+        let localizedModel = UIDevice.current.localizedModel
 #endif
         
 #if DEBUG
@@ -67,14 +71,10 @@ struct GeteduroamApp: App {
         if let scenario = UserDefaults.standard.string(forKey: "Scenario"),  let scenario = Scenario(rawValue: scenario) {
             initialState = scenario.initialState
         } else {
-#if os(macOS)
-            initialState = .init(localizedModel: "Mac")
-#else
-            initialState = .init(localizedModel: UIDevice.current.localizedModel)
-#endif
+            initialState = Main.State(localizedModel: localizedModel)
         }
 #else
-        let initialState = Main.State(localizedModel: UIDevice.current.localizedModel)
+        let initialState = Main.State(localizedModel: localizedModel)
 #endif
         appDelegate.createStore(initialState: initialState)
     }
