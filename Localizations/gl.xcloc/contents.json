@@ -1,0 +1,12 @@
+{
+  "developmentRegion" : "en",
+  "project" : "geteduroam.xcodeproj",
+  "targetLocale" : "gl",
+  "toolInfo" : {
+    "toolBuildNumber" : "16A242",
+    "toolID" : "com.apple.dt.xcode",
+    "toolName" : "Xcode",
+    "toolVersion" : "16.0"
+  },
+  "version" : "1.0"
+}

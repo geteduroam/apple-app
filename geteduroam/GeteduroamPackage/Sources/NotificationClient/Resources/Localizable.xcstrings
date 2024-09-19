@@ -16,7 +16,7 @@
             "value" : "Напомнете ми по-късно"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Recorda'm-ho més tard"
@@ -56,6 +56,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rappelez-le moi plus tard"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atgoffwch Fi Nes Ymlaen"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lembrar máis tarde"
           }
         },
         "hu" : {
@@ -117,7 +129,7 @@
             "value" : "Обновете сега"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Renovar ara"
@@ -157,6 +169,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Renouveler maintenant"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adnewyddu Nawr"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renovar agora"
           }
         },
         "hu" : {
@@ -218,7 +242,7 @@
             "value" : "Обновете Вашата свързаност, за да удължите достъпа си."
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Renovar la vostra connexió per continuar accedint."
@@ -258,6 +282,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Renouvelez votre connexion pour prolonger votre accès."
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adnewyddwch eich cysylltiad i ymestyn eich mynediad."
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renova a túa conexión para ampliar a validez."
           }
         },
         "hu" : {
@@ -319,7 +355,7 @@
             "value" : "Ще имате достъп до %@. Обновете Вашата свързаност, за да удължите достъпа си."
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tenieu accés fins a %@. Renoveu la vostra connexió per continuar accedint."
@@ -359,6 +395,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vous avez accès jusqu'à %@. Renouvelez votre connexion pour prolonger votre accès."
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Roedd gennych fynediad tan %@. Adnewyddwch eich cysylltiad i ymestyn eich mynediad."
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tiveches acceso ata %@. Renova a túa conexión para ampliar o teu acceso."
           }
         },
         "hu" : {
@@ -420,7 +468,7 @@
             "value" : "Ще имате достъп до %@. Обновете Вашата свързаност, за да удължите достъпа си."
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Teniu accés fins a %@. Renoveu la vostra connexió per seguir accedint."
@@ -460,6 +508,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vous avez accès jusqu'à %@. Renouvelez votre connexion pour prolonger votre accès."
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mae gennych fynediad tan %@. Adnewyddwch eich cysylltiad i ymestyn eich mynediad."
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tes acceso ata %@. Renova a túa conexión para ampliar o teu acceso."
           }
         },
         "hu" : {
@@ -521,7 +581,7 @@
             "value" : "Достъпът Ви до мрежата е изтекъл"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "El vostre accés a la xarxa ha caducat"
@@ -561,6 +621,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Votre accès au réseau a expiré"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mae eich mynediad rhwydwaith wedi dod i ben"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O seu acceso á rede caducou"
           }
         },
         "hu" : {
@@ -622,7 +694,7 @@
             "value" : "Достъпът Ви до мрежата скоро ще изтече"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "La vostra connexió a la xarxa està a punt de caducar."
@@ -662,6 +734,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Votre accès au réseau va bientôt expirer"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mae eich mynediad rhwydwaith ar fin dod i ben"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O teu acceso á rede está a punto de caducar"
           }
         },
         "hu" : {

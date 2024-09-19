@@ -12,6 +12,16 @@
           }
         }
       }
+    },
+    "EAP Config" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "EAP Config"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

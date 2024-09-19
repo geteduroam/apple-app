@@ -16,7 +16,7 @@
             "value" : "Конфигурирайте Вашия eduroam акаунт лесно и сигурно като използвате geteduroam."
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Configureu el vostre compte eduroam de manera fàcil i segura utilitzant geteduroam."
@@ -56,6 +56,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Configurez votre compte eduroam facilement et avec sécurité en utilisant geteduroam."
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ffurfweddwch eich cyfrif eduroam yn hawdd ac yn ddiogel gan ddefnyddio geteduroam."
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configura a túa conta eduroam de forma sinxela e segura usando geteduroam"
           }
         },
         "hu" : {
@@ -118,7 +130,7 @@
             "value" : "eduroam,wifi,roam,geteduroam,hotspot,wi-fi,мрежа,образование,университет,свързване,безжична връзка,интернет"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "eduroam,wifi,roam,geteduroam,hotspot,wi-fi,xarxa,educació,universitat,connectar,sense fils,internet"
@@ -158,6 +170,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "eduroam,wifi,roam,geteduroam,hotspot,wi-fi,network,education,university,connect,wireless,internet"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "eduroam,wifi,crwydro,geteduroam,llecyn,wi-fi,rhwydwaith,addysg,prifysgol,connect,diwifr,internet"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "eduroam,wifi,roam,geteduroam,hotspot,wi-fi,rede,educación,universidade,conectar,wireless,sen fíos,internet"
           }
         },
         "hu" : {
@@ -219,7 +243,7 @@
             "value" : "geteduroam"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "geteduroam"
@@ -256,6 +280,18 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
+        "gl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "geteduroam"
@@ -320,7 +356,7 @@
             "value" : "a33cfd6cfef0750b66927b70babd9cf2_tr"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "a33cfd6cfef0750b66927b70babd9cf2_tr"
@@ -357,6 +393,18 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "a33cfd6cfef0750b66927b70babd9cf2_tr"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "a33cfd6cfef0750b66927b70babd9cf2_tr"
+          }
+        },
+        "gl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "a33cfd6cfef0750b66927b70babd9cf2_tr"
@@ -421,7 +469,7 @@
             "value" : "Друга организация"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Una altra Organització"
@@ -461,6 +509,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Autre établissement"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Outra organización"
           }
         },
         "hu" : {
@@ -522,7 +582,7 @@
             "value" : "Свържете се с нашия хелпдеск, ако имате нужда от съдействие."
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Contacteu amb el nostre servei d'assistència si necessiteu ajuda."
@@ -562,6 +622,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Contactez votre support informatique local si vous avez besoin d'aide."
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cysylltwch â'n desg gymorth os oes angen cymorth arnoch."
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contacte co noso servizo de asistencia se necesita axuda."
           }
         },
         "hu" : {
@@ -623,7 +695,7 @@
             "value" : "Примерна организация"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Organització de mostra"
@@ -663,6 +735,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Exemple d'établissement"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sefydliad Enghreifftiol"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Organización de exemplo"
           }
         },
         "hu" : {
@@ -724,7 +808,7 @@
             "value" : "Профил за служител"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Perfil per al personal"
@@ -764,6 +848,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Profil pour les personnels"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Proffil ar gyfer Staff"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perfil para o persoal"
           }
         },
         "hu" : {
@@ -825,7 +921,7 @@
             "value" : "Профил за студенти"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Perfil per a estudiants"
@@ -865,6 +961,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Profil pour les étudiants"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Proffil ar gyfer Myfyrwyr"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perfil para o alumnado"
           }
         },
         "hu" : {
@@ -927,7 +1035,7 @@
             "value" : "свържете се, където и да сте"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "connecta't estiguis on estiguis"
@@ -967,6 +1075,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Connectez-vous où que vous soyez"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "cysylltu ble bynnag yr ydych"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conéctate onde queiras que estés"
           }
         },
         "hu" : {
@@ -1028,7 +1148,7 @@
             "value" : "Тази важна актуализация предлага изцяло ново приложение."
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aquesta important actualització porta una aplicació totalment renovada i reescrita."
@@ -1068,6 +1188,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cette mise à jour majeure fournit une application entièrement reconçue et réécrite."
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mae'r diweddariad mawr hwn yn dod ag ap cwbl newydd wedi'i ddylunio a'i ailysgrifennu."
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta actualización presenta unha aplicación diseñada de novo e reescrita."
           }
         },
         "hu" : {

@@ -1,4 +1,4 @@
-Copyright 2022-2023, The Commons Conservancy geteduroam Programme 
+Copyright 2022-2024, The Commons Conservancy geteduroam Programme 
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:

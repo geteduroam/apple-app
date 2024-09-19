@@ -47,7 +47,7 @@
             "value" : "Споразумение"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Accepta"
@@ -87,6 +87,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Approuver"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cytuno"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aceptar"
           }
         },
         "hu" : {
@@ -211,7 +223,7 @@
             "value" : "Отказ"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancel·la"
@@ -251,6 +263,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuler"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Canslo"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
           }
         },
         "hu" : {
@@ -311,7 +335,7 @@
             "value" : "Конфигурирано"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Configurat"
@@ -351,6 +375,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Configuré"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wedi'i ffurfweddu"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configurado"
           }
         },
         "hu" : {
@@ -411,7 +447,7 @@
             "value" : "Конфигурирано е, но не е свързано"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Configurat, però no connectat"
@@ -451,6 +487,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Configuré, mais non connecté"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wedi'i ffurfweddu, ond heb ei gysylltu"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configurado, pero non conectado"
           }
         },
         "hu" : {
@@ -511,7 +559,7 @@
             "value" : "Свързване"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Connecta"
@@ -551,6 +599,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Connecter"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cysylltu"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conectar"
           }
         },
         "hu" : {
@@ -611,7 +671,7 @@
             "value" : "Свързване"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "CONNECTA"
@@ -651,6 +711,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "CONNECTER"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CYSYLLTU"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CONECTAR"
           }
         },
         "hu" : {
@@ -711,7 +783,7 @@
             "value" : "Свързан"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Connectat"
@@ -751,6 +823,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Connecté"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wedi'i cysylltu"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conectado"
           }
         },
         "hu" : {
@@ -811,7 +895,7 @@
             "value" : "Продължете"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continuar"
@@ -851,6 +935,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continuer"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parhau"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuar"
           }
         },
         "hu" : {
@@ -911,7 +1007,7 @@
             "value" : "Продължете със Системните настройки"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continuar a les Preferències del Sistema"
@@ -951,6 +1047,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continuer dans les paramètres système"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parhewch yn System Preferences"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuar en Preferencias do Sistema"
           }
         },
         "hu" : {
@@ -1011,7 +1119,7 @@
             "value" : "Продължете със Системните настройки"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continuar a Configuració del sistema"
@@ -1051,6 +1159,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continuer dans les réglages système"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parhewch mewn Gosodiadau System"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuar en Configuración do Sistema"
           }
         },
         "hu" : {
@@ -1111,7 +1231,7 @@
             "value" : "Продължете към уебсайта"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continuar al lloc web"
@@ -1151,6 +1271,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continuer vers le site web"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parhau i'r wefan"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuar no sitio web"
           }
         },
         "hu" : {
@@ -1211,7 +1343,7 @@
             "value" : "Не съм съгласен"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rebutjar"
@@ -1251,6 +1383,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ne pas approuver"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anghytuno"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rexeitar"
           }
         },
         "hu" : {
@@ -1333,7 +1477,7 @@
             "value" : "Кликнете два пъти, за да прегледате профила, и след това натиснете бутона \"Install…\", за да инсталирате мрежата на Вашия компютър."
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Feu doble clic per revisar el perfil i després premeu el botó \"Instal·lar...\" per configurar la xarxa al vostre ordinador."
@@ -1373,6 +1517,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Double-cliquez pour passer en revue le profil puis appuyez sur le bouton « Installer... » pour configurer le réseau sur votre ordinateur"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cliciwch ddwywaith i adolygu'r proffil ac yna pwyswch y botwm \"Gosod ...\" i osod y rhwydwaith ar eich cyfrifiadur."
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fai dobre clic para revisar o perfil e logo preme o botón \"Instalar...\" para configurar a rede no teu ordenador."
           }
         },
         "hu" : {
@@ -1434,7 +1590,7 @@
             "value" : "Неуспешно свързване"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No s'ha pogut connectar."
@@ -1474,6 +1630,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "La tentative de connexion a échoué"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wedi methu cysylltu"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fallou a conexión"
           }
         },
         "hu" : {
@@ -1534,7 +1702,7 @@
             "value" : "Хелпдеск"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Servei d'assistència técnica"
@@ -1574,6 +1742,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Support informatique"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desg helpu"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Centro de asistencia técnica"
           }
         },
         "hu" : {
@@ -1634,7 +1814,7 @@
             "value" : "Вход"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Iniciar sessió"
@@ -1674,6 +1854,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Identifiez-vous"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mewngofnodi"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar sesión"
           }
         },
         "hu" : {
@@ -1734,7 +1926,7 @@
             "value" : "Изисква влизане в системата"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Validació necessària"
@@ -1774,6 +1966,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Identifiant requis"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mae angen mewngofnodi"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inicio de sesión requirido"
           }
         },
         "hu" : {
@@ -1835,7 +2039,7 @@
             "value" : "Липсва информация за профила."
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Manca informació sobre el perfil."
@@ -1875,6 +2079,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Information manquante sur le profil."
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gwybodaeth ar goll am proffil."
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Falta información sobre o perfil."
           }
         },
         "hu" : {
@@ -1936,7 +2152,7 @@
             "value" : "Липсва информация, за да започне автентикацията."
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Manca informació per a iniciar l'autenticació."
@@ -1976,6 +2192,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Information manquante pour démarrer l'authentification."
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gwybodaeth ar goll i ddechrau dilysu."
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Falta información para iniciar a autenticación."
           }
         },
         "hu" : {
@@ -2037,7 +2265,7 @@
             "value" : "Липсва информация, за да започне автентикацията."
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Manca informació per a iniciar l'autenticació."
@@ -2077,6 +2305,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Information manquante pour démarrer l'authentification."
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gwybodaeth ar goll i ddechrau dilysu."
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Falta información para iniciar a autenticación."
           }
         },
         "hu" : {
@@ -2138,7 +2378,7 @@
             "value" : "Липсва информация, за да започне автентикацията."
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Manca informació per a iniciar l'autenticació."
@@ -2178,6 +2418,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Information manquante pour démarrer l'authentification."
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gwybodaeth ar goll i ddechrau dilysu."
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Falta información para iniciar a autenticación."
           }
         },
         "hu" : {
@@ -2239,7 +2491,7 @@
             "value" : "Липсва информация, за да стартира конфигурацията."
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Manca informació per a iniciar la configuració."
@@ -2279,6 +2531,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Information manquante pour démarrer la configuration."
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gwybodaeth ar goll i ddechrau ffurfweddu."
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Falta información para iniciar a configuración."
           }
         },
         "hu" : {
@@ -2340,7 +2604,7 @@
             "value" : "Липсва информация, за да стартира конфигурацията."
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Manca informació per a iniciar la configuració."
@@ -2380,6 +2644,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Information manquante pour démarrer la configuration."
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gwybodaeth ar goll i ddechrau ffurfweddu."
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Falta información para iniciar a configuración."
           }
         },
         "hu" : {
@@ -2441,7 +2717,7 @@
             "value" : "Не е намерен валиден профил."
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No s'ha trobat cap perfil vàlid."
@@ -2481,6 +2757,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aucun profil valide trouvé."
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heb ganfod proffil dilys."
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non se atopou ningún perfil válido."
           }
         },
         "hu" : {
@@ -2542,7 +2830,7 @@
             "value" : "Не е намерен валиден доставчик."
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cap proveïdor vàlid trobat."
@@ -2582,6 +2870,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aucun fournisseur valide trouvé."
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ni chanfuwyd darparwr dilys."
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non se atopou ningún provedor válido."
           }
         },
         "hu" : {
@@ -2642,7 +2942,7 @@
             "value" : "Парола"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Contrasenya"
@@ -2682,6 +2982,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mot de passe"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cyfrinair"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contrasinal"
           }
         },
         "hu" : {
@@ -2774,7 +3086,7 @@
             "value" : "Моля, въведете Вашето потребителско име и парола."
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Si us plau, introduïu el  vostre nom d'usuari i contrasenya."
@@ -2814,6 +3126,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Entrez votre identifiant et mot de passe, svp."
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rhowch eich enw defnyddiwr a cyfrinair."
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por favor, introduce o teu nome de usuario e contrasinal."
           }
         },
         "hu" : {
@@ -2875,7 +3199,7 @@
             "value" : "Профили"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Perfils"
@@ -2915,6 +3239,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Profils"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Proffiliau"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perfís"
           }
         },
         "hu" : {
@@ -3023,7 +3359,7 @@
             "value" : "Прегледайте профила и след това натиснете бутона \"Install…\", за да инсталирате мрежата на Вашия компютър."
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reviseu el perfil i després premeu el botó \"Instal·lar...\" per configurar la xarxa al teu ordinador."
@@ -3063,6 +3399,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Passez en revue le profil puis appuyez sur le bouton « Installer... » pour configurer le réseau sur votre ordinateur"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adolygwch y proffil ac yna pwyswch y botwm \"Gosod ...\" i osod y rhwydwaith ar eich cyfrifiadur."
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revise o perfil e despois prema o botón \"Instalar...\" para configurar a rede no seu ordenador."
           }
         },
         "hu" : {
@@ -3123,7 +3471,7 @@
             "value" : "Условия за ползване"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Termes d'ús"
@@ -3163,6 +3511,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Conditions d'utilisation"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telerau Defnyddio"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Termos de uso"
           }
         },
         "hu" : {
@@ -3224,7 +3584,7 @@
             "value" : "Процесът на конфигуриране беше отменен."
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "El procés de configuració s'ha cancel·lat."
@@ -3264,6 +3624,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le processus de configuration a été annulé."
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cafodd y broses ffurfweddu ei canslo."
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O proceso de configuración foi cancelado."
           }
         },
         "hu" : {
@@ -3324,7 +3696,7 @@
             "value" : "Потребителско име"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nom d'usuari"
@@ -3364,6 +3736,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Identifiant"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enw defnyddiwr"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome de usuario"
           }
         },
         "hu" : {
@@ -3424,7 +3808,7 @@
             "value" : "Вие сте пренасочен към уебсайт."
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Se us redirigeix a un lloc web."
@@ -3556,7 +3940,7 @@
             "value" : "За да използвате тази мрежа, трябва да се съгласите с условията за ползване."
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Heu d'acceptar els termes d'ús abans de poder utilitzar aquesta xarxa."
@@ -3596,6 +3980,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vous devez approuver les conditions d'utilisation avant de pouvoir utiliser ce réseau."
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rhaid i chi gytuno i'r telerau defnyddio cyn y gallwch ddefnyddio'r rhwydwaith hwn."
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Debes aceptar os termos de uso antes de poder usar esta rede."
           }
         },
         "hu" : {
@@ -3657,7 +4053,7 @@
             "value" : "Трябва да се съгласите с условията за ползване."
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Heu d'acceptar els termes d'ús."
@@ -3697,6 +4093,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vous devez approuver les conditions d'utilisation."
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rhaid i chi gytuno â'r telerau defnyddio."
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Debes aceptar os termos de uso."
           }
         },
         "hu" : {

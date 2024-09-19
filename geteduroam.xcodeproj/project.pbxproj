@@ -419,7 +419,7 @@
 				en,
 				Base,
 				nl,
-				"ca-ES",
+				ca,
 				de,
 				es,
 				hu,
@@ -433,6 +433,8 @@
 				bg,
 				sl,
 				uk,
+				gd,
+				gl,
 			);
 			mainGroup = 7555FF72242A565900829871;
 			packageReferences = (

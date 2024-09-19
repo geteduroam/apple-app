@@ -16,7 +16,7 @@
             "value" : "По неизвестна причина не е получен токен за достъп"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No s'ha obtingut cap token d'accés per raons desconegudes"
@@ -56,6 +56,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aucun jeton d'accès n'a été obtenu, pour une raison inconnue"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ni chafwyd tocyn mynediad am reswm anhysbys"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por motivos descoñecidos, non se obtivo ningún token de acceso"
           }
         },
         "hu" : {

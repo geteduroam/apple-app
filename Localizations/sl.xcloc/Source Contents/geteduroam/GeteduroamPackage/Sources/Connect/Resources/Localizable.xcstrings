@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "." : {
+
+    },
+    "(%@)" : {
+
+    },
     "Agree" : {
       "localizations" : {
         "en" : {
@@ -10,6 +16,18 @@
           }
         }
       }
+    },
+    "Already configured" : {
+
+    },
+    "Already configured for %@ profile" : {
+
+    },
+    "Already configured, but not connected" : {
+
+    },
+    "Already connected" : {
+
     },
     "Cancel" : {
       "localizations" : {
@@ -117,6 +135,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Disagree"
+          }
+        }
+      }
+    },
+    "Do you want to reconfigure your %@ to use %@ profile instead?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Do you want to reconfigure your %1$@ to use %2$@ profile instead?"
           }
         }
       }
@@ -260,17 +288,6 @@
         }
       }
     },
-    "OK" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        }
-      }
-    },
     "Password" : {
       "localizations" : {
         "en" : {
@@ -280,6 +297,12 @@
           }
         }
       }
+    },
+    "Password Required" : {
+
+    },
+    "Please enter your password." : {
+
     },
     "Please enter your username and password." : {
       "localizations" : {
@@ -301,6 +324,15 @@
           }
         }
       }
+    },
+    "Reconfigure %@" : {
+
+    },
+    "Reconfigure your %@ to renew your network access or if you are experiencing network issues." : {
+
+    },
+    "Reconnect" : {
+
     },
     "Review the profile and then press the \"Install…\" button to setup the network on your computer." : {
       "localizations" : {
@@ -353,6 +385,12 @@
         }
       }
     },
+    "You had access until %@ " : {
+
+    },
+    "You have access until %@ " : {
+
+    },
     "You must agree to the terms of use before you can use this network." : {
       "localizations" : {
         "en" : {
@@ -373,6 +411,18 @@
           }
         }
       }
+    },
+    "You need to provide a password." : {
+
+    },
+    "You need to provide a username and password." : {
+
+    },
+    "You need to provide a valid username." : {
+
+    },
+    "Your username should end with '@%@'." : {
+
     }
   },
   "version" : "1.0"

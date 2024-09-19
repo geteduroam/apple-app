@@ -17,7 +17,7 @@
             "value" : "geteduroam"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "geteduroam"
@@ -54,6 +54,18 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
+        "gl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "geteduroam"
