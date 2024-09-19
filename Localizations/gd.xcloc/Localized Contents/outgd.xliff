@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="geteduroam/GeteduroamPackage/Sources/AppRemoteConfigClient/Resources/en.lproj/Localizable.strings" datatype="plaintext" source-language="en" target-language="gd">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
+    </header>
+    <body>
+      <trans-unit id="Connecting" xml:space="preserve">
+        <source>Connecting</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="This menu is for testing purposes only." xml:space="preserve">
+        <source>This menu is for testing purposes only.</source>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="geteduroam/GeteduroamPackage/Sources/AuthClient/Resources/Localizable.xcstrings" source-language="en" target-language="gd" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
+    </header>
+    <body>
+      <trans-unit id="No access token obtained for unknown reason" xml:space="preserve">
+        <source>No access token obtained for unknown reason</source>
+        <note>OIDAuthStateError neitherAccessTokenNorErrorAvailable</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="geteduroam/GeteduroamPackage/Sources/Backport/Resources/Localizable.xcstrings" source-language="en" target-language="gd" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
+    </header>
+    <body>
+      <trans-unit id="Search" xml:space="preserve">
+        <source>Search</source>
+        <note>Search prompt</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="geteduroam/GeteduroamPackage/Sources/Connect/Resources/Localizable.xcstrings" source-language="en" target-language="gd" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
+    </header>
+    <body>
+      <trans-unit id="(%@)" xml:space="preserve">
+        <source>(%@)</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="." xml:space="preserve">
+        <source>.</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Agree" xml:space="preserve">
+        <source>Agree</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Already configured" xml:space="preserve">
+        <source>Already configured</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Already configured for %@ profile" xml:space="preserve">
+        <source>Already configured for %@ profile</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Already configured, but not connected" xml:space="preserve">
+        <source>Already configured, but not connected</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Already connected" xml:space="preserve">
+        <source>Already connected</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="CONNECT" xml:space="preserve">
+        <source>CONNECT</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Cancel" xml:space="preserve">
+        <source>Cancel</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Configured" xml:space="preserve">
+        <source>Configured</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Configured, but not connected" xml:space="preserve">
+        <source>Configured, but not connected</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Connect" xml:space="preserve">
+        <source>Connect</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Connected" xml:space="preserve">
+        <source>Connected</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Continue" xml:space="preserve">
+        <source>Continue</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Continue in System Preferences" xml:space="preserve">
+        <source>Continue in System Preferences</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Continue in System Settings" xml:space="preserve">
+        <source>Continue in System Settings</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Continue to Website" xml:space="preserve">
+        <source>Continue to Website</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Disagree" xml:space="preserve">
+        <source>Disagree</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Do you want to reconfigure your %@ to use %@ profile instead?" xml:space="preserve">
+        <source>Do you want to reconfigure your %1$@ to use %2$@ profile instead?</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Double-click to review the profile and then press the &quot;Install…&quot; button to setup the network on your computer." xml:space="preserve">
+        <source>Double-click to review the profile and then press the "Install…" button to setup the network on your computer.</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Failed to connect" xml:space="preserve">
+        <source>Failed to connect</source>
+        <note>Failed to connect</note>
+      </trans-unit>
+      <trans-unit id="Helpdesk" xml:space="preserve">
+        <source>Helpdesk</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Log In" xml:space="preserve">
+        <source>Log In</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Login Required" xml:space="preserve">
+        <source>Login Required</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Missing information about profile." xml:space="preserve">
+        <source>Missing information about profile.</source>
+        <note>missingProfileType</note>
+      </trans-unit>
+      <trans-unit id="Missing information to start authentication. (auth)" xml:space="preserve">
+        <source>Missing information to start authentication.</source>
+        <note>missingAuthorizationEndpoint (leave text in brackets out of localization)</note>
+      </trans-unit>
+      <trans-unit id="Missing information to start authentication. (info)" xml:space="preserve">
+        <source>Missing information to start authentication.</source>
+        <note>missingOAuthInfo (leave text in brackets out of localization)</note>
+      </trans-unit>
+      <trans-unit id="Missing information to start authentication. (token)" xml:space="preserve">
+        <source>Missing information to start authentication.</source>
+        <note>missingTokenEndpoint (leave text in brackets out of localization)</note>
+      </trans-unit>
+      <trans-unit id="Missing information to start configuration. (eap)" xml:space="preserve">
+        <source>Missing information to start configuration.</source>
+        <note>missingEAPConfigEndpoint (leave text in brackets out of localization)</note>
+      </trans-unit>
+      <trans-unit id="Missing information to start configuration. (profile)" xml:space="preserve">
+        <source>Missing information to start configuration.</source>
+        <note>missingMobileConfigEndpoint (leave text in brackets out of localization)</note>
+      </trans-unit>
+      <trans-unit id="No valid profile found." xml:space="preserve">
+        <source>No valid profile found.</source>
+        <note>mobileConfigFailed</note>
+      </trans-unit>
+      <trans-unit id="No valid provider found." xml:space="preserve">
+        <source>No valid provider found.</source>
+        <note>noValidProviderFound</note>
+      </trans-unit>
+      <trans-unit id="Password" xml:space="preserve">
+        <source>Password</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Password Required" xml:space="preserve">
+        <source>Password Required</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Please enter your password." xml:space="preserve">
+        <source>Please enter your password.</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Please enter your username and password." xml:space="preserve">
+        <source>Please enter your username and password.</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Profiles" xml:space="preserve">
+        <source>Profiles</source>
+        <note>Profiles</note>
+      </trans-unit>
+      <trans-unit id="Reconfigure %@" xml:space="preserve">
+        <source>Reconfigure %@</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Reconfigure your %@ to renew your network access or if you are experiencing network issues." xml:space="preserve">
+        <source>Reconfigure your %@ to renew your network access or if you are experiencing network issues.</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Reconnect" xml:space="preserve">
+        <source>Reconnect</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Review the profile and then press the &quot;Install…&quot; button to setup the network on your computer." xml:space="preserve">
+        <source>Review the profile and then press the "Install…" button to setup the network on your computer.</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Terms of Use" xml:space="preserve">
+        <source>Terms of Use</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="The configuration process was cancelled." xml:space="preserve">
+        <source>The configuration process was cancelled.</source>
+        <note>userCancelled</note>
+      </trans-unit>
+      <trans-unit id="Username" xml:space="preserve">
+        <source>Username</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="You are redirected to a website." xml:space="preserve">
+        <source>You are redirected to a website.</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="You had access until %@ " xml:space="preserve">
+        <source>You had access until %@ </source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="You have access until %@ " xml:space="preserve">
+        <source>You have access until %@ </source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="You must agree to the terms of use before you can use this network." xml:space="preserve">
+        <source>You must agree to the terms of use before you can use this network.</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="You must agree to the terms of use." xml:space="preserve">
+        <source>You must agree to the terms of use.</source>
+        <note>missingTermsAcceptance (leave text in brackets out of localization)</note>
+      </trans-unit>
+      <trans-unit id="You need to provide a password." xml:space="preserve">
+        <source>You need to provide a password.</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="You need to provide a username and password." xml:space="preserve">
+        <source>You need to provide a username and password.</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="You need to provide a valid username." xml:space="preserve">
+        <source>You need to provide a valid username.</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Your username should end with '@%@'." xml:space="preserve">
+        <source>Your username should end with '@%@'.</source>
+        <note/>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="geteduroam/GeteduroamPackage/Sources/EAPConfigurator/Resources/Localizable.xcstrings" source-language="en" target-language="gd" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
+    </header>
+    <body>
+      <trans-unit id="No OID or SSID in configuration" xml:space="preserve">
+        <source>No OID or SSID in configuration</source>
+        <note>No OID or SSID in configuration</note>
+      </trans-unit>
+      <trans-unit id="No credentials in configuration" xml:space="preserve">
+        <source>No credentials in configuration</source>
+        <note>empty user/pass</note>
+      </trans-unit>
+      <trans-unit id="No password in configuration" xml:space="preserve">
+        <source>No password in configuration</source>
+        <note>empty pass</note>
+      </trans-unit>
+      <trans-unit id="No valid client certificate in configuration" xml:space="preserve">
+        <source>No valid client certificate in configuration</source>
+        <note>noValidClientCertificate</note>
+      </trans-unit>
+      <trans-unit id="No valid configuration found" xml:space="preserve">
+        <source>No valid configuration found</source>
+        <note>noConfigurations</note>
+      </trans-unit>
+      <trans-unit id="No valid outer EAP type in configuration" xml:space="preserve">
+        <source>No valid outer EAP type in configuration</source>
+        <note>noOuterEAPType</note>
+      </trans-unit>
+      <trans-unit id="Unable to add certificate %@ to keychain (%d)" xml:space="preserve">
+        <source>Unable to add certificate %1$@ to keychain (%2$d)</source>
+        <note>addClientCertificate: SecItemAdd</note>
+      </trans-unit>
+      <trans-unit id="Unable to copy from keychain (%d)" xml:space="preserve">
+        <source>Unable to copy from keychain (%d)</source>
+        <note>SecItemCopyMatching: retrieving identity returned</note>
+      </trans-unit>
+      <trans-unit id="Unable to create certificate from data" xml:space="preserve">
+        <source>Unable to create certificate from data</source>
+        <note>SecCertificateCreateWithData: false</note>
+      </trans-unit>
+      <trans-unit id="Unable to decode certificate data" xml:space="preserve">
+        <source>Unable to decode certificate data</source>
+        <note>Unable to base64 decode certificate data</note>
+      </trans-unit>
+      <trans-unit id="Unable to get common name from certificate" xml:space="preserve">
+        <source>Unable to get common name from certificate</source>
+        <note>Certificate: unable to get common name or subject sequence </note>
+      </trans-unit>
+      <trans-unit id="Unable to import certificate into keychain (%d)" xml:space="preserve">
+        <source>Unable to import certificate into keychain (%d)</source>
+        <note>addClientCertificate</note>
+      </trans-unit>
+      <trans-unit id="Unable to read supported interfaces" xml:space="preserve">
+        <source>Unable to read supported interfaces</source>
+        <note>cannotCopySupportedInterfaces</note>
+      </trans-unit>
+      <trans-unit id="Unable to set identity for client certificate" xml:space="preserve">
+        <source>Unable to set identity for client certificate</source>
+        <note>ClientCertificate: cannot set identity</note>
+      </trans-unit>
+      <trans-unit id="Unable to set server certificate as trusted" xml:space="preserve">
+        <source>Unable to set server certificate as trusted</source>
+        <note>setTrustedServerCertificates: returned false</note>
+      </trans-unit>
+      <trans-unit id="Unable to verify network because no server name or certificate set" xml:space="preserve">
+        <source>Unable to verify network because no server name or certificate set</source>
+        <note>No server names and no custom CAs set</note>
+      </trans-unit>
+      <trans-unit id="Username must end with &quot;%@&quot;" xml:space="preserve">
+        <source>Username must end with "%@"</source>
+        <note>invalid username</note>
+      </trans-unit>
+      <trans-unit id="with unknown name" xml:space="preserve">
+        <source>with unknown name</source>
+        <note>with unknown name</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="geteduroam/GeteduroamPackage/Sources/Main/Resources/Localizable.xcstrings" source-language="en" target-language="gd" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
+    </header>
+    <body>
+      <trans-unit id="App Configuration" xml:space="preserve">
+        <source>App Configuration</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="App Configuration…" xml:space="preserve">
+        <source>App Configuration…</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Close" xml:space="preserve">
+        <source>Close</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Configured" xml:space="preserve">
+        <source>Configured</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Failed to load organizations" xml:space="preserve">
+        <source>Failed to load organizations</source>
+        <note>Message when organizations can't be loaded and the fallback fails too</note>
+      </trans-unit>
+      <trans-unit id="It is recommended to update %@ to a newer version." xml:space="preserve">
+        <source>It is recommended to update %@ to a newer version.</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="It is recommended to update this app to the latest version." xml:space="preserve">
+        <source>It is recommended to update this app to the latest version.</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="It is required to update %@ to a newer version." xml:space="preserve">
+        <source>It is required to update %@ to a newer version.</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="It is required to update this app to the latest version." xml:space="preserve">
+        <source>It is required to update this app to the latest version.</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="No matches found" xml:space="preserve">
+        <source>No matches found</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="OK" xml:space="preserve">
+        <source>OK</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Open File…" xml:space="preserve">
+        <source>Open File…</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Search for your organization" xml:space="preserve">
+        <source>Search for your organization</source>
+        <note>Search prompt</note>
+      </trans-unit>
+      <trans-unit id="The organization is no longer listed." xml:space="preserve">
+        <source>The organization is no longer listed.</source>
+        <note>Message when user asked to renew but the organization could not be found</note>
+      </trans-unit>
+      <trans-unit id="This app is disabled." xml:space="preserve">
+        <source>This app is disabled.</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="This app is obsolete." xml:space="preserve">
+        <source>This app is obsolete.</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="This app is under maintenance." xml:space="preserve">
+        <source>This app is under maintenance.</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="Unknown organization" xml:space="preserve">
+        <source>Unknown organization</source>
+        <note>Title when user asked to renew but the organization could not be found</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="geteduroam/GeteduroamPackage/Sources/NotificationClient/Resources/Localizable.xcstrings" source-language="en" target-language="gd" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
+    </header>
+    <body>
+      <trans-unit id="Remind Me Later" xml:space="preserve">
+        <source>Remind Me Later</source>
+        <note>Remind Me Later</note>
+      </trans-unit>
+      <trans-unit id="Renew Now" xml:space="preserve">
+        <source>Renew Now</source>
+        <note>Renew Now</note>
+      </trans-unit>
+      <trans-unit id="Renew your connection to extend your access." xml:space="preserve">
+        <source>Renew your connection to extend your access.</source>
+        <note>Renew your connection to extend your access.</note>
+      </trans-unit>
+      <trans-unit id="You had access until %@. Renew your connection to extend your access." xml:space="preserve">
+        <source>You had access until %@. Renew your connection to extend your access.</source>
+        <note>You had access until &lt;date&gt;. Renew your connection to extend your access.</note>
+      </trans-unit>
+      <trans-unit id="You have access until %@. Renew your connection to extend your access." xml:space="preserve">
+        <source>You have access until %@. Renew your connection to extend your access.</source>
+        <note>You have access until &lt;date&gt;. Renew your connection to extend your access.</note>
+      </trans-unit>
+      <trans-unit id="Your network access has expired" xml:space="preserve">
+        <source>Your network access has expired</source>
+        <note>Your network access has expired</note>
+      </trans-unit>
+      <trans-unit id="Your network access is about to expire" xml:space="preserve">
+        <source>Your network access is about to expire</source>
+        <note>Your network access is about to expire</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="geteduroam/InfoPlist.xcstrings" source-language="en" target-language="gd" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName" xml:space="preserve">
+        <source>geteduroam</source>
+        <note>Bundle name</note>
+      </trans-unit>
+      <trans-unit id="EAP Config" xml:space="preserve">
+        <source>EAP Config</source>
+        <note/>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="geteduroam/Localizable.xcstrings" source-language="en" target-language="gd" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
+    </header>
+    <body>
+      <trans-unit id="geteduroam" xml:space="preserve">
+        <source>geteduroam</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="geteduroam Help" xml:space="preserve">
+        <source>geteduroam Help</source>
+        <note/>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="getgovroam/InfoPlist.xcstrings" source-language="en" target-language="gd" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName" xml:space="preserve">
+        <source>getgovroam</source>
+        <note>Bundle name</note>
+      </trans-unit>
+      <trans-unit id="EAP Config" xml:space="preserve">
+        <source>EAP Config</source>
+        <note/>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="getgovroam/Localizable.xcstrings" source-language="en" target-language="gd" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
+    </header>
+    <body>
+      <trans-unit id="getgovroam" xml:space="preserve">
+        <source>getgovroam</source>
+        <note/>
+      </trans-unit>
+      <trans-unit id="getgovroam Help" xml:space="preserve">
+        <source>getgovroam Help</source>
+        <note/>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

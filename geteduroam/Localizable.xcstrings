@@ -15,7 +15,7 @@
             "value" : "geteduroam"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "geteduroam"
@@ -52,6 +52,18 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam"
+          }
+        },
+        "gl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "geteduroam"
@@ -115,7 +127,7 @@
             "value" : "geteduroam Помощ"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ajuda de geteduroam "
@@ -155,6 +167,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aide pour geteduroam"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "geteduroam Cymorth"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Axuda de geteduroam"
           }
         },
         "hu" : {

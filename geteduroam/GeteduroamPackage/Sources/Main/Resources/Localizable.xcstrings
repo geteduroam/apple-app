@@ -63,7 +63,7 @@
             "value" : "Конфигурирано"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Configurat"
@@ -164,7 +164,7 @@
             "value" : "Неуспешно зареждане на организациите"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Error en carregar les organitzacions"
@@ -204,6 +204,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le chargement des établissements a échoué"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wedi methu llwytho sefydliadau"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fallou a carga das organizacións"
           }
         },
         "hu" : {
@@ -328,7 +340,7 @@
             "value" : "Не са намерени съвпадения"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No s'han trobat coincidències"
@@ -368,6 +380,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aucune correspondance trouvée"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heb ganfod unrhyw gyfatebiaeth"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non se atoparon coincidencias"
           }
         },
         "hu" : {
@@ -428,7 +452,7 @@
             "value" : "ОК"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
@@ -465,6 +489,18 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iawn"
+          }
+        },
+        "gl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
@@ -545,7 +581,7 @@
             "value" : "Търсене за Вашата организация"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cerqueu la vostra organització"
@@ -585,6 +621,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chercher votre établissement"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chwiliwch am eich sefydliad"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Busca a túa organización"
           }
         },
         "hu" : {
@@ -646,7 +694,7 @@
             "value" : "Организацията вече не е в списъка."
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "L'organització ja no està llistada."
@@ -686,6 +734,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cet établissement n'est plus dans la liste."
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nid yw'r sefydliad bellach wedi'i restru."
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A organización xa non está listada."
           }
         },
         "hu" : {
@@ -795,7 +855,7 @@
             "value" : "Неизвестна организация"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Organització desconeguda"
@@ -835,6 +895,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Établissement inconnu"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sefydliad anhysbys"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Organización descoñecida"
           }
         },
         "hu" : {

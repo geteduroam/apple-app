@@ -16,7 +16,7 @@
             "value" : "Няма креденшъли в конфигурацията"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cap credencial a la configuració"
@@ -50,6 +50,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pas d'identifiants dans la configuration"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dim tystlythyrau yn y ffurfweddiad"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non hai credenciais na configuración"
           }
         },
         "hu" : {
@@ -111,7 +123,7 @@
             "value" : "Няма OID или SSID в конфигурацията"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cap OID o SSID a la configuració"
@@ -145,6 +157,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aucun OID ou SSID dans la configuration"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dim OID neu SSID yn y ffurfweddiad"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sen OID ou SSID na configuración"
           }
         },
         "hu" : {
@@ -240,7 +264,7 @@
             "value" : "Не е намерена валидна конфигурация"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cap configuració vàlida trobada"
@@ -274,6 +298,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aucune configuration valide trouvée"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ni chanfuwyd ffurfweddiad dilys"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non se atopou ningunha configuración válida"
           }
         },
         "hu" : {
@@ -335,7 +371,7 @@
             "value" : "Няма валиден външен EAP тип в конфигурацията"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cap tipus extern d'EAP vàlid en la configuració."
@@ -369,6 +405,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aucun type EAP externe valide dans la configuration"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dim math EAP allanol dilys yn y ffurfweddiad"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non hai ningún tipo EAP externo válido na configuración"
           }
         },
         "hu" : {
@@ -430,7 +478,7 @@
             "value" : "Не може да се добави сертификат %1$@ към keychain (%2$d)"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No s'ha pogut afegir el certificat %1$@ al repositori de claus (%2$d)"
@@ -470,6 +518,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible d'ajouter le certificat %1$@ au trousseau (%2$d)"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Methu ychwanegu tystysgrif %1$@ i'r gadwyn allweddi (%2$d)"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Incapaz de engadir o certificado %1$@ ao almacén de claves (%2$d)"
           }
         },
         "hu" : {
@@ -531,7 +591,7 @@
             "value" : "Не може да се копира  от keychain(%d)"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No es pot copiar des del repositori de claus (%d)"
@@ -565,6 +625,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible de copier depuis le trousseau (%d)"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Methu copïo o keychain (%d)"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Incapaz de copiar desde o almacén de claves \n(%d)"
           }
         },
         "hu" : {
@@ -626,7 +698,7 @@
             "value" : "Не може да се създаде сертификат от данните"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No es possible crear el certificat a partir de les dades."
@@ -660,6 +732,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible de créer le certificat depuis les données"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Methu creu tystysgrif o ddata"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non se pode crear un certificado a partir de datos"
           }
         },
         "hu" : {
@@ -721,7 +805,7 @@
             "value" : "Не могат да се декодират данните от сертификата"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No es pot descodificar les dades del certificat."
@@ -755,6 +839,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible de décoder les données du certificat"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Methu dadgodio data tystysgrif"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non se pode de decodificar os datos do certificado."
           }
         },
         "hu" : {
@@ -816,7 +912,7 @@
             "value" : "Не може да се вземе common name от сертификата"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No es possible obtenir el nom comú des del certificat."
@@ -850,6 +946,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible de trouver le nom d'usage dans le certificat"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Methu cael enw cyffredin o'r dystysgrif"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non se pode obter o nome común do certificado"
           }
         },
         "hu" : {
@@ -911,7 +1019,7 @@
             "value" : "Не може да се импортира сертификат в keychain (%d)"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No es possible importar el certificat al repositori de claus (%d)"
@@ -945,6 +1053,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible d'importer le certificat dans le trousseau (%d)"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Methu mewnforio tystysgrif i'r gadwyn allweddi (%d)"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non se pode importar o certificado no almacén de claves (%d)"
           }
         },
         "hu" : {
@@ -1006,7 +1126,7 @@
             "value" : "Не могат да се прочетат поддържаните интерфейси"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No es poden llegir les interfícies compatibles."
@@ -1040,6 +1160,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible de lire les interfaces supportées"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Methu darllen rhyngwynebau a gefnogir"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non se pode de ler as interfaces compatibles."
           }
         },
         "hu" : {
@@ -1101,7 +1233,7 @@
             "value" : "Не може да се зададе идентичност за клиентския сертификат"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No es possible establir la identitat per al certificat del client."
@@ -1135,6 +1267,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible de configurer l'identité pour le certificat client"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Methu gosod hunaniaeth ar gyfer tystysgrif cleient"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non se pode establecer a identidade para o certificado do cliente"
           }
         },
         "hu" : {
@@ -1196,7 +1340,7 @@
             "value" : "Не може да се зададе сертификата на сървъра като доверен"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No es possible establir el certificat del servidor com a confiable."
@@ -1230,6 +1374,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible de considérer le certificat serveur comme étant de confiance"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Methu gosod tystysgrif gweinydd fel un y gellir ymddiried ynddo"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non se pode establecer o certificado do servidor como fiable."
           }
         },
         "hu" : {
@@ -1291,7 +1447,7 @@
             "value" : "Не може да се провери мрежата, защото не са зададени име на сървър и сертификат"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No es pot verificar la xarxa perquè no s'ha establert cap nom de servidor o certificat."
@@ -1325,6 +1481,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossible de vérifier le réseau car aucun nom de serveur ou certificat n'est indiqué"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Methu dilysu rhwydwaith oherwydd nid oes enw gweinydd na thystysgrif wedi'i osod"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non se pode verificar a rede porque non se estableceu ningún nome de servidor ou certificado."
           }
         },
         "hu" : {
@@ -1386,7 +1554,7 @@
             "value" : "Потребителското име трябва да завършва с \"%@\""
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "El nom d'usuari ha de finalitzar amb \"%@\"."
@@ -1420,6 +1588,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le nom d'utilisateur doit se terminer par « %@ »"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rhaid i'r enw defnyddiwr orffen gyda \"%@\""
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O nome de usuario debe rematar con \"%@\""
           }
         },
         "hu" : {
@@ -1481,7 +1661,7 @@
             "value" : "с неизвестно име"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "amb nom desconegut"
@@ -1515,6 +1695,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "avec un nom inconnu"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ag enw anhysbys"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "con nome descoñecido"
           }
         },
         "hu" : {

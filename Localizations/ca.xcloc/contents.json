@@ -1,7 +1,7 @@
 {
   "developmentRegion" : "en",
   "project" : "geteduroam.xcodeproj",
-  "targetLocale" : "ca-ES",
+  "targetLocale" : "ca",
   "toolInfo" : {
     "toolBuildNumber" : "15C65",
     "toolID" : "com.apple.dt.xcode",

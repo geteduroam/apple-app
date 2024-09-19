@@ -15,7 +15,7 @@
             "value" : "getgovroam"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "getgovroam"
@@ -52,6 +52,18 @@
           }
         },
         "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "getgovroam"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "getgovroam"
+          }
+        },
+        "gl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "getgovroam"
@@ -115,7 +127,7 @@
             "value" : "getgovroam Помощ"
           }
         },
-        "ca-ES" : {
+        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ajuda de getgovroam "
@@ -155,6 +167,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aide pour getgovroam"
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "getgovroam Help"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Axuda de getgovroam"
           }
         },
         "hu" : {

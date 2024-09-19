@@ -19,6 +19,8 @@
 		C755640C2AB9C69100244B45 /* Muli.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C755640A2AB9C64E00244B45 /* Muli.ttf */; };
 		C755640D2AB9C69100244B45 /* Muli-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C75564062AB9C64E00244B45 /* Muli-Bold.ttf */; };
 		C755640E2AB9C69100244B45 /* Muli-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C75564082AB9C64E00244B45 /* Muli-SemiBold.ttf */; };
+		C756A8ED2C9BFBE600A1BA5E /* AppStore.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C72FDF122B2B51AA00AE0636 /* AppStore.xcstrings */; };
+		C756A8EE2C9BFBED00A1BA5E /* AppStore.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C72FDF152B2B543900AE0636 /* AppStore.xcstrings */; };
 		C76B786D2A86F45B00A651EB /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C76B786C2A86F45B00A651EB /* Localizable.xcstrings */; };
 		C76B786F2A86F45B00A651EB /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C76B786E2A86F45B00A651EB /* Localizable.xcstrings */; };
 		C774FA1C29E05DDD001E560C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C74A11E7294C9FB600ECC19A /* Launch Screen.storyboard */; platformFilter = ios; };
@@ -419,7 +421,7 @@
 				en,
 				Base,
 				nl,
-				"ca-ES",
+				ca,
 				de,
 				es,
 				hu,
@@ -433,6 +435,8 @@
 				bg,
 				sl,
 				uk,
+				gd,
+				gl,
 			);
 			mainGroup = 7555FF72242A565900829871;
 			packageReferences = (
@@ -461,6 +465,7 @@
 				058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */,
 				C774FA1C29E05DDD001E560C /* Launch Screen.storyboard in Resources */,
 				C74A11EE294CA56100ECC19A /* OpenSans-Bold.ttf in Resources */,
+				C756A8ED2C9BFBE600A1BA5E /* AppStore.xcstrings in Resources */,
 				C72D66D72A4DCE9A007FDB68 /* discovery.json in Resources */,
 				C76B786D2A86F45B00A651EB /* Localizable.xcstrings in Resources */,
 				C74A11EF294CA56100ECC19A /* OpenSans-Regular.ttf in Resources */,
@@ -493,6 +498,7 @@
 				C7F45A68297AC88C0005508D /* discovery.json in Resources */,
 				C755640C2AB9C69100244B45 /* Muli.ttf in Resources */,
 				C7F45A69297AC89A0005508D /* Launch Screen.storyboard in Resources */,
+				C756A8EE2C9BFBED00A1BA5E /* AppStore.xcstrings in Resources */,
 				C78BB7732A29D212001799ED /* LICENSE.md in Resources */,
 				C76B786F2A86F45B00A651EB /* Localizable.xcstrings in Resources */,
 				C755640D2AB9C69100244B45 /* Muli-Bold.ttf in Resources */,
