@@ -1,38 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "." : {
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "."
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "."
-          }
-        }
-      }
-    },
-    "(%@)" : {
-      "localizations" : {
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%@)"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%@)"
-          }
-        }
-      }
-    },
     "Agree" : {
       "localizations" : {
         "ar" : {
@@ -3894,34 +3862,46 @@
         }
       }
     },
-    "You had access until %@ " : {
+    "You had access until %@ **(%@)**." : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "You had access until %1$@ **(%2$@)**."
+          }
+        },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You had access until %@ "
+            "value" : "You had access until %1$@ **(%2$@)**."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Je had toegang tot %@ "
+            "value" : "Je had toegang tot %1$@ **(%2$@)**."
           }
         }
       }
     },
-    "You have access until %@ " : {
+    "You have access until %@ **(%@)**." : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "You have access until %1$@ **(%2$@)**."
+          }
+        },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You have access until %@ "
+            "value" : "You have access until %1$@ **(%2$@)**."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Je hebt toegang tot %@ "
+            "value" : "Je hebt toegang tot %1$@ **(%2$@)**."
           }
         }
       }

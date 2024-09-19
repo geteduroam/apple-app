@@ -66,29 +66,17 @@ public struct ConnectView_iOS: View {
                     if let validUntil = store.validUntil {
                         TimelineView(.explicit([validUntil, validUntil.addingTimeInterval(Constants.detailedDataTimeInterval)])) { context in
                             if context.date.timeIntervalSinceNow <= 0 {
-                                Group {
-                                    Text("You had access until \(context.date, format: .dateTime.day().month().year().hour().minute()) ", bundle: .module) +
-                                    Text("(\(context.date, format: .relative(presentation: .numeric)))", bundle: .module).bold() +
-                                    Text(".", bundle: .module)
-                                }
-                                .font(theme.statusFont)
-                                .padding(20)
+                                Text("You had access until \(context.date, format: .dateTime.day().month().year().hour().minute()) **(\(context.date, format: .relative(presentation: .numeric)))**.", bundle: .module)
+                                    .font(theme.statusFont)
+                                    .padding(20)
                             } else if context.date.timeIntervalSinceNow >= Constants.detailedDataTimeInterval {
-                                Group {
-                                    Text("You have access until \(context.date, format: .dateTime.day().month().year()) ", bundle: .module) +
-                                    Text("(\(context.date, format: .relative(presentation: .numeric)))", bundle: .module).bold() +
-                                    Text(".", bundle: .module)
-                                }
-                                .font(theme.statusFont)
-                                .padding(20)
+                                Text("You have access until \(context.date, format: .dateTime.day().month().year()) **(\(context.date, format: .relative(presentation: .numeric)))**.", bundle: .module)
+                                    .font(theme.statusFont)
+                                    .padding(20)
                             } else {
-                                Group {
-                                    Text("You have access until \(context.date, format: .dateTime.day().month().year().hour().minute()) ", bundle: .module) +
-                                    Text("(\(context.date, format: .relative(presentation: .numeric)))", bundle: .module).bold() +
-                                    Text(".", bundle: .module)
-                                }
-                                .font(theme.statusFont)
-                                .padding(20)
+                                Text("You have access until \(context.date, format: .dateTime.day().month().year().hour().minute()) **(\(context.date, format: .relative(presentation: .numeric)))**.", bundle: .module)
+                                    .font(theme.statusFont)
+                                    .padding(20)
                             }
                         }
                     }

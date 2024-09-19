@@ -1,0 +1,68 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "No credentials in configuration" : {
+      "comment" : "empty user/pass"
+    },
+    "No OID or SSID in configuration" : {
+      "comment" : "No OID or SSID in configuration"
+    },
+    "No password in configuration" : {
+      "comment" : "empty pass"
+    },
+    "No valid client certificate in configuration" : {
+      "comment" : "noValidClientCertificate"
+    },
+    "No valid configuration found" : {
+      "comment" : "noConfigurations"
+    },
+    "No valid outer EAP type in configuration" : {
+      "comment" : "noOuterEAPType"
+    },
+    "Unable to add certificate %@ to keychain (%d)" : {
+      "comment" : "addClientCertificate: SecItemAdd",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Unable to add certificate %1$@ to keychain (%2$d)"
+          }
+        }
+      }
+    },
+    "Unable to copy from keychain (%d)" : {
+      "comment" : "SecItemCopyMatching: retrieving identity returned"
+    },
+    "Unable to create certificate from data" : {
+      "comment" : "SecCertificateCreateWithData: false"
+    },
+    "Unable to decode certificate data" : {
+      "comment" : "Unable to base64 decode certificate data"
+    },
+    "Unable to get common name from certificate" : {
+      "comment" : "Certificate: unable to get common name or subject sequence "
+    },
+    "Unable to import certificate into keychain (%d)" : {
+      "comment" : "addClientCertificate"
+    },
+    "Unable to read supported interfaces" : {
+      "comment" : "cannotCopySupportedInterfaces"
+    },
+    "Unable to set identity for client certificate" : {
+      "comment" : "ClientCertificate: cannot set identity"
+    },
+    "Unable to set server certificate as trusted" : {
+      "comment" : "setTrustedServerCertificates: returned false"
+    },
+    "Unable to verify network because no server name or certificate set" : {
+      "comment" : "No server names and no custom CAs set"
+    },
+    "Username must end with \"%@\"" : {
+      "comment" : "invalid username"
+    },
+    "with unknown name" : {
+      "comment" : "with unknown name"
+    }
+  },
+  "version" : "1.0"
+}
