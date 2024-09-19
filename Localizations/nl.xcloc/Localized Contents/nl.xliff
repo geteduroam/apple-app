@@ -106,16 +106,6 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="16.0" build-num="16A242"/>
     </header>
     <body>
-      <trans-unit id="(%@)" xml:space="preserve">
-        <source>(%@)</source>
-        <target state="translated">(%@)</target>
-        <note/>
-      </trans-unit>
-      <trans-unit id="." xml:space="preserve">
-        <source>.</source>
-        <target state="translated">.</target>
-        <note/>
-      </trans-unit>
       <trans-unit id="Agree" xml:space="preserve">
         <source>Agree</source>
         <target state="translated">Accepteer</target>
@@ -331,14 +321,14 @@
         <target state="translated">Je wordt doorverwezen naar een webpagina.</target>
         <note/>
       </trans-unit>
-      <trans-unit id="You had access until %@ " xml:space="preserve">
-        <source>You had access until %@ </source>
-        <target state="translated">Je had toegang tot %@ </target>
+      <trans-unit id="You had access until %@ **(%@)**." xml:space="preserve">
+        <source>You had access until %1$@ **(%2$@)**.</source>
+        <target state="translated">Je had toegang tot %1$@ **(%2$@)**.</target>
         <note/>
       </trans-unit>
-      <trans-unit id="You have access until %@ " xml:space="preserve">
-        <source>You have access until %@ </source>
-        <target state="translated">Je hebt toegang tot %@ </target>
+      <trans-unit id="You have access until %@ **(%@)**." xml:space="preserve">
+        <source>You have access until %1$@ **(%2$@)**.</source>
+        <target state="translated">Je hebt toegang tot %1$@ **(%2$@)**.</target>
         <note/>
       </trans-unit>
       <trans-unit id="You must agree to the terms of use before you can use this network." xml:space="preserve">
