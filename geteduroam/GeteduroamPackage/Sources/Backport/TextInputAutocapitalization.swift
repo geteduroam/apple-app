@@ -33,7 +33,7 @@ public enum TextInputAutocapitalization {
 
 public extension Backport where Content: View {
     /// Configures the behavior in which scrollable content interacts with the software keyboard.
-    /// - Parameter mode: Mode to apply
+    /// - Parameter autocapitalization: Mode to apply
     /// - Returns: View with dismiss keyboard mode applied if available
     @ViewBuilder func textInputAutocapitalization(_ autocapitalization: TextInputAutocapitalization?) -> some View {
 #if !os(macOS)
