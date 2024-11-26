@@ -30,8 +30,7 @@ extension Organization {
                 default: true,
                 type: .eapConfig
             )
-        ],
-        geo: []
+        ]
     )
     
     static let example2 = Organization(
@@ -41,8 +40,7 @@ extension Organization {
             .init(language: "nl", value: "govroam (demo)")
         ],
         country: "NL",
-        profiles: [],
-        geo: []
+        profiles: []
     )
     
     static let example3 = Organization(
@@ -52,8 +50,7 @@ extension Organization {
             .init(language: "nl", value: "Andere Organisatie (demo)")
         ],
         country: "NL",
-        profiles: [],
-        geo: []
+        profiles: []
     )
 }
 
