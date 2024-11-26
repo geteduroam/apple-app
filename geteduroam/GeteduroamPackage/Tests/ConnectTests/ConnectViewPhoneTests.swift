@@ -27,7 +27,7 @@ final class ConnectViewPhoneTests: XCTestCase {
     func testConnectScreen() throws {
         throw XCTSkip("Work in progress")
         let profile = Profile(id: "1", name: [LocalizedEntry(value: "My Profile")], default: true, type: .eapConfig)
-        let organization = Organization(id: "test", name: [LocalizedEntry(value: "My Test Organization")], country: "AB", profiles: [profile], geo: [])
+        let organization = Organization(id: "test", name: [LocalizedEntry(value: "My Test Organization")], country: "AB", profiles: [profile])
         let store = StoreOf<Connect>(initialState: .init(organization: organization, localizedModel: "test model"), reducer: { })
         
         let connectView = ConnectView(store: store)

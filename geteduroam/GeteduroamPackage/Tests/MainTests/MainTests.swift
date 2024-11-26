@@ -11,7 +11,7 @@ final class MainTests: XCTestCase {
     static let eapConfigEndpoint = URL(string: "https://www.example.com/eapconfig")!
     static let letsWifiEndpoint = URL(string: "https://www.example.com/letswifi")!
     
-    let demoInstance = Organization(id: "cat_7016", name: [LocalizedEntry(language: nil, value: "Môreelsepark Cöllege")], country: "NL", profiles: [Profile(id: "letswifi_cat_7830", name: [LocalizedEntry(language: nil, value: "Mijn Moreelsepark")], default: true, letsWiFiEndpoint: MainTests.letsWifiEndpoint, type: .letswifi)], geo: [Coordinate(lat: 52.088999999999999, lon: 5.1130000000000004)])
+    let demoInstance = Organization(id: "cat_7016", name: [LocalizedEntry(language: nil, value: "Môreelsepark Cöllege")], country: "NL", profiles: [Profile(id: "letswifi_cat_7830", name: [LocalizedEntry(language: nil, value: "Mijn Moreelsepark")], default: true, letsWiFiEndpoint: MainTests.letsWifiEndpoint, type: .letswifi)])
 
     func testLoading() async throws {
         let store = TestStore(
@@ -22,7 +22,7 @@ final class MainTests: XCTestCase {
                     .success((data: 
                     """
                     {
-                        "http://letswifi.app/discovery#v2": {
+                        "http://letswifi.app/discovery#v3": {
                             "providers": [
                                 {
                                     "id": "cat_7016",
@@ -43,12 +43,6 @@ final class MainTests: XCTestCase {
                                                 }
                                             ],
                                             "type": "letswifi"
-                                        }
-                                    ],
-                                    "geo": [
-                                        {
-                                            "lat": 52.088999999999999,
-                                            "lon": 5.1130000000000004
                                         }
                                     ]
                                 }

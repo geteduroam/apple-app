@@ -1,12 +1,12 @@
 import Foundation
 
 public struct Organization: Codable, Identifiable, Equatable, Sendable {
-    public init(id: String, name: [LocalizedEntry]?, country: String, profiles: [Profile], geo: [Coordinate] = []) {
+    public init(id: String, name: [LocalizedEntry]?, country: String, profiles: [Profile]) { //, geo: [Coordinate] = []) {
         self.id = id
         self.name = name
         self.country = country
         self.profiles = profiles
-        self.geo = geo
+//        self.geo = geo
         // For the language set during initialization we store the match words to improve query performance
         self.matchWordsLanguageCode = Locale.current.languageCode
         self.matchWords = Self.determineMatchWords(for: self.matchWordsLanguageCode, id: id, name: name)
@@ -16,7 +16,7 @@ public struct Organization: Codable, Identifiable, Equatable, Sendable {
     public let name: [LocalizedEntry]?
     public let country: String
     public let profiles: [Profile]
-    public let geo: [Coordinate]
+//    public let geo: [Coordinate]
 
     public var nameOrId: String {
         name?.localized() ?? id
@@ -52,7 +52,7 @@ public struct Organization: Codable, Identifiable, Equatable, Sendable {
         self.name = try container.decodeIfPresent([LocalizedEntry].self, forKey: .name)
         self.country = try container.decode(String.self, forKey: .country)
         self.profiles = try container.decode([Profile].self, forKey: .profiles)
-        self.geo = try container.decode([Coordinate].self, forKey: .geo)
+//        self.geo = try container.decode([Coordinate].self, forKey: .geo)
         // For the language set during initialization we store the match words to improve query performance
         self.matchWordsLanguageCode = Locale.current.languageCode
         self.matchWords = Self.determineMatchWords(for: self.matchWordsLanguageCode, id: id, name: name)
@@ -74,7 +74,7 @@ public struct Organization: Codable, Identifiable, Equatable, Sendable {
         self.name = [LocalizedEntry(value: host)]
         self.country = "URL"
         self.profiles = [Profile(id: "url", name: [LocalizedEntry(value: host)], default: true, letsWiFiEndpoint: url, type: .letswifi)]
-        self.geo = []
+//        self.geo = []
         // For the language set during initialization we store the match words to improve query performance
         self.matchWordsLanguageCode = Locale.current.languageCode
         self.matchWords = Self.determineMatchWords(for: self.matchWordsLanguageCode, id: id, name: name)
@@ -86,7 +86,7 @@ public struct Organization: Codable, Identifiable, Equatable, Sendable {
         self.name = [LocalizedEntry(value: displayName)]
         self.country = "FILE"
         self.profiles = [Profile(id: "local", name: [LocalizedEntry(value: displayName)], default: true, eapConfigEndpoint: fileURL, mobileConfigEndpoint: nil, letsWiFiEndpoint: nil, webviewEndpoint: nil, type: .eapConfig)]
-        self.geo = []
+//        self.geo = []
         // For the language set during initialization we store the match words to improve query performance
         self.matchWordsLanguageCode = Locale.current.languageCode
         self.matchWords = Self.determineMatchWords(for: self.matchWordsLanguageCode, id: id, name: name)
@@ -97,6 +97,6 @@ public struct Organization: Codable, Identifiable, Equatable, Sendable {
         case name
         case country
         case profiles
-        case geo
+//        case geo
     }
 }

@@ -34,7 +34,7 @@ extension CacheClient {
         },
         restoreDiscovery: {
             print("Should now restore cache")
-            return .init(content: .init(organizations: [.init(id: "restored", name: [.init(value: "Restored discovery from Cache")], country: "NL", profiles: [], geo: [])]))
+            return .init(content: .init(organizations: [.init(id: "restored", name: [.init(value: "Restored discovery from Cache")], country: "NL", profiles: [])]))
         })
 }
 
