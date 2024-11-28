@@ -68,9 +68,9 @@ public struct Organization: Codable, Identifiable, Equatable, Sendable {
             return nil
         }
         self.id = "url"
-        self.name = [LocalizedEntry(value: host)]
+        self.name = [LocalizedEntry(display: host)]
         self.country = "URL"
-        self.profiles = [Profile(id: "url", name: [LocalizedEntry(value: host)], default: true, letsWiFiEndpoint: url, type: .letswifi)]
+        self.profiles = [Profile(id: "url", name: [LocalizedEntry(display: host)], default: true, letsWiFiEndpoint: url, type: .letswifi)]
         // For the language set during initialization we store the match words to improve query performance
         self.matchWordsLanguageCode = Locale.current.languageCode
         self.matchWords = Self.determineMatchWords(for: self.matchWordsLanguageCode, id: id, name: name)
@@ -79,9 +79,9 @@ public struct Organization: Codable, Identifiable, Equatable, Sendable {
     public init(local fileURL: URL) {
         let displayName = FileManager().displayName(atPath: fileURL.path)
         self.id = "local"
-        self.name = [LocalizedEntry(value: displayName)]
+        self.name = [LocalizedEntry(display: displayName)]
         self.country = "FILE"
-        self.profiles = [Profile(id: "local", name: [LocalizedEntry(value: displayName)], default: true, eapConfigEndpoint: fileURL, mobileConfigEndpoint: nil, letsWiFiEndpoint: nil, webviewEndpoint: nil, type: .eapConfig)]
+        self.profiles = [Profile(id: "local", name: [LocalizedEntry(display: displayName)], default: true, eapConfigEndpoint: fileURL, mobileConfigEndpoint: nil, letsWiFiEndpoint: nil, webviewEndpoint: nil, type: .eapConfig)]
         // For the language set during initialization we store the match words to improve query performance
         self.matchWordsLanguageCode = Locale.current.languageCode
         self.matchWords = Self.determineMatchWords(for: self.matchWordsLanguageCode, id: id, name: name)

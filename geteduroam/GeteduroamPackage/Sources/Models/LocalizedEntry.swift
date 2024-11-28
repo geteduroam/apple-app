@@ -1,17 +1,17 @@
 import Foundation
 
 public struct LocalizedEntry: Codable, Equatable, Sendable {
-    public init(language: String? = "any", value: String) {
+    public init(language: String? = "any", display: String) {
         self.language = language
-        self.value = value
+        self.display = display
     }
     
     let language: String?
-    let value: String
+    let display: String?
     
     enum CodingKeys: String, CodingKey {
-        case value = ""
         case language = "lang"
+        case display
     }
 }
 
@@ -22,11 +22,11 @@ extension [LocalizedEntry] {
         // 1. find entry with language "any" or language not set
         // 2. use first entry
         func fallback() -> String? {
-            first(where: { $0.language == "any" || $0.language == nil })?.value ?? first?.value
+            first(where: { $0.language == "any" || $0.language == nil })?.display ?? first?.display
         }
         guard let language = languageCode else {
             return fallback()
         }
-        return first(where: { $0.language == language })?.value ?? fallback()
+        return first(where: { $0.language == language })?.display ?? fallback()
     }
 }

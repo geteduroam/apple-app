@@ -23,9 +23,9 @@ struct ProfileRowView: View {
 }
 
 #Preview {
-    ProfileRowView(profile: .init(id: "profile1", name: [LocalizedEntry(value: "My Profile")]), isSelected: true)
+    ProfileRowView(profile: .init(id: "profile1", name: [LocalizedEntry(display: "My Profile")]), isSelected: true)
 }
 
 #Preview {
-    ProfileRowView(profile: .init(id: "profile2", name: [LocalizedEntry(value: "My Other Profile")]), isSelected: false)
+    ProfileRowView(profile: .init(id: "profile2", name: [LocalizedEntry(display: "My Other Profile")]), isSelected: false)
 }

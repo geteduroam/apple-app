@@ -7,16 +7,16 @@ extension Organization {
     static let example = Organization(
         id: "id",
         name: [
-            .init(language: "any", value: "Example Organization (demo)"),
-            .init(language: "nl", value: "Voorbeeldorganisatie (demo)")
+            .init(language: "any", display: "Example Organization (demo)"),
+            .init(language: "nl", display: "Voorbeeldorganisatie (demo)")
         ],
         country: "NL",
         profiles: [
             .init(
                 id: "profile1",
                 name: [
-                    .init(language: "any", value: "Profile for Staff"),
-                    .init(language: "nl", value: "Profiel voor medewerkers")
+                    .init(language: "any", display: "Profile for Staff"),
+                    .init(language: "nl", display: "Profiel voor medewerkers")
                 ],
                 default: true,
                 type: .eapConfig
@@ -24,8 +24,8 @@ extension Organization {
             .init(
                 id: "profile2",
                 name: [
-                    .init(language: "any", value: "Profile for Students"),
-                    .init(language: "nl", value: "Profiel voor studenten")
+                    .init(language: "any", display: "Profile for Students"),
+                    .init(language: "nl", display: "Profiel voor studenten")
                 ],
                 default: true,
                 type: .eapConfig
@@ -36,8 +36,8 @@ extension Organization {
     static let example2 = Organization(
         id: "id2",
         name: [
-            .init(language: "any", value: "eduroam (demo)"),
-            .init(language: "nl", value: "eduroam (demo)")
+            .init(language: "any", display: "eduroam (demo)"),
+            .init(language: "nl", display: "eduroam (demo)")
         ],
         country: "WW",
         profiles: []
@@ -46,8 +46,8 @@ extension Organization {
     static let example3 = Organization(
         id: "id3",
         name: [
-            .init(language: "any", value: "Another Organization (demo)"),
-            .init(language: "nl", value: "Andere Organisatie (demo)")
+            .init(language: "any", display: "Another Organization (demo)"),
+            .init(language: "nl", display: "Andere Organisatie (demo)")
         ],
         country: "NL",
         profiles: []
