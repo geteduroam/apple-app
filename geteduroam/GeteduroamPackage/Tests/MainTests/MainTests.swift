@@ -11,7 +11,7 @@ final class MainTests: XCTestCase {
     static let eapConfigEndpoint = URL(string: "https://www.example.com/eapconfig")!
     static let letsWifiEndpoint = URL(string: "https://www.example.com/letswifi")!
     
-    let demoInstance = Organization(id: "cat_7016", name: [LocalizedEntry(language: nil, value: "Môreelsepark Cöllege")], country: "NL", profiles: [Profile(id: "letswifi_cat_7830", name: [LocalizedEntry(language: nil, value: "Mijn Moreelsepark")], default: true, letsWiFiEndpoint: MainTests.letsWifiEndpoint, type: .letswifi)])
+    let demoInstance = Organization(id: "cat_7016", name: [LocalizedEntry(language: nil, display: "Môreelsepark Cöllege")], country: "NL", profiles: [Profile(id: "letswifi_cat_7830", name: [LocalizedEntry(language: nil, display: "Mijn Moreelsepark")], default: true, letsWiFiEndpoint: MainTests.letsWifiEndpoint, type: .letswifi)])
 
     func testLoading() async throws {
         let store = TestStore(
@@ -29,7 +29,7 @@ final class MainTests: XCTestCase {
                                     "country": "NL",
                                     "name": [
                                         {
-                                            "": "Môreelsepark Cöllege"
+                                            "display": "Môreelsepark Cöllege"
                                         }
                                     ],
                                     "profiles": [
@@ -39,7 +39,7 @@ final class MainTests: XCTestCase {
                                             "letswifi_endpoint": "https://www.example.com/letswifi",
                                             "name": [
                                                 {
-                                                    "": "Mijn Moreelsepark"
+                                                    "display": "Mijn Moreelsepark"
                                                 }
                                             ],
                                             "type": "letswifi"
@@ -180,11 +180,11 @@ final class MainTests: XCTestCase {
             $0.searchResults = .init(
                 uniqueElements: [Organization(
                     id: "url",
-                    name: [LocalizedEntry(value: "geteduroam.nl")],
+                    name: [LocalizedEntry(display: "geteduroam.nl")],
                     country: "URL",
                     profiles: [Profile(
                         id: "url",
-                        name: [LocalizedEntry(value: "geteduroam.nl")],
+                        name: [LocalizedEntry(display: "geteduroam.nl")],
                         default: true,
                         letsWiFiEndpoint: URL(string: "https://geteduroam.nl")!,
                         type: .letswifi

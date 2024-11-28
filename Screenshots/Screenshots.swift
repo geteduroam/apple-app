@@ -58,7 +58,7 @@ final class Screenshots: XCTestCase {
         }
     }
 #elseif os(macOS)
-    func testScreenshots() throws {
+    @MainActor func testScreenshots() throws {
         let languages: [Language] = [.en, .nl]
         let scenarios = Scenario.allCases
         for language in languages {
