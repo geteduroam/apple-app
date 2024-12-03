@@ -234,8 +234,7 @@ public struct ConnectView_iOS: View {
                             name: [LocalizedEntry(value: "Other Profile")],
                             default: false,
                             type: .eapConfig)
-                    ],
-                    geo: [Coordinate(lat: 0, lon: 0)]),
+                    ]),
                 localizedModel: "iPhone"
             ),
             reducer: { Connect()

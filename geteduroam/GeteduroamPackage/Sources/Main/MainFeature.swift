@@ -324,8 +324,7 @@ public struct Main: Sendable {
                     id: "local",
                     name: [LocalizedEntry(value: displayName)],
                     country: "",
-                    profiles: [Profile(id: "local", name: [LocalizedEntry(value: displayName)], default: true, eapConfigEndpoint: url, mobileConfigEndpoint: nil, letsWiFiEndpoint: nil, webviewEndpoint: nil, type: .eapConfig)],
-                    geo: []
+                    profiles: [Profile(id: "local", name: [LocalizedEntry(value: displayName)], default: true, eapConfigEndpoint: url, mobileConfigEndpoint: nil, letsWiFiEndpoint: nil, webviewEndpoint: nil, type: .eapConfig)]
                 )
                 state.destination = .connect(.init(organization: organization, localizedModel: state.localizedModel))
 #else

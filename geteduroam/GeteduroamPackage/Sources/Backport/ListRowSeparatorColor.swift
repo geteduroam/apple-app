@@ -31,9 +31,18 @@ public enum VerticalEdge {
 }
 
 public extension Backport where Content: View {
-    /// Configures the behavior in which scrollable content interacts with the software keyboard.
-    /// - Parameter mode: Mode to apply
-    /// - Returns: View with dismiss keyboard mode applied if available
+    /// Sets the tint color associated with a row.
+    ///
+    /// Separators can be presented above and below a row. You can specify to
+    /// which edge this preference should apply.
+    ///
+    /// - Parameters:
+    ///     - color: The color to use to tint the row separators, or `nil` to
+    ///         use the default color for the current list style.
+    ///     - edges: The set of row edges for which the tint applies.
+    ///         The list style might decide to not display certain separators,
+    ///         typically the top edge. The default is ``VerticalEdge/Set/all``.
+    ///
     @ViewBuilder func listRowSeparatorTint(_ color: Color, edges: VerticalEdge.Set = .all) -> some View {
         if #available(iOS 15.0, tvOS 15.0, watchOS 9.0, macOS 13.0, *) {
             content.listRowSeparatorTint(color, edges: edges.original)

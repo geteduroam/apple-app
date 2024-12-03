@@ -16,7 +16,7 @@ final class ConnectTests: XCTestCase {
     let demoInstance = Organization(id: "cat_7016", name: [LocalizedEntry(value: "Môreelsepark Cöllege")], country: "NL", profiles: [
         Profile(id: "letswifi_cat_7830", name: [LocalizedEntry(value: "Mijn Moreelsepark")], default: true, letsWiFiEndpoint: ConnectTests.letsWifiEndpoint, type: .letswifi),
         Profile(id: "profile2", name: [LocalizedEntry(value: "Profile")], eapConfigEndpoint: ConnectTests.eapConfigEndpoint, type: .eapConfig)
-    ], geo: [Coordinate(lat: 52.088999999999999, lon: 5.1130000000000004)])
+    ])
     
     #if !os(macOS) // TODO: Write tests for macOS
     func testInvalidEAPConfig() async throws {

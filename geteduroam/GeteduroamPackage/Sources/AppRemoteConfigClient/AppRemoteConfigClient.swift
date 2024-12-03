@@ -104,7 +104,7 @@ private class LiveMainActorAppRemoteConfigClient {
         let bundledConfigURL = Bundle.main.url(forResource: "appconfig", withExtension: "json")
         values = Values()
         localValues = LocalValues()
-        service = AppRemoteConfigService(url: url, bundledConfigURL: bundledConfigURL, bundleIdentifier: Bundle.main.bundleIdentifier!, apply: values.apply(settings:))
+        service = AppRemoteConfigService(url: url, publicKey: nil, bundledConfigURL: bundledConfigURL, bundleIdentifier: Bundle.main.bundleIdentifier!, apply: values.apply(settings:))
     }
 }
 

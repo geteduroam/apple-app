@@ -10,8 +10,8 @@ public struct LocalizedEntry: Codable, Equatable, Sendable {
     let value: String
     
     enum CodingKeys: String, CodingKey {
-        case value = ""
         case language = "lang"
+        case value = "display"
     }
 }
 

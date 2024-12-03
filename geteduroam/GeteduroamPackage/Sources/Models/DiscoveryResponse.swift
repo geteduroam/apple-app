@@ -6,7 +6,7 @@ public struct DiscoveryResponse: Codable, Equatable, Sendable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case content = "http://letswifi.app/discovery#v2"
+        case content = "http://letswifi.app/discovery#v3"
     }
     
     public let content: DiscoveryVersion
