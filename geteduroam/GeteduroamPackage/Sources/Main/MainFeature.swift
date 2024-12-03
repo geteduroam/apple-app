@@ -322,9 +322,9 @@ public struct Main: Sendable {
                 let displayName = FileManager().displayName(atPath: url.path)
                 let organization = Organization(
                     id: "local",
-                    name: [LocalizedEntry(display: displayName)],
+                    name: [LocalizedEntry(value: displayName)],
                     country: "",
-                    profiles: [Profile(id: "local", name: [LocalizedEntry(display: displayName)], default: true, eapConfigEndpoint: url, mobileConfigEndpoint: nil, letsWiFiEndpoint: nil, webviewEndpoint: nil, type: .eapConfig)]
+                    profiles: [Profile(id: "local", name: [LocalizedEntry(value: displayName)], default: true, eapConfigEndpoint: url, mobileConfigEndpoint: nil, letsWiFiEndpoint: nil, webviewEndpoint: nil, type: .eapConfig)]
                 )
                 state.destination = .connect(.init(organization: organization, localizedModel: state.localizedModel))
 #else

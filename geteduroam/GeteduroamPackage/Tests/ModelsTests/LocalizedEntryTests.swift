@@ -7,8 +7,8 @@ final class LocalizedEntryTests: XCTestCase {
     
     func testLocalizationWithNilLanguage() throws {
         let sut = [
-            LocalizedEntry(language: nil, display: "No lang value"),
-            LocalizedEntry(language: "nl", display: "NL value")
+            LocalizedEntry(language: nil, value: "No lang value"),
+            LocalizedEntry(language: "nl", value: "NL value")
         ]
         
         XCTAssertEqual("No lang value", sut.localized(for: "en"))
@@ -17,8 +17,8 @@ final class LocalizedEntryTests: XCTestCase {
     
     func testLocalizationWithAnyLanguage() throws {
         let sut = [
-            LocalizedEntry(language: "any", display: "No lang value"),
-            LocalizedEntry(language: "nl", display: "NL value")
+            LocalizedEntry(language: "any", value: "No lang value"),
+            LocalizedEntry(language: "nl", value: "NL value")
         ]
         
         XCTAssertEqual("No lang value", sut.localized(for: "en"))
@@ -27,8 +27,8 @@ final class LocalizedEntryTests: XCTestCase {
     
     func testLocalizationWithoutAnyLanguage() throws {
         let sut = [
-            LocalizedEntry(language: "nl", display: "NL value"),
-            LocalizedEntry(language: "dk", display: "DK value")
+            LocalizedEntry(language: "nl", value: "NL value"),
+            LocalizedEntry(language: "dk", value: "DK value")
         ]
         
         XCTAssertEqual("NL value", sut.localized(for: "en"))
@@ -38,7 +38,7 @@ final class LocalizedEntryTests: XCTestCase {
     
     func testLocalizationWithSingleLanguage() throws {
         let sut = [
-            LocalizedEntry(language: "nl", display: "NL value")
+            LocalizedEntry(language: "nl", value: "NL value")
         ]
         
         XCTAssertEqual("NL value", sut.localized(for: "en"))
