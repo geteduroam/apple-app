@@ -19,7 +19,7 @@ Q: How to update the included discovery fallback files?
 A: Run these commands:
 
     curl --silent --compressed 'https://discovery.eduroam.app/v3/discovery.json' > geteduroam/discovery.json
-    curl --silent --compressed 'https://getgovroam.nl/v2/discovery.json' > getgovroam/discovery.json
+    curl --silent --compressed 'https://getgovroam.nl/v3/discovery.json' > getgovroam/discovery.json
 
     care prepare Config/appconfig.yaml geteduroam/appconfig.json
     care prepare Config/appconfig.yaml getgovroam/appconfig.json
