@@ -910,8 +910,8 @@ public struct Connect: Sendable {
                 let codeChallange = OIDAuthorizationRequest.codeChallengeS256(forVerifier: codeVerifier)
                 let state = UUID().uuidString
                 let nonce = UUID().uuidString
-                
-                let request = OIDAuthorizationRequest(configuration: configuration, clientId: clientId, clientSecret: nil, scope: scope, redirectURL: redirectURL, responseType: OIDResponseTypeCode, state: state, nonce: nonce, codeVerifier: codeVerifier, codeChallenge: codeChallange, codeChallengeMethod: OIDOAuthorizationRequestCodeChallengeMethodS256, additionalParameters: nil)
+                let uri = URL(string: redirectURL.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)!
+                let request = OIDAuthorizationRequest(configuration: configuration, clientId: clientId, clientSecret: nil, scope: scope, redirectURL: uri, responseType: OIDResponseTypeCode, state: state, nonce: nonce, codeVerifier: codeVerifier, codeChallenge: codeChallange, codeChallengeMethod: OIDOAuthorizationRequestCodeChallengeMethodS256, additionalParameters: nil)
                 
                 (accessToken, _) = try await authClient
                     .startAuth(request: request)

@@ -116,8 +116,11 @@ public final class GeteduroamAppDelegate: NSObject, NSApplicationDelegate, Obser
         guard let window = NSApplication.shared.keyWindow else {
             throw StartAuthError.noWindow
         }
+        
+        let customExternalUserAgent = CustomExternalUserAgent(presenting: window)
+        
         return try await withCheckedThrowingContinuation { continuation in
-            self.currentAuthorizationFlow = OIDAuthState.authState(byPresenting: request, presenting: window) { authState, error in
+            self.currentAuthorizationFlow = OIDAuthState.authState(byPresenting: request, externalUserAgent: customExternalUserAgent) { authState, error in
                 if let authState {
                     continuation.resume(returning: authState)
                 } else if let error {
