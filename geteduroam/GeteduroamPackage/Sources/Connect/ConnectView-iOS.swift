@@ -161,6 +161,7 @@ public struct ConnectView_iOS: View {
                 }
                 .padding(20)
             }
+            .ignoresSafeArea(.keyboard)
             .onAppear {
                 store.send(.onAppear)
             }
