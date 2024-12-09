@@ -1,11 +1,3 @@
-//
-//  CustomExternalUserAgent.swift
-//  GeteduroamPackage
-//
-//  Created by Yasser Farahi on 05/12/2024.
-//
-
-
 //  class CustomExternalUserAgent
 //
 //  This class provides a custom implementation of the OIDExternalUserAgent protocol,
