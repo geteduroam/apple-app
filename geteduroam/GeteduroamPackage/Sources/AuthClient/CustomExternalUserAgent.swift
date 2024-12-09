@@ -56,8 +56,9 @@ public final class CustomExternalUserAgent: NSObject, OIDExternalUserAgent {
                 if let callbackURL {
                     session.resumeExternalUserAgentFlow(with: callbackURL)
                 } else if let error {
-                    session.failExternalUserAgentFlowWithError(error)
-                    session.cancel()
+                    DispatchQueue.main.async {
+                        session.failExternalUserAgentFlowWithError(error)
+                    }
                 }
             }
             authSession.presentationContextProvider = presentationContextProvider

@@ -121,7 +121,7 @@ public final class GeteduroamAppDelegate: NSObject, NSApplicationDelegate, Obser
         let customExternalUserAgent = CustomExternalUserAgent(presenting: window, presentationContextProvider: self)
         
         return try await withCheckedThrowingContinuation { continuation in
-            self.currentAuthorizationFlow = OIDAuthState.authState(byPresenting: request, presenting: window) { authState, error in
+            self.currentAuthorizationFlow = OIDAuthState.authState(byPresenting: request, externalUserAgent: customExternalUserAgent) { authState, error in
                 if let authState {
                     continuation.resume(returning: authState)
                 } else if let error {
