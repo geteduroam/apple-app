@@ -32,19 +32,20 @@
 #if os(macOS)
 import Foundation
 @preconcurrency import AppAuth
-import AuthClient
 import AuthenticationServices
 
-internal final class CustomExternalUserAgent: NSObject, OIDExternalUserAgent {
+public final class CustomExternalUserAgent: NSObject, OIDExternalUserAgent {
     
     private var presentingWindow: NSWindow?
+    private var presentationContextProvider: ASWebAuthenticationPresentationContextProviding
     private var currentSession: OIDExternalUserAgentSession?
 
-    init(presenting window: NSWindow) {
+    public init(presenting window: NSWindow, presentationContextProvider: ASWebAuthenticationPresentationContextProviding) {
         self.presentingWindow = window
+        self.presentationContextProvider = presentationContextProvider
     }
 
-    func present(_ request: OIDExternalUserAgentRequest, session: OIDExternalUserAgentSession) -> Bool {
+    public func present(_ request: OIDExternalUserAgentRequest, session: OIDExternalUserAgentSession) -> Bool {
         self.currentSession = session
         
         let authURL = request.externalUserAgentRequestURL()
@@ -56,8 +57,10 @@ internal final class CustomExternalUserAgent: NSObject, OIDExternalUserAgent {
                     session.resumeExternalUserAgentFlow(with: callbackURL)
                 } else if let error {
                     session.failExternalUserAgentFlowWithError(error)
+                    session.cancel()
                 }
             }
+            authSession.presentationContextProvider = presentationContextProvider
             authSession.start()
             return true
         } else {
@@ -65,7 +68,7 @@ internal final class CustomExternalUserAgent: NSObject, OIDExternalUserAgent {
         }
     }
 
-    func dismiss(animated: Bool, completion: @escaping () -> Void) {
+    public func dismiss(animated: Bool, completion: @escaping () -> Void) {
         currentSession = nil
         completion()
     }

@@ -92,6 +92,7 @@ extension UIApplication {
     
 }
 #elseif os(macOS)
+import AuthenticationServices
 @MainActor
 public final class GeteduroamAppDelegate: NSObject, NSApplicationDelegate, ObservableObject, AuthClient {
     
@@ -117,10 +118,10 @@ public final class GeteduroamAppDelegate: NSObject, NSApplicationDelegate, Obser
             throw StartAuthError.noWindow
         }
         
-        let customExternalUserAgent = CustomExternalUserAgent(presenting: window)
+        let customExternalUserAgent = CustomExternalUserAgent(presenting: window, presentationContextProvider: self)
         
         return try await withCheckedThrowingContinuation { continuation in
-            self.currentAuthorizationFlow = OIDAuthState.authState(byPresenting: request, externalUserAgent: customExternalUserAgent) { authState, error in
+            self.currentAuthorizationFlow = OIDAuthState.authState(byPresenting: request, presenting: window) { authState, error in
                 if let authState {
                     continuation.resume(returning: authState)
                 } else if let error {
@@ -137,6 +138,12 @@ public final class GeteduroamAppDelegate: NSObject, NSApplicationDelegate, Obser
             menu.items.removeAll { $0.title == "View" } // TODO: Don't hardcode title
             // TODO: Also remove Zoom? menu.items.removeAll { $0.title == "Zoom" }
         }
+    }
+}
+
+extension GeteduroamAppDelegate: ASWebAuthenticationPresentationContextProviding {
+    public func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+        return ASPresentationAnchor()
     }
 }
 #endif
