@@ -1543,6 +1543,22 @@
         }
       }
     },
+    "Download and Install Profile?" : {
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download and Install Profile?"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profiel downloaden en installeren?"
+          }
+        }
+      }
+    },
     "Failed to connect" : {
       "comment" : "Failed to connect",
       "localizations" : {
@@ -1764,6 +1780,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Служба технічної підтримки"
+          }
+        }
+      }
+    },
+    "Install" : {
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Install"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Installeer"
           }
         }
       }
@@ -3646,6 +3678,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Процес налаштування було скасовано."
+          }
+        }
+      }
+    },
+    "The profile contains the network settings needed to configure your %@ for network access. System Settings will be opened to install the profile." : {
+      "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The profile contains the network settings needed to configure your %@ for network access. System Settings will be opened to install the profile."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Het profiel bevat de netwerkinstellingen die nodig zijn om jouw %@ te configureren. Systeeminstellingen zal worden geopend om het profiel te installeren."
           }
         }
       }

@@ -42,6 +42,7 @@ public struct Connect: Sendable {
 
         public var providerInfo: ProviderInfo?
         public var agreedToTerms: Bool = false
+        public var agreedToInstallProfile: Bool = false
         public var credentials: Credentials?
         public var reusableInfo: ReusableInfo?
         public var requiredUserNameSuffix: String?
@@ -299,6 +300,7 @@ public struct Connect: Sendable {
     public enum Destination {
         case alert(AlertState<AlertAction>)
         case termsAlert(AlertState<TermsAlertAction>)
+        case profileAlert(AlertState<ProfileAlertAction>)
         case websiteAlert(AlertState<WebsiteAlertAction>)
     }
     
@@ -308,6 +310,11 @@ public struct Connect: Sendable {
     }
     
     public enum TermsAlertAction: Equatable {
+        case agreeButtonTapped
+        case disagreeButtonTapped
+    }
+    
+    public enum ProfileAlertAction: Equatable {
         case agreeButtonTapped
         case disagreeButtonTapped
     }
@@ -424,6 +431,27 @@ public struct Connect: Sendable {
             state.destination = .termsAlert(termsAlert)
             return .none
         }
+        
+        #if os(macOS)
+        guard state.agreedToInstallProfile else {
+            let localizedModel = state.localizedModel
+            let profileAlert = AlertState<ProfileAlertAction>(
+                title: {
+                    TextState("Download and Install Profile?", bundle: .module)
+                }, actions: {
+                    ButtonState(action: .send(.agreeButtonTapped)) {
+                        TextState("Install", bundle: .module)
+                    }
+                    ButtonState(role: .cancel, action: .send(.disagreeButtonTapped)) {
+                        TextState("Cancel", bundle: .module)
+                    }
+                }, message: {
+                    TextState("The profile contains the network settings needed to configure your \(localizedModel) for network access. System Settings will be opened to install the profile.", bundle: .module)
+                })
+            state.destination = .profileAlert(profileAlert)
+            return .none
+        }
+        #endif
         
         state.loadingState = .isLoading
         let organization = state.organization
@@ -546,6 +574,18 @@ public struct Connect: Sendable {
                 case .disagreeButtonTapped:
                     state.loadingState = .initial
                     state.agreedToTerms = false
+                    return .none
+                }
+                
+            case let .destination(.presented(.profileAlert(action))):
+                switch action {
+                case .agreeButtonTapped:
+                    state.agreedToInstallProfile = true
+                    return connect(state: &state, dryRun: true)
+                    
+                case .disagreeButtonTapped:
+                    state.loadingState = .initial
+                    state.agreedToInstallProfile = false
                     return .none
                 }
                 

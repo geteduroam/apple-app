@@ -118,6 +118,7 @@ public struct ConnectView_Mac: View {
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             .alert($store.scope(state: \.destination?.termsAlert, action: \.destination.termsAlert))
+            .alert($store.scope(state: \.destination?.profileAlert, action: \.destination.profileAlert))
             .alert($store.scope(state: \.destination?.alert, action: \.destination.alert))
             .alert($store.scope(state: \.destination?.websiteAlert, action: \.destination.websiteAlert))
         }
