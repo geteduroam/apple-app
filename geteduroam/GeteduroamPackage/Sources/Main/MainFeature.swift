@@ -307,7 +307,11 @@ public struct Main: Sendable {
                     let connectionType = configuredConnection.type
                     let validUntil = configuredConnection.validUntil
                     let providerInfo = configuredConnection.providerInfo
+#if os(iOS)
                     state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, localizedModel: state.localizedModel, loadingState: .success(.unknown, connectionType, validUntil: validUntil), providerInfo: providerInfo))
+#elseif os(macOS)
+                    state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, localizedModel: state.localizedModel))
+#endif
                     return .none
                 } else {
                     state.destination = .connect(.init(organization: organization, localizedModel: state.localizedModel))
@@ -349,7 +353,9 @@ public struct Main: Sendable {
                 let connectionType = configuredConnection.type
                 let validUntil = configuredConnection.validUntil
                 let providerInfo = configuredConnection.providerInfo
+#if os(iOS)
                 state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, localizedModel: state.localizedModel, loadingState: .success(.unknown, connectionType, validUntil: validUntil), providerInfo: providerInfo))
+#endif
                 
                 state.searchResults = updateSearchResults()
                 return .none
@@ -375,7 +381,11 @@ public struct Main: Sendable {
                 }
                 
                 state.configuredConnection = .init(organizationType: organizationType, profileId: profileId, type: nil, validUntil: validUntil, providerInfo: nil)
+#if os(iOS)
                 state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, localizedModel: state.localizedModel, loadingState: .success(.unknown, nil, validUntil: validUntil), providerInfo: nil))
+#elseif os(macOS)
+                state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, localizedModel: state.localizedModel))
+#endif
                 
                 state.searchResults = updateSearchResults()
                 return .none
