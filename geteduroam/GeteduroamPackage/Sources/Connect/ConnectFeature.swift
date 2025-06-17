@@ -446,7 +446,11 @@ public struct Connect: Sendable {
                         TextState("Cancel", bundle: .module)
                     }
                 }, message: {
-                    TextState("The profile contains the network settings needed to configure your \(localizedModel) for network access. System Settings will be opened to install the profile.", bundle: .module)
+                    TextState("""
+                    The profile contains the network settings needed to configure your \(localizedModel) for network access. We do not collect any personal information. 
+                    
+                    System Settings will be opened to install the profile.
+                    """, bundle: .module)
                 })
             state.destination = .profileAlert(profileAlert)
             return .none

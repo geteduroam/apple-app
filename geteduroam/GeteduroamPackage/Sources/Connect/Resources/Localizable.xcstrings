@@ -3682,18 +3682,18 @@
         }
       }
     },
-    "The profile contains the network settings needed to configure your %@ for network access. System Settings will be opened to install the profile." : {
+    "The profile contains the network settings needed to configure your %@ for network access. We do not collect any personal information. \n\nSystem Settings will be opened to install the profile." : {
       "localizations" : {
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The profile contains the network settings needed to configure your %@ for network access. System Settings will be opened to install the profile."
+            "value" : "The profile contains the network settings needed to configure your %@ for network access. We do not collect any personal information. \n\nSystem Settings will be opened to install the profile."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Het profiel bevat de netwerkinstellingen die nodig zijn om jouw %@ te configureren. Systeeminstellingen zal worden geopend om het profiel te installeren."
+            "value" : "Het profiel bevat de benodigde netwerkinstellingen om jouw %@ in te stellen voor netwerktoegang. We verzamelen geen persoonlijke informatie.\n\nSysteeminstellingen zal worden geopend om het profiel te installeren."
           }
         }
       }
