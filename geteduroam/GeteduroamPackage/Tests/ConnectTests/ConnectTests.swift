@@ -5,6 +5,7 @@ import Models
 import XCTest
 @testable import Connect
 @testable import HotspotNetworkClient
+@testable import AppRemoteConfigClient
 import XMLCoder
 
 @MainActor
@@ -34,6 +35,7 @@ final class ConnectTests: XCTestCase {
                 )
                 class Mock: MockURLProtocol { }
                 $0.urlSession = Mock.session(exchange: networkExchange)
+                $0.configClient.values = { .init(appState: "active") }
             })
         
         await store.send(.onAppear)
@@ -144,8 +146,7 @@ final class ConnectTests: XCTestCase {
                                         </IEEE80211>
                                     </CredentialApplicability>
                                     <ProviderInfo>
-                                        <DisplayName>
-                                            <lang>en</lang>English Test Config</DisplayName>
+                                        <DisplayName lang="en">English Test Config</DisplayName>
                                         <Description></Description>
                                         <ProviderLocation>
                                             <Latitude>53.0</Latitude>
@@ -157,10 +158,8 @@ final class ConnectTests: XCTestCase {
                                         </ProviderLogo>
                                         <Helpdesk>
                                             <EmailAdress>helpdesk@example.com</EmailAdress>
-                                            <WebAddress>
-                                                <lang>en</lang>https://www.example.com/en</WebAddress>
-                                            <WebAddress>
-                                                <lang>nl</lang>https://www.example.com/nl</WebAddress>
+                                            <WebAddress lang="en">https://www.example.com/en</WebAddress>
+                                            <WebAddress lang="nl">https://www.example.com/nl</WebAddress>
                                             <Phone>+31-555-123456</Phone>
                                         </Helpdesk>
                                     </ProviderInfo>
@@ -196,6 +195,7 @@ final class ConnectTests: XCTestCase {
                     NetworkInfo(ssid: "ssid", bssid: "", signalStrength: 1, isSecure: true, didAutoJoin: false, didJustJoin: true, isChosenHelper: true)
                 }
                 $0.defaultFileStorage = .inMemory
+                $0.configClient.values = { .init(appState: "active") }
             })
         
         await store.send(.onAppear)
@@ -208,11 +208,20 @@ final class ConnectTests: XCTestCase {
             $0.loadingState = .isLoading
         }
         
+        // The dry-run connectResponse triggers the real connect immediately. Due to async
+        // scheduling, @Shared configuredConnection may be set by the real connect's effect
+        // before or after this assertion runs. Use .off exhaustivity to avoid flakiness.
+        store.exhaustivity = .off
         let providerInfo = config.providers[0].providerInfo
         await store.receive(\.connectResponse) {
             $0.loadingState = .isLoading
             $0.providerInfo = providerInfo
-            $0.configuredConnection = .init(
+        }
+
+        store.exhaustivity = .on
+        await store.receive(\.connectResponse) {
+            $0.loadingState = .success(.disconnected, .ssids(expectedSSIDs: ["ssid"]), validUntil: Date(timeIntervalSince1970: 3600))
+            $0.$configuredConnection.withLock { $0 = .init(
                 organizationType: .id("cat_7016"),
                 profileId: "profile2",
                 type: .ssids(expectedSSIDs: ["ssid"]),
@@ -233,10 +242,7 @@ final class ConnectTests: XCTestCase {
                     )
                 )
             )
-        }
-        
-        await store.receive(\.connectResponse) {
-            $0.loadingState = .success(.disconnected, .ssids(expectedSSIDs: ["ssid"]), validUntil: Date(timeIntervalSince1970: 3600))
+            }
         }
         
         await store.receive(\.foundSSID) {

@@ -103,6 +103,11 @@ struct GeteduroamApp: App {
             CommandGroup(replacing: CommandGroupPlacement.newItem) {
                 EmptyView()
             }
+            CommandGroup(after: CommandGroupPlacement.appInfo) {
+                Button("Privacy Policy") {
+                    appDelegate.store.send(.showPrivacyPolicy)
+                }
+            }
             CommandGroup(replacing: CommandGroupPlacement.help) {
                 Button("getgovroam Help") {
                     openURL(URL(string: "https://govroam.nl")!)

@@ -103,12 +103,17 @@ struct GeteduroamApp: App {
             CommandGroup(replacing: CommandGroupPlacement.newItem) {
                 EmptyView()
             }
+            CommandGroup(after: CommandGroupPlacement.appInfo) {
+                Button("Privacy Policy") {
+                    appDelegate.store.send(.showPrivacyPolicy)
+                }
+            }
             CommandGroup(replacing: CommandGroupPlacement.help) {
                 Button("geteduroam Help") {
                     openURL(URL(string: "https://eduroam.org")!)
                 }
             }
-        }
+        }    
     }
     
     private func fakeInitialWindowPositionPreference() {

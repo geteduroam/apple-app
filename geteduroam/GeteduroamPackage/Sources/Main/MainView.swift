@@ -40,11 +40,17 @@ public struct MainView: View {
                             }
                         }
                 }
+                .sheet(item: $store.scope(state: \.destination?.privacyPolicy, action: \.destination.privacyPolicy)) { _ in
+                    PrivacyPolicyView()
+                }
             } else {
                 MainContentView(store: store)
                     .sheet(item: $store.scope(state: \.destination?.connect, action: \.destination.connect)) { store in
                         ConnectView(store: store)
                             .frame(minWidth: 320, minHeight: 480)
+                    }
+                    .sheet(item: $store.scope(state: \.destination?.privacyPolicy, action: \.destination.privacyPolicy)) { _ in
+                        PrivacyPolicyView()
                     }
             }
 #endif

@@ -18,98 +18,10 @@ public struct ConnectView_Mac: View {
     public var body: some View {
         WithPerceptionTracking {
             VStack(alignment: .leading) {
-                if #available(macOS 13.0, *) {
-                    // On macOS 13 we push instead of present a sheet and therefore these controls aren't needed
-                } else {
-                    HStack(alignment: .firstTextBaseline) {
-                        VStack(alignment: .leading) {
-                            Text(store.organization.nameOrId)
-                                .font(theme.organizationNameFont)
-                            Text(store.organization.country)
-                                .font(theme.organizationCountryFont)
-                        }
-                        Spacer()
-                        Button(action: {
-                            store.send(.dismissTapped)
-                        }, label: {
-                            Image(systemName: "xmark")
-                        })
-                        .buttonStyle(.plain)
-                    }
-                    Spacer()
-                }
-
-                if let providerInfo = store.providerInfo {
-                    HelpdeskView(providerInfo: providerInfo)
-                    Spacer()
-                }
-                
-                if store.isConfigured == false {
-                    List {
-                        Section {
-                            let selectedProfile = store.selectedProfile
-                            ForEach(store.organization.profiles) { profile in
-                                Button {
-                                    store.send(.select(profile.id))
-                                } label: {
-                                    ProfileRowView(profile: profile, isSelected: selectedProfile == profile)
-                                }
-                                .buttonStyle(.plain)
-                                .backport
-                                .listRowSeparatorTint(Color("ListSeparator"))
-                                .listRowBackground(Color("Background"))
-                            }
-                        } header: {
-                            Text("Profiles", bundle: .module)
-                                .font(theme.profilesHeaderFont)
-                        }
-                    }
-                    .listStyle(.plain)
-                    .disabled(store.canSelectProfile == false)
-                }
-                
+                headerView
+                profileListView
                 Spacer()
-                
-                if store.isConfigured {
-                  HStack(alignment: .top) {
-                    Image(systemName: "doc.badge.gearshape.fill")
-                    VStack(alignment: .leading) {
-                        if #available(macOS 13.0, *) {
-                            Text("Continue in System Settings", bundle: .module)
-                                .font(theme.connectButtonFont)
-                            Text("""
-                                Double-click to review the profile and then press the "Install…" button to setup the network on your computer.
-                                """, bundle: .module)
-                                .font(theme.connectedFont)
-                        } else {
-                            Text("Continue in System Preferences", bundle: .module)
-                                .font(theme.connectButtonFont)
-                            Text("""
-                                Review the profile and then press the "Install…" button to setup the network on your computer.
-                                """, bundle: .module)
-                                .font(theme.connectedFont)
-                        }
-                    }
-                  }
-                  .foregroundColor(.black)
-                  .padding()
-                  .background(Color.accentColor)
-                  .cornerRadius(6)
-                } else {
-                    HStack {
-                        Spacer()
-                        Button {
-                            store.send(.connect)
-                        } label: {
-                            Text("Connect", bundle: .module)
-                                .multilineTextAlignment(.center)
-                        }
-                        .disabled(store.isLoading)
-                        .buttonStyle(.bordered)
-                        .controlSize(.large)
-                        Spacer()
-                    }
-                }
+                footerView
             }
             .padding()
             .navigationTitle(store.organization.nameOrId)
@@ -121,6 +33,110 @@ public struct ConnectView_Mac: View {
             .alert($store.scope(state: \.destination?.profileAlert, action: \.destination.profileAlert))
             .alert($store.scope(state: \.destination?.alert, action: \.destination.alert))
             .alert($store.scope(state: \.destination?.websiteAlert, action: \.destination.websiteAlert))
+        }
+    }
+
+    @ViewBuilder
+    private var headerView: some View {
+        if #available(macOS 13.0, *) {
+            // On macOS 13 we push instead of present a sheet and therefore these controls aren't needed
+        } else {
+            HStack(alignment: .firstTextBaseline) {
+                VStack(alignment: .leading) {
+                    Text(store.organization.nameOrId)
+                        .font(theme.organizationNameFont)
+                    Text(store.organization.country)
+                        .font(theme.organizationCountryFont)
+                }
+                Spacer()
+                Button(action: {
+                    store.send(.dismissTapped)
+                }, label: {
+                    Image(systemName: "xmark")
+                })
+                .buttonStyle(.plain)
+            }
+            Spacer()
+        }
+        if let providerInfo = store.providerInfo {
+            HelpdeskView(providerInfo: providerInfo)
+            Spacer()
+        }
+    }
+
+    @ViewBuilder
+    private var profileListView: some View {
+        if store.isConfigured == false {
+            let selectedProfile = store.selectedProfile
+            List {
+                Section {
+                    ForEach(store.organization.profiles) { profile in
+                        Button {
+                            store.send(.select(profile.id))
+                        } label: {
+                            ProfileRowView(profile: profile, isSelected: selectedProfile == profile)
+                        }
+                        .buttonStyle(.plain)
+                        .backport
+                        .listRowSeparatorTint(Color("ListSeparator"))
+                        .listRowBackground(Color("Background"))
+                    }
+                } header: {
+                    Text("Profiles", bundle: .module)
+                        .font(theme.profilesHeaderFont)
+                }
+            }
+            .listStyle(.plain)
+            .disabled(store.canSelectProfile == false)
+        }
+    }
+
+    @ViewBuilder
+    private var footerView: some View {
+        if store.isConfigured {
+            HStack(alignment: .top) {
+                Image(systemName: "doc.badge.gearshape.fill")
+                configuredInstructionsView
+            }
+            .foregroundColor(.black)
+            .padding()
+            .background(Color.accentColor)
+            .cornerRadius(6)
+        } else {
+            HStack {
+                Spacer()
+                Button {
+                    store.send(.connect)
+                } label: {
+                    Text("Connect", bundle: .module)
+                        .multilineTextAlignment(.center)
+                }
+                .disabled(store.isLoading)
+                .buttonStyle(.bordered)
+                .controlSize(.large)
+                Spacer()
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var configuredInstructionsView: some View {
+        VStack(alignment: .leading) {
+            if #available(macOS 13.0, *) {
+                Text("Continue in System Settings", bundle: .module)
+                    .font(theme.connectButtonFont)
+                Text("""
+                    Double-click to review the profile and then press the "Install…" button to setup the network on your computer.
+                    """, bundle: .module)
+                    .font(theme.connectedFont)
+            } else {
+                Text("Continue in System Preferences", bundle: .module)
+                    .font(theme.connectButtonFont)
+                Text("""
+                    Review the profile and then press the "Install…" button to setup the network on your computer.
+                    """, bundle: .module)
+                    .font(theme.connectedFont)
+            }
         }
     }
 }
