@@ -53,7 +53,7 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-url-routing", from: "0.6.0"),
         .package(url: "https://github.com/pointfreeco/xctest-dynamic-overlay", from: "1.0.0"),
 //        .package(url: "https://github.com/tgrapperon/swift-dependencies-additions", from: "1.0.0")
-        .package(url: "https://github.com/johankool/swift-dependencies-additions", branch: "delete-unneeded")
+        .package(url: "https://github.com/johankool/swift-dependencies-additions", revision: "3693b0c")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.

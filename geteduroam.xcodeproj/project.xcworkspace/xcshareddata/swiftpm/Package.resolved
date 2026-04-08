@@ -1,5 +1,5 @@
 {
-  "originHash" : "0fb33232107e8d342d54fe392f2fc6b29c7a630c8ccbd93d1f1e126f86fbb911",
+  "originHash" : "3ae59ce10f3a308cc45ee52a7d85a9cd8c8bc070b1cba514d055acda81e14013",
   "pins" : [
     {
       "identity" : "app-remote-config",
@@ -132,7 +132,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/johankool/swift-dependencies-additions",
       "state" : {
-        "branch" : "delete-unneeded",
+        "branch" : "3693b0c",
         "revision" : "3693b0c32d8fabe329fc662913a8f3dd5efa8600"
       }
     },
