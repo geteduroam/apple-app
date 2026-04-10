@@ -19,7 +19,7 @@ public struct IgnoreMissingServerCertificateNameEnabled: Sendable {
 
 /// Remotely configurable values
 @AppRemoteConfigValues @Perceptible @MainActor
-public class Values {
+public class Values {    
     /// Application state for app life management
     fileprivate(set) var appState: String = AppState.active.rawValue
     public fileprivate(set) var appStateEnum: AppState {

@@ -224,7 +224,28 @@
           }
         }
       }
+    },
+    "Privacy Policy" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy Policy"
+          }
+        }
+      }
+    },
+    "Privacy Policy Content" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This application downloads a Wi-Fi profile that allows your device access to govroam. After downloading, the System Settings app will be opened to install the Wi-Fi profile.\n\nThe Wi-Fi profile is checked by the application prior to opening System Settings, to make sure that the profile will not configure anything besides Wi-Fi configuration and certificates needed for Wi-Fi authentication. Neither the application itself, nor Wi-Fi profiles downloaded through this application will be able to make other changes to your device nor collect any information from your device.\n\nAfter the profile is installed, you have access to govroam. When connecting to network, the local Wi-Fi operator and your provider will see your user ID and MAC address. Additionally, as with any Wi-Fi network, the local Wi-Fi operator can see network requests."
+          }
+        }
+      }
     }
   },
-  "version" : "1.0"
+  "version" : "1.2"
 }

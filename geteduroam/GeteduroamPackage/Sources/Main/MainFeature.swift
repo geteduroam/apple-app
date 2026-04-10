@@ -77,6 +77,7 @@ public struct Main: Sendable {
         case renewActionInReminderTapped(organizationId: String, organizationURLString: String?, profileId: String)
         case searchResponse(TaskResult<IdentifiedArrayOf<Organization>>)
         case select(Organization)
+        case showPrivacyPolicy
         case tryAgainTapped
         case useLocalFile(URL)
         case configuredConnectionFound(ConfiguredConnection)
@@ -84,10 +85,11 @@ public struct Main: Sendable {
         case configuredConnectionUpdated(ConfiguredConnection?)
     }
     
-    @Reducer(state: .equatable)
+    @Reducer
     public enum Destination {
         case connect(Connect)
         case alert(AlertState<AlertAction>)
+        case privacyPolicy(PrivacyPolicy)
     }
     
     public enum AlertAction {
@@ -144,7 +146,7 @@ public struct Main: Sendable {
                 Logger.notifications.debug("Application did finish launching")
                 let delegate = notificationClient.delegate()
                 return .run { send in
-                    await withThrowingTaskGroup(of: Void.self) { @MainActor group in
+                    await withThrowingTaskGroup(of: Void.self) { group in
                         group.addTask {
                             for await event in delegate {
                                 switch event {
@@ -321,6 +323,10 @@ public struct Main: Sendable {
             case .destination:
                 return .none
                 
+            case .showPrivacyPolicy:
+                state.destination = .privacyPolicy(.init())
+                return .none
+                
             case let .useLocalFile(url):
 #if os(iOS)
                 let displayName = FileManager().displayName(atPath: url.path)
@@ -380,7 +386,7 @@ public struct Main: Sendable {
                     return .none
                 }
                 
-                state.configuredConnection = .init(organizationType: organizationType, profileId: profileId, type: nil, validUntil: validUntil, providerInfo: nil)
+                state.$configuredConnection.withLock { $0  = .init(organizationType: organizationType, profileId: profileId, type: nil, validUntil: validUntil, providerInfo: nil) }
 #if os(iOS)
                 state.destination = .connect(.init(organization: organization, selectedProfileId: profileId, localizedModel: state.localizedModel, loadingState: .success(.unknown, nil, validUntil: validUntil), providerInfo: nil))
 #elseif os(macOS)
@@ -398,3 +404,5 @@ public struct Main: Sendable {
         .ifLet(\.$destination, action: \.destination)
     }
 }
+
+extension Main.Destination.State: Equatable { }

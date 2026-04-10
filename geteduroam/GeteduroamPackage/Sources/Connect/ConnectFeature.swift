@@ -296,7 +296,7 @@ public struct Connect: Sendable {
         case reconnectTapped
     }
     
-    @Reducer(state: .equatable, action: .equatable)
+    @Reducer
     public enum Destination {
         case alert(AlertState<AlertAction>)
         case termsAlert(AlertState<TermsAlertAction>)
@@ -466,7 +466,7 @@ public struct Connect: Sendable {
         state.reusableInfo = nil
         let agreedToTerms = state.agreedToTerms
         if !dryRun {
-            state.configuredConnection = nil
+            state.$configuredConnection.withLock { $0 = nil }
             notificationClient.unscheduleRenewReminder()
         }
         return .run { send in
@@ -546,7 +546,7 @@ public struct Connect: Sendable {
             case let .destination(.presented(.alert(action))):
                 switch action {                    
                 case .reconnectButtonTapped:
-                    state.configuredConnection = nil
+                    state.$configuredConnection.withLock { $0 = nil }
                     notificationClient.unscheduleRenewReminder()
                     state.loadingState = .initial
                     state.credentials = nil
@@ -557,7 +557,7 @@ public struct Connect: Sendable {
                     return connect(state: &state, dryRun: true)
                     
                 case let .switchProfileButtonTapped(profileId):
-                    state.configuredConnection = nil
+                    state.$configuredConnection.withLock { $0 = nil }
                     notificationClient.unscheduleRenewReminder()
                     state.loadingState = .initial
                     state.credentials = nil
@@ -658,11 +658,11 @@ public struct Connect: Sendable {
                     state.providerInfo = connectResponse.providerInfo
                     
                     if let url = state.selectedProfile?.letsWiFiEndpoint?.absoluteString, state.organization.id == "url" {
-                        state.configuredConnection = ConfiguredConnection(organizationType: .url(url), profileId: state.selectedProfile?.id, type: connection, validUntil: validUntil, providerInfo: state.providerInfo)
+                        state.$configuredConnection.withLock { $0 = ConfiguredConnection(organizationType: .url(url), profileId: state.selectedProfile?.id, type: connection, validUntil: validUntil, providerInfo: state.providerInfo) }
                     } else if let url = state.selectedProfile?.eapConfigEndpoint, state.organization.id == "local" {
-                        state.configuredConnection = ConfiguredConnection(organizationType: .local(url), profileId: state.selectedProfile?.id, type: connection, validUntil: validUntil, providerInfo: state.providerInfo)
+                        state.$configuredConnection.withLock { $0  = ConfiguredConnection(organizationType: .local(url), profileId: state.selectedProfile?.id, type: connection, validUntil: validUntil, providerInfo: state.providerInfo) }
                     } else {
-                        state.configuredConnection = ConfiguredConnection(organizationType: .id(state.organization.id), profileId: state.selectedProfile?.id, type: connection, validUntil: validUntil, providerInfo: state.providerInfo)
+                        state.$configuredConnection.withLock { $0 = ConfiguredConnection(organizationType: .id(state.organization.id), profileId: state.selectedProfile?.id, type: connection, validUntil: validUntil, providerInfo: state.providerInfo) }
                     }
                     
                     switch connection {
@@ -1110,3 +1110,6 @@ public struct Connect: Sendable {
     }
     
 }
+
+extension Connect.Destination.State: Equatable { }
+extension Connect.Destination.Action: Equatable { }

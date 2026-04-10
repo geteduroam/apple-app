@@ -3,6 +3,7 @@ import DiscoveryClient
 import Models
 import URLRouting
 import XCTest
+@testable import AppRemoteConfigClient
 @testable import Main
 
 @MainActor
@@ -54,6 +55,7 @@ final class MainTests: XCTestCase {
                 $0.cacheClient.restoreDiscovery = { .init(content: .init(organizations: []))}
                 $0.notificationClient.delegate = { .finished }
                 $0.notificationClient.scheduledRenewReminder = { nil }
+                $0.configClient.values = { .init(appState: "active") }
             })
 
         await store.send(.onAppear) {
@@ -65,6 +67,7 @@ final class MainTests: XCTestCase {
             $0.organizations = [demoInstance]
         }
         
+        await store.receive(\.configuredConnectionUpdated)
         await store.skipInFlightEffects()
     }
 

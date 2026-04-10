@@ -1,6 +1,7 @@
 import Foundation
 import ComposableArchitecture
 import Models
+import Sharing
 
 extension URL {
     static func connection() -> URL? {
@@ -12,7 +13,7 @@ extension URL {
     }
 }
 
-extension PersistenceKey where Self == FileStorageKey<ConfiguredConnection?> {
+extension SharedKey where Self == FileStorageKey<ConfiguredConnection?> {
     public static var connection: Self {
         guard let connectionURL = URL.connection() else {
             fatalError()
