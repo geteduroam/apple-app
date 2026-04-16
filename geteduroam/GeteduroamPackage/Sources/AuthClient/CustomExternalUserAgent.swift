@@ -6,14 +6,14 @@
 //  Problem Addressed:
 //  On macOS, the default external user agent provided by AppAuth (`OIDExternalUserAgentMac`)
 //  can result in crashes or unhandled errors in certain scenarios, such as:
-//  - User cancelation of the authentication flow (e.g., closing the browser).
+//  - User cancellation of the authentication flow (e.g., closing the browser).
 //  - Situations where AppAuth's callback handling (`callback(nil, authorizationError)`)
 //    does not propagate errors correctly back to the application.
 //
 //  This class resolves these issues by providing a custom implementation that:
 //  1. Utilizes ASWebAuthenticationSession directly for managing authentication flows.
-//  2. Explicitly handles success, error, and cancelation cases.
-//  3. Ensures that errors and cancelations are correctly propagated back to GeteduroamAppDelegate,
+//  2. Explicitly handles success, error, and cancellation cases.
+//  3. Ensures that errors and cancellations are correctly propagated back to GeteduroamAppDelegate,
 //     allowing the app to gracefully manage these situations.
 
 //  Usage:
