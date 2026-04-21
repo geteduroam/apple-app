@@ -7,6 +7,7 @@ import Foundation
 import HotspotNetworkClient
 import Models
 import NotificationClient
+import PrivacyPolicy
 import SwiftUI
 #if canImport(UIKit)
 import UIKit
@@ -302,6 +303,7 @@ public struct Connect: Sendable {
         case termsAlert(AlertState<TermsAlertAction>)
         case profileAlert(AlertState<ProfileAlertAction>)
         case websiteAlert(AlertState<WebsiteAlertAction>)
+        case privacyPolicy(PrivacyPolicy)
     }
     
     public enum AlertAction: Equatable {
@@ -317,6 +319,7 @@ public struct Connect: Sendable {
     public enum ProfileAlertAction: Equatable {
         case agreeButtonTapped
         case disagreeButtonTapped
+        case showPrivacyPolicyButtonTapped
     }
     
     public enum WebsiteAlertAction: Equatable {
@@ -444,6 +447,9 @@ public struct Connect: Sendable {
                     }
                     ButtonState(role: .cancel, action: .send(.disagreeButtonTapped)) {
                         TextState("Cancel", bundle: .module)
+                    }
+                    ButtonState(action: .send(.showPrivacyPolicyButtonTapped)) {
+                        TextState("Privacy Policy", bundle: .module)
                     }
                 }, message: {
                     TextState("""
@@ -590,6 +596,12 @@ public struct Connect: Sendable {
                 case .disagreeButtonTapped:
                     state.loadingState = .initial
                     state.agreedToInstallProfile = false
+                    return .none
+                    
+                case .showPrivacyPolicyButtonTapped:
+                    state.loadingState = .initial
+                    state.agreedToInstallProfile = false
+                    state.destination = .privacyPolicy(.init())
                     return .none
                 }
                 
