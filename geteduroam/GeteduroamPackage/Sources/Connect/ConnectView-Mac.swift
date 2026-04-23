@@ -4,6 +4,7 @@ import ComposableArchitecture
 import Models
 import Perception
 import SwiftUI
+import PrivacyPolicy
 
 #if os(macOS)
 public struct ConnectView_Mac: View {
@@ -17,22 +18,30 @@ public struct ConnectView_Mac: View {
     
     public var body: some View {
         WithPerceptionTracking {
-            VStack(alignment: .leading) {
-                headerView
-                profileListView
-                Spacer()
-                footerView
-            }
-            .padding()
-            .navigationTitle(store.organization.nameOrId)
-            .onAppear {
-                store.send(.onAppear)
-            }
-            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-            .alert($store.scope(state: \.destination?.termsAlert, action: \.destination.termsAlert))
-            .alert($store.scope(state: \.destination?.profileAlert, action: \.destination.profileAlert))
-            .alert($store.scope(state: \.destination?.alert, action: \.destination.alert))
-            .alert($store.scope(state: \.destination?.websiteAlert, action: \.destination.websiteAlert))
+            contentView
+                .alert($store.scope(state: \.destination?.termsAlert, action: \.destination.termsAlert))
+                .alert($store.scope(state: \.destination?.profileAlert, action: \.destination.profileAlert))
+                .alert($store.scope(state: \.destination?.alert, action: \.destination.alert))
+                .alert($store.scope(state: \.destination?.websiteAlert, action: \.destination.websiteAlert))
+        }
+    }
+    
+    @ViewBuilder
+    private var contentView: some View {
+        VStack(alignment: .leading) {
+            headerView
+            profileListView
+            Spacer()
+            footerView
+        }
+        .padding()
+        .navigationTitle(store.organization.nameOrId)
+        .onAppear {
+            store.send(.onAppear)
+        }
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+        .sheet(item: $store.scope(state: \.destination?.privacyPolicy, action: \.destination.privacyPolicy)) { _ in
+            PrivacyPolicyView()
         }
     }
 

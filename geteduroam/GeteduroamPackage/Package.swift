@@ -28,6 +28,9 @@ let package = Package(
             name: "Connect",
             targets: ["Connect"]),
         .library(
+            name: "PrivacyPolicy",
+            targets: ["PrivacyPolicy"]),
+        .library(
             name: "EAPConfigurator",
             targets: ["EAPConfigurator"]),
         .library(
@@ -67,6 +70,7 @@ let package = Package(
                 "CacheClient",
                 "Connect",
                 "DiscoveryClient",
+                "PrivacyPolicy",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
                 .product(name: "Dependencies", package: "swift-dependencies")
             ]
@@ -110,6 +114,7 @@ let package = Package(
                 "HotspotNetworkClient",
                 "Models",
                 "NotificationClient",
+                "PrivacyPolicy",
                 .product(name: "AppAuth", package: "AppAuth-iOS"),
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ]),
@@ -156,6 +161,11 @@ let package = Package(
             dependencies: [
                 .product(name: "Dependencies", package: "swift-dependencies"),
                 .product(name: "DependenciesMacros", package: "swift-dependencies")
+            ]),
+        .target(
+            name: "PrivacyPolicy",
+            dependencies: [
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ])
     ]
 )

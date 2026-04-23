@@ -5,6 +5,7 @@ import Connect
 import Dependencies
 import Models
 import Perception
+import PrivacyPolicy
 import SwiftUI
 #if canImport(UIKit)
 import UIKit
