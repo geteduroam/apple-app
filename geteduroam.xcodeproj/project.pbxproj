@@ -560,7 +560,6 @@
 		7555FFA3242A565B00829871 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOL_FRAMEWORKS = SwiftUI;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -631,7 +630,6 @@
 		7555FFA4242A565B00829871 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOL_FRAMEWORKS = SwiftUI;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -696,7 +694,6 @@
 		7555FFA6242A565B00829871 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = geteduroam/geteduroam.entitlements;
@@ -730,7 +727,6 @@
 		7555FFA7242A565B00829871 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = geteduroam/geteduroam.entitlements;
@@ -764,7 +760,6 @@
 		C714074929A7802F0063F667 /* Release Test */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOL_FRAMEWORKS = SwiftUI;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -829,7 +824,6 @@
 		C714074A29A7802F0063F667 /* Release Test */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = geteduroam/geteduroam.entitlements;
@@ -863,7 +857,6 @@
 		C714074B29A7802F0063F667 /* Release Test */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = getgovroam/getgovroam.entitlements;
@@ -896,7 +889,6 @@
 		C7AEDE77299CF84100387E3C /* Debug Test */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOL_FRAMEWORKS = SwiftUI;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -967,7 +959,6 @@
 		C7AEDE78299CF84100387E3C /* Debug Test */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = geteduroam/geteduroam.entitlements;
@@ -1001,7 +992,6 @@
 		C7AEDE79299CF84100387E3C /* Debug Test */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = getgovroam/getgovroam.entitlements;
@@ -1034,7 +1024,6 @@
 		C7DAA9E82B212FDE00306C6C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1058,7 +1047,6 @@
 		C7DAA9E92B212FDE00306C6C /* Debug Test */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1082,7 +1070,6 @@
 		C7DAA9EA2B212FDE00306C6C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1104,7 +1091,6 @@
 		C7DAA9EB2B212FDE00306C6C /* Release Test */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1126,7 +1112,6 @@
 		C7DAA9F82B21C99E00306C6C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1150,7 +1135,6 @@
 		C7DAA9F92B21C99E00306C6C /* Debug Test */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1174,7 +1158,6 @@
 		C7DAA9FA2B21C99E00306C6C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1196,7 +1179,6 @@
 		C7DAA9FB2B21C99E00306C6C /* Release Test */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1218,7 +1200,6 @@
 		C7F45A55297ABC5C0005508D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = getgovroam/getgovroam.entitlements;
@@ -1251,7 +1232,6 @@
 		C7F45A56297ABC5C0005508D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				SWIFT_ENABLE_EXPLICIT_MODULES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = getgovroam/getgovroam.entitlements;
