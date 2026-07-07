@@ -6,6 +6,7 @@ import Foundation
 import Models
 import NotificationClient
 import OSLog
+import PrivacyPolicy
 
 @Reducer
 public struct Main: Sendable {
