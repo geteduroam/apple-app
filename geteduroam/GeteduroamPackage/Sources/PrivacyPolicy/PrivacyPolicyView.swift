@@ -11,7 +11,7 @@ public struct PrivacyPolicyView: View {
             VStack(alignment: .leading, spacing: 12) {
                 Text("Privacy Policy")
                     .font(.headline)
-                Text("Privacy Policy Content")
+                Text("Privacy Policy Content", bundle: .main)
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
