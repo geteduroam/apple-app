@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -45,7 +45,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/CoreOffice/XMLCoder", from: "0.16.0"),
-        .package(url: "https://github.com/egeniq/app-remote-config", from: "0.6.0"),
+        .package(url: "https://github.com/egeniq/app-remote-config", from: "0.7.2"),
         .package(url: "https://github.com/egeniq/network-ios", branch: "main"),
         .package(url: "https://github.com/openid/AppAuth-iOS", from: "1.0.0"),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", exact: "1.23.2"),

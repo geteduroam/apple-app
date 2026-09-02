@@ -238,7 +238,109 @@
     "Privacy Policy Content" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This application downloads a Wi-Fi profile that allows your device access to eduroam worldwide. After downloading, the System Settings app will be opened to install the Wi-Fi profile.\n\nThe Wi-Fi profile is checked by the application prior to opening System Settings, to make sure that the profile will not configure anything besides Wi-Fi configuration and certificates needed for Wi-Fi authentication. Neither the application itself, nor Wi-Fi profiles downloaded through this application will be able to make other changes to your device nor collect any information from your device.\n\nAfter the profile is installed, you have access to eduroam worldwide. When connecting to network, the local Wi-Fi operator and your provider will see your user ID and MAC address. Additionally, as with any Wi-Fi network, the local Wi-Fi operator can see network requests."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This application downloads a Wi-Fi profile that allows your device access to eduroam worldwide. After downloading, the System Settings app will be opened to install the Wi-Fi profile.\n\nThe Wi-Fi profile is checked by the application prior to opening System Settings, to make sure that the profile will not configure anything besides Wi-Fi configuration and certificates needed for Wi-Fi authentication. Neither the application itself, nor Wi-Fi profiles downloaded through this application will be able to make other changes to your device nor collect any information from your device.\n\nAfter the profile is installed, you have access to eduroam worldwide. When connecting to network, the local Wi-Fi operator and your provider will see your user ID and MAC address. Additionally, as with any Wi-Fi network, the local Wi-Fi operator can see network requests."
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This application downloads a Wi-Fi profile that allows your device access to eduroam worldwide. After downloading, the System Settings app will be opened to install the Wi-Fi profile.\n\nThe Wi-Fi profile is checked by the application prior to opening System Settings, to make sure that the profile will not configure anything besides Wi-Fi configuration and certificates needed for Wi-Fi authentication. Neither the application itself, nor Wi-Fi profiles downloaded through this application will be able to make other changes to your device nor collect any information from your device.\n\nAfter the profile is installed, you have access to eduroam worldwide. When connecting to network, the local Wi-Fi operator and your provider will see your user ID and MAC address. Additionally, as with any Wi-Fi network, the local Wi-Fi operator can see network requests."
+          }
+        },
+        "cy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This application downloads a Wi-Fi profile that allows your device access to eduroam worldwide. After downloading, the System Settings app will be opened to install the Wi-Fi profile.\n\nThe Wi-Fi profile is checked by the application prior to opening System Settings, to make sure that the profile will not configure anything besides Wi-Fi configuration and certificates needed for Wi-Fi authentication. Neither the application itself, nor Wi-Fi profiles downloaded through this application will be able to make other changes to your device nor collect any information from your device.\n\nAfter the profile is installed, you have access to eduroam worldwide. When connecting to network, the local Wi-Fi operator and your provider will see your user ID and MAC address. Additionally, as with any Wi-Fi network, the local Wi-Fi operator can see network requests."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This application downloads a Wi-Fi profile that allows your device access to eduroam worldwide. After downloading, the System Settings app will be opened to install the Wi-Fi profile.\n\nThe Wi-Fi profile is checked by the application prior to opening System Settings, to make sure that the profile will not configure anything besides Wi-Fi configuration and certificates needed for Wi-Fi authentication. Neither the application itself, nor Wi-Fi profiles downloaded through this application will be able to make other changes to your device nor collect any information from your device.\n\nAfter the profile is installed, you have access to eduroam worldwide. When connecting to network, the local Wi-Fi operator and your provider will see your user ID and MAC address. Additionally, as with any Wi-Fi network, the local Wi-Fi operator can see network requests."
+          }
+        },
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This application downloads a Wi-Fi profile that allows your device access to eduroam worldwide. After downloading, the System Settings app will be opened to install the Wi-Fi profile.\n\nThe Wi-Fi profile is checked by the application prior to opening System Settings, to make sure that the profile will not configure anything besides Wi-Fi configuration and certificates needed for Wi-Fi authentication. Neither the application itself, nor Wi-Fi profiles downloaded through this application will be able to make other changes to your device nor collect any information from your device.\n\nAfter the profile is installed, you have access to eduroam worldwide. When connecting to network, the local Wi-Fi operator and your provider will see your user ID and MAC address. Additionally, as with any Wi-Fi network, the local Wi-Fi operator can see network requests."
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This application downloads a Wi-Fi profile that allows your device access to eduroam worldwide. After downloading, the System Settings app will be opened to install the Wi-Fi profile.\n\nThe Wi-Fi profile is checked by the application prior to opening System Settings, to make sure that the profile will not configure anything besides Wi-Fi configuration and certificates needed for Wi-Fi authentication. Neither the application itself, nor Wi-Fi profiles downloaded through this application will be able to make other changes to your device nor collect any information from your device.\n\nAfter the profile is installed, you have access to eduroam worldwide. When connecting to network, the local Wi-Fi operator and your provider will see your user ID and MAC address. Additionally, as with any Wi-Fi network, the local Wi-Fi operator can see network requests."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This application downloads a Wi-Fi profile that allows your device access to eduroam worldwide. After downloading, the System Settings app will be opened to install the Wi-Fi profile.\n\nThe Wi-Fi profile is checked by the application prior to opening System Settings, to make sure that the profile will not configure anything besides Wi-Fi configuration and certificates needed for Wi-Fi authentication. Neither the application itself, nor Wi-Fi profiles downloaded through this application will be able to make other changes to your device nor collect any information from your device.\n\nAfter the profile is installed, you have access to eduroam worldwide. When connecting to network, the local Wi-Fi operator and your provider will see your user ID and MAC address. Additionally, as with any Wi-Fi network, the local Wi-Fi operator can see network requests."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This application downloads a Wi-Fi profile that allows your device access to eduroam worldwide. After downloading, the System Settings app will be opened to install the Wi-Fi profile.\n\nThe Wi-Fi profile is checked by the application prior to opening System Settings, to make sure that the profile will not configure anything besides Wi-Fi configuration and certificates needed for Wi-Fi authentication. Neither the application itself, nor Wi-Fi profiles downloaded through this application will be able to make other changes to your device nor collect any information from your device.\n\nAfter the profile is installed, you have access to eduroam worldwide. When connecting to network, the local Wi-Fi operator and your provider will see your user ID and MAC address. Additionally, as with any Wi-Fi network, the local Wi-Fi operator can see network requests."
+          }
+        },
+        "gd" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This application downloads a Wi-Fi profile that allows your device access to eduroam worldwide. After downloading, the System Settings app will be opened to install the Wi-Fi profile.\n\nThe Wi-Fi profile is checked by the application prior to opening System Settings, to make sure that the profile will not configure anything besides Wi-Fi configuration and certificates needed for Wi-Fi authentication. Neither the application itself, nor Wi-Fi profiles downloaded through this application will be able to make other changes to your device nor collect any information from your device.\n\nAfter the profile is installed, you have access to eduroam worldwide. When connecting to network, the local Wi-Fi operator and your provider will see your user ID and MAC address. Additionally, as with any Wi-Fi network, the local Wi-Fi operator can see network requests."
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This application downloads a Wi-Fi profile that allows your device access to eduroam worldwide. After downloading, the System Settings app will be opened to install the Wi-Fi profile.\n\nThe Wi-Fi profile is checked by the application prior to opening System Settings, to make sure that the profile will not configure anything besides Wi-Fi configuration and certificates needed for Wi-Fi authentication. Neither the application itself, nor Wi-Fi profiles downloaded through this application will be able to make other changes to your device nor collect any information from your device.\n\nAfter the profile is installed, you have access to eduroam worldwide. When connecting to network, the local Wi-Fi operator and your provider will see your user ID and MAC address. Additionally, as with any Wi-Fi network, the local Wi-Fi operator can see network requests."
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This application downloads a Wi-Fi profile that allows your device access to eduroam worldwide. After downloading, the System Settings app will be opened to install the Wi-Fi profile.\n\nThe Wi-Fi profile is checked by the application prior to opening System Settings, to make sure that the profile will not configure anything besides Wi-Fi configuration and certificates needed for Wi-Fi authentication. Neither the application itself, nor Wi-Fi profiles downloaded through this application will be able to make other changes to your device nor collect any information from your device.\n\nAfter the profile is installed, you have access to eduroam worldwide. When connecting to network, the local Wi-Fi operator and your provider will see your user ID and MAC address. Additionally, as with any Wi-Fi network, the local Wi-Fi operator can see network requests."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This application downloads a Wi-Fi profile that allows your device access to eduroam worldwide. After downloading, the System Settings app will be opened to install the Wi-Fi profile.\n\nThe Wi-Fi profile is checked by the application prior to opening System Settings, to make sure that the profile will not configure anything besides Wi-Fi configuration and certificates needed for Wi-Fi authentication. Neither the application itself, nor Wi-Fi profiles downloaded through this application will be able to make other changes to your device nor collect any information from your device.\n\nAfter the profile is installed, you have access to eduroam worldwide. When connecting to network, the local Wi-Fi operator and your provider will see your user ID and MAC address. Additionally, as with any Wi-Fi network, the local Wi-Fi operator can see network requests."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This application downloads a Wi-Fi profile that allows your device access to eduroam worldwide. After downloading, the System Settings app will be opened to install the Wi-Fi profile.\n\nThe Wi-Fi profile is checked by the application prior to opening System Settings, to make sure that the profile will not configure anything besides Wi-Fi configuration and certificates needed for Wi-Fi authentication. Neither the application itself, nor Wi-Fi profiles downloaded through this application will be able to make other changes to your device nor collect any information from your device.\n\nAfter the profile is installed, you have access to eduroam worldwide. When connecting to network, the local Wi-Fi operator and your provider will see your user ID and MAC address. Additionally, as with any Wi-Fi network, the local Wi-Fi operator can see network requests."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This application downloads a Wi-Fi profile that allows your device access to eduroam worldwide. After downloading, the System Settings app will be opened to install the Wi-Fi profile.\n\nThe Wi-Fi profile is checked by the application prior to opening System Settings, to make sure that the profile will not configure anything besides Wi-Fi configuration and certificates needed for Wi-Fi authentication. Neither the application itself, nor Wi-Fi profiles downloaded through this application will be able to make other changes to your device nor collect any information from your device.\n\nAfter the profile is installed, you have access to eduroam worldwide. When connecting to network, the local Wi-Fi operator and your provider will see your user ID and MAC address. Additionally, as with any Wi-Fi network, the local Wi-Fi operator can see network requests."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This application downloads a Wi-Fi profile that allows your device access to eduroam worldwide. After downloading, the System Settings app will be opened to install the Wi-Fi profile.\n\nThe Wi-Fi profile is checked by the application prior to opening System Settings, to make sure that the profile will not configure anything besides Wi-Fi configuration and certificates needed for Wi-Fi authentication. Neither the application itself, nor Wi-Fi profiles downloaded through this application will be able to make other changes to your device nor collect any information from your device.\n\nAfter the profile is installed, you have access to eduroam worldwide. When connecting to network, the local Wi-Fi operator and your provider will see your user ID and MAC address. Additionally, as with any Wi-Fi network, the local Wi-Fi operator can see network requests."
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This application downloads a Wi-Fi profile that allows your device access to eduroam worldwide. After downloading, the System Settings app will be opened to install the Wi-Fi profile.\n\nThe Wi-Fi profile is checked by the application prior to opening System Settings, to make sure that the profile will not configure anything besides Wi-Fi configuration and certificates needed for Wi-Fi authentication. Neither the application itself, nor Wi-Fi profiles downloaded through this application will be able to make other changes to your device nor collect any information from your device.\n\nAfter the profile is installed, you have access to eduroam worldwide. When connecting to network, the local Wi-Fi operator and your provider will see your user ID and MAC address. Additionally, as with any Wi-Fi network, the local Wi-Fi operator can see network requests."
+          }
+        },
+        "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "This application downloads a Wi-Fi profile that allows your device access to eduroam worldwide. After downloading, the System Settings app will be opened to install the Wi-Fi profile.\n\nThe Wi-Fi profile is checked by the application prior to opening System Settings, to make sure that the profile will not configure anything besides Wi-Fi configuration and certificates needed for Wi-Fi authentication. Neither the application itself, nor Wi-Fi profiles downloaded through this application will be able to make other changes to your device nor collect any information from your device.\n\nAfter the profile is installed, you have access to eduroam worldwide. When connecting to network, the local Wi-Fi operator and your provider will see your user ID and MAC address. Additionally, as with any Wi-Fi network, the local Wi-Fi operator can see network requests."
