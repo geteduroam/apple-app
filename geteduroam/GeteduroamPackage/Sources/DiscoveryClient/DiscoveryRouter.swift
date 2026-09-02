@@ -7,7 +7,7 @@ public enum DiscoveryRoute: Equatable {
 }
 
 public let discoveryRouter = OneOf {
-    Route(.case(DiscoveryRoute.discover)) {
+    Route(DiscoveryRoute.discover) {
         Path { "discovery.json" }
     }
 }
