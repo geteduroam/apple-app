@@ -1,5 +1,5 @@
 {
-  "originHash" : "1df4e1d4bac8eb3c9e8a570dee87bda998469ffbe25be56406720520ad80ec40",
+  "originHash" : "88e4804b404ee40bef5de3db81d5553f24d6b4fcba9c266c806e13113aba06fd",
   "pins" : [
     {
       "identity" : "app-remote-config",
@@ -87,8 +87,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-composable-architecture",
       "state" : {
-        "revision" : "df934d9c5a274a6f6a7bdcec73fbcb330149ff8b",
-        "version" : "1.23.2"
+        "revision" : "cc8e5f1659b53e6df2a21601e6cb9468a6dc00cb",
+        "version" : "1.23.3"
       }
     },
     {

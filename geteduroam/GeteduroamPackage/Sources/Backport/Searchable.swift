@@ -27,16 +27,16 @@ public extension Backport where Content: View {
     ///     containing view hierarchy.
     ///   - prompt: A `Text` view representing the prompt of the search field
     ///     which provides users with guidance on what to search for.
-    @ViewBuilder func searchable(text: Binding<String>,
+    func searchable(text: Binding<String>,
                                  placement: SearchFieldPlacement = .automatic,
-                                 prompt: Text? = nil) -> some View {
+                                 prompt: Text? = nil) -> AnyView {
         if #available(iOS 16, tvOS 16.0, watchOS 9.0, macOS 12.0, *) {
-            content.searchable(text: text, placement: placement.original, prompt: prompt)
+            return AnyView(content.searchable(text: text, placement: placement.original, prompt: prompt))
         } else {
-            VStack {
+            return AnyView(VStack {
                 TextField("Search", text: text)
                 content
-            }
+            })
         }
     }
     
@@ -49,14 +49,14 @@ public extension Backport where Content: View {
     ///     containing view hierarchy.
     ///   - prompt: The key for the localized prompt of the search field
     ///     which provides users with guidance on what to search for.
-    @ViewBuilder func searchable(text: Binding<String>, placement: SearchFieldPlacement = .automatic, prompt: LocalizedStringKey) -> some View {
+    func searchable(text: Binding<String>, placement: SearchFieldPlacement = .automatic, prompt: LocalizedStringKey) -> AnyView {
         if #available(iOS 16, tvOS 16.0, watchOS 9.0, macOS 12.0, *) {
-            content.searchable(text: text, placement: placement.original, prompt: prompt)
+            return AnyView(content.searchable(text: text, placement: placement.original, prompt: prompt))
         } else {
-            VStack {
+            return AnyView(VStack {
                 TextField(prompt, text: text)
                 content
-            }
+            })
         }
     }
     
@@ -69,14 +69,14 @@ public extension Backport where Content: View {
     ///     containing view hierarchy.
     ///   - prompt: A string representing the prompt of the search field
     ///     which provides users with guidance on what to search for.
-    @ViewBuilder func searchable<S>(text: Binding<String>, placement: SearchFieldPlacement = .automatic, prompt: S) -> some View where S : StringProtocol {
+    func searchable<S>(text: Binding<String>, placement: SearchFieldPlacement = .automatic, prompt: S) -> AnyView where S : StringProtocol {
         if #available(iOS 16, tvOS 16.0, watchOS 9.0, macOS 12.0, *) {
-            content.searchable(text: text, placement: placement.original, prompt: prompt)
+            return AnyView(content.searchable(text: text, placement: placement.original, prompt: prompt))
         } else {
-            VStack {
+            return AnyView(VStack {
                 TextField(prompt, text: text)
                 content
-            }
+            })
         }
     }
 
