@@ -48,7 +48,7 @@ let package = Package(
         .package(url: "https://github.com/egeniq/app-remote-config", from: "0.7.2"),
         .package(url: "https://github.com/egeniq/network-ios", branch: "main"),
         .package(url: "https://github.com/openid/AppAuth-iOS", from: "1.0.0"),
-        .package(url: "https://github.com/pointfreeco/swift-composable-architecture", exact: "1.23.2"),
+        .package(url: "https://github.com/pointfreeco/swift-composable-architecture", exact: "1.23.3"),
         .package(url: "https://github.com/pointfreeco/swift-custom-dump", from: "1.0.0"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.0.0"),
         .package(url: "https://github.com/pointfreeco/swift-perception", from: "1.0.0"),

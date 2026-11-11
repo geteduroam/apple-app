@@ -1,0 +1,13 @@
+{
+  "id" : "c8ee5381-2032-45ce-8409-184ce29e5bbe",
+  "targets" : [
+    {
+      "id" : "96B94894-3A9C-4B8D-A46C-02F4D5C79EAA",
+      "name" : "geteduroam"
+    },
+    {
+      "id" : "BA161FCD-4F7F-4DC5-8334-C67E0329F837",
+      "name" : "getgovroam"
+    }
+  ]
+}
